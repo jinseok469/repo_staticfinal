@@ -3,226 +3,236 @@
 
 <div th:replace="~{xdm/include/head :: head}"></div>
 
-	
-	
+
+
 <main id="main" class="main">
 
-		<div class="pagetitle">
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">page 1</a></li>
-					<li class="breadcrumb-item">page 2</li>
-					<li class="breadcrumb-item active">Default</li>
-				</ol>
-			</nav>
-			<h1 style="height: 50px;">CodeGroup<span style="font-size:18px;"> (List)</span></h1>
-		</div>
-		<!-- End Page Title -->
+	<div class="pagetitle">
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.html">page 1</a></li>
+				<li class="breadcrumb-item">page 2</li>
+				<li class="breadcrumb-item active">Default</li>
+			</ol>
+		</nav>
+		<h1 style="height: 50px;">
+			CodeGroup<span style="font-size: 18px;"> (List)</span>
+		</h1>
+	</div>
+	<!-- End Page Title -->
 
-		<section class="section">
-			<form class="row g-3 needs-validation" novalidate id="cgFormList"  >
-				<div class="col-md-2" style="height: 10px;">
+	<section class="section">
+		<form class="row g-3 needs-validation" novalidate name="formList" id="formList" method="post" autocomplete="off">
+<!-- 		<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/> -->
+<!-- 		<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/> -->
+			<div class="col-md-2" style="height: 10px;">
 
-					<select class="form-select" id="">
-						<option selected disabled value="">N</option>
-						<option>아무거나</option>
-					</select>
-					<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<select class="form-select" id="">
-						<option selected disabled value="">Y</option>
-						<option>아무거나</option>
-					</select>
-					<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<select class="form-select" id="">
-						<option selected disabled value="">날짜</option>
-						<option>등록일</option>
-						<option>수정일</option>
-					</select>
-					<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="validationCustom03"
-						placeholder="2025-01-05">
-					<div class="invalid-feedback">코드를 입력해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="validationCustom03"
-						placeholder="2025-02-04">
-					<div class="invalid-feedback">코드를 입력해주세요.</div>
-				</div>
-				<div class="col-md-2"></div>
-				<div class="col-md-2">
-					<select class="form-select" id="">
-						<option selected disabled value="">검색구분</option>
-						<option>코드그룹 코드</option>
-						<option>코드그룹 이름</option>
-						<option>코드그룹 이름(영문)</option>
-					</select>
-					<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="validationCustom03"
-						placeholder="검색어">
-					<div class="invalid-feedback">코드를 입력해주세요.</div>
-				</div>
-				<div class="col-md-8">
-					<button class="btn btn-outline-dark" type="button">
-						<i class="bi bi-search"></i>
-					</button>
-					<button class="btn btn-outline-dark" type="button">
-						<i class="bi bi-arrow-clockwise"></i>
-					</button>
-				</div>
+				<select class="form-select" id="">
+					<option selected disabled value="">N</option>
+					<option>아무거나</option>
+				</select>
+				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
+			</div>
+			<div class="col-md-2">
+				<select class="form-select" id="">
+					<option selected disabled value="">Y</option>
+					<option>아무거나</option>
+				</select>
+				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
+			</div>
+			<div class="col-md-2">
+				<select class="form-select" id="">
+					<option selected disabled value="">날짜</option>
+					<option>등록일</option>
+					<option>수정일</option>
+				</select>
+				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control" id="validationCustom03"
+					placeholder="2025-01-05">
+				<div class="invalid-feedback">코드를 입력해주세요.</div>
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control" id="validationCustom03"
+					placeholder="2025-02-04">
+				<div class="invalid-feedback">코드를 입력해주세요.</div>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<select class="form-select" id="">
+					<option selected disabled value="">검색구분</option>
+					<option>코드그룹 코드</option>
+					<option>코드그룹 이름</option>
+					<option>코드그룹 이름(영문)</option>
+				</select>
+				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control" id="validationCustom03"
+					placeholder="검색어">
+				<div class="invalid-feedback">코드를 입력해주세요.</div>
+			</div>
+			<div class="col-md-8">
+				<button class="btn btn-outline-dark" type="button">
+					<i class="bi bi-search"></i>
+				</button>
+				<button class="btn btn-outline-dark" type="button">
+					<i class="bi bi-arrow-clockwise"></i>
+				</button>
+			</div>
 
-				<div class="col-lg-12">
-					<div class="card">
-						<div class="card-body">
-							<div class="row">
-								<div class="col-md-10" style="height: 50px;">
-									<h5 class="card-title-list">Total : 42</h5>
-								</div>
-								<div class="col-md-2 select-col">
-									<select class="form-select select-end">
-										<option value="">5</option>
-										<option value="">10</option>
-										<option value="">15</option>
-									</select>
-								</div>
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-10" style="height: 50px;">
+								<h5 class="card-title-list">Total : 42</h5>
+							</div>
+							<div class="col-md-2 select-col">
+								<select class="form-select select-end">
+									<option value="">5</option>
+									<option value="">10</option>
+									<option value="">15</option>
+								</select>
 							</div>
 						</div>
+					</div>
 
-						<!-- Table with stripped rows -->
-						<table class="table datatable" >
-							<thead>
-								<tr>
+					<!-- Table with stripped rows -->
+					<table class="table datatable">
+						<thead>
+							<tr>
 
-									<th data-sortable="false"
-										style="text-align: center; width: 100px;"><div
-											class="checked">
-											<input type="checkbox" class="form-check" name="animal"
-												value="selectall" onclick="selectAll(this)">
-										</div></th>
-									<th data-sortable="false"
-										style="width: 10px; text-align: center;">#</th>
-									<th style="text-align: center;">사용</th>
-									<th class="list-sort" style="text-align: center;">코드그룹 코드</th>
-									<th class="list-sort" style="text-align: center;">코드그룹 이름</th>
-									<th class="list-sort" style="text-align: center;">코드그룹
-										이름(영문)</th>
-									<th class="list-sort" style="text-align: center;">갯수</th>
-									<th class="list-sort" style="text-align: center;">순서</th>
-									<th data-type="date" data-format="YYYY/DD/MM" class="list-sort"
-										style="text-align: center;">등록일</th>
-									<th data-type="data" data-format="YYYY/DD/MM" class="list-sort"
-										style="text-align: center;">수정일</th>
-								</tr>
-							</thead>
-							<tbody>
-							<tr th:if="${#lists.isEmpty(list)}" >
-							<td colspan="10" style="text-align:center; padding-top:20px;">
-								<div><p >There are no data!</p></div>
-							</td>
+								<th data-sortable="false"
+									style="text-align: center; width: 100px;"><div
+										class="checked">
+										<input type="checkbox" class="form-check" name="animal"
+											value="selectall" onclick="selectAll(this)">
+									</div></th>
+								<th data-sortable="false"
+									style="width: 10px; text-align: center;">#</th>
+								<th style="text-align: center;">사용</th>
+								<th class="list-sort" style="text-align: center;">코드그룹 코드</th>
+								<th class="list-sort" style="text-align: center;">코드그룹 이름</th>
+								<th class="list-sort" style="text-align: center;">코드그룹
+									이름(영문)</th>
+								<th class="list-sort" style="text-align: center;">갯수</th>
+								<th class="list-sort" style="text-align: center;">순서</th>
+								<th data-type="date" data-format="YYYY/DD/MM" class="list-sort"
+									style="text-align: center;">등록일</th>
+								<th data-type="data" data-format="YYYY/DD/MM" class="list-sort"
+									style="text-align: center;">수정일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:if="${#lists.isEmpty(list)}">
+								<td colspan="10" style="text-align: center; padding-top: 20px;">
+									<div>
+										<p>There are no data!</p>
+									</div>
+								</td>
 							</tr>
 
-								<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}">
-									<td>
-										<div class="checked">
-											<input type="checkbox" class="form-check" 
-												name="animal" value="checke" >
-										</div>
-									</td>
-									<td th:text="${list.seq}"></td>
-									<td th:text="${list.cgDelNy}"></td>
-									<td th:text="${list.seq}"></td>
-									<td ><a th:href="@{/codeGroupXdmView(seq=${list.seq})}" th:text="${list.cgName}"></a></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							
+							<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}">
+								<td>
+									<div class="checked">
+										<input type="checkbox" class="form-check" name="animal"
+											value="checke">
+									</div>
+								</td>
+								<td th:text="${list.seq}"></td>
+								<td th:text="${list.cgDelNy}"></td>
+								<td th:text="${list.seq}"></td>
+								<td><a th:href="@{/codeGroupXdmView(seq=${list.seq})}"
+									th:text="${list.cgName}"></a></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 
-							</tbody>
-							<tfoot>
 
-							</tfoot>
+						</tbody>
+						<tfoot>
 
-						</table>
-						<div class="row" >
-                    <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
-                      <ul class="pagination">
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                          </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </nav>
-                    
-                  </div>
-						<div class="row">
-							<div class="col-md-6 padding-left">
-								<button class="btn btn-danger">X</button>
-								<button class="btn btn-danger" id="cgSetBtn" >
-									<i class="bi bi-trash"></i>
-								</button>
-							</div>
-							<div class="col-md-6 padding-right"
-								style="display: flex; justify-content: end;">
+						</tfoot>
 
-								<button class="btn btn-success btn-right">
-									<i class="bi bi-journal-x"></i>
-								</button>
-								<a href="/codeGroupXdmForm" class="btn btn-primary"><i
-									class="bi bi-plus-lg"></i></a>
-							</div>
-						</div>
+					</table>
+					<div class="row">
+						<nav aria-label="Page navigation example"
+							style="display: flex; justify-content: center;">
+							<ul class="pagination" id="pagination">
+								<li th:if="${vo.startPage gt vo.pageNumToShow}"
+									class="page-item" style="cursor: pointer;"><a
+									class="page-link" href="javascript:goList(${vo.startPage - 1})"
+									th:attr="onclick=|goList('${vo.startPage - 1}')|"> <i
+										class="fa-solid fa-angle-left"></i>
+								</a></li>
+								<li
+									th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+									th:classappend="${num eq vo.thisPage} ? active : ''"
+									class="page-item" style="cursor: pointer;"><a
+									class="page-link" th:attr="onclick=|goList('${num}')|"
+									th:text="${num}">
+										<!-- ${i.index} -->
+								</a></li>
+								<li th:if="${vo.endPage ne vo.totalPages}" class="page-item"
+									style="cursor: pointer;"><a class="page-link"
+									th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
+										class="fa-solid fa-angle-right"></i>
+								</a></li>
+							</ul>
+						</nav>
 
 					</div>
+					<div class="row">
+						<div class="col-md-6 padding-left">
+							<button class="btn btn-danger">X</button>
+							<button class="btn btn-danger" id="cgSetBtn">
+								<i class="bi bi-trash"></i>
+							</button>
+						</div>
+						<div class="col-md-6 padding-right"
+							style="display: flex; justify-content: end;">
+
+							<button class="btn btn-success btn-right">
+								<i class="bi bi-journal-x"></i>
+							</button>
+							<a href="/codeGroupXdmForm" class="btn btn-primary"><i
+								class="bi bi-plus-lg"></i></a>
+						</div>
+					</div>
+
 				</div>
+			</div>
+		</form>
+	</section>
+
+</main>
 
 
+<div th:replace="~{xdm/include/footer :: footer}"></div>
+<script
+	src="/xdm/template/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script
+	src="/xdm/template/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script
+	src="/xdm/template/NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
+<script
+	src="/xdm/template/NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/xdm/template/NiceAdmin/assets/vendor/quill/quill.js"></script>
+<script
+	src="/xdm/template/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script
+	src="/xdm/template/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
+<script
+	src="/xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
 
-				
-				</form>
-		</section>
-
-	</main>
-	
-
-	<div th:replace="~{xdm/include/footer :: footer}"></div>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
-	<script src="/xdm/template/NiceAdmin/assets/vendor/quill/quill.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
-
-	<!-- Template Main JS File -->
-	<script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
-	<script type="text/javascript">
+<!-- Template Main JS File -->
+<script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
+<script type="text/javascript">
 	function selectAll(selectAll){
 	   	const checkeded = document.getElementsByName("animal");
 	   	
@@ -237,4 +247,3 @@
 </body>
 
 </html>
-	

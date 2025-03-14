@@ -3,19 +3,31 @@
 
 <mapper namespace="com.staticfinal.module.codegroup.CodeGroupDao">
 
+
 	<resultMap
 		type="com.staticfinal.module.codegroup.CodeGroupDto" id="resultMapObj"></resultMap>
+
+	<sql id="selectCommon">
+		from codeGroup as a
+		where 1=1
+
+	</sql>
+
+
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectCommon"></include>
+	</select>
 
 	<select id="selectList" resultMap="resultMapObj">
 		select
 		a.seq,
 		a.cgName,
 		a.cgDelNy
-		from
-		codeGroup as a
-		where 1=1
-
+		<include refid="selectCommon"></include>
 		order by a.seq desc
+		limit #{startRnumForMysql},#{rowNumToShow}
+
 	</select>
 	<select id="selectOne" resultMap="resultMapObj">
 		select
@@ -45,7 +57,7 @@
 		set
 
 		cgName = #{cgName}
-		
+
 		where
 		seq = #{seq}
 	</update>

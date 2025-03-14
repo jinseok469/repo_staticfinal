@@ -15,12 +15,19 @@ public class CodeGroupController {
 	CodeGroupService codeGroupService;
 	
 	@RequestMapping(value="/codeGroupXdmList")
-	public String codeGruopXdmList(Model model) {
-		List<CodeGroupDto> codeGroupDto = new ArrayList<>();
-		codeGroupDto = codeGroupService.selectList();
-		model.addAttribute("list",codeGroupDto);
+	public String codeGruopXdmList(CodeGroupVo vo,Model model ) {
+		vo.setParamsPaging(codeGroupService.selectOneCount());
 		
-		return "xdm/codeGroup/CodeGroupXdmList";
+		List<CodeGroupDto> codeGroupDtos = new ArrayList<>();
+		codeGroupDtos = codeGroupService.selectList(vo);
+//		if(vo.getTotalRows() > 0) {
+		model.addAttribute("list",codeGroupDtos);
+		model.addAttribute("vo",vo);
+//		}
+		
+		
+//		int a = codeGroupService.selectOneCount();
+		return   "xdm/codeGroup/CodeGroupXdmList";
 	}
 	@RequestMapping(value="/codeGroupXdmView")
 	public String codeGroupXdmView(Model model , CodeGroupDto codeGroupDto) {
