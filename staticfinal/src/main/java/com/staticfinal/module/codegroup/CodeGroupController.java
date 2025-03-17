@@ -1,12 +1,10 @@
 package com.staticfinal.module.codegroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CodeGroupController {
@@ -14,16 +12,25 @@ public class CodeGroupController {
 	@Autowired
 	CodeGroupService codeGroupService;
 	
+	
 	@RequestMapping(value="/codeGroupXdmList")
-	public String codeGruopXdmList(CodeGroupVo vo,Model model ) {
+	public String codeGruopXdmList(
+			CodeGroupVo vo,
+//			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+//			@RequestParam(value = "perPage",required = false,defaultValue = "5" ) int perPage,
+			 
+			Model model
+		) {
+		// 페이지 값을 설정
+//		vo.setRowNumToShow(perPage);
+//	    vo.setThisPage(page);
 		vo.setParamsPaging(codeGroupService.selectOneCount());
 		
-		List<CodeGroupDto> codeGroupDtos = new ArrayList<>();
-		codeGroupDtos = codeGroupService.selectList(vo);
-//		if(vo.getTotalRows() > 0) {
-		model.addAttribute("list",codeGroupDtos);
+		
+		if(vo.getTotalRows() > 0) {
+		model.addAttribute("list",codeGroupService.selectList(vo));
 		model.addAttribute("vo",vo);
-//		}
+		}
 		
 		
 //		int a = codeGroupService.selectOneCount();

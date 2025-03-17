@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{xdm/include/head :: head}"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 
@@ -22,9 +23,11 @@
 	<!-- End Page Title -->
 
 	<section class="section">
-		<form class="row g-3 needs-validation" novalidate name="formList" id="formList" method="post" autocomplete="off">
-<!-- 		<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/> -->
-<!-- 		<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/> -->
+		<form class="row g-3 needs-validation" novalidate name="formList"
+			id="formList" method="post" autocomplete="off" default="1">
+			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
+				type="hidden" id="rowNumToShow" name="rowNumToShow"
+				th:value="${vo.rowNumToShow}" />
 			<div class="col-md-2" style="height: 10px;">
 
 				<select class="form-select" id="">
@@ -87,20 +90,21 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-10" style="height: 50px;">
-								<h5 class="card-title-list">Total : 42</h5>
+								<h5 class="card-title-list">Total : [[${vo.totalRows}]]</h5>
 							</div>
 							<div class="col-md-2 select-col">
-								<select class="form-select select-end">
-									<option value="">5</option>
-									<option value="">10</option>
-									<option value="">15</option>
+								<select class="form-select select-end" name="perPage"
+									onchange="getNum()">
+									<option value="5" th:selected="${vo.rowNumToShow == 5}">5</option>
+									<option value="10" th:selected="${vo.rowNumToShow == 10}">10</option>
+									<option value="15" th:selected="${vo.rowNumToShow == 15}">15</option>
 								</select>
 							</div>
 						</div>
 					</div>
 
 					<!-- Table with stripped rows -->
-					<table class="table datatable">
+					<table class="table datatable" id="datatable">
 						<thead>
 							<tr>
 
@@ -175,8 +179,7 @@
 									th:classappend="${num eq vo.thisPage} ? active : ''"
 									class="page-item" style="cursor: pointer;"><a
 									class="page-link" th:attr="onclick=|goList('${num}')|"
-									th:text="${num}">
-										<!-- ${i.index} -->
+									th:text="${num}"> <!-- ${i.index} -->
 								</a></li>
 								<li th:if="${vo.endPage ne vo.totalPages}" class="page-item"
 									style="cursor: pointer;"><a class="page-link"
@@ -231,8 +234,11 @@
 	src="/xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
+
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
 <script type="text/javascript">
+
+
 	function selectAll(selectAll){
 	   	const checkeded = document.getElementsByName("animal");
 	   	
@@ -240,6 +246,50 @@
 	   		checkbox.checked = selectAll.checked;
 	   	})
 	  	}
+	 
+	 /* function goList(pageNum) {
+		 let  num = pageNum;
+		
+	     let dfNum = document.getElementsByName("perPage")[0];
+		 let ixNum = dfNum.selectedIndex;
+		 let vlNum = dfNum.options[ixNum].value;
+		
+	   window.location.assign("/codeGroupXdmList?page="+num+"&perPage="+vlNum);
+	}  */
+	
+	let form = document.querySelector("form[name=formList]");
+	function goList(Num){
+		document.querySelector("input[name=thisPage]").value = Num;
+		form.action = "/codeGroupXdmList"
+		form.submit();
+	}
+	 
+	 
+	
+	function getNum(){
+		let dfNum = document.getElementsByName("perPage")[0];
+		let ixNum = dfNum.selectedIndex;
+		let vlNum = dfNum.options[ixNum].value;
+		document.querySelector("input[name=rowNumToShow]").value = vlNum;
+		
+		form.action = "/codeGroupXdmList"
+		form.submit();
+	}
+	/* function getNum(){
+		const urlParams = new URLSearchParams(window.location.search);
+		const page = urlParams.get("page") || "1";
+		
+		let dfNum = document.getElementsByName("perPage")[0];
+		let ixNum = dfNum.selectedIndex;
+		let vlNum = dfNum.options[ixNum].value;
+		
+		window.location.assign("/codeGroupXdmList?page="+page+"&perPage="+vlNum);
+	  
+	} */
+		
+	
+	
+		
 	
 	
 

@@ -1,7 +1,6 @@
-package com.staticfinal.module.codegroup;
+package com.staticfinal.module.code;
 
-public class CodeGroupVo {
-
+public class CodeVo {
 //	paging
 	private int thisPage = 1;									// 현재 페이지
 	private int rowNumToShow =  5;								// 화면에 보여줄 데이터 줄 갯수
@@ -124,28 +123,4 @@ public class CodeGroupVo {
 		System.out.println("getStartRnumForMysql(): " + getStartRnumForMysql());
 		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 }
