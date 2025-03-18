@@ -23,7 +23,8 @@
 		select
 		a.seq,
 		a.cgName,
-		a.cgDelNy
+		a.cgDelNy,
+		(select count(b.seq) from code as b where 1=1 and b.cdDelNy = 0 and b.codeGroup_seq = a.seq) as seqCount
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}

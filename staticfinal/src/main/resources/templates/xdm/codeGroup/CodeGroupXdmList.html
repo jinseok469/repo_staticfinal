@@ -146,12 +146,12 @@
 									</div>
 								</td>
 								<td th:text="${list.seq}"></td>
-								<td th:text="${list.cgDelNy}"></td>
+								<td th:text="${list.cgDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
 								<td><a th:href="@{/codeGroupXdmView(seq=${list.seq})}"
 									th:text="${list.cgName}"></a></td>
 								<td></td>
-								<td></td>
+								<td th:text="${list.seqCount}"></td>
 								<td></td>
 								<td></td>
 								<td></td>

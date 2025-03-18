@@ -1,10 +1,18 @@
 package com.staticfinal.module.codegroup;
 
 public class CodeGroupDto {
-	public String seq;
-	public String cgName;
-	public int cgDelNy;
+	private String seq;
+	private String cgName;
+	private int cgDelNy;
+	private String seqCount;
 	
+	
+	public String getSeqCount() {
+		return seqCount;
+	}
+	public void setSeqCount(String seqCount) {
+		this.seqCount = seqCount;
+	}
 	public String getSeq() {
 		return seq;
 	}

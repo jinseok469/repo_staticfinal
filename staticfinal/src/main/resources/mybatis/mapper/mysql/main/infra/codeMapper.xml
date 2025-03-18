@@ -3,57 +3,57 @@
 
 <mapper namespace="com.staticfinal.module.code.CodeDao">
 
-	<resultMap
-		type="com.staticfinal.module.code.CodeDto" id="resultMapObj"></resultMap>
-		<sql id="selectCommon">
+	<resultMap type="com.staticfinal.module.code.CodeDto"
+		id="resultMapObj"></resultMap>
+	<sql id="selectCommon">
 		from
-	code as a
-	left join codeGroup as b on b.seq = a.codeGroup_seq
-	where 1=1
+		code as a
+		left join codeGroup as b on b.seq = a.codeGroup_seq
+		where 1=1
 
-		</sql>
-		<select id="selectCount" resultType="Integer">
+	</sql>
+	<select id="selectCount" resultType="Integer">
 		select count(*)
 		<include refid="selectCommon"></include>
-		</select>
-	
-	<select id="codeList" resultMap="resultMapObj">
-	select
-	a.seq,
-	b.seq as bseq,
-	b.cgName,
-	b.cgDelNy,
-	a.codeGroup_seq,
-	a.cdName,
-	a.cdDelNy
-	<include refid="selectCommon"></include>
-	order by a.seq desc
-	limit #{startRnumForMysql},#{rowNumToShow}
-</select>
-<select id="codeGroupList" resultMap="resultMapObj">
-	select
-	b.seq as b_seq,
-	b.cgName as b_cgName,
-	b.cgDelNy as b_cgDelNy
-	from
-	codeGroup as b
-	where 1=1 and
-	b.cgDelNy = 0
-	order by seq asc
- 	
-</select>
-<insert id="codeInsert">
-	insert into
-	code
-	(
-	codeGroup_seq,
-	cdName
-	)values
-	(
-	#{codeGroup_seq},
-	#{cdName}
-	)
+	</select>
 
-</insert>
+	<select id="codeList" resultMap="resultMapObj">
+		select
+		a.seq,
+		b.seq as bseq,
+		b.cgName,
+		b.cgDelNy,
+		a.codeGroup_seq,
+		a.cdName,
+		a.cdDelNy
+		<include refid="selectCommon"></include>
+		order by a.seq desc
+		limit #{startRnumForMysql},#{rowNumToShow}
+	</select>
+	<select id="codeGroupList" resultMap="resultMapObj">
+		select
+		b.seq as b_seq,
+		b.cgName as b_cgName,
+		b.cgDelNy as b_cgDelNy
+		from
+		codeGroup as b
+		where 1=1 and
+		b.cgDelNy = 0
+		order by b.seq asc
+
+	</select>
+	<insert id="codeInsert">
+		insert into
+		code
+		(
+		codeGroup_seq,
+		cdName
+		)values
+		(
+		#{codeGroup_seq},
+		#{cdName}
+		)
+
+	</insert>
 
 </mapper>

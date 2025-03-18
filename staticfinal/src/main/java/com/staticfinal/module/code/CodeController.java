@@ -5,13 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.staticfinal.module.codegroup.CodeGroupService;
-
 @Controller
 public class CodeController {
 	
 	@Autowired
 	CodeService codeService;
+	
 	
 	@RequestMapping(value = "/codeXdmList")
 	public String codeXdmList(Model model, CodeVo vo) {

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.staticfinal.module.user.UserDao">
+
+	<resultMap type="com.staticfinal.module.user.UserDto"
+		id="resultMapObj"></resultMap>
+	<sql id="selectCommon">
+		from
+		user as a
+		where 1=1
+
+	</sql>
+	<select id="selectCount" resultType="Integer">
+		select count(*)
+		<include refid="selectCommon"></include>
+	</select>
+
+	<select id="userList" resultMap="resultMapObj">
+		select
+		a.seq,
+		a.name,
+		a.gender,
+		a.dob,
+		a.nickName,
+		a.id,
+		a.password,
+		a.email,
+		a.postalCode,
+		a.betterAddress,
+		a.urDelNy
+		<include refid="selectCommon"></include>
+		order by a.seq desc
+		limit #{startRnumForMysql},#{rowNumToShow}
+	</select>
+	<select id="userOne" resultMap="resultMapObj">
+		select
+		a.seq,
+		a.name,
+		a.gender,
+		a.dob,
+		a.nickName,
+		a.id,
+		a.password,
+		a.email,
+		a.postalCode,
+		a.betterAddress,
+		a.urDelNy
+		from
+		user as a
+		where 1=1 and
+		a.seq = #{seq}
+
+	</select>
+
+
+</mapper>
