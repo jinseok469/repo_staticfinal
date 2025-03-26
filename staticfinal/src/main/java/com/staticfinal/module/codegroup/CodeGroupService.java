@@ -1,10 +1,12 @@
 package com.staticfinal.module.codegroup;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.staticfinal.module.util.BannerVo;
 
 @Service
 public class CodeGroupService {
@@ -12,11 +14,9 @@ public class CodeGroupService {
 	@Autowired
 	CodeGroupDao codeGroupDao;
 	 
-	public List<CodeGroupDto> selectList(CodeGroupVo vo){
-		List<CodeGroupDto> codeGroupDtos = new ArrayList<>();
-		codeGroupDtos = codeGroupDao.selectList(vo);
+	public List<CodeGroupDto> selectList(BannerVo vo){
 		
-		return codeGroupDtos;
+		return codeGroupDao.selectList(vo);
 	}
 	public CodeGroupDto selectOne(CodeGroupDto codeGroupDto) {
 		return codeGroupDao.selectOne(codeGroupDto);

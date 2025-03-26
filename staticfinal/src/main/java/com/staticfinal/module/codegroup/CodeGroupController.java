@@ -1,10 +1,14 @@
+
 package com.staticfinal.module.codegroup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
+
+import com.staticfinal.module.util.BannerVo;
 
 @Controller
 public class CodeGroupController {
@@ -14,8 +18,8 @@ public class CodeGroupController {
 	
 	
 	@RequestMapping(value="/codeGroupXdmList")
-	public String codeGruopXdmList(
-			CodeGroupVo vo,
+	public String codeGruopXdmList(@ModelAttribute("vo")
+			BannerVo vo,
 //			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 //			@RequestParam(value = "perPage",required = false,defaultValue = "5" ) int perPage,
 			 
@@ -24,8 +28,8 @@ public class CodeGroupController {
 		// 페이지 값을 설정
 //		vo.setRowNumToShow(perPage);
 //	    vo.setThisPage(page);
+
 		vo.setParamsPaging(codeGroupService.selectOneCount());
-		
 		
 		if(vo.getTotalRows() > 0) {
 		model.addAttribute("list",codeGroupService.selectList(vo));
@@ -43,7 +47,14 @@ public class CodeGroupController {
 		return "xdm/codeGroup/CodeGroupXdmView";
 	}
 	@RequestMapping(value="/codeGroupXdmForm")
-	public String codeGroupXdmForm() {
+	public String codeGroupXdmForm(@ModelAttribute("vo")BannerVo vo,CodeGroupDto codeGroupDto,Model model) {
+		if (codeGroupDto.getSeq().equals("0") || codeGroupDto.getSeq().equals("")) {
+//			insert mode
+		} else {
+//			update mode
+			model.addAttribute("item", codeGroupService.selectOne(codeGroupDto));
+//			model.addAttribute("list", codeService.selectList(cvo));
+		}
 		return "xdm/codeGroup/CodeGroupXdmForm";
 	}
 	@RequestMapping(value="/codeGroupXdmInst")
@@ -52,15 +63,15 @@ public class CodeGroupController {
 		codeGroupService.insert(codeGroupDto);
 		return "redirect:/codeGroupXdmList";
 	}
-	@RequestMapping(value="/codeGroupXdmMfom")
-	public String codeGroupXdmMfom(Model model,CodeGroupDto codeGroupDto) {
-		System.out.println("codeGroupDto.getSeq() = " +codeGroupDto.getSeq());
-		System.out.println("codeGroupDto.getCgName() = "+ codeGroupDto.getCgName());
-		System.out.println("codeGroupDto.getCgDelNy() = "+ codeGroupDto.getCgDelNy());
-		
-		model.addAttribute("item",codeGroupService.selectOne(codeGroupDto));
-		return "xdm/codeGroup/codeGroupXdmMfom";
-	}
+//	@RequestMapping(value="/codeGroupXdmMfom")
+//	public String codeGroupXdmMfom(Model model,CodeGroupDto codeGroupDto) {
+//		System.out.println("codeGroupDto.getSeq() = " +codeGroupDto.getSeq());
+//		System.out.println("codeGroupDto.getCgName() = "+ codeGroupDto.getCgName());
+//		System.out.println("codeGroupDto.getCgDelNy() = "+ codeGroupDto.getCgDelNy());
+//		
+//		model.addAttribute("item",codeGroupService.selectOne(codeGroupDto));
+//		return "xdm/codeGroup/codeGroupXdmMfom";
+//	}
 	@RequestMapping(value="/codeGroupXdmUpdt")
 	public String codeGroupXdmUdpt(CodeGroupDto codeGroupDto) {
 		System.out.println("codeGroupDto.getSeq() = " +codeGroupDto.getSeq());

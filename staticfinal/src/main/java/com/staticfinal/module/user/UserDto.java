@@ -10,7 +10,16 @@ public class UserDto {
 	private String password;
 	private String email;
 	private int urDelNy;
+	private String cdName;
 	
+	
+	
+	public String getCdName() {
+		return cdName;
+	}
+	public void setCdName(String cdName) {
+		this.cdName = cdName;
+	}
 	public int getUrDelNy() {
 		return urDelNy;
 	}

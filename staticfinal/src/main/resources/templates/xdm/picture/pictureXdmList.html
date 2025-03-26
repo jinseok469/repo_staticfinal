@@ -4,8 +4,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-<div th:replace="~{xdm/include/userHead :: head}"></div>
-
+<div th:replace="~{xdm/include/pictureHead :: head}"></div>
 	
 
 
@@ -20,7 +19,7 @@
 			</ol>
 		</nav>
 		<h1 style="height: 50px;">
-			User<span style="font-size: 18px;"> (List)</span>
+			블로그<span style="font-size: 18px;"> (List)</span>
 		</h1>
 	</div>
 	<!-- End Page Title -->
@@ -33,22 +32,21 @@
 				th:value="${vo.rowNumToShow}" />
 			<div class="col-md-2" style="height: 10px;">
 
-				<select class="form-select" id="shDelNy">
-					<option   value="">사용 여부</option>
-					<option value="0" th:selected="${vo.shDelNy == 0}">Y</option>
-					<option value="1" th:selected="${vo.shDelNy == 1}">N</option>
+				<select class="form-select" id="">
+					<option selected disabled value="">N</option>
+					<option>아무거나</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
+				<select class="form-select" id="">
 					<option selected disabled value="">Y</option>
 					<option>아무거나</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
+				<select class="form-select" id="">
 					<option selected disabled value="">날짜</option>
 					<option>등록일</option>
 					<option>수정일</option>
@@ -57,35 +55,31 @@
 			</div>
 			<div class="col-md-2">
 				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-01-05" disabled>
+					placeholder="2025-01-05">
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
 				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-02-04" disabled>
+					placeholder="2025-02-04">
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
-				<select class="form-select" id="shOption" name="shOption" required>
-					<option value="">검색구분</option>
-					<option value="1" th:selected="${vo.shOption == 1}">유저 번호</option>
-					<option  value="2" th:selected="${vo.shOption == 2}">유저 이름</option>
-					<option  value="3" th:selected="${vo.shOption == 3}">유저 닉네임</option>
-					<option  value="4" th:selected="${vo.shOption == 4}">성별</option>
+				<select class="form-select" id="">
+					<option selected disabled value="">검색구분</option>
+					<option>코드그룹 코드</option>
+					<option>코드그룹 이름</option>
+					<option>코드그룹 이름(영문)</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-								<div class="valid-feedback">훌륭 합니다 !</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control"
-					placeholder="검색어" id="shValue" name="shValue" onkeyup="enterkey()" th:value="${vo.shValue}" required>
-				<div class="invalid-feedback">항목을 입력해주세요.</div>
-				<div class="valid-feedback">훌륭 합니다 !</div>
-
+				<input type="text" class="form-control" id="validationCustom03"
+					placeholder="검색어">
+				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-8">
-				<button class="btn btn-outline-dark" type="button" id="btnSearch">
+				<button class="btn btn-outline-dark" type="button">
 					<i class="bi bi-search"></i>
 				</button>
 				<button class="btn btn-outline-dark" type="button">
@@ -119,30 +113,26 @@
 								<th data-sortable="false"
 									style="text-align: center; width: 100px;"><div
 										class="checked">
-										<input type="checkbox" class="form-check" name="userCheck"
+										<input type="checkbox" class="form-check" name="blogCheck"
 											value="selectall" onclick="selectAll(this)">
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
 								<th style="text-align: center;">사용</th>
+								<th class="list-sort" style="text-align: center;">블로그 번호</th>
 								<th class="list-sort" style="text-align: center;">유저 번호</th>
 								<th class="list-sort" style="text-align: center;">유저 이름</th>
-								<th class="list-sort" style="text-align: center;">성별
-									</th>
-								<th class="list-sort" style="text-align: center;">생년 월일</th>
-								<th class="list-sort" style="text-align: center;">닉네임</th>
-								<th  class="list-sort"
-									style="text-align: center;">아이디</th>
-								<th  class="list-sort"style="text-align: center;">패스워드</th>
-								<th  class="list-sort"style="text-align: center;">이메일</th>
-								<th  class="list-sort"style="text-align: center;">우편번호</th>
-								<th  class="list-sort"style="text-align: center;">상세주소</th>
+								<th class="list-sort" style="text-align: center;">유저 닉네임</th>
+								<th class="list-sort" style="text-align: center;">사진 카테고리</th>
+								<th class="list-sort" style="text-align: center;">블로그 제목</th>
+								
+								
 
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:if="${#lists.isEmpty(list)}">
-								<td colspan="14" style="text-align: center; padding-top: 20px;">
+								<td colspan="9" style="text-align: center; padding-top: 20px;">
 									<div>
 										<p>There are no data!</p>
 									</div>
@@ -152,24 +142,23 @@
 							<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}">
 								<td>
 									<div class="checked">
-										<input type="checkbox" class="form-check" name="userCheck"
-											value="checke" onclick="updateSelectAll()">
+										<input type="checkbox" class="form-check" name="blogCheck"
+											value="checke">
 									</div>
 								</td>
+								<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
+								<td th:text="${list.ptDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
-								<td th:text="${list.urDelNy == 0}? Y:N"></td>
-								<td th:text="${list.seq}"></td>
-								<td ><a th:href="@{/userXdmView(seq=${list.seq})}" th:text="${list.name}"></a>
-									</td>
-								<td th:text="${@codeService.selectOneCachedCode(list.gender)}"></td>
-								<td th:text="${list.dob}"></td>
+								<td th:text="${list.user_seq}"></td>
+								<td th:text="${list.name}"></td>
 								<td th:text="${list.nickName}"></td>
-								<td th:text="${list.id}"></td>
-								<td th:text="${list.password}"></td>
-								<td th:text="${list.email}"></td>
-								<td th:text="${list.postalCode}"></td>
-								<td th:text="${list.betterAddress}"></td>
+								<td th:text="${list.categoryName}"></td>
+								<td ><a th:href="@{/pictureXdmView(seq=${list.seq})}" th:text="${list.title}"></a></td>
+								
+								
 							</tr>
+
+
 						</tbody>
 						<tfoot>
 
@@ -252,31 +241,27 @@
 
 
 	function selectAll(selectAll){
-	   	const checkeded = document.getElementsByName("userCheck");
+	   	const checkeded = document.getElementsByName("blogCheck");
 	   	
 	   	checkeded.forEach((checkbox)=>{
 	   		checkbox.checked = selectAll.checked;
 	   	})
 	  	}
-	 function updateSelectAll() {
-         const checkboxes = document.querySelectorAll('input[name="userCheck"]');
-         
-         // 전체 선택 체크박스는 첫 번째 체크박스로 가정
-         const selectAllCheckbox = checkboxes[0]; 
-
-         // 모든 체크박스가 체크되었는지 확인
-         const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-
-         // 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
-         selectAllCheckbox.checked = allChecked;
-     }
 	 
-	
+	 /* function goList(pageNum) {
+		 let  num = pageNum;
+		
+	     let dfNum = document.getElementsByName("perPage")[0];
+		 let ixNum = dfNum.selectedIndex;
+		 let vlNum = dfNum.options[ixNum].value;
+		
+	   window.location.assign("/codeGroupXdmList?page="+num+"&perPage="+vlNum);
+	}  */
 	
 	let form = document.querySelector("form[name=formList]");
 	function goList(Num){
 		document.querySelector("input[name=thisPage]").value = Num;
-		form.action = "/userXdmList"
+		form.action = "/blogXdmList"
 		form.submit();
 	}
 	 
@@ -288,73 +273,21 @@
 		let vlNum = dfNum.options[ixNum].value;
 		document.querySelector("input[name=rowNumToShow]").value = vlNum;
 		
-		form.action = "/userXdmList"
+		form.action = "/blogXdmList"
 		form.submit();
 	}
-	
-
-	 let shOption = document.getElementById("shOption");
-	 let shValue = document.getElementById("shValue");
-	 function enterkey(){
-		 if(event.key == "Enter"){
-			 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-				 shValue.classList.add("is-invalid");
-				 shValue.classList.remove("is-valid");
-				 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-					 shOption.classList.add("is-invalid");
-					 shOption.classList.remove("is-valid");
-					 document.getElementsByClassName("is-invalid")[0].focus();
-					 return false;
-				 }
-				 
-					 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }
-			 form.action ="/userXdmList";
-			 form.submit();
-		 }
-	 }
-	 
-		 document.getElementById("btnSearch").onclick = function(){
-		 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-			 shValue.classList.add("is-invalid");
-			 shValue.classList.remove("is-valid");
-			 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-				 shOption.classList.add("is-invalid");
-				 shOption.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }
-			 
-				 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-		 }else if(shOption.value.trim() == null || shOption.value.trim() ==""){
-			 shOption.classList.add("is-invalid");
-			 shOption.classList.remove("is-valid");
-			 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-				 shValue.classList.add("is-invalid");
-				 shValue.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-		 }
-			 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-	 }
-		 form.action ="/userXdmList";
-		 form.submit();
-		 }
-		 
-		 
-		 document.getElementById("shOption").onchange = function(){
-				let shOption = this;
-				if(shOption.selectedIndex === 0){
-					shOption.classList.add("is-invalid");
-					shOption.classList.remove("is-valid");
-				}else{
-					shOption.classList.add("is-valid");
-					shOption.classList.remove("is-invalid");
-				}
-			}  	
+	/* function getNum(){
+		const urlParams = new URLSearchParams(window.location.search);
+		const page = urlParams.get("page") || "1";
+		
+		let dfNum = document.getElementsByName("perPage")[0];
+		let ixNum = dfNum.selectedIndex;
+		let vlNum = dfNum.options[ixNum].value;
+		
+		window.location.assign("/codeGroupXdmList?page="+page+"&perPage="+vlNum);
+	  
+	} */
+		
 	
 	
 		

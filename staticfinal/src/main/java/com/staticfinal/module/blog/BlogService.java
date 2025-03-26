@@ -5,17 +5,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.staticfinal.module.util.BannerVo;
+//import org.springframework.ui.Model;
+
 @Service
 public class BlogService {
 	
 	@Autowired
 	BlogDao blogDao;
 	
-	public List<BlogDto> blogList(BlogVo vo){
+	public List<BlogDto> blogList(BannerVo vo){
 		
 		return blogDao.blogList(vo);
+	}
+	public List<BlogDto> betterInfo(BlogDto blogDto){
+		
+		return blogDao.betterInfo(blogDto);
+	}
+	public BlogDto blogOne(BlogDto blogDto) {
+		return blogDao.blogOne(blogDto);
 	}
 	public int selectCount() {
 		return blogDao.selectCount();
 	}
+	public List<BlogDto> blogCategoryList(BlogDto blogDto){
+		return blogDao.blogCategoryList(blogDto);
+	}
+	
 }

@@ -6,10 +6,22 @@
 	<resultMap type="com.staticfinal.module.code.CodeDto"
 		id="resultMapObj"></resultMap>
 	<sql id="selectCommon">
-		from
-		code as a
-		left join codeGroup as b on b.seq = a.codeGroup_seq
-		where 1=1
+		FROM code as a
+		left join codeGroup as b on a.codeGroup_seq = b.seq
+        WHERE 1=1
+<!--         <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy = #{shUseNy}</if> -->
+        <if test="shDelNy != null and !shDelNy.equals('')">AND a.cdDelNy = #{shDelNy}</if>
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+        <choose>
+            <when test="shOption == 1">AND a.codeGroup_seq = #{shValue}</when>
+            <when test="shOption == 2">AND b.cgName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.cdName LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
 
 	</sql>
 	<select id="selectCount" resultType="Integer">
@@ -42,6 +54,32 @@
 		order by b.seq asc
 
 	</select>
+	<select id="codeOne" resultMap="resultMapObj">
+		select
+		a.seq,
+		a.codeGroup_seq,
+		a.cdName,
+		a.cdDelNy,
+		b.seq as bseq,
+		b.cgName
+		
+		from
+		code as a
+		left join codeGroup as b on a.codeGroup_seq = b.seq
+		where 1=1
+		and a.seq = #{seq}
+	
+	
+	</select>
+	<update id="codeUpdate">
+	update code
+	set 
+	codeGroup_seq = #{codeGroup_seq},
+	cdName = #{cdName}
+	where 1=1
+	and seq = #{seq}
+	
+	</update>
 	<insert id="codeInsert">
 		insert into
 		code
@@ -55,5 +93,27 @@
 		)
 
 	</insert>
+	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+		SELECT 
+			a.seq,
+			a.cdName,
+			a.codeGroup_seq
+		FROM
+			code as a
+		WHERE 1=1
+			AND cdDelNy = 0
+		   
+   </select>
+   <delete id="codeUelete" parameterType="list">
+   		update
+   		code
+   		set 
+   		cdDelNy = 1
+   		where seq IN
+   		<foreach collection="seqList" item="seq" open="(" separator="," close=")">
+   		 #{seq}
+   		</foreach>
+   		
+   </delete>
 
 </mapper>

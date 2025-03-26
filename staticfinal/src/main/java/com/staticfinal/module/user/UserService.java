@@ -5,13 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.staticfinal.module.util.BannerVo;
+
 @Service
 public class UserService {
 	
 	@Autowired
 	UserDao userDao;
 	
-	public List<UserDto> userList(UserVo vo){
+	public List<UserDto> userList(BannerVo vo){
 		
 		return userDao.userList(vo);
 	}
@@ -22,5 +24,9 @@ public class UserService {
 		
 		return userDao.selectCount();
 	}
+	public UserDto loginOne(String id, String password) {
+		return userDao.loginOne(id, password);
+	}
+	
 
 }

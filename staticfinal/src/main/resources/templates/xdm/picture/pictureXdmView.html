@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div th:replace="~{xdm/include/pictureHead :: head}"></div>
+<!-- End Sidebar-->
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">page 1</a></li>
+          <li class="breadcrumb-item">page 2</li>
+          <li class="breadcrumb-item active">Default</li>
+        </ol>
+      </nav>
+      <h1>블로그</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        
+        <div class="col-lg-12">
+          <div class="card" >
+            <div class="card-body">
+              <h1 class="card-title" style="height: 100px;" >기본정보 </h1>
+
+              <!-- Custom Styled Validation -->
+              <form class="row g-3 needs-validation" novalidate id="" action="" method="post" >
+                <div class="col-md-3" style="height: 100px;">
+                  <label for="seq" class="form-label">블로그 번호 <sup>*</sup></label>
+                  <input type="text" class="form-control" id="seq" th:value="${item.seq}"  required  readonly>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom05" class="form-label">사진 카테고리</label>
+                  <input type="text" class="form-control" id="validationCustom05"  th:value="${item.categoryName}" required readonly>
+                  <div class="invalid-feedback">
+                    코드이름 을 입력해주세요.
+                  </div>
+                </div>
+                <div class="col-md-3" style="height: 100px;">
+                  <label for="validationCustom08" class="form-label">사진 제목<sup>*</sup></label>
+                  <input type="text" class="form-control" id="validationCustom08" th:value="${item.title}" required readonly>
+                  <div class="invalid-feedback">
+                    Please provide a valid zip.
+                  </div>
+                </div>
+      
+                <div class="col-md-3" style="height: 100px;">
+                  <label for="validationCustom02" class="form-label">유저 번호</label>
+                  <input type="text" class="form-control" id="validationCustom02" th:value="${item.user_seq}"  required readonly>
+                  <div class="valid-feedback">
+                    코드를 입력해주세요!
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="cgName" class="form-label">유저 이름<sup>*</sup></label>
+                  <input type="text" class="form-control" id="cgName" th:value="${item.name}"  required readonly >
+                  <div class="invalid-feedback">
+                    코드를 입력해주세요.
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="cgnickName" class="form-label">유저 닉네임<sup>*</sup></label>
+                  <input type="text" class="form-control" id="cgnickName" th:value="${item.nickName}"  required readonly >
+                  <div class="invalid-feedback">
+                    코드를 입력해주세요.
+                  </div>
+                </div>
+                
+                
+                <div class="col-md-3" style="height: 100px;">
+                  <label for="validationCustom21" class="form-label">사용 카메라</label>
+                  <input type="text" class="form-control" id="validationCustom21" th:value="${item.useCamera}" required readonly>
+                  <div class="invalid-feedback">
+                    Please provide a valid zip.
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom22" class="form-label">촬영 장소</label>
+                  <input type="text" class="form-control" id="validationCustom22" th:value="${item.photoPlace}" required readonly>
+                  <div class="invalid-feedback">
+                    Please provide a valid zip.
+                  </div>
+                </div>
+               
+                <div class="col-md-3" style="height: 100px;">
+                  <label for="validationCustom25" class="form-label">블로그 사용여부<sup>*</sup></label>
+                  <input class="form-control" id="validationCustom25" th:value="${item.ptDelNy == 0}? Y:N" required readonly   >
+                    <!-- <option selected disabled value="">0</option>
+                    <option>아무거나</option>
+                  </select> -->
+                  <div class="invalid-feedback">
+                    항목중 하나를 선택 해주세요.
+                  </div>
+                </div>
+                <div class="col-12" style="height: 100px;">
+                <label for="validationCustom27" class="form-label">사진 설명</label>
+                <input class="form-control" id="validationCustom27" th:value="${item.photoIntroduce}" required readonly>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <a href="/pictureXdmList" class="btn btn-outline-dark"><i class="bi bi-blockquote-right"></i></a></div>
+                <div class="col-md-6">
+<!--                   <div style="display: flex;justify-content: end;"><a th:href="@{/blogXdmInfo(seq=${item.seq})}"  class="btn btn-primary" id="blogBtn">상세 코디목록</a></div> -->
+                </div>
+              </form><!-- End Custom Styled Validation -->
+
+            </div>
+          </div>
+
+          
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <div th:replace="~{xdm/include/footer :: footer}"></div>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="xdm/template/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/quill/quill.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="xdm/template/NiceAdmin/assets/js/main.js"></script>
+	 <script type="text/javascript">
+// 	document.getElementById("blog").onclick = function(){
+// 		document.getElementById("codeGroupForm").submit();
+// 	}
+	</script> 
+</body>
+
+</html>

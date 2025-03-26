@@ -8,8 +8,21 @@
 		type="com.staticfinal.module.codegroup.CodeGroupDto" id="resultMapObj"></resultMap>
 
 	<sql id="selectCommon">
-		from codeGroup as a
-		where 1=1
+		 FROM codeGroup as a
+        WHERE 1=1
+<!--         <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy = #{shUseNy}</if> -->
+        <if test="shDelNy != null and !shDelNy.equals('')">AND a.cgDelNy = #{shDelNy}</if>
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+        <choose>
+            <when test="shOption == 1">AND a.seq = #{shValue}</when>
+            <when test="shOption == 2">AND a.cgName LIKE CONCAT('%',#{shValue},'%')</when>
+<!--             <when test="shOption == 3">AND a.ifcgNameEng LIKE CONCAT('%',#{shValue},'%')</when> -->
+        </choose>
 
 	</sql>
 
@@ -34,7 +47,8 @@
 		select
 		a.seq,
 		a.cgName,
-		a.cgDelNy
+		a.cgDelNy,
+		(select count(b.seq) from code as b where 1=1 and b.cdDelNy = 0 and b.codeGroup_seq = a.seq) as seqCount
 		from
 		codeGroup as a
 		where 1=1 and

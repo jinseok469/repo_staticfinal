@@ -12,16 +12,31 @@
 		a.user_seq
 		left join blogCategory as c on c.seq = a.blogCategory_seq
 		where 1=1
+<!-- 		      <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy = #{shUseNy}</if>  -->
+        <if test="shDelNy != null and !shDelNy.equals('')">AND a.bgDelNy = #{shDelNy}</if>
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+        <choose>
+            <when test="shOption == 1">AND a.seq = #{shValue}</when>
+            <when test="shOption == 2">AND a.title LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND b.name LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 4">AND b.nickName LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
 	</sql>
 	<select id="selectCount" resultType="Integer">
-	select count(*)
-	<include refid="selectCommon"></include>
+		select count(*)
+		<include refid="selectCommon"></include>
 	</select>
 
 	<select id="blogList" resultMap="resultMapObj">
 		select
 		a.seq,
 		b.name,
+		b.nickName,
 		a.user_seq,
 		a.blogCategory_seq,
 		c.categoryName,
@@ -30,5 +45,54 @@
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 
+	</select>
+	<select id="blogOne" resultMap="resultMapObj">
+		select
+		a.seq,
+		a.blogIntroduction,
+		a.modelHeight,
+		a.modelWeight,
+		a.modelSize,
+		a.modelShoesSize,
+		a.blogCategory_seq,
+		a.user_seq,
+		a.buied,
+		a.title,
+		b.name,
+		b.nickName,
+		c.categoryName
+		from
+		betterBlog as a
+		left join user as b on a.user_seq = b.seq
+		left join
+		blogCategory as c on a.blogCategory_seq = c.seq
+		where 1=1
+		and a.seq = #{seq}
+	</select>
+	<select id="betterInfo" resultMap="resultMapObj">
+		select
+		a.seq,
+		b.seq as infoseq,
+		b.item,
+		b.itemBrand,
+		b.infoPrice,
+		b.buyLink
+
+		from
+		betterBlog as a
+		left join clotheInfo as b on a.seq = b.betterBlog_seq
+		where 1=1
+		and a.seq = #{seq}
+		order by infoseq asc
+
+	</select>
+	<select id="blogCategoryList" resultMap="resultMapObj">
+		select
+		a.seq as bcSeq,
+		a.categoryName
+		from
+		blogCategory as a
+		where 1=1
+		order by a.seq asc
 	</select>
 </mapper>

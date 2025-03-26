@@ -8,7 +8,21 @@
 	<sql id="selectCommon">
 		from
 		user as a
+		left join code as b on a.gender = b.seq
 		where 1=1
+		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy 
+			= #{shUseNy}</if> -->
+		<if test="shDelNy != null and !shDelNy.equals('')">AND a.urDelNy = #{shDelNy}</if>
+
+		<!-- <choose> <when test="shOptionDate == 1">AND a.regDateTime BETWEEN 
+			#{shDateStart} AND #{shDateEnd}</when> <when test="shOptionDate == 2">AND 
+			a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when> </choose> -->
+		<choose>
+			<when test="shOption == 1">AND a.seq = #{shValue}</when>
+			<when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
+			<when test="shOption == 3">AND a.nickName LIKE CONCAT('%',#{shValue},'%')</when>
+			<when test="shOption == 4">AND b.cdName LIKE CONCAT('%',#{shValue},'%')</when>
+		</choose>
 
 	</sql>
 	<select id="selectCount" resultType="Integer">
@@ -28,6 +42,7 @@
 		a.email,
 		a.postalCode,
 		a.betterAddress,
+		b.cdName,
 		a.urDelNy
 		<include refid="selectCommon"></include>
 		order by a.seq desc
@@ -52,6 +67,24 @@
 		a.seq = #{seq}
 
 	</select>
-
+	<select id="loginOne" resultMap="resultMapObj">
+		select
+		a.seq,
+		a.name,
+		a.gender,
+		a.dob,
+		a.nickName,
+		a.id,
+		a.password,
+		a.email,
+		a.postalCode,
+		a.betterAddress,
+		a.urDelNy
+		from
+		user as a
+		where 1=1 and
+		a.id = #{id}
+		and a.password = #{password}
+	</select>
 
 </mapper>

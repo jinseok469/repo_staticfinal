@@ -1,5 +1,8 @@
 package com.staticfinal.module.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CodeDto {
 	
 	private String seq;
@@ -13,6 +16,16 @@ public class CodeDto {
 	private String b_cgName;
 	private String b_cgDelNy;
 	
+	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
+	
+	
+	
+	public static List<CodeDto> getCachedCodeArrayList() {
+		return cachedCodeArrayList;
+	}
+	public static void setCachedCodeArrayList(List<CodeDto> cachedCodeArrayList) {
+		CodeDto.cachedCodeArrayList = cachedCodeArrayList;
+	}
 	public int getCgDelNy() {
 		return cgDelNy;
 	}

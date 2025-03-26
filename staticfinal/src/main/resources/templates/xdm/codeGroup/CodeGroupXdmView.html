@@ -2,249 +2,115 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{xdm/include/head :: head}"></div>
+<!-- End Sidebar-->
+  <main id="main" class="main">
 
-	<!-- End Sidebar-->
-	<main id="main" class="main">
+    <div class="pagetitle">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">page 1</a></li>
+          <li class="breadcrumb-item">page 2</li>
+          <li class="breadcrumb-item active">Default</li>
+        </ol>
+      </nav>
+     <div><h1>CodeGroup </h1></div>
+    </div><!-- End Page Title -->
 
-		<div class="pagetitle">
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">page 1</a></li>
-					<li class="breadcrumb-item">page 2</li>
-					<li class="breadcrumb-item active">Default</li>
-				</ol>
-			</nav>
-			<h1 style="height: 50px;">CodeGroup<span style="font-size:17px"> (View)</span></h1>
-		</div>
-		<!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+        
+        <div class="col-lg-12">
+          <div class="card" >
+            <div class="card-body">
+              <h1 class="card-title" style="height: 100px;" >기본정보  </h1>
 
-		<section class="section">
-			<form class="row g-3 needs-validation" novalidate id="cgFormView" action="/codeGroupXdmUele" method="post">
-				<div class="col-md-2" style="height: 10px;">
+              <!-- Custom Styled Validation -->
+              <form class="row g-3 needs-validation" novalidate id="cgViewForm" action="/codeGroupXdmUpdt" method="post">
+                <div class="col-md-3" style="height: 100px;">
+                  <label for="seqed" class="form-label">코드그룹 코드 <sup>*</sup></label>
+                  <input type="hidden"  name="seq" th:value="${item.seq}"/>
+                  <input type="text" class="form-control" id="seqed" value="" placeholder="" name="seq" th:value="${item.seq}" required readonly>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+      
+               
+                <div class="col-md-3">
+                  <label for="cgName" class="form-label">코드그룹 이름 <sup>*</sup></label>
+                  <input type="text" class="form-control" id="cgName" name="cgName" th:value="${item.cgName}"  required readonly>
+                  <div class="invalid-feedback">
+                    코드를 입력해주세요.
+                  </div>
+                </div>
+                
+               
+                
+                <div class="col-md-3" style="height: 100px;">
+                  <label for="validationCustom50" class="form-label">사용여부<sup>*</sup></label>
+                  <input type="hidden"  name="cgDelNy" th:value="${item.cgDelNy}">
+                  <input type="text" class="form-control" id="validationCustom50" name="cgDelNy" th:value="${item.cgDelNy == 0}? Y:N " required readonly   >
+                    <!-- <option selected  th:value="${item.cgDelNy}" ></option>
+                    <option>아무거나</option>
+                  </select> -->
+                  <div class="invalid-feedback">
+                    사용여부를 입력 해주세요.
+                  </div>
+                </div>
+                <div class="col-md-3" style="height: 100px;">
+                  <label for="validationCustom51" class="form-label">갯수</label>
+                  <input type="hidden"  name="cgDelNy" th:value="${item.seqCount}">
+                  <input type="text" class="form-control" id="validationCustom51" name="" th:value="${item.seqCount}" required readonly   >
+                    <!-- <option selected  th:value="${item.cgDelNy}" ></option>
+                    <option>아무거나</option>
+                  </select> -->
+                  <div class="invalid-feedback">
+                    사용여부를 입력 해주세요.
+                  </div>
+                </div>
+                
+                
+                
+                <div class="col-md-6"></div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  <a href="javascript:history.back()" class="btn btn-outline-dark"><i class="bi bi-blockquote-right"></i></a></div>
+                <div class="col-md-6">
+<!--                   <div style="display: flex;justify-content: end;"><button class="btn btn-primary" id="cgViewBtn" th:value="${item.seq}"><i class="bi bi-server"></i></button></div> -->
+                </div>
+              </form><!-- End Custom Styled Validation -->
 
-					<select class="form-select" id="">
-						<option selected disabled value="">N</option>
-						<option>아무거나</option>
-					</select>
-					<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<select class="form-select" id="">
-						<option selected disabled value="">Y</option>
-						<option>아무거나</option>
-					</select>
-					<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<select class="form-select" id="">
-						<option selected disabled value="">날짜</option>
-						<option>등록일</option>
-						<option>수정일</option>
-					</select>
-					<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="validationCustom03"
-						placeholder="2025-01-05">
-					<div class="invalid-feedback">코드를 입력해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="validationCustom03"
-						placeholder="2025-02-04">
-					<div class="invalid-feedback">코드를 입력해주세요.</div>
-				</div>
-				<div class="col-md-2"></div>
-				<div class="col-md-2">
-					<select class="form-select" id="">
-						<option selected disabled value="">검색구분</option>
-						<option>코드그룹 코드</option>
-						<option>코드그룹 이름</option>
-						<option>코드그룹 이름(영문)</option>
-					</select>
-					<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-				</div>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="validationCustom03"
-						placeholder="검색어">
-					<div class="invalid-feedback">코드를 입력해주세요.</div>
-				</div>
-				<div class="col-md-8">
-					<button class="btn btn-outline-dark" type="button">
-						<i class="bi bi-search"></i>
-					</button>
-					<button class="btn btn-outline-dark" type="button">
-						<i class="bi bi-arrow-clockwise"></i>
-					</button>
-				</div>
+            </div>
+          </div>
 
-				<div class="col-lg-12">
-					<div class="card">
-						<div class="card-body">
-							<div class="row">
-								<div class="col-md-10" style="height: 50px;">
-									<h5 class="card-title-list">Total : 42</h5>
-								</div>
-								<div class="col-md-2 select-col">
-									<!-- <select class="form-select select-end">
-										<option value="">5</option>
-										<option value="">10</option>
-										<option value="">15</option>
-									</select> -->
-								</div>
-							</div>
-						</div>
-			<!-- Table with stripped rows -->
-			
-				<table class="table datatable">
-					<thead>
-						<tr>
+          
 
-							<th data-sortable="false"
-								style="text-align: center; width: 100px;"><div
-									class="checked">
-									<input type="checkbox" class="form-check" name="animalView"
-										value="selectall" onclick="selectAll(this)">
-								</div></th>
-							<th data-sortable="false"
-								style="width: 10px; text-align: center;">#</th>
-							<th data-sortable="false" style="text-align: center;">사용</th>
-							<th data-sortable="false" class="list-sort"
-								style="text-align: center;">코드그룹 코드</th>
-							<th data-sortable="false" class="list-sort"
-								style="text-align: center;">코드그룹 이름</th>
-							<th data-sortable="false" class="list-sort"
-								style="text-align: center;">코드그룹 이름(영문)</th>
-							<th data-sortable="false" class="list-sort"
-								style="text-align: center;">갯수</th>
-							<th data-sortable="false" class="list-sort"
-								style="text-align: center;">순서</th>
-							<th data-sortable="false" data-type="date"
-								data-format="YYYY/DD/MM" class="list-sort"
-								style="text-align: center;">등록일</th>
-							<th data-sortable="false" data-type="data"
-								data-format="YYYY/DD/MM" class="list-sort"
-								style="text-align: center;">수정일</th>
-						</tr>
-					</thead>
-					<tbody>
+        </div>
+      </div>
+    </section>
 
-						<tr>
-							<td>
-								<div class="checked">
-									<input type="checkbox" class="form-check" name="animalView"
-										value="checke">
-								</div>
-							</td>
-							<td th:text="${item.seq}"></td>
-							<td th:text="${item.cgDelNy}"></td>
-							<td th:text="${item.seq}"></td>
-							<td th:text="${item.cgName}"></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						
+  </main><!-- End #main -->
 
-					</tbody>
-					<tfoot>
+<div th:replace="~{xdm/include/footer :: footer}"></div>
+ <!-- End Footer -->
 
-					</tfoot>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-				</table>
-				<div class="row">
-					<!-- <nav aria-label="Page navigation example"
-						style="display: flex; justify-content: center;">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ul>
-					</nav> -->
+  <!-- Vendor JS Files -->
+  <script src="xdm/template/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/quill/quill.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
 
-				</div>
-				<div class="row">
-					<div class="col-md-6 padding-left">
-						<a th:href="@{/codeGroupXdmDele(seq=${item.seq})}" class="btn btn-danger" id="cgViewDelBtn">X</a>
-						<a th:href="@{/codeGroupXdmUele(seq=${item.seq})}"
-							id="cgViewSetBtn" class="btn btn-danger">
-								<i class="bi bi-trash"></i>
-							</a>
-					</div>
-					<div class="col-md-6 padding-right"
-						style="display: flex; justify-content: end;">
-
-						<button class="btn btn-success btn-right">
-							<i class="bi bi-journal-x"></i>
-						</button>
-						<a th:href="@{/codeGroupXdmMfom(seq=${item.seq})}" class="btn btn-primary">U
-							</a>
-					</div>
-				</div>
-				</div>
-				</div>
-			</form>
-		</section>
-
-	</main>
-	<!-- End #main -->
-
-	<div th:replace="~{xdm/include/footer :: footer}"></div>
-	<!-- End Footer -->
-
-	<a href="#"
-		class="back-to-top d-flex align-items-center justify-content-center"><i
-		class="bi bi-arrow-up-short"></i></a>
-
-	<!-- Vendor JS Files -->
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
-	<script src="/xdm/template/NiceAdmin/assets/vendor/quill/quill.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
-	<script
-		src="/xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
-
-	<!-- Template Main JS File -->
-	<script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
+  <!-- Template Main JS File -->
+  <script src="xdm/template/NiceAdmin/assets/js/main.js"></script>
 	<script type="text/javascript">
-	function selectAll(selectAll){
-	   	const checkeded = document.getElementsByName("animalView");
-	   	
-	   	checkeded.forEach((checkbox)=>{
-	   		checkbox.checked = selectAll.checked;
-	   	})
-	  	}
-	</script>
-	<script type="text/javascript">
-	document.getElementById("cgViewSetBtn").onclick = function(){
-		if(confirm("사용 중지 하시겠습니까?")){
-			
-		}else{
-			return false;
-		}
-	}
-	document.getElementById("cgViewDelBtn").onclick = function(){
-		if(confirm("삭제 하시겠습니까?")){
-			
-		}else{
-			return false;
-		}
+	document.getElementById("cgViewBtn").onclick = function(){
+		document.getElementById("cgViewForm").submit();
 	}
 	</script>
 </body>

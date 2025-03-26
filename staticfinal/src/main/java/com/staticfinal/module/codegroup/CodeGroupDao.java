@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.staticfinal.module.util.BannerVo;
+
 @Repository
 public interface CodeGroupDao {
 	
-	public List<CodeGroupDto> selectList(CodeGroupVo vo);
+	public List<CodeGroupDto> selectList(BannerVo vo);
 	
 	public CodeGroupDto selectOne(CodeGroupDto codeGroupDto);
 	

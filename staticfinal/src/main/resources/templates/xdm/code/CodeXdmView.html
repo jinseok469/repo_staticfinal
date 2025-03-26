@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<div th:replace="~{xdm/include/userHead :: head}"></div>
+<div th:replace="~{xdm/include/codeHead :: head}"></div>
 <!-- End Sidebar-->
   <main id="main" class="main">
 
@@ -13,7 +13,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>User</h1>
+      <h1>Code</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -27,85 +27,39 @@
               <!-- Custom Styled Validation -->
               <form class="row g-3 needs-validation" novalidate id="" action="" method="post">
                 <div class="col-md-3" style="height: 100px;">
-                  <label for="seq" class="form-label">유저 번호 <sup>*</sup></label>
-                  <input type="text" class="form-control" id="seq" th:value="${item.seq}"  required  readonly>
+                  <label for="seq" class="form-label">코드 그룹 코드 <sup>*</sup></label>
+                  <input type="text" class="form-control" id="seq" th:value="${item.codeGroup_seq}"  required  readonly>
                   <div class="valid-feedback">
                     Looks good!
                   </div>
                 </div>
       
                 <div class="col-md-3" style="height: 100px;">
-                  <label for="validationCustom02" class="form-label">유저 이름</label>
-                  <input type="text" class="form-control" id="validationCustom02" th:value="${item.name}"  required readonly>
+                  <label for="validationCustom02" class="form-label">코드 그룹 이름</label>
+                  <input type="text" class="form-control" id="validationCustom02" th:value="${item.cgName}"  required readonly>
                   <div class="valid-feedback">
                     코드를 입력해주세요!
                   </div>
                 </div>
                 <div class="col-md-3">
-                  <label for="userGender" class="form-label">성별 <sup>*</sup></label>
-                  <select id="userGender" class="form-select">
-                  <option th:each="list : ${@codeService.selectListCachedCode(item.gender)}" th:value="${list.seq}" th:text="${list.cdName}" th:selected="${list.seq} == ${item?.gender}"></option>
-                  </select>
-<!--                   <input type="text" class="form-control" id="cgName" th:value="${@codeService.selectOneCachedCode(item.gender)}"  required readonly > -->
+                  <label for="cgName" class="form-label">코드 <sup>*</sup></label>
+                  <input type="text" class="form-control" id="cgName" th:value="${item.seq}"  required readonly >
                   <div class="invalid-feedback">
                     코드를 입력해주세요.
                   </div>
                 </div>
                 
                 <div class="col-md-3">
-                  <label for="validationCustom05" class="form-label">생년 월일</label>
-                  <input type="text" class="form-control" id="validationCustom05"  th:value="${item.dob}" required readonly>
+                  <label for="validationCustom05" class="form-label">코드 이름</label>
+                  <input type="text" class="form-control" id="validationCustom05"  th:value="${item.cdName}" required readonly>
                   <div class="invalid-feedback">
                     코드이름 을 입력해주세요.
                   </div>
                 </div>
                 
                 <div class="col-md-3" style="height: 100px;">
-                  <label for="validationCustom08" class="form-label">닉네임<sup>*</sup></label>
-                  <input type="text" class="form-control" id="validationCustom08" th:value="${item.nickName}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationCustom21" class="form-label">아이디<sup>*</sup></label>
-                  <input type="text" class="form-control" id="validationCustom21" th:value="${item.id}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationCustom22" class="form-label">패스워드<sup>*</sup></label>
-                  <input type="text" class="form-control" id="validationCustom22" th:value="${item.password}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationCustom23" class="form-label">이메일</label>
-                  <input type="text" class="form-control" id="validationCustom23" th:value="${item.email}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationCustom24" class="form-label">우편 번호</label>
-                  <input type="text" class="form-control" id="validationCustom24" th:value="${item.postalCode}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationCustom26" class="form-label">상세 주소</label>
-                  <input type="text" class="form-control" id="validationCustom26" th:value="${item.betterAddress}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-                
-                <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom25" class="form-label">사용여부<sup>*</sup></label>
-                  <input class="form-control" id="validationCustom" th:value="${item.urDelNy == 0}? Y:N" required readonly   >
+                  <input class="form-control" id="validationCustom" th:value="${item.cdDelNy == 0}? Y:N" required readonly   >
                     <!-- <option selected disabled value="">0</option>
                     <option>아무거나</option>
                   </select> -->
@@ -115,6 +69,7 @@
                 </div>
                 
                 
+                <div class="col-md-6"></div>
                 <div class="col-md-6"></div>
                 <div class="col-md-6"></div>
                 <div class="col-md-6">
