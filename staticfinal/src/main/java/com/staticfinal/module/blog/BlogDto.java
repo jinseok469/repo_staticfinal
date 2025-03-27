@@ -22,6 +22,7 @@ public class BlogDto {
 	private String infoseq;
 	private String nickName;
 	private String bcSeq;
+	private String betterBlog_seq;
 	public int getBgDelNy() {
 		return bgDelNy;
 	}
@@ -142,6 +143,12 @@ public class BlogDto {
 	}
 	public void setBcSeq(String bcSeq) {
 		this.bcSeq = bcSeq;
+	}
+	public String getBetterBlog_seq() {
+		return betterBlog_seq;
+	}
+	public void setBetterBlog_seq(String betterBlog_seq) {
+		this.betterBlog_seq = betterBlog_seq;
 	}
 	
 	

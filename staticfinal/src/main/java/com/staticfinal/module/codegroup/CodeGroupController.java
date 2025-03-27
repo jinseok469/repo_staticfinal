@@ -1,12 +1,15 @@
 
 package com.staticfinal.module.codegroup;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.staticfinal.module.util.BannerVo;
 
@@ -88,8 +91,8 @@ public class CodeGroupController {
 		return "redirect:/codeGroupXdmList";
 	}
 	@RequestMapping(value="/codeGroupXdmUele")
-	public String codeGroupXdmUele(CodeGroupDto codeGroupDto) {
-		codeGroupService.uelete(codeGroupDto);
+	public String codeGroupXdmUele(@RequestParam("seqList")List<String> seqList) {
+		codeGroupService.uelete(seqList);
 		return "redirect:/codeGroupXdmList";
 	}
 	

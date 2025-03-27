@@ -2,6 +2,7 @@ package com.staticfinal.module.codegroup;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.staticfinal.module.util.BannerVo;
@@ -17,7 +18,7 @@ public interface CodeGroupDao {
 	
 	public int update(CodeGroupDto codeGroupDto);
 	
-	public int uelete(CodeGroupDto codeGroupDto);
+	public int uelete(@Param("seqList")List<String> seqList);
 	
 	public int delete(CodeGroupDto codeGroupDto);
 	

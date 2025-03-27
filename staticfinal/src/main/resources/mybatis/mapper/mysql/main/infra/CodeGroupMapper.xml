@@ -81,8 +81,12 @@
 		codeGroup
 		set
 		cgDelNy = 1
-		where
-		seq = #{seq}
+		where seq in
+		<foreach collection="seqList" item="seq" open="(" separator="," close=")">
+		
+		#{seq}
+		</foreach>
+		
 
 	</delete>
 	<delete id="delete">

@@ -25,20 +25,21 @@
               <h1 class="card-title" style="height: 100px;" >기본정보 </h1>
 
               <!-- Custom Styled Validation -->
-              <form class="row g-3 needs-validation" novalidate id="" action="" method="post" >
+              <form class="row g-3 needs-validation" novalidate id="formList" action="" method="post" >
                 <div class="col-md-3" style="height: 100px;">
+                <input type="hidden" name="seq" th:value="${item?.seq}">
                   <label for="seq" class="form-label">블로그 번호 <sup>*</sup></label>
-                  <input type="text" class="form-control" id="seq" th:value="${item.seq}"  required  disabled>
+                  <input type="text" class="form-control" id="seq" th:value="${item?.seq}"  required  disabled>
                   <div class="valid-feedback">
                     Looks good!
                   </div>
                 </div>
                 <div class="col-md-3">
                   <label for="validationCustom05" class="form-label">블로그 카테고리</label>
-                  <select  class="form-select" id="validationCustom05" required >
+                  <select  class="form-select" id="validationCustom05" name="blogCategory_seq" required >
                   <option value="">선택 하세요</option>
-                  <option th:each="bcList:${bcList}" th:text="${bcList.categoryName}" th:value="${bcList.bcSeq}"
-                  th:selected="${bcList.bcSeq == item.blogCategory_seq}"></option>
+                  <option th:each="bcList:${bcList}" th:text="${bcList?.categoryName}" th:value="${bcList?.bcSeq}"
+                  th:selected="${bcList?.bcSeq == item?.blogCategory_seq}"></option>
                   </select>
                   <div class="invalid-feedback">
                     코드이름 을 입력해주세요.
@@ -46,7 +47,7 @@
                 </div>
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom08" class="form-label">블로그 제목<sup>*</sup></label>
-                  <input type="text" class="form-control" id="validationCustom08" name="title" th:value="${item.title}" required >
+                  <input type="text" class="form-control" id="validationCustom08" name="title" th:value="${item?.title}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
@@ -54,21 +55,21 @@
       
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom02" class="form-label">유저 번호</label>
-                  <input type="text" class="form-control" id="validationCustom02" name="user_seq" th:value="${item.user_seq}"  required >
+                  <input type="text" class="form-control" id="validationCustom02" name="user_seq" th:value="${item?.user_seq}"  required >
                   <div class="valid-feedback">
                     코드를 입력해주세요!
                   </div>
                 </div>
                 <div class="col-md-3">
                   <label for="cgName" class="form-label">유저 이름<sup>*</sup></label>
-                  <input type="text" class="form-control" id="cgName" th:value="${item.name}"  required disabled >
+                  <input type="text" class="form-control" id="cgName" th:value="${item?.name}"  required disabled >
                   <div class="invalid-feedback">
                     코드를 입력해주세요.
                   </div>
                 </div>
                 <div class="col-md-3">
                   <label for="cgnickName" class="form-label">유저 닉네임<sup>*</sup></label>
-                  <input type="text" class="form-control" id="cgnickName" th:value="${item.nickName}"  required disabled >
+                  <input type="text" class="form-control" id="cgnickName" th:value="${item?.nickName}"  required disabled >
                   <div class="invalid-feedback">
                     코드를 입력해주세요.
                   </div>
@@ -77,35 +78,35 @@
                 
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom21" class="form-label">모델 신장</label>
-                  <input type="text" class="form-control" id="validationCustom21" th:value="${item.modelHeight}" required readonly>
+                  <input type="text" class="form-control" id="validationCustom21" name="modelHeight" th:value="${item?.modelHeight}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
                 </div>
                 <div class="col-md-3">
                   <label for="validationCustom22" class="form-label">모델 몸무게</label>
-                  <input type="text" class="form-control" id="validationCustom22" th:value="${item.modelWeight}" required readonly>
+                  <input type="text" class="form-control" id="validationCustom22" name="modelWeight" th:value="${item?.modelWeight}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
                 </div>
                 <div class="col-md-3">
                   <label for="validationCustom23" class="form-label">모델 의류 사이즈</label>
-                  <input type="text" class="form-control" id="validationCustom23" th:value="${item.modelSize}" required readonly>
+                  <input type="text" class="form-control" id="validationCustom23" name="modelSize" th:value="${item?.modelSize}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
                 </div>
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom24" class="form-label">모델 신발 사이즈</label>
-                  <input type="text" class="form-control" id="validationCustom24" th:value="${item.modelShoesSize}" required readonly>
+                  <input type="text" class="form-control" id="validationCustom24" name="modelShoesSize" th:value="${item?.modelShoesSize}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
                 </div>
                 <div class="col-md-3">
                    <label for="validationCustom26" class="form-label">블로그 구매여부</label>
-                  <input type="text" class="form-control" id="validationCustom26" th:value="${item.buied == 1}? Y:N" required readonly>
+                  <input type="text" class="form-control" id="validationCustom26" name="buied" th:value="${item?.buied == 0}? N" required disabled>
                   <div class="invalid-feedback">
                     Please provide a valid zip. 
                   </div>
@@ -113,7 +114,7 @@
                 
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom25" class="form-label">블로그 사용여부<sup>*</sup></label>
-                  <input class="form-control" id="validationCustom25" th:value="${item.bgDelNy == 0}? Y:N" required readonly   >
+                  <input class="form-control" id="validationCustom25" name="bgDelNy" th:value="${item?.bgDelNy == 0}? Y" required disabled   >
                     <!-- <option selected disabled value="">0</option>
                     <option>아무거나</option>
                   </select> -->
@@ -123,52 +124,17 @@
                 </div>
                 <div class="col-12" style="height: 100px;">
                 <label for="validationCustom27" class="form-label">블로그 설명</label>
-                <input class="form-control" id="validationCustom27" th:value="${item.blogIntroduction}" required readonly>
+                <input class="form-control" id="validationCustom27" name="blogIntroduction" th:value="${item?.blogIntroduction}" required >
                 </div>
-                <th:block th:each="info : ${info}">
-								<div class="col-md-3" style="height: 70px;">
-									<label for="seq" class="form-label">코디 번호 <sup>*</sup></label>
-									<input type="text" class="form-control" id="seq"
-										th:value="${info.infoseq}" required readonly>
-									<div class="valid-feedback">Looks good!</div>
-								</div>
-								<div class="col-md-3" style="height: 70px;">
-									<label for="validationCustom05" class="form-label">아이템</label>
-									<input type="text" class="form-control" id="validationCustom05"
-										th:value="${info.item}" required readonly>
-									<div class="invalid-feedback">코드이름 을 입력해주세요.</div>
-								</div>
-								<div class="col-md-3" style="height: 70px;">
-									<label for="validationCustom08" class="form-label">아이템
-										브랜드</label> <input type="text" class="form-control"
-										id="validationCustom08" th:value="${info.itemBrand}" required
-										readonly>
-									<div class="invalid-feedback">Please provide a valid zip.
-									</div>
-								</div>
-
-								<div class="col-md-3" style="height: 70px;">
-									<label for="validationCustom02" class="form-label">정보
-										가격</label> <input type="text" class="form-control"
-										id="validationCustom02" th:value="${info.infoPrice}" required
-										readonly>
-									<div class="valid-feedback">코드를 입력해주세요!</div>
-								</div>
-								<div class="col-12" style="height: 100px;">
-									<label for="cgName" class="form-label">아이템 구매 링크</label> <input
-										type="text" class="form-control" id="cgName"
-										th:value="${info.buyLink}" required readonly>
-									<div class="invalid-feedback">코드를 입력해주세요.</div>
-								</div>
-								</th:block>
-                
+                	
                 
                 <div class="col-md-6"></div>
                 <div class="col-md-6"></div>
                 <div class="col-md-6">
                   <a href="javascript:history.back()" class="btn btn-outline-dark"><i class="bi bi-blockquote-right"></i></a></div>
                 <div class="col-md-6">
-                  <div style="display: flex;justify-content: end;"><a   class="btn btn-primary" id="blogBtn"><i class="bi bi-server"></i></a></div>
+                
+                  <div style="display: flex;justify-content: end;"><a   class="btn btn-primary" id="blogBtn" onclick="dataSubmit()"><i class="bi bi-server"></i></a></div>
                 </div>
               </form><!-- End Custom Styled Validation -->
 
@@ -200,6 +166,21 @@
   <!-- Template Main JS File -->
   <script src="xdm/template/NiceAdmin/assets/js/main.js"></script>
 	 <script type="text/javascript">
+	 let form = document.getElementById("formList");
+	 let seq = document.querySelector("input[name=seq]");
+	 function dataSubmit() {
+		console.log( document.querySelector("input[name=seq]").value);
+		if (seq.value == "0" || seq.value == "") {
+			
+			form.action = "blogXdmInst";
+			form.submit();
+		} else {
+			
+
+			form.action = "blogXdmUpdt";
+			form.submit();
+		}
+	}
 // 	document.getElementById("blog").onclick = function(){
 // 		document.getElementById("codeGroupForm").submit();
 // 	}

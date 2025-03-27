@@ -31,5 +31,13 @@ public class BlogService {
 	public List<BlogDto> blogCategoryList(BlogDto blogDto){
 		return blogDao.blogCategoryList(blogDto);
 	}
-	
+	public int blogUpdate(BlogDto blogDto) {
+		return blogDao.blogUpdate(blogDto);
+	}
+	public int blogInsert(BlogDto blogDto) {
+		return blogDao.blogInsert(blogDto);
+	}
+	public int infoUpdate(BlogDto blogDto) {
+		return blogDao.infoUpdate(blogDto);
+	}
 }

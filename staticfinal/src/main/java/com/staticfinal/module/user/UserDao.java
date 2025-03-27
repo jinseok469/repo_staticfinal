@@ -14,5 +14,5 @@ public interface UserDao {
 	public List<UserDto> userList(BannerVo vo);
 	public UserDto userOne(UserDto userDto);
 	public int selectCount();
-	public UserDto loginOne(@Param("id")String id,@Param("password") String password);
+	public UserDto loginOne(UserDto userDto);
 }

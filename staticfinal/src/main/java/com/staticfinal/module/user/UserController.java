@@ -45,7 +45,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/signinXdmForm")
-	public String signinXdmForm() {
+	public String signinXdmForm(UserDto userDto, HttpSession httpSession) {
+		
+
 		return "xdm/user/signinXdmForm";
 	}
 
@@ -53,9 +55,15 @@ public class UserController {
 	@RequestMapping(value = "/signinXdmProc")
 	public Map<String, Object> signinXdmProc(UserDto userDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		UserDto value = userService.loginOne(userDto.getId(), userDto.getPassword());
+		UserDto value = userService.loginOne(userDto);
+		
 		if (value != null) {
 			returnMap.put("rt", "success");
+//			/		httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
+//			UserDto rtDto = userService.loginOne(userDto.getId(), userDto.getPassword());
+			httpSession.setAttribute("sessSeqXdm", value.getSeq());
+			httpSession.setAttribute("sessIdXdm", value.getId());
+			httpSession.setAttribute("sessNameXdm", value.getName());
 		} else {
 
 			returnMap.put("rt", "fail");
@@ -66,7 +74,7 @@ public class UserController {
 	@RequestMapping(value = "/signoutXdmProc")
 	public Map<String, Object> signoutXdmProc(UserDto userDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		UserDto value = userService.loginOne(userDto.getId(), userDto.getPassword());
+		UserDto value = userService.loginOne(userDto);
 		if (value == null) {
 			returnMap.put("rt", "success");
 		} else {

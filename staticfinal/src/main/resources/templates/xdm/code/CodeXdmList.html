@@ -5,20 +5,27 @@
 <div th:replace="~{xdm/include/codeHead :: head}"></div>
 <!-- End Sidebar-->
 <main id="main" class="main">
-<div class="modal fade" id="modalConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="modalConfirmTitle">title</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
 				</div>
-				<div class="modal-body" id="modalConfirmBody">
-					body
-				</div>
+				<div class="modal-body" id="modalConfirmBody">body</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-secondary btn-sm btn_custom" data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom" name="" id="btnModalDelete"><i class="fa-solid fa-x fa-lg"></i></button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom" name="" id="btnModalUelete">삭제</button>
+					<button type="button"
+						class="btn btn-outline-secondary btn-sm btn_custom"
+						data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalDelete">
+						<i class="fa-solid fa-x fa-lg"></i>
+					</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalUelete">삭제</button>
 				</div>
 			</div>
 		</div>
@@ -40,8 +47,9 @@
 			id="formList" method="post" autocomplete="off" default="1">
 			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
-				th:value="${vo.rowNumToShow}" />
-				<input type="hidden" name="seqList">
+				th:value="${vo.rowNumToShow}" /> <input type="hidden"
+				name="seqList">
+				<input type="hidden" name="seq">
 			<div class="col-md-2" style="height: 10px;">
 
 				<select class="form-select" id="shDelNy" name="shDelNy">
@@ -161,7 +169,7 @@
 								<td>
 									<div class="checked">
 										<input type="checkbox" class="form-check" name="chch"
-											onclick="updateSelectAll()" th:attr="data-seq=${list.seq}" >
+											onclick="updateSelectAll()" th:attr="data-seq=${list.seq}">
 									</div>
 								</td>
 								<td
@@ -171,7 +179,9 @@
 								<td th:text="${list.cgName}"></td>
 								<td th:text="${list.seq}"></td>
 								<td></td>
-								<td class="cdName "><a href="javascript:void(0);" th:text="${list.cdName}" th:attr="onclick=|goForm('${list.seq}')|"></a></td>
+								<td class="cdName "><a href="javascript:void(0);"
+									th:text="${list.cdName}"
+									th:attr="onclick=|goForm('${list.seq}')|"></a></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -223,7 +233,7 @@
 							style="display: flex; justify-content: end;">
 							<a href="" class="btn btn-primary  btn-right ">U</a> <a
 								href="basicInfo.html" class="btn btn-success btn-right"><i
-								class="bi bi-journal-x"></i></a> <a  id="btnForm"
+								class="bi bi-journal-x"></i></a> <a id="btnForm"
 								class="btn btn-primary "><i class="bi bi-plus-lg"></i></a>
 						</div>
 					</div>
@@ -278,7 +288,7 @@
 <!-- Template Main JS File -->
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
 <script type="text/javascript">
-	let seq = document.querySelector("input[name=seqList]");	
+	let seq = document.querySelector("input[name=seq]");	
 	let form = document.getElementById("formList");
 	document.getElementById("btnForm").onclick = function () {
 	    goForm(0);
@@ -305,7 +315,14 @@
          const selectAllCheckbox = checkboxes[0]; 
 
          // 모든 체크박스가 체크되었는지 확인
-         const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+         let allChecked = true;
+
+		for (let i = 0; i < checkboxes.length; i++) {
+    		if (!checkboxes[i].checked) {
+       			 allChecked = false;
+       			 break;
+   	 		}
+		}
 
          // 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
          selectAllCheckbox.checked = allChecked;
@@ -345,7 +362,18 @@
 				 
 					 document.getElementsByClassName("is-invalid")[0].focus();
 				 return false;
+			 }else if(shOption.value.trim() == null || shOption.value.trim() ==""){
+				 shOption.classList.add("is-invalid");
+				 shOption.classList.remove("is-valid");
+				 if(shValue.value.trim() == null || shValue.value.trim() == ""){
+					 shValue.classList.add("is-invalid");
+					 shValue.classList.remove("is-valid");
+					 document.getElementsByClassName("is-invalid")[0].focus();
+					 return false;
 			 }
+				 document.getElementsByClassName("is-invalid")[0].focus();
+				 return false;
+		 }
 			 form.action ="/codeXdmList";
 			 form.submit();
 		 }

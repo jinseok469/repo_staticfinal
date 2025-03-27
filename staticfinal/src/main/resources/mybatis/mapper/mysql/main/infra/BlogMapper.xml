@@ -95,4 +95,47 @@
 		where 1=1
 		order by a.seq asc
 	</select>
+	<update id="blogUpdate">
+	update betterBlog
+	set
+	blogIntroduction = #{blogIntroduction},
+	modelHeight =#{modelHeight},
+	modelWeight= #{modelWeight},
+	modelSize = #{modelSize},
+	modelShoesSize = #{modelShoesSize},
+	blogCategory_seq = #{blogCategory_seq},
+	user_seq = #{user_seq},
+	buied = #{buied},
+	title = #{title}
+	where 1=1 
+	and seq = #{seq}
+	</update>
+	
+	<insert id="blogInsert">
+	insert into betterBlog
+	(
+	blogIntroduction ,
+	modelHeight ,
+	modelWeight,
+	modelSize,
+	modelShoesSize ,
+	blogCategory_seq,
+	user_seq ,
+	buied ,
+	title ,
+	bgDelNy
+	)values
+	(
+	#{blogIntroduction},
+	#{modelHeight},
+	#{modelWeight},
+	#{modelSize},
+	#{modelShoesSize},
+	#{blogCategory_seq},
+	#{user_seq},
+	#{buied},
+	#{title},
+	#{bgDelNy}
+	)
+	</insert>
 </mapper>

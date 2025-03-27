@@ -14,5 +14,8 @@ public interface BlogDao {
 	public BlogDto blogOne(BlogDto blogDto);
 	public int selectCount();
 	public List<BlogDto> blogCategoryList(BlogDto blogDto);
+	public int blogUpdate(BlogDto blogDto);
+	public int blogInsert(BlogDto blogDto);
+	public int infoUpdate(BlogDto blogDto);
 
 }

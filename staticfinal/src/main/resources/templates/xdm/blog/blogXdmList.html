@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 
 
@@ -31,6 +30,8 @@
 			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
 				th:value="${vo.rowNumToShow}" />
+				<input type="hidden" name="seqList">
+				<input type="hidden" name="seq">
 			<div class="col-md-2" style="height: 10px;">
 
 				<select class="form-select" id="shDelNy" name="shDelNy">
@@ -157,7 +158,7 @@
 								<td th:text="${list.name}"></td>
 								<td th:text="${list.nickName}"></td>
 								<td th:text="${list.categoryName}"></td>
-								<td ><a th:href="@{/blogXdmView(seq=${list.seq})}" th:text="${list.title}"></a></td>
+								<td ><a th:href="@{/blogXdmForm(seq=${list.seq})}" th:text="${list.title}"></a></td>
 								<td th:text="${list.buied == 1 }?Y:N"></td>
 								
 							</tr>
@@ -208,7 +209,7 @@
 							<button class="btn btn-success btn-right">
 								<i class="bi bi-journal-x"></i>
 							</button>
-							<a href="/userXdmForm" class="btn btn-primary"><i
+							<a type="button" id="blogBtn" class="btn btn-primary"><i
 								class="bi bi-plus-lg"></i></a>
 						</div>
 					</div>
@@ -242,6 +243,17 @@
 
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
 <script type="text/javascript">
+let seq = document.querySelector("input[name=seq]");
+document.getElementById("blogBtn").onclick = function () {
+    goForm(0);
+}
+
+goForm = function (keyValue) {
+    seq.value = keyValue;
+    form.action = "blogXdmForm";
+    form.submit();
+}
+
 
 
 function selectAll(selectAll){

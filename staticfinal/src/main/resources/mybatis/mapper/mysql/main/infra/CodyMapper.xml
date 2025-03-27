@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.staticfinal.module.cody.CodyDao">
+
+	<resultMap type="com.staticfinal.module.cody.CodyDto"
+		id="resultMapObj"></resultMap>
+	<sql id="selectCommon">
+		from
+		clotheInfo as a
+		left join betterBlog as b on b.seq =
+		a.betterBlog_seq
+		where 1=1
+
+
+	</sql>
+	<select id="selectCount">
+		select Count(*)
+		<include refid="selectCommon"></include>
+
+	</select>
+
+	<select id="codyList" resultMap="resultMapObj">
+		select
+		a.seq,
+		a.item,
+		a.buyLink,
+		a.infoPrice,
+		a.itemBrand,
+		a.betterBlog_seq,
+		a.ifDelNy,
+		b.title
+
+		<include refid="selectCommon"></include>
+		order by a.seq desc
+		limit #{startRnumForMysql},#{rowNumToShow}
+	</select>
+	<select id="codyOne" resultMap="resultMapObj">
+		select
+		a.seq,
+		a.item,
+		a.buyLink,
+		a.infoPrice,
+		a.itemBrand,
+		a.betterBlog_seq,
+		a.ifDelNy,
+		b.title
+		from
+		clotheInfo as a
+		left join betterBlog as b on b.seq = a.betterBlog_seq
+		where 1=1
+		and a.seq = #{seq}
+	</select>
+</mapper>

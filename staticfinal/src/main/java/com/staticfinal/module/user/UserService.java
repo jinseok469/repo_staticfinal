@@ -24,8 +24,8 @@ public class UserService {
 		
 		return userDao.selectCount();
 	}
-	public UserDto loginOne(String id, String password) {
-		return userDao.loginOne(id, password);
+	public UserDto loginOne(UserDto userDto) {
+		return userDao.loginOne(userDto);
 	}
 	
 

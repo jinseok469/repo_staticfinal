@@ -213,13 +213,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/xdm/template/NiceAdmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+<!--             <img src="/xdm/template/NiceAdmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
+            <span class="d-none d-md-block dropdown-toggle ps-2"> <h6 class="mt-2 text-black">[[${session.sessNameXdm}]]</h6></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+            <h6 class="mt-2 text-black">[[${session.sessNameXdm}]]</h6>
               <span>Web Designer</span>
             </li>
             <li>
@@ -299,14 +299,14 @@
         </a>
        <ul id="forms-nav" class="nav-content collapse "
 					data-bs-parent="#sidebar-nav">
-					<li><a href="/blogXdmList"> <i class="bi bi-circle"></i><span>블로그</span>
+				<li><a href="/blogXdmList"  > <i class="bi bi-circle"></i><span>블로그</span>
+					</a></li>
+					<li><a href="/codyXdmList" > <i class="bi bi-circle"></i><span>
+								블로그 별 코디 목록</span>
 					</a></li>
 					 <li><a href="/pictureXdmList"> <i class="bi bi-circle"></i><span>날씨 사진
 								</span>
 					</a></li>
-<!-- 					<li><a href="forms-editors.html"> <i class="bi bi-circle"></i><span>Form -->
-<!-- 								Editors</span> -->
-<!-- 					</a></li> -->
 <!-- 					<li><a href="forms-validation.html"> <i -->
 <!-- 							class="bi bi-circle"></i><span>Form Validation</span> -->
 <!-- 					</a></li>  -->

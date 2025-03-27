@@ -1,3 +1,4 @@
+
 package com.staticfinal.module.code;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class CodeController {
 		if (codeDto.getSeq().equals("0") || codeDto.getSeq().equals("")) {
 //			insert mode
 			model.addAttribute("cgList",codeService.codeGroupList(codeDto));
-			model.addAttribute("item", codeService.codeOne(codeDto));
+//			model.addAttribute("item", codeService.codeOne(codeDto));
 			
 		} else {
 //			update mode

@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
-<div th:replace="~{xdm/include/head :: head}"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
-
+<div th:replace="~{xdm/include/codyHead :: head}"></div>
+<!-- End Sidebar-->
 <main id="main" class="main">
-
+	<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalConfirmTitle">title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalConfirmBody">body</div>
+				<div class="modal-footer">
+					<button type="button"
+						class="btn btn-outline-secondary btn-sm btn_custom"
+						data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalDelete">
+						<i class="fa-solid fa-x fa-lg"></i>
+					</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalUelete">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="pagetitle">
 		<nav>
 			<ol class="breadcrumb">
@@ -16,20 +38,18 @@
 				<li class="breadcrumb-item active">Default</li>
 			</ol>
 		</nav>
-		<h1 style="height: 50px;">
-			CodeGroup<span style="font-size: 18px;"> (List)</span>
-		</h1>
+		<h1 style="height: 50px;">Cody</h1>
 	</div>
 	<!-- End Page Title -->
 
 	<section class="section">
 		<form class="row g-3 needs-validation" novalidate name="formList"
 			id="formList" method="post" autocomplete="off" default="1">
-			<input type="hidden" name="seq">
 			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
-				th:value="${vo.rowNumToShow}" />
-				<input type="hidden" name="seqList">
+				th:value="${vo.rowNumToShow}" /> <input type="hidden"
+				name="seqList">
+				<input type="hidden" name="seq">
 			<div class="col-md-2" style="height: 10px;">
 
 				<select class="form-select" id="shDelNy" name="shDelNy">
@@ -66,31 +86,32 @@
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
-				<select class="form-select" id="shOption" name="shOption">
+				<select class="form-select" id="shOption" name="shOption" required>
 					<option value="">검색구분</option>
-					<option value="1" th:selected="${vo.shOption == 1}">코드그룹
-						코드</option>
-					<option value="2" th:selected="${vo.shOption == 2}">코드그룹
-						이름</option>
-					<!-- 					<option value="2">코드그룹 이름(영문)</option> -->
+					<option value="1" th:selected="${vo.shOption ==1}">코드그룹 코드</option>
+					<option value="2" th:selected="${vo.shOption ==2}">코드그룹 이름</option>
+					<!--                     <option>코드</option> -->
+					<!--                     <option>대체코드</option> -->
+					<option value="3" th:selected="${vo.shOption ==3}">코드 이름</option>
+					<!--                     <option>코드 이름(영문)</option> -->
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 				<div class="valid-feedback">훌륭 합니다!</div>
+
 			</div>
 			<div class="col-md-2">
 				<input type="text" class="form-control" id="shValue" name="shValue"
-					th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어">
-				<div class="invalid-feedback">코드를 입력해주세요.</div>
+					th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어"
+					required>
+				<div class="invalid-feedback">항목을 입력해주세요.</div>
 				<div class="valid-feedback">훌륭 합니다!</div>
-
 			</div>
 			<div class="col-md-8">
 				<button class="btn btn-outline-dark" type="button" id="btnSearch">
 					<i class="bi bi-search"></i>
 				</button>
-				<a class="btn btn-outline-dark" type="button"
-					href="/codeGroupXdmList"> <i class="bi bi-arrow-clockwise"></i>
-				</a>
+				<a class="btn btn-outline-dark" type="button" href="/codeXdmList"><i
+					class="bi bi-arrow-clockwise"></i></a>
 			</div>
 
 			<div class="col-lg-12">
@@ -102,67 +123,67 @@
 							</div>
 							<div class="col-md-2 select-col">
 								<select class="form-select select-end" name="perPage"
-									onchange="getNum()">
+									id="perPage" onchange="getNum()">
 									<option value="5" th:selected="${vo.rowNumToShow == 5}">5</option>
 									<option value="10" th:selected="${vo.rowNumToShow == 10}">10</option>
 									<option value="15" th:selected="${vo.rowNumToShow == 15}">15</option>
 								</select>
+
 							</div>
 						</div>
 					</div>
-
 					<!-- Table with stripped rows -->
-					<table class="table datatable" id="datatable">
+					<table class="table datatable">
 						<thead>
 							<tr>
 
 								<th data-sortable="false"
 									style="text-align: center; width: 100px;"><div
 										class="checked">
-										<input type="checkbox" class="form-check" name="animal"
-											value="selectall" onclick="selectAll(this)">
+										<input type="checkbox" class="form-check" name="cody"
+											onclick="selectAll(this)">
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
 								<th style="text-align: center;">사용</th>
-								<th class="list-sort" style="text-align: center;">코드그룹 코드</th>
-								<th class="list-sort" style="text-align: center;">코드그룹 이름</th>
-								<th class="list-sort" style="text-align: center;">코드그룹
-									이름(영문)</th>
-								<th class="list-sort" style="text-align: center;">갯수</th>
-								<th class="list-sort" style="text-align: center;">순서</th>
-								<th data-type="date" data-format="YYYY/DD/MM" class="list-sort"
-									style="text-align: center;">등록일</th>
-								<th data-type="data" data-format="YYYY/DD/MM" class="list-sort"
-									style="text-align: center;">수정일</th>
+								<th class="list-sort">블로그 번호</th>
+								<th class="list-sort">블로그 코디 번호</th>
+								<th class="list-sort">블로그 제목</th>
+								<th class="list-sort">코디 아이템</th>
+								<th class="list-sort">코디 아이템 브랜드</th>
+								<th class="list-sort">코디 링크</th>
+								<th class="list-sort">코디 정보 가격</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:if="${#lists.isEmpty(list)}">
-								<td colspan="10" style="text-align: center; padding-top: 20px;">
+							<tr th:if="${#lists.isEmpty(codyList)}">
+								<td colspan="12" style="text-align: center; padding-top: 20px;">
 									<div>
 										<p>There are no data!</p>
 									</div>
 								</td>
 							</tr>
-
-							<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}">
+							<tr th:if="${!#lists.isEmpty(codyList)}" th:each="list : ${codyList}">
 								<td>
 									<div class="checked">
-										<input type="checkbox" class="form-check" name="animal"
-											value="checke" onclick="updateSelectAll()" th:attr="data-seq=${list.seq}">
+										<input type="checkbox" class="form-check" name="cody"
+											onclick="updateSelectAll()" th:attr="data-seq=${list.seq}">
 									</div>
 								</td>
+								<td
+									th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
+								<td th:text="${list.ifDelNy == 0} ? Y : N"></td>
+								<td th:text="${list.betterBlog_seq}"></td>
 								<td th:text="${list.seq}"></td>
-								<td th:text="${list.cgDelNy == 0}? Y:N"></td>
-								<td th:text="${list.seq}"></td>
-								<td class="cgName align-middle fw-semi-bold"><a href="javascript:void(0);" th:text="${list.cgName}" th:attr="onclick=|goForm('${list.seq}')|"></a></td>
-								<td></td>
-								<td th:text="${list.seqCount}"></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td th:text="${list.title}"></td>
+								<td class="cdName "><a href="javascript:void(0);"
+									th:text="${list.item}"
+									th:attr="onclick=|goForm('${list.seq}')|"></a></td>
+									<td th:text="${list.itemBrand}"></td>
+								<td th:text="${list.buyLink}"></td>
+								<td th:text="${list.infoPrice}"></td>
 							</tr>
+
 
 
 						</tbody>
@@ -174,7 +195,7 @@
 					<div class="row">
 						<nav aria-label="Page navigation example"
 							style="display: flex; justify-content: center;">
-							<ul class="pagination" id="pagination">
+							<ul class="pagination">
 								<li th:if="${vo.startPage gt vo.pageNumToShow}"
 									class="page-item" style="cursor: pointer;"><a
 									class="page-link" href="javascript:goList(${vo.startPage - 1})"
@@ -199,56 +220,51 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6 padding-left">
-							<button type="button" class="btn btn-danger">X</button>
-							<button type="button" class="btn btn-danger" id="btnUelete">
+							<button class="btn btn-danger" id="btnDelete" type="button">X</button>
+							<button class="btn btn-danger" id="btnUelete" type="button">
 								<i class="bi bi-trash"></i>
 							</button>
 						</div>
 						<div class="col-md-6 padding-right"
 							style="display: flex; justify-content: end;">
-
-							<button class="btn btn-success btn-right">
-								<i class="bi bi-journal-x"></i>
-							</button>
-							<a id="btnForm" class="btn btn-primary"><i
-								class="bi bi-plus-lg"></i></a>
+							<a href="" class="btn btn-primary  btn-right ">U</a> <a
+								href="basicInfo.html" class="btn btn-success btn-right"><i
+								class="bi bi-journal-x"></i></a> <a id="btnForm"
+								class="btn btn-primary "><i class="bi bi-plus-lg"></i></a>
 						</div>
 					</div>
 
 				</div>
 			</div>
-			<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modalConfirmTitle">title</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body" id="modalConfirmBody">body</div>
-				<div class="modal-footer">
-					<button type="button"
-						class="btn btn-outline-secondary btn-sm btn_custom"
-						data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
-						name="" id="btnModalDelete">
-						<i class="fa-solid fa-x fa-lg"></i>
-					</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
-						name="" id="btnModalUelete">삭제</button>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
+
 		</form>
 	</section>
 
 </main>
+<!-- End #main -->
 
+<footer id="footer" class="footer">
+	<div class="copyright">
+		&copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights
+		Reserved
+	</div>
+	<div class="credits">
+		<!-- All the links in the footer should remain intact. -->
+		<!-- You can delete the links only if you purchased the pro version. -->
+		<!-- Licensing information: https://bootstrapmade.com/license/ -->
+		<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+		Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+	</div>
+</footer>
+<!-- End Footer -->
 
-<div th:replace="~{xdm/include/footer :: footer}"></div>
+<a href="#"
+	class="back-to-top d-flex align-items-center justify-content-center"><i
+	class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
 <script
 	src="/xdm/template/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
 <script
@@ -266,89 +282,67 @@
 	src="/xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
-
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
 <script type="text/javascript">
 	let seq = document.querySelector("input[name=seq]");	
+	let form = document.getElementById("formList");
 	document.getElementById("btnForm").onclick = function () {
 	    goForm(0);
 	}
-
-
+	
 	goForm = function (keyValue) {
 	    seq.value = keyValue;
-	    form.action = "codeGroupXdmForm";
+	    form.action = "codyXdmForm";
 	    form.submit();
 	}
-
-
-	function selectAll(selectAll) {
-	    const checkboxes = document.getElementsByName("animal");
-
-	    for (let i = 0; i < checkboxes.length; i++) {
-	        checkboxes[i].checked = selectAll.checked;
-	    }
-	}
+	
+	
+	function selectAll(selectAll){
+	   	const checkeded = document.getElementsByName("cody");
+	   	
+	   	checkeded.forEach((checkbox)=>{
+	   		checkbox.checked = selectAll.checked;
+	   	})
+	  	}
 	 function updateSelectAll() {
-         const checkboxes = document.querySelectorAll('input[name="animal"]');
+         const checkboxes = document.querySelectorAll('input[name="cody"]');
          
          // 전체 선택 체크박스는 첫 번째 체크박스로 가정
          const selectAllCheckbox = checkboxes[0]; 
 
          // 모든 체크박스가 체크되었는지 확인
-       let allChecked = true;
+         let allChecked = true;
 
 		for (let i = 0; i < checkboxes.length; i++) {
     		if (!checkboxes[i].checked) {
        			 allChecked = false;
        			 break;
-   	 		 }
-		 }
+   	 		}
+		}
 
          // 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
          selectAllCheckbox.checked = allChecked;
      }
-	 
-	 /* function goList(pageNum) {
-		 let  num = pageNum;
-		
-	     let dfNum = document.getElementsByName("perPage")[0];
-		 let ixNum = dfNum.selectedIndex;
-		 let vlNum = dfNum.options[ixNum].value;
-		
-	   window.location.assign("/codeGroupXdmList?page="+num+"&perPage="+vlNum);
-	}  */
+
 	
-	let form = document.querySelector("form[name=formList]");
+	
+	
 	function goList(Num){
 		document.querySelector("input[name=thisPage]").value = Num;
-		form.action = "/codeGroupXdmList"
+		form.action = "/codyXdmList"
 		form.submit();
 	}
 	 
 	 
 	
-	function getNum(){
-		let dfNum = document.getElementsByName("perPage")[0];
-		let ixNum = dfNum.selectedIndex;
-		let vlNum = dfNum.options[ixNum].value;
-		document.querySelector("input[name=rowNumToShow]").value = vlNum;
+	 function getNum(){
+		document.querySelector("input[name=rowNumToShow]").value = document.getElementById("perPage").value;
 		
-		form.action = "/codeGroupXdmList"
+		form.action = "/codyXdmList"
 		form.submit();
-	}
-	/* function getNum(){
-		const urlParams = new URLSearchParams(window.location.search);
-		const page = urlParams.get("page") || "1";
-		
-		let dfNum = document.getElementsByName("perPage")[0];
-		let ixNum = dfNum.selectedIndex;
-		let vlNum = dfNum.options[ixNum].value;
-		
-		window.location.assign("/codeGroupXdmList?page="+page+"&perPage="+vlNum);
-	  
-	} */
-	let shOption = document.getElementById("shOption");
+	} 
+	 
+	 let shOption = document.getElementById("shOption");
 	 let shValue = document.getElementById("shValue");
 	 function enterkey(){
 		 if(event.key == "Enter"){
@@ -376,13 +370,12 @@
 				 document.getElementsByClassName("is-invalid")[0].focus();
 				 return false;
 		 }
-			 form.action ="/codeGroupXdmList";
+			 form.action ="/codyXdmList";
 			 form.submit();
 		 }
 	 }
 	 
-		 
-	 document.getElementById("btnSearch").onclick = function(){
+		 document.getElementById("btnSearch").onclick = function(){
 		 if(shValue.value.trim() == null || shValue.value.trim() == ""){
 			 shValue.classList.add("is-invalid");
 			 shValue.classList.remove("is-valid");
@@ -407,9 +400,21 @@
 			 document.getElementsByClassName("is-invalid")[0].focus();
 			 return false;
 	 }
-		 form.action ="/codeGroupXdmList";
+		 form.action ="/codyXdmList";
 		 form.submit();
 		 }
+			document.getElementById("shValue").oninput = function(){
+		  		let codeName = this;
+		  		if(codeName.value.trim() == null || codeName.value.trim() == "" || codeName.value.includes(" ") || /[^a-zA-Z0-9가-힣]/.test(codeName.value)){
+		  		 	codeName.classList.add("is-invalid");
+		  		 	codeName.classList.remove("is-valid");
+		  		}else{
+		  			codeName.classList.add("is-valid");
+		  			codeName.classList.remove("is-invalid");
+		  		}
+		  	}
+		 
+		 
 		 document.getElementById("shOption").onchange = function(){
 				let shOption = this;
 				if(shOption.selectedIndex === 0){
@@ -420,6 +425,7 @@
 					shOption.classList.remove("is-invalid");
 				}
 			}  	
+		 
 		 if(document.getElementById("btnUelete")){
 				document.getElementById("btnUelete").onclick = function () {
 			
@@ -433,7 +439,7 @@
 
 
 			document.getElementById("btnModalUelete").onclick = function () {
-				let checkboxes = document.getElementsByName("animal");
+				let checkboxes = document.getElementsByName("cody");
 				let seqq = new Array();
 				let seqList = document.querySelector("input[name=seqList]");
 				let j = 0;
@@ -446,13 +452,10 @@
 				}
 				console.log(seqq);
 				seqList.value = seqq;
-				form.action = "codeGroupXdmUele";
+				form.action = "codyXdmUele";
 				form.submit();
 			}
-		
-	
-	
-
+			
 	</script>
 </body>
 
