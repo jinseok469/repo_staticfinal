@@ -22,5 +22,11 @@ public class CodyService {
 	public int selectCount() {
 		return codyDao.selectCount();
 	}
+	public int codyInsert(CodyDto codyDto) {
+		return codyDao.codyInsert(codyDto);
+	}
+	public int codyUpdate(CodyDto codyDto) {
+		return codyDao.codyUpdate(codyDto);
+	}
 
 }

@@ -1,5 +1,7 @@
 package com.staticfinal.module.blog;
 
+import java.util.List;
+
 //import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.staticfinal.module.util.BannerVo;
 
@@ -55,6 +58,11 @@ public class BlogController {
 	@RequestMapping(value = "/blogXdmUpdt")
 	public String blogXdmUpdt(BlogDto blogDto) {
 		blogService.blogUpdate(blogDto);
+		return "redirect:/blogXdmList";
+	}
+	@RequestMapping(value = "/blogXdmUele")
+	public String blogXdmUele(@RequestParam("seqList") List<String> seq) {
+		blogService.bgUelete(seq);
 		return "redirect:/blogXdmList";
 	}
 	

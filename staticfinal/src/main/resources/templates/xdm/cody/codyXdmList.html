@@ -88,11 +88,12 @@
 			<div class="col-md-2">
 				<select class="form-select" id="shOption" name="shOption" required>
 					<option value="">검색구분</option>
-					<option value="1" th:selected="${vo.shOption ==1}">코드그룹 코드</option>
-					<option value="2" th:selected="${vo.shOption ==2}">코드그룹 이름</option>
+					<option value="1" th:selected="${vo.shOption ==1}">코디 번호</option>
+					<option value="2" th:selected="${vo.shOption ==2}">블로그 제목</option>
 					<!--                     <option>코드</option> -->
 					<!--                     <option>대체코드</option> -->
-					<option value="3" th:selected="${vo.shOption ==3}">코드 이름</option>
+					<option value="3" th:selected="${vo.shOption ==3}">코디 아이템</option>
+					<option value="4" th:selected="${vo.shOption ==4}">코디 아이템 브랜드</option>
 					<!--                     <option>코드 이름(영문)</option> -->
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
@@ -329,6 +330,7 @@
 	
 	function goList(Num){
 		document.querySelector("input[name=thisPage]").value = Num;
+		console.log(document.querySelector("input[name=thisPage]").value);
 		form.action = "/codyXdmList"
 		form.submit();
 	}

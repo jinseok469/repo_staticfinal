@@ -76,8 +76,8 @@
 		b.item,
 		b.itemBrand,
 		b.infoPrice,
-		b.buyLink
-
+		b.buyLink,
+		b.betterBlog_seq
 		from
 		betterBlog as a
 		left join clotheInfo as b on a.seq = b.betterBlog_seq
@@ -138,4 +138,17 @@
 	#{bgDelNy}
 	)
 	</insert>
+	<delete id="bgUelete">
+	update betterBlog
+	set
+	bgDelNy = 1
+	where 1=1 and seq in
+	<foreach collection="seqList" item="seq" open="(" separator="," close=")">
+	
+	#{seq}
+	</foreach>
+	
+	
+	</delete>
+
 </mapper>

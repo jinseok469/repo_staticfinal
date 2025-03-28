@@ -2,6 +2,7 @@ package com.staticfinal.module.blog;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.staticfinal.module.util.BannerVo;
@@ -17,5 +18,5 @@ public interface BlogDao {
 	public int blogUpdate(BlogDto blogDto);
 	public int blogInsert(BlogDto blogDto);
 	public int infoUpdate(BlogDto blogDto);
-
+	public int bgUelete(@Param("seqList")List<String> seq);
 }

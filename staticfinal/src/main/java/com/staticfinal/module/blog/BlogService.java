@@ -40,4 +40,8 @@ public class BlogService {
 	public int infoUpdate(BlogDto blogDto) {
 		return blogDao.infoUpdate(blogDto);
 	}
+	public int bgUelete(List<String> seq) {
+		return blogDao.bgUelete(seq);
+	}
+	
 }

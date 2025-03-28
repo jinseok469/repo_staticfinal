@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-3">
                   <label for="validationCustom05" class="form-label">블로그 카테고리</label>
-                  <select  class="form-select" id="validationCustom05" name="blogCategory_seq" required >
+                  <select  class="form-select ss" id="validationCustom05" name="blogCategory_seq" required >
                   <option value="">선택 하세요</option>
                   <option th:each="bcList:${bcList}" th:text="${bcList?.categoryName}" th:value="${bcList?.bcSeq}"
                   th:selected="${bcList?.bcSeq == item?.blogCategory_seq}"></option>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom08" class="form-label">블로그 제목<sup>*</sup></label>
-                  <input type="text" class="form-control" id="validationCustom08" name="title" th:value="${item?.title}" required >
+                  <input type="text" class="form-control ss" id="validationCustom08" name="title" th:value="${item?.title}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
@@ -55,7 +55,7 @@
       
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom02" class="form-label">유저 번호</label>
-                  <input type="text" class="form-control" id="validationCustom02" name="user_seq" th:value="${item?.user_seq}"  required >
+                  <input type="text" class="form-control ss" id="validationCustom02" name="user_seq" th:value="${item?.user_seq}"  required >
                   <div class="valid-feedback">
                     코드를 입력해주세요!
                   </div>
@@ -78,28 +78,28 @@
                 
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom21" class="form-label">모델 신장</label>
-                  <input type="text" class="form-control" id="validationCustom21" name="modelHeight" th:value="${item?.modelHeight}" required >
+                  <input type="text" class="form-control ss" id="validationCustom21" name="modelHeight" th:value="${item?.modelHeight}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
                 </div>
                 <div class="col-md-3">
                   <label for="validationCustom22" class="form-label">모델 몸무게</label>
-                  <input type="text" class="form-control" id="validationCustom22" name="modelWeight" th:value="${item?.modelWeight}" required >
+                  <input type="text" class="form-control ss" id="validationCustom22" name="modelWeight" th:value="${item?.modelWeight}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
                 </div>
                 <div class="col-md-3">
                   <label for="validationCustom23" class="form-label">모델 의류 사이즈</label>
-                  <input type="text" class="form-control" id="validationCustom23" name="modelSize" th:value="${item?.modelSize}" required >
+                  <input type="text" class="form-control ss" id="validationCustom23" name="modelSize" th:value="${item?.modelSize}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
                 </div>
                 <div class="col-md-3" style="height: 100px;">
                   <label for="validationCustom24" class="form-label">모델 신발 사이즈</label>
-                  <input type="text" class="form-control" id="validationCustom24" name="modelShoesSize" th:value="${item?.modelShoesSize}" required >
+                  <input type="text" class="form-control ss" id="validationCustom24" name="modelShoesSize" th:value="${item?.modelShoesSize}" required >
                   <div class="invalid-feedback">
                     Please provide a valid zip.
                   </div>
@@ -124,9 +124,8 @@
                 </div>
                 <div class="col-12" style="height: 100px;">
                 <label for="validationCustom27" class="form-label">블로그 설명</label>
-                <input class="form-control" id="validationCustom27" name="blogIntroduction" th:value="${item?.blogIntroduction}" required >
+                <input class="form-control ss" id="validationCustom27" name="blogIntroduction" th:value="${item?.blogIntroduction}" required >
                 </div>
-                	
                 
                 <div class="col-md-6"></div>
                 <div class="col-md-6"></div>
@@ -136,6 +135,26 @@
                 
                   <div style="display: flex;justify-content: end;"><a   class="btn btn-primary" id="blogBtn" onclick="dataSubmit()"><i class="bi bi-server"></i></a></div>
                 </div>
+               
+		 <div class="modal fade show" id="bgModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+                
               </form><!-- End Custom Styled Validation -->
 
             </div>
@@ -168,22 +187,96 @@
 	 <script type="text/javascript">
 	 let form = document.getElementById("formList");
 	 let seq = document.querySelector("input[name=seq]");
+		 let input = document.getElementsByClassName("ss");
 	 function dataSubmit() {
 		console.log( document.querySelector("input[name=seq]").value);
+		 let flag = false;
 		if (seq.value == "0" || seq.value == "") {
+			for(let i = 0 ; i< input.length;i++){
+			if (input[i].value.trim() == null 
+					|| input[i].value.trim() == ""
+					) {
+				document.getElementById("modalHead").textContent = "경고";
+				document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+				
+				input[i].classList.add("is-invalid");
+				input[i].classList.remove("is-valid");
+				flag = true;
+				
+			}else{
+				input[i].classList.add("is-valid");
+				input[i].classList.remove("is-invalid");
+			}
 			
-			form.action = "blogXdmInst";
-			form.submit();
+			}
+			if(flag){
+			document.getElementsByClassName("is-invalid")[0].focus();
+			$("#bgModal").modal("show");
+			}else{
+				form.action="/blogXdmInst"
+				form.submit();
+			}
+ 			
 		} else {
 			
-
-			form.action = "blogXdmUpdt";
-			form.submit();
+				for(let i = 0 ; i< input.length;i++){
+				if (input[i].value.trim() == null  
+						|| input[i].value.trim() == ""
+						) {
+					document.getElementById("modalHead").textContent = "경고";
+					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+					
+					input[i].classList.add("is-invalid");
+					input[i].classList.remove("is-valid");
+					flag = true;
+					
+				}else{
+					input[i].classList.add("is-valid");
+					input[i].classList.remove("is-invalid");
+				}
+				
+				}
+				if(flag){
+				document.getElementsByClassName("is-invalid")[0].focus();
+				$("#bgModal").modal("show");
+				}else{
+					form.action="/blogXdmUpdt"
+					form.submit();
+				}
+	}
+	 }
+	 
+function btnClick() {
+		bgModal.style.display = "none";
+		return false;
+	}
+	
+	
+	for(let i = 0; i < input.length; i++){
+		input[i].oninput = function(){
+		let codeName = this;
+		if(codeName.value.trim() == null || codeName.value.trim() == ""  ){
+		 	codeName.classList.add("is-invalid");
+		 	codeName.classList.remove("is-valid");
+		}else{
+			codeName.classList.add("is-valid");
+			codeName.classList.remove("is-invalid");
 		}
 	}
-// 	document.getElementById("blog").onclick = function(){
-// 		document.getElementById("codeGroupForm").submit();
-// 	}
+	}
+let select = document.getElementsByTagName("select");
+for(let i=0; i< select.length; i++){
+select[i].onchange = function(){
+	let shOption = this;
+	if(shOption.selectedIndex === 0){
+		shOption.classList.add("is-invalid");
+		shOption.classList.remove("is-valid");
+	}else{
+		shOption.classList.add("is-valid");
+		shOption.classList.remove("is-invalid");
+	}
+}  	
+}
 	</script> 
 </body>
 

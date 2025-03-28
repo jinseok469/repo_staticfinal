@@ -11,11 +11,23 @@
 		left join betterBlog as b on b.seq =
 		a.betterBlog_seq
 		where 1=1
-
+	 <if test="shDelNy != null and !shDelNy.equals('')">AND a.ifDelNy = #{shDelNy}</if>
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+        <choose>
+            <when test="shOption == 1">AND a.seq = #{shValue}</when>
+            <when test="shOption == 2">AND b.title LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.item LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 4">AND a.itemBrand LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
 
 	</sql>
-	<select id="selectCount">
-		select Count(*)
+	<select id="selectCount" resultType="Integer">
+		SELECT COUNT(*)
 		<include refid="selectCommon"></include>
 
 	</select>
@@ -30,7 +42,6 @@
 		a.betterBlog_seq,
 		a.ifDelNy,
 		b.title
-
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
@@ -51,4 +62,21 @@
 		where 1=1
 		and a.seq = #{seq}
 	</select>
+	<update id="codyUpdate">
+	update clotheInfo
+	set
+	item = #{item},
+	buyLink = #{buyLink},
+	infoPrice = #{infoPrice},
+	itemBrand = #{itemBrand},
+	betterBlog_seq = #{betterBlog_seq}
+	where 1=1 
+	and seq = #{seq}
+	</update>
+	<insert id="codyInsert">
+	insert into clotheInfo
+	(item,buyLink,infoPrice,itemBrand,betterBlog_seq)
+	values(#{item},#{buyLink},#{infoPrice},#{itemBrand},#{betterBlog_seq})
+	
+	</insert>
 </mapper>

@@ -86,9 +86,9 @@
 				<button class="btn btn-outline-dark" type="button" id="btnSearch">
 					<i class="bi bi-search"></i>
 				</button>
-				<button class="btn btn-outline-dark" type="button">
+				<a class="btn btn-outline-dark" type="button" href="/blogXdmList">
 					<i class="bi bi-arrow-clockwise"></i>
-				</button>
+				</a>
 			</div>
 
 			<div class="col-lg-12">
@@ -118,7 +118,7 @@
 									style="text-align: center; width: 100px;"><div
 										class="checked">
 										<input type="checkbox" class="form-check" name="blogCheck"
-											value="selectall" onclick="selectAll(this)">
+											value="selectall" onclick="selectAll(this)" >
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
@@ -148,7 +148,7 @@
 								<td>
 									<div class="checked">
 										<input type="checkbox" class="form-check" name="blogCheck"
-											value="checke">
+											value="checke" th:attr="data-seq=${list.seq}" onclick="updateSelectAll()">
 									</div>
 								</td>
 								<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
@@ -199,7 +199,7 @@
 					<div class="row">
 						<div class="col-md-6 padding-left">
 							<button class="btn btn-danger">X</button>
-							<button class="btn btn-danger" id="cgSetBtn">
+							<button type="button" class="btn btn-danger" id="btnUelete">
 								<i class="bi bi-trash"></i>
 							</button>
 						</div>
@@ -216,6 +216,32 @@
 
 				</div>
 			</div>
+			
+			<div class="modal fade show" id="modalConfirm" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalConfirmTitle">title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalConfirmBody">body</div>
+				<div class="modal-footer">
+					<button type="button"
+						class="btn btn-outline-secondary btn-sm btn_custom"
+						data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalDelete">
+						<i class="fa-solid fa-x fa-lg"></i>
+					</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalUelete">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
 		</form>
 	</section>
 
@@ -270,7 +296,14 @@ function selectAll(selectAll){
      const selectAllCheckbox = checkboxes[0]; 
 
      // 모든 체크박스가 체크되었는지 확인
-     const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+     let allChecked = true;
+
+	for (let i = 0; i < checkboxes.length; i++) {
+		if (!checkboxes[i].checked) {
+   			 allChecked = false;
+   			 break;
+	 		 }
+	 }
 
      // 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
      selectAllCheckbox.checked = allChecked;
@@ -366,6 +399,35 @@ function goList(Num){
 				shOption.classList.remove("is-invalid");
 			}
 		}  	
+	 if(document.getElementById("btnUelete")){
+			document.getElementById("btnUelete").onclick = function () {
+		
+				document.querySelector("#modalConfirmTitle").textContent = "확 인";
+				document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+				document.querySelector("#btnModalUelete").style.display = '';
+				document.querySelector("#btnModalDelete").style.display = 'none';
+				$("#modalConfirm").modal("show");      	
+			}
+		}
+
+
+		document.getElementById("btnModalUelete").onclick = function () {
+			let checkboxes = document.getElementsByName("blogCheck");
+			let seqq = new Array();
+			let seqList = document.querySelector("input[name=seqList]");
+			let j = 0;
+			for(let i = 0; i < checkboxes.length ; i++){
+				if(checkboxes[i].checked){
+					let seq = checkboxes[i].getAttribute("data-seq");
+					seqq[j] = seq;
+					j++;
+				}
+			}
+			console.log(seqq);
+			seqList.value = seqq;
+			form.action = "blogXdmUele";
+			form.submit();
+		}
 
 
 	</script>

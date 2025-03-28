@@ -45,9 +45,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/signinXdmForm")
-	public String signinXdmForm(UserDto userDto, HttpSession httpSession) {
-		
-
+	public String signinXdmForm(Model model,UserDto userDto, HttpSession httpSession) {
+		model.addAttribute("login",userService.loginDisplay());
 		return "xdm/user/signinXdmForm";
 	}
 
@@ -76,6 +75,9 @@ public class UserController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		UserDto value = userService.loginOne(userDto);
 		if (value == null) {
+			httpSession.setAttribute("sessSeqXdm", null);
+			httpSession.setAttribute("sessIdXdm", null);
+			httpSession.setAttribute("sessNameXdm", null);
 			returnMap.put("rt", "success");
 		} else {
 			

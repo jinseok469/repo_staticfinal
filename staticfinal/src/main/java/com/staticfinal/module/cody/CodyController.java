@@ -17,9 +17,9 @@ public class CodyController {
 	@RequestMapping(value = "/codyXdmList")
 	public String codyXdmList(@ModelAttribute("vo")BannerVo vo, Model model) {
 		
-		model.addAttribute("codyList",codyService.codyList(vo));
-		
 		vo.setParamsPaging(codyService.selectCount());
+		model.addAttribute("codyList",codyService.codyList(vo));
+		System.out.println(vo.getThisPage());
 		return "xdm/cody/codyXdmList";
 	}
 	
@@ -29,5 +29,14 @@ public class CodyController {
 		
 		return "xdm/cody/codyXdmForm";
 	}
-
+	@RequestMapping(value = "/codyXdmInst")
+	public String codyXdmInst(CodyDto codyDto) {
+		codyService.codyInsert(codyDto);
+		return "redirect:/codyXdmList";
+	}
+	@RequestMapping(value = "/codyXdmUpdt")
+	public String codyXdmUpdt(CodyDto codyDto) {
+		codyService.codyUpdate(codyDto);
+		return "redirect:/codyXdmList";
+	}
 }
