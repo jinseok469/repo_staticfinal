@@ -5,12 +5,19 @@
 
 	<resultMap
 		type="com.staticfinal.module.picture.PictureDto" id="resultMapObj"></resultMap>
+		
 		<sql id="selectCommon">
 		from
 	 	betterPicture as a
 	 	left join pictureCategory as b on a.pictureCategory_seq = b.seq
 	 	left join user as c on a.user_seq = c.seq
-	 	where 1=1 
+	 	where 1=1
+	 	<if test="shDelNy != null and !shDelNy.equals('')">and a.ptDelNy = #{shDelNy}</if>
+	 	  <choose>
+            <when test="shOption == 1">AND a.seq = #{shValue}</when>
+            <when test="shOption == 2">AND c.name LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.title LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
 		</sql>
 		<select id="selectCount" resultType="Integer">
 		select count(*)
@@ -44,7 +51,63 @@
 	 	b.categoryName,
 	 	c.name,
 	 	c.nickName
-	 	<include refid="selectCommon"></include>
+	 	from
+	 	betterPicture as a
+	 	left join pictureCategory as b on a.pictureCategory_seq = b.seq
+	 	left join user as c on a.user_seq = c.seq
+	 	where 1=1
 		and a.seq = #{seq}
 </select>
+<select id="pictureCategoryList" resultMap="resultMapObj">
+	select 
+	 a.categoryName,
+	 a.seq
+	 from
+	 pictureCategory as a
+	 where 1=1
+	 order by a.seq asc
+</select>
+<insert id="pictureInsert">
+insert into betterPicture
+(
+title,
+useCamera,
+photoPlace,
+photoIntroduce,
+pictureCategory_seq,
+user_seq
+)values
+(
+#{title},
+#{useCamera},
+#{photoPlace},
+#{photoIntroduce},
+#{pictureCategory_seq},
+#{user_seq}
+)
+</insert>
+<update id="pictureUpdate">
+update betterPicture
+set
+title = #{title},
+useCamera = #{useCamera},
+photoPlace = #{photoPlace},
+photoIntroduce = #{photoIntroduce},
+pictureCategory_seq = #{pictureCategory_seq},
+user_seq = #{user_seq}
+where 1=1 
+and seq = #{seq}
+</update>
+<delete id="pictureUelete">
+update betterPicture
+set
+ptDelNy = 1
+where 1=1 and seq in
+<foreach collection="seqList" item="seq" open="(" separator="," close=")">
+#{seq}
+</foreach>
+
+
+
+</delete>
 </mapper>

@@ -21,5 +21,5 @@ public interface CodeDao {
 	public int codeUpdate(CodeDto codeDto);
 	public int selectCount();
 	public List<CodeDto> selectListCachedCodeArrayList();
-	public int codeUelete(@Param("seqList")List<String> seqList);
+	public int codeUelete(CodeDto codeDto);
 }

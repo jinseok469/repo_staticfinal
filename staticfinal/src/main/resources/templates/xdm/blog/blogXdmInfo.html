@@ -117,6 +117,26 @@
 	<!-- Template Main JS File -->
 	<script src="xdm/template/NiceAdmin/assets/js/main.js"></script>
 	<script type="text/javascript">
+	 $("#btnSignout").on("click", function(){
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				,url: "/signoutXdmProc"
+				,data: {}
+				,success: function(response) {
+					if(response.rt == "success") {
+					
+						location.href = "/signinXdmForm";
+					} else {
+						// by pass
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		});
 		// 	document.getElementById("blog").onclick = function(){
 		// 		document.getElementById("codeGroupForm").submit();
 		// 	}

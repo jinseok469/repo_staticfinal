@@ -5,8 +5,22 @@ public class CodeGroupDto {
 	private String cgName;
 	private int cgDelNy;
 	private String seqCount;
+	private String cgReg;
+	private String cgMof;
 	
 	
+	public String getCgReg() {
+		return cgReg;
+	}
+	public void setCgReg(String cgReg) {
+		this.cgReg = cgReg;
+	}
+	public String getCgMof() {
+		return cgMof;
+	}
+	public void setCgMof(String cgMof) {
+		this.cgMof = cgMof;
+	}
 	public String getSeqCount() {
 		return seqCount;
 	}

@@ -14,9 +14,12 @@
 			= #{shUseNy}</if> -->
 		<if test="shDelNy != null and !shDelNy.equals('')">AND a.urDelNy = #{shDelNy}</if>
 
-		<!-- <choose> <when test="shOptionDate == 1">AND a.regDateTime BETWEEN 
-			#{shDateStart} AND #{shDateEnd}</when> <when test="shOptionDate == 2">AND 
-			a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when> </choose> -->
+		<choose> <when test="shOptionDate != null and !shOptionDate.equals('') and shOptionDate == 1">
+		AND a.dob BETWEEN 
+			#{shDateStart} AND #{shDateEnd}</when> 
+<!-- 			<when test="shOptionDate == 2">AND  -->
+<!-- 			a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>  -->
+			</choose>
 		<choose>
 			<when test="shOption == 1">AND a.seq = #{shValue}</when>
 			<when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
@@ -95,5 +98,32 @@
 		 where 1=1 
 		 and a.seq =1
 	</select>
-
+	
+	<insert id="userInsert"  useGeneratedKeys="true" keyProperty="lastSeq">
+	insert into
+	user
+	(
+		name,
+		gender,
+		dob,
+		nickName,
+		id,
+		password,
+		email,
+		postalCode,
+		betterAddress
+	)values
+	(
+		#{name},
+		#{gender},
+		#{dob},
+		#{nickName},
+		#{id},
+		#{password},
+		#{email},
+		#{postalCode},
+		#{betterAddress}
+	)
+	
+	</insert>
 </mapper>

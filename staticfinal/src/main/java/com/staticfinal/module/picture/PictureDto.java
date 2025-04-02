@@ -1,5 +1,7 @@
 package com.staticfinal.module.picture;
 
+import java.util.List;
+
 public class PictureDto {
 	private String seq;
 	private String title;
@@ -12,7 +14,15 @@ public class PictureDto {
 	private String name;
 	private String nickName;
 	private int ptDelNy;
+	private List<String> seqList;
 	
+	
+	public List<String> getSeqList() {
+		return seqList;
+	}
+	public void setSeqList(List<String> seqList) {
+		this.seqList = seqList;
+	}
 	public String getSeq() {
 		return seq;
 	}

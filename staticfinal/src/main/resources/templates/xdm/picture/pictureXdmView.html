@@ -3,144 +3,290 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div th:replace="~{xdm/include/pictureHead :: head}"></div>
 <!-- End Sidebar-->
-  <main id="main" class="main">
+<main id="main" class="main">
 
-    <div class="pagetitle">
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">page 1</a></li>
-          <li class="breadcrumb-item">page 2</li>
-          <li class="breadcrumb-item active">Default</li>
-        </ol>
-      </nav>
-      <h1>블로그</h1>
-    </div><!-- End Page Title -->
+	<div class="pagetitle">
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.html">page 1</a></li>
+				<li class="breadcrumb-item">page 2</li>
+				<li class="breadcrumb-item active">Default</li>
+			</ol>
+		</nav>
+		<h1>사진</h1>
+	</div>
+	<!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        
-        <div class="col-lg-12">
-          <div class="card" >
-            <div class="card-body">
-              <h1 class="card-title" style="height: 100px;" >기본정보 </h1>
+	<section class="section">
+		<div class="row">
 
-              <!-- Custom Styled Validation -->
-              <form class="row g-3 needs-validation" novalidate id="" action="" method="post" >
-                <div class="col-md-3" style="height: 100px;">
-                  <label for="seq" class="form-label">블로그 번호 <sup>*</sup></label>
-                  <input type="text" class="form-control" id="seq" th:value="${item.seq}"  required  readonly>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationCustom05" class="form-label">사진 카테고리</label>
-                  <input type="text" class="form-control" id="validationCustom05"  th:value="${item.categoryName}" required readonly>
-                  <div class="invalid-feedback">
-                    코드이름 을 입력해주세요.
-                  </div>
-                </div>
-                <div class="col-md-3" style="height: 100px;">
-                  <label for="validationCustom08" class="form-label">사진 제목<sup>*</sup></label>
-                  <input type="text" class="form-control" id="validationCustom08" th:value="${item.title}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-      
-                <div class="col-md-3" style="height: 100px;">
-                  <label for="validationCustom02" class="form-label">유저 번호</label>
-                  <input type="text" class="form-control" id="validationCustom02" th:value="${item.user_seq}"  required readonly>
-                  <div class="valid-feedback">
-                    코드를 입력해주세요!
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="cgName" class="form-label">유저 이름<sup>*</sup></label>
-                  <input type="text" class="form-control" id="cgName" th:value="${item.name}"  required readonly >
-                  <div class="invalid-feedback">
-                    코드를 입력해주세요.
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="cgnickName" class="form-label">유저 닉네임<sup>*</sup></label>
-                  <input type="text" class="form-control" id="cgnickName" th:value="${item.nickName}"  required readonly >
-                  <div class="invalid-feedback">
-                    코드를 입력해주세요.
-                  </div>
-                </div>
-                
-                
-                <div class="col-md-3" style="height: 100px;">
-                  <label for="validationCustom21" class="form-label">사용 카메라</label>
-                  <input type="text" class="form-control" id="validationCustom21" th:value="${item.useCamera}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationCustom22" class="form-label">촬영 장소</label>
-                  <input type="text" class="form-control" id="validationCustom22" th:value="${item.photoPlace}" required readonly>
-                  <div class="invalid-feedback">
-                    Please provide a valid zip.
-                  </div>
-                </div>
-               
-                <div class="col-md-3" style="height: 100px;">
-                  <label for="validationCustom25" class="form-label">블로그 사용여부<sup>*</sup></label>
-                  <input class="form-control" id="validationCustom25" th:value="${item.ptDelNy == 0}? Y:N" required readonly   >
-                    <!-- <option selected disabled value="">0</option>
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<h1 class="card-title" style="height: 100px;">기본정보</h1>
+
+						<!-- Custom Styled Validation -->
+						<form class="row g-3 needs-validation" novalidate id="formList"
+							action="" method="post">
+							<input type="hidden" name="seq" th:value="${item?.seq}">
+							<div class="col-md-3" style="height: 100px;">
+								<label for="seq" class="form-label">블로그 번호 <sup>*</sup></label>
+								<input type="text" class="form-control" id="seq" name="seq"
+									th:value="${item?.seq}" required disabled>
+								<div class="valid-feedback">Looks good!</div>
+							</div>
+							<div class="col-md-3">
+								<label for="select" class="form-label">사진 카테고리</label> <select
+									class="form-select ss" name="pictureCategory_seq">
+									<option value="">선택 하세요</option>
+									<option th:each="list:${ptList}"
+										th:text="${list?.categoryName}" th:value="${list?.seq}"
+										th:selected="${list?.seq == item?.pictureCategory_seq}"></option>
+								</select>
+								<div class="invalid-feedback"></div>
+							</div>
+							<div class="col-md-3" style="height: 100px;">
+								<label for="validationCustom08" class="form-label">사진 제목<sup>*</sup></label>
+								<input type="text" class="form-control ss" id="title"
+									name="title" th:value="${item?.title}" required>
+								<div class="invalid-feedback"></div>
+							</div>
+
+							<div class="col-md-3" style="height: 100px;">
+								<label for="validationCustom02" class="form-label">유저 번호</label>
+								<input type="text" class="form-control ss" id="user_seq" name="user_seq"
+									th:value="${item?.user_seq}" required>
+								<div class="valid-feedback">코드를 입력해주세요!</div>
+							</div>
+							<div class="col-md-3">
+								<label for="cgName" class="form-label">유저 이름<sup>*</sup></label>
+								<input type="text" class="form-control" id="cgName"
+									name="cgName" th:value="${item?.name}" required disabled>
+								<div class="invalid-feedback">코드를 입력해주세요.</div>
+							</div>
+							<div class="col-md-3">
+								<label for="cgnickName" class="form-label">유저 닉네임<sup>*</sup></label>
+								<input type="text" class="form-control" id="cgnickName"
+									name="cgnickName" th:value="${item?.nickName}" required
+									disabled>
+								<div class="invalid-feedback">코드를 입력해주세요.</div>
+							</div>
+
+
+							<div class="col-md-3" style="height: 100px;">
+								<label for="validationCustom21" class="form-label">사용
+									카메라</label> <input type="text" class="form-control ss" id="useCamera"
+									name="useCamera" th:value="${item?.useCamera}" required>
+								<div class="invalid-feedback">Please provide a valid zip.
+								</div>
+							</div>
+							<div class="col-md-3">
+								<label for="validationCustom22" class="form-label">촬영 장소</label>
+								<input type="text" class="form-control ss" id="photoPlace"
+									name="photoPlace" th:value="${item?.photoPlace}" required>
+								<div class="invalid-feedback">
+								</div>
+							</div>
+
+							<div class="col-md-3" style="height: 100px;">
+								<label for="validationCustom25" class="form-label">블로그
+									사용여부<sup>*</sup>
+								</label> <input class="form-control" id="ptDelNy"
+									th:value="${item?.ptDelNy == 0}? Y" required disabled>
+								<!-- <option selected disabled value="">0</option>
                     <option>아무거나</option>
                   </select> -->
-                  <div class="invalid-feedback">
-                    항목중 하나를 선택 해주세요.
-                  </div>
-                </div>
-                <div class="col-12" style="height: 100px;">
-                <label for="validationCustom27" class="form-label">사진 설명</label>
-                <input class="form-control" id="validationCustom27" th:value="${item.photoIntroduce}" required readonly>
-                </div>
-                <div class="col-md-6"></div>
-                <div class="col-md-6"></div>
-                <div class="col-md-6">
-                  <a href="/pictureXdmList" class="btn btn-outline-dark"><i class="bi bi-blockquote-right"></i></a></div>
-                <div class="col-md-6">
-<!--                   <div style="display: flex;justify-content: end;"><a th:href="@{/blogXdmInfo(seq=${item.seq})}"  class="btn btn-primary" id="blogBtn">상세 코디목록</a></div> -->
-                </div>
-              </form><!-- End Custom Styled Validation -->
+								<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
+							</div>
+							<div class="col-12" style="height: 100px;">
+								<label for="validationCustom27" class="form-label">사진 설명</label>
+								<input class="form-control ss" id="photoIntroduce"
+									name="photoIntroduce" th:value="${item?.photoIntroduce}"
+									required>
+							</div>
+							<div class="col-md-6"></div>
+							<div class="col-md-6"></div>
+							<div class="col-md-6">
+								<a href="javascript:history.back()" class="btn btn-outline-dark"><i
+									class="bi bi-blockquote-right"></i></a>
+							</div>
+							<div class="col-md-6">
+								<div style="display: flex; justify-content: end;">
+									<a class="btn btn-primary" id="ptBtn" onclick="dataSubmit()"><i
+										class="bi bi-server"></i></a>
+								</div>
+							</div>
+							<div class="modal fade" id="ptModal" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog ">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h1 class="modal-title fs-5" id="modalHead"></h1>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body" id="modalText"></div>
+										<div class="modal-footer">
+											<a class="btn btn-secondary" data-bs-dismiss="modal"
+												onclick="btnClick()">확인</a>
+											<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- End Custom Styled Validation -->
 
-            </div>
-          </div>
+					</div>
+				</div>
 
-          
 
-        </div>
-      </div>
-    </section>
 
-  </main><!-- End #main -->
+			</div>
+		</div>
+	</section>
 
-  <div th:replace="~{xdm/include/footer :: footer}"></div>
+</main>
+<!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div th:replace="~{xdm/include/footer :: footer}"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="xdm/template/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="xdm/template/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="xdm/template/NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="xdm/template/NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
-  <script src="xdm/template/NiceAdmin/assets/vendor/quill/quill.js"></script>
-  <script src="xdm/template/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="xdm/template/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
+<a href="#"
+	class="back-to-top d-flex align-items-center justify-content-center"><i
+	class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Template Main JS File -->
-  <script src="xdm/template/NiceAdmin/assets/js/main.js"></script>
-	 <script type="text/javascript">
-// 	document.getElementById("blog").onclick = function(){
-// 		document.getElementById("codeGroupForm").submit();
-// 	}
-	</script> 
+<!-- Vendor JS Files -->
+<script
+	src="xdm/template/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script
+	src="xdm/template/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="xdm/template/NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
+<script
+	src="xdm/template/NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
+<script src="xdm/template/NiceAdmin/assets/vendor/quill/quill.js"></script>
+<script
+	src="xdm/template/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script
+	src="xdm/template/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
+<script
+	src="xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="xdm/template/NiceAdmin/assets/js/main.js"></script>
+<script type="text/javascript">
+	let form = document.getElementById("formList");
+	let seq = document.querySelector("input[name=seq]");
+	let input = document.getElementsByClassName("ss");
+	
+	 function dataSubmit() {
+			console.log( document.querySelector("input[name=seq]").value);
+			 let flag = false;
+			if (seq.value == "0" || seq.value == "") {
+				for(let i = 0 ; i< input.length;i++){
+				if (input[i].value.trim() == null 
+						|| input[i].value.trim() == ""
+						) {
+					document.getElementById("modalHead").textContent = "경고";
+					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+					
+					input[i].classList.add("is-invalid");
+					input[i].classList.remove("is-valid");
+					flag = true;
+					
+				}else{
+					input[i].classList.add("is-valid");
+					input[i].classList.remove("is-invalid");
+				}
+				
+				}
+				if(flag){
+				document.getElementsByClassName("is-invalid")[0].focus();
+				$("#bgModal").modal("show");
+				}else{
+					form.action="/pictureXdmInst"
+					form.submit();
+// 				alert("등록");
+				}
+	 			
+			} else {
+				
+					for(let i = 0 ; i< input.length;i++){
+					if (input[i].value.trim() == null  
+							|| input[i].value.trim() == ""
+							) {
+						document.getElementById("modalHead").textContent = "경고";
+						document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+						
+						input[i].classList.add("is-invalid");
+						input[i].classList.remove("is-valid");
+						flag = true;
+						
+					}else{
+						input[i].classList.add("is-valid");
+						input[i].classList.remove("is-invalid");
+					}
+					
+					}
+					if(flag){
+					document.getElementsByClassName("is-invalid")[0].focus();
+					$("#ptModal").modal("show");
+					}else{
+// 						alert("수정");
+						form.action="/pictureXdmUpdt"
+						form.submit();
+					}
+		}
+		 }
+	 function btnClick(){
+		 document.getElementById("ptModal").style.display ="none";
+		 return false;
+	 }
+	 for(let i = 0; i < input.length; i++){
+			input[i].oninput = function(){
+			let codeName = this;
+			if(codeName.value.trim() == null || codeName.value.trim() == ""  ){
+			 	codeName.classList.add("is-invalid");
+			 	codeName.classList.remove("is-valid");
+			}else{
+				codeName.classList.add("is-valid");
+				codeName.classList.remove("is-invalid");
+			}
+		}
+		}
+	let select = document.getElementsByTagName("select");
+	for(let i=0; i< select.length; i++){
+	select[i].onchange = function(){
+		let shOption = this;
+		if(shOption.selectedIndex === 0){
+			shOption.classList.add("is-invalid");
+			shOption.classList.remove("is-valid");
+		}else{
+			shOption.classList.add("is-valid");
+			shOption.classList.remove("is-invalid");
+		}
+	}  	
+	}
+	 $("#btnSignout").on("click", function(){
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				,url: "/signoutXdmProc"
+				,data: {}
+				,success: function(response) {
+					if(response.rt == "success") {
+					
+						location.href = "/signinXdmForm";
+					} else {
+						// by pass
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		});
+</script>
 </body>
 
 </html>

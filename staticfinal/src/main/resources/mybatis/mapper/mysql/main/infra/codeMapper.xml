@@ -11,12 +11,12 @@
         WHERE 1=1
 <!--         <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy = #{shUseNy}</if> -->
         <if test="shDelNy != null and !shDelNy.equals('')">AND a.cdDelNy = #{shDelNy}</if>
-<!-- 				
+				
 				<choose>
-					<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-					<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-				</choose>
- -->				
+					<when test="shOptionDate == 1">AND a.cdReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+					<when test="shOptionDate == 2">AND a.cdMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+ 				</choose>
+ 			
         <choose>
             <when test="shOption == 1">AND a.codeGroup_seq = #{shValue}</when>
             <when test="shOption == 2">AND b.cgName LIKE CONCAT('%',#{shValue},'%')</when>
@@ -37,7 +37,9 @@
 		b.cgDelNy,
 		a.codeGroup_seq,
 		a.cdName,
-		a.cdDelNy
+		a.cdDelNy,
+		a.cdReg,
+		a.cdMof
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
@@ -75,7 +77,8 @@
 	update code
 	set 
 	codeGroup_seq = #{codeGroup_seq},
-	cdName = #{cdName}
+	cdName = #{cdName},
+	cdMof = now()
 	where 1=1
 	and seq = #{seq}
 	
@@ -85,11 +88,14 @@
 		code
 		(
 		codeGroup_seq,
-		cdName
+		cdName,
+		cdReg
+		
 		)values
 		(
 		#{codeGroup_seq},
-		#{cdName}
+		#{cdName},
+		now()
 		)
 
 	</insert>

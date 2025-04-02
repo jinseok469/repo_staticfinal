@@ -38,9 +38,9 @@ public class CodeService {
 	public int selectCount() {
 		return codeDao.selectCount();
 	}
-	public int codeUelete(List<String> seqList) {
+	public int codeUelete(CodeDto codeDto) {
 		
-			return codeDao.codeUelete(seqList);
+			return codeDao.codeUelete(codeDto);
 		
 	}
 	@PostConstruct

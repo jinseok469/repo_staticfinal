@@ -67,21 +67,21 @@
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<select class="form-select" id="" >
-					<option selected  value="">날짜</option>
-					<option>등록일</option>
-					<option>수정일</option>
+				<select class="form-select dd" id="shOptionDate" name="shOptionDate" >
+					<option   value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+					<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+					<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control datepicker" id=""
-					 >
+				<input type="text" class="form-control datepicker ss" id="shDateStart"
+				name="shDateStart"	 placeholder="시작일">
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control datepicker" id=""
-					>
+				<input type="text" class="form-control datepicker ss" id="shDateEnd"
+				name="shDateEnd"	placeholder="종료일">
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2"></div>
@@ -100,7 +100,7 @@
 
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="shValue" name="shValue"
+				<input type="text" class="form-control ss" id="shValue" name="shValue"
 					th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어"
 					required>
 				<div class="invalid-feedback">항목을 입력해주세요.</div>
@@ -184,8 +184,8 @@
 									th:attr="onclick=|goForm('${list.seq}')|"></a></td>
 								<td></td>
 								<td></td>
-								<td></td>
-								<td></td>
+								<td th:text="${list.cdReg}"></td>
+								<td th:text="${list.cdMof}"></td>
 							</tr>
 
 
@@ -290,6 +290,8 @@
 <script type="text/javascript">
 	let seq = document.querySelector("input[name=seq]");	
 	let form = document.getElementById("formList");
+	let input = document.getElementsByClassName("ss");
+	let select = document.getElementsByClassName("dd");
 	document.getElementById("btnForm").onclick = function () {
 	    goForm(0);
 	}
@@ -303,11 +305,11 @@
 	
 	function selectAll(selectAll){
 	   	const checkeded = document.getElementsByName("chch");
-	   	
-	   	checkeded.forEach((checkbox)=>{
-	   		checkbox.checked = selectAll.checked;
-	   	})
-	  	}
+	   
+	   	for(let i = 0 ; i < checkeded.length; i++){
+	   		checkeded[i].checked = selectAll.checked;
+	   	}
+	}
 	 function updateSelectAll() {
          const checkboxes = document.querySelectorAll('input[name="chch"]');
          
@@ -346,90 +348,45 @@
 		form.submit();
 	} 
 	 
-	 let shOption = document.getElementById("shOption");
-	 let shValue = document.getElementById("shValue");
 	 function enterkey(){
 		 if(event.key == "Enter"){
-			 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-				 shValue.classList.add("is-invalid");
-				 shValue.classList.remove("is-valid");
-				 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-					 shOption.classList.add("is-invalid");
-					 shOption.classList.remove("is-valid");
-					 document.getElementsByClassName("is-invalid")[0].focus();
-					 return false;
-				 }
-				 
-					 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }else if(shOption.value.trim() == null || shOption.value.trim() ==""){
-				 shOption.classList.add("is-invalid");
-				 shOption.classList.remove("is-valid");
-				 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-					 shValue.classList.add("is-invalid");
-					 shValue.classList.remove("is-valid");
-					 document.getElementsByClassName("is-invalid")[0].focus();
-					 return false;
-			 }
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-		 }
+			 
 			 form.action ="/codeXdmList";
 			 form.submit();
 		 }
 	 }
 	 
 		 document.getElementById("btnSearch").onclick = function(){
-		 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-			 shValue.classList.add("is-invalid");
-			 shValue.classList.remove("is-valid");
-			 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-				 shOption.classList.add("is-invalid");
-				 shOption.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }
-			 
-				 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-		 }else if(shOption.value.trim() == null || shOption.value.trim() ==""){
-			 shOption.classList.add("is-invalid");
-			 shOption.classList.remove("is-valid");
-			 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-				 shValue.classList.add("is-invalid");
-				 shValue.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-		 }
-			 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-	 }
+		
 		 form.action ="/codeXdmList";
 		 form.submit();
 		 }
-			document.getElementById("shValue").oninput = function(){
-		  		let codeName = this;
-		  		if(codeName.value.trim() == null || codeName.value.trim() == "" || codeName.value.includes(" ") || /[^a-zA-Z0-9가-힣]/.test(codeName.value)){
-		  		 	codeName.classList.add("is-invalid");
-		  		 	codeName.classList.remove("is-valid");
+		 
+		 for(let i = 0 ; i < input.length; i++){
+			 input[i].oninput = function(){
+		  		let input = this;
+		  		if(input.value.trim() == null || input.value.trim() == "" || input.value.includes(" ") || /[^a-zA-Z0-9가-힣]/.test(codeName.value)){
+		  			input.classList.add("is-invalid");
+		  			input.classList.remove("is-valid");
 		  		}else{
-		  			codeName.classList.add("is-valid");
-		  			codeName.classList.remove("is-invalid");
+		  			input.classList.add("is-valid");
+		  			input.classList.remove("is-invalid");
 		  		}
 		  	}
+		 }
 		 
-		 
-		 document.getElementById("shOption").onchange = function(){
-				let shOption = this;
-				if(shOption.selectedIndex === 0){
-					shOption.classList.add("is-invalid");
-					shOption.classList.remove("is-valid");
+		 for(let i = 0; i< select.length; i++){
+		 select[i].onchange = function(){
+				let select = this;
+				if(select.selectedIndex === 0){
+					select.classList.add("is-invalid");
+					select.classList.remove("is-valid");
 				}else{
-					shOption.classList.add("is-valid");
-					shOption.classList.remove("is-invalid");
+					select.classList.add("is-valid");
+					select.classList.remove("is-invalid");
 				}
 			}  	
-		 
+		 }
 		 if(document.getElementById("btnUelete")){
 				document.getElementById("btnUelete").onclick = function () {
 			
@@ -459,7 +416,26 @@
 				form.action = "codeXdmUele";
 				form.submit();
 			}
-			
+			 $("#btnSignout").on("click", function(){
+					$.ajax({
+						async: true 
+						,cache: false
+						,type: "post"
+						,url: "/signoutXdmProc"
+						,data: {}
+						,success: function(response) {
+							if(response.rt == "success") {
+							
+								location.href = "/signinXdmForm";
+							} else {
+								// by pass
+							}
+						}
+						,error : function(jqXHR, textStatus, errorThrown){
+							alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+						}
+					});
+				});
 	</script>
 </body>
 

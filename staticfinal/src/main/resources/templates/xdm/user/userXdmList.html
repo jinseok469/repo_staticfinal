@@ -6,7 +6,7 @@
 
 <div th:replace="~{xdm/include/userHead :: head}"></div>
 
-	
+
 
 
 <main id="main" class="main">
@@ -27,14 +27,14 @@
 
 	<section class="section">
 		<form class="row g-3 needs-validation" novalidate name="formList"
-			id="formList" method="post" autocomplete="off" default="1">
+			id="formList" method="post" autocomplete="off" >
 			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
 				th:value="${vo.rowNumToShow}" />
 			<div class="col-md-2" style="height: 10px;">
 
 				<select class="form-select" id="shDelNy">
-					<option   value="">사용 여부</option>
+					<option value="">사용 여부</option>
 					<option value="0" th:selected="${vo.shDelNy == 0}">Y</option>
 					<option value="1" th:selected="${vo.shDelNy == 1}">N</option>
 				</select>
@@ -48,38 +48,44 @@
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected disabled value="">날짜</option>
-					<option>등록일</option>
-					<option>수정일</option>
+				<select class="form-select " id="shOptionDate" name="shOptionDate"
+					required>
+
+					<option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+					<option value="1" th:selected="${vo.shOptionDate == 1}">생년월일</option>
+					<!-- 					<option value="1" th:value="${vo.shOptionDate == 1}">등록일</option> -->
+					<!-- 					<option value="2" th:valeu="${vo.shOptionDate == 2}">수정일</option> -->
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-01-05" disabled>
-				<div class="invalid-feedback">코드를 입력해주세요.</div>
+				<input type="text" class="form-control datepicker "
+					id="shDateStart" name="shDateStart"
+					placeholder="시작일" maxlength="10">
+				<div class="invalid-feedback">시작 날짜를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-02-04" disabled>
-				<div class="invalid-feedback">코드를 입력해주세요.</div>
+				<input type="text" class="form-control datepicker " id="shDateEnd"
+					name="shDateEnd"
+					placeholder="종료일" maxlength="10">
+				<div class="invalid-feedback">종료 날짜를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
-				<select class="form-select" id="shOption" name="shOption" required>
+				<select class="form-select dd" id="shOption" name="shOption" required>
 					<option value="">검색구분</option>
 					<option value="1" th:selected="${vo.shOption == 1}">유저 번호</option>
-					<option  value="2" th:selected="${vo.shOption == 2}">유저 이름</option>
-					<option  value="3" th:selected="${vo.shOption == 3}">유저 닉네임</option>
-					<option  value="4" th:selected="${vo.shOption == 4}">성별</option>
+					<option value="2" th:selected="${vo.shOption == 2}">유저 이름</option>
+					<option value="3" th:selected="${vo.shOption == 3}">유저 닉네임</option>
+					<option value="4" th:selected="${vo.shOption == 4}">성별</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-								<div class="valid-feedback">훌륭 합니다 !</div>
+				<div class="valid-feedback">훌륭 합니다 !</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control"
-					placeholder="검색어" id="shValue" name="shValue" onkeyup="enterkey()" th:value="${vo.shValue}" required>
+				<input type="text" class="form-control" placeholder="검색어"
+					id="shValue" name="shValue" onkeyup="enterkey()"
+					th:value="${vo.shValue}" required>
 				<div class="invalid-feedback">항목을 입력해주세요.</div>
 				<div class="valid-feedback">훌륭 합니다 !</div>
 
@@ -88,9 +94,9 @@
 				<button class="btn btn-outline-dark" type="button" id="btnSearch">
 					<i class="bi bi-search"></i>
 				</button>
-				<button class="btn btn-outline-dark" type="button">
+				<a class="btn btn-outline-dark" type="button" href="/userXdmList">
 					<i class="bi bi-arrow-clockwise"></i>
-				</button>
+				</a>
 			</div>
 
 			<div class="col-lg-12">
@@ -127,16 +133,14 @@
 								<th style="text-align: center;">사용</th>
 								<th class="list-sort" style="text-align: center;">유저 번호</th>
 								<th class="list-sort" style="text-align: center;">유저 이름</th>
-								<th class="list-sort" style="text-align: center;">성별
-									</th>
+								<th class="list-sort" style="text-align: center;">성별</th>
 								<th class="list-sort" style="text-align: center;">생년 월일</th>
 								<th class="list-sort" style="text-align: center;">닉네임</th>
-								<th  class="list-sort"
-									style="text-align: center;">아이디</th>
-								<th  class="list-sort"style="text-align: center;">패스워드</th>
-								<th  class="list-sort"style="text-align: center;">이메일</th>
-								<th  class="list-sort"style="text-align: center;">우편번호</th>
-								<th  class="list-sort"style="text-align: center;">상세주소</th>
+								<th class="list-sort" style="text-align: center;">아이디</th>
+								<th class="list-sort" style="text-align: center;">패스워드</th>
+								<th class="list-sort" style="text-align: center;">이메일</th>
+								<th class="list-sort" style="text-align: center;">우편번호</th>
+								<th class="list-sort" style="text-align: center;">상세주소</th>
 
 							</tr>
 						</thead>
@@ -159,8 +163,8 @@
 								<td th:text="${list.seq}"></td>
 								<td th:text="${list.urDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
-								<td ><a th:href="@{/userXdmView(seq=${list.seq})}" th:text="${list.name}"></a>
-									</td>
+								<td><a th:href="@{/userXdmView(seq=${list.seq})}"
+									th:text="${list.name}"></a></td>
 								<td th:text="${@codeService.selectOneCachedCode(list.gender)}"></td>
 								<td th:text="${list.dob}"></td>
 								<td th:text="${list.nickName}"></td>
@@ -212,10 +216,10 @@
 						<div class="col-md-6 padding-right"
 							style="display: flex; justify-content: end;">
 
-							<button class="btn btn-success btn-right">
+							<button type="button" class="btn btn-success btn-right">
 								<i class="bi bi-journal-x"></i>
 							</button>
-							<a href="/userXdmForm" class="btn btn-primary"><i
+							<a href="javascript:void(0);" class="btn btn-primary"><i
 								class="bi bi-plus-lg"></i></a>
 						</div>
 					</div>
@@ -249,7 +253,7 @@
 
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
 <script type="text/javascript">
-
+let form = document.querySelector("form[name=formList]");
 
 	function selectAll(selectAll){
 	   	const checkeded = document.getElementsByName("userCheck");
@@ -273,7 +277,7 @@
 	 
 	
 	
-	let form = document.querySelector("form[name=formList]");
+	
 	function goList(Num){
 		document.querySelector("input[name=thisPage]").value = Num;
 		form.action = "/userXdmList"
@@ -293,53 +297,17 @@
 	}
 	
 
-	 let shOption = document.getElementById("shOption");
-	 let shValue = document.getElementById("shValue");
+	let input = document.getElementsByClassName("ss");
+ 	let select = document.getElementsByClassName("dd");
 	 function enterkey(){
 		 if(event.key == "Enter"){
-			 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-				 shValue.classList.add("is-invalid");
-				 shValue.classList.remove("is-valid");
-				 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-					 shOption.classList.add("is-invalid");
-					 shOption.classList.remove("is-valid");
-					 document.getElementsByClassName("is-invalid")[0].focus();
-					 return false;
-				 }
-				 
-					 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }
 			 form.action ="/userXdmList";
 			 form.submit();
 		 }
 	 }
-	 
+	 	
 		 document.getElementById("btnSearch").onclick = function(){
-		 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-			 shValue.classList.add("is-invalid");
-			 shValue.classList.remove("is-valid");
-			 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-				 shOption.classList.add("is-invalid");
-				 shOption.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }
-			 
-				 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-		 }else if(shOption.value.trim() == null || shOption.value.trim() ==""){
-			 shOption.classList.add("is-invalid");
-			 shOption.classList.remove("is-valid");
-			 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-				 shValue.classList.add("is-invalid");
-				 shValue.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-		 }
-			 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-	 }
+		
 		 form.action ="/userXdmList";
 		 form.submit();
 		 }
@@ -355,8 +323,36 @@
 					shOption.classList.remove("is-invalid");
 				}
 			}  	
-	
-	
+		 document.getElementById("shOptionDate").onchange = function(){
+				let shOption = this;
+				if(shOption.selectedIndex === 0){
+					shOption.classList.add("is-invalid");
+					shOption.classList.remove("is-valid");
+				}else{
+					shOption.classList.add("is-valid");
+					shOption.classList.remove("is-invalid");
+				}
+			}  	
+		 $("#btnSignout").on("click", function(){
+				$.ajax({
+					async: true 
+					,cache: false
+					,type: "post"
+					,url: "/signoutXdmProc"
+					,data: {}
+					,success: function(response) {
+						if(response.rt == "success") {
+						
+							location.href = "/signinXdmForm";
+						} else {
+							// by pass
+						}
+					}
+					,error : function(jqXHR, textStatus, errorThrown){
+						alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+					}
+				});
+			});
 		
 	
 	

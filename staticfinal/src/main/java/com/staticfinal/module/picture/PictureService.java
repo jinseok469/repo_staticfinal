@@ -24,4 +24,16 @@ public class PictureService {
 	public int selectCount() {
 		return pictureDao.selectCount();
 	}
+	public List<PictureDto> pictureCategoryList(){
+		return pictureDao.pictureCategoryList();
+	}
+	public int pictureInsert(PictureDto pictureDto) {
+		return pictureDao.pictureInsert(pictureDto);
+	}
+	public int pictureUpdate(PictureDto pictureDto) {
+		return pictureDao.pictureUpdate(pictureDto);
+	}
+	public int pictureUelete(PictureDto pictureDto) {
+		return pictureDao.pictureUelete(pictureDto);
+	}
 }

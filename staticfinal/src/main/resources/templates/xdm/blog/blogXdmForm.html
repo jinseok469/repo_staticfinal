@@ -188,6 +188,26 @@
 	 let form = document.getElementById("formList");
 	 let seq = document.querySelector("input[name=seq]");
 		 let input = document.getElementsByClassName("ss");
+		 $("#btnSignout").on("click", function(){
+				$.ajax({
+					async: true 
+					,cache: false
+					,type: "post"
+					,url: "/signoutXdmProc"
+					,data: {}
+					,success: function(response) {
+						if(response.rt == "success") {
+						
+							location.href = "/signinXdmForm";
+						} else {
+							// by pass
+						}
+					}
+					,error : function(jqXHR, textStatus, errorThrown){
+						alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+					}
+				});
+			});
 	 function dataSubmit() {
 		console.log( document.querySelector("input[name=seq]").value);
 		 let flag = false;

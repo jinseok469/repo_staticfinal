@@ -191,6 +191,26 @@
 			cgName.classList.add("is-valid");
 		}
 	}
+	 $("#btnSignout").on("click", function(){
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				,url: "/signoutXdmProc"
+				,data: {}
+				,success: function(response) {
+					if(response.rt == "success") {
+					
+						location.href = "/signinXdmForm";
+					} else {
+						// by pass
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		});
 	
 
 	

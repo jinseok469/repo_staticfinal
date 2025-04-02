@@ -2,7 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{xdm/include/head :: head}"></div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 
@@ -25,11 +24,10 @@
 	<section class="section">
 		<form class="row g-3 needs-validation" novalidate name="formList"
 			id="formList" method="post" autocomplete="off" default="1">
-			<input type="hidden" name="seq">
-			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
-				type="hidden" id="rowNumToShow" name="rowNumToShow"
-				th:value="${vo.rowNumToShow}" />
-				<input type="hidden" name="seqList">
+			<input type="hidden" name="seq"> <input type="hidden"
+				name="thisPage" th:value="${vo.thisPage}" /> <input type="hidden"
+				id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}" />
+			<input type="hidden" name="seqList">
 			<div class="col-md-2" style="height: 10px;">
 
 				<select class="form-select" id="shDelNy" name="shDelNy">
@@ -47,26 +45,28 @@
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected disabled value="">날짜</option>
-					<option>등록일</option>
-					<option>수정일</option>
+				<select class="form-select " id="shOptionDate" name="shOptionDate"
+					required>
+					<option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+					<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+					<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-01-05" disabled>
-				<div class="invalid-feedback">코드를 입력해주세요.</div>
+				<input type="text" class="form-control datepicker "
+					id="shDateStart" name="shDateStart" placeholder="시작일"
+					onkeyup="enterkey()">
+				<div class="invalid-feedback">시작일을 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-02-04" disabled>
-				<div class="invalid-feedback">코드를 입력해주세요.</div>
+				<input type="text" class="form-control datepicker " id="shDateEnd"
+					name="shDateEnd" placeholder="종료일" onkeyup="enterkey()">
+				<div class="invalid-feedback">종료일을 입력해주세요.</div>
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
-				<select class="form-select" id="shOption" name="shOption">
+				<select class="form-select dd" id="shOption" name="shOption">
 					<option value="">검색구분</option>
 					<option value="1" th:selected="${vo.shOption == 1}">코드그룹
 						코드</option>
@@ -78,8 +78,9 @@
 				<div class="valid-feedback">훌륭 합니다!</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="shValue" name="shValue"
-					th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어">
+				<input type="text" class="form-control ss" id="shValue"
+					name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()"
+					placeholder="검색어">
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 				<div class="valid-feedback">훌륭 합니다!</div>
 
@@ -150,18 +151,21 @@
 								<td>
 									<div class="checked">
 										<input type="checkbox" class="form-check" name="animal"
-											value="checke" onclick="updateSelectAll()" th:attr="data-seq=${list.seq}">
+											value="checke" onclick="updateSelectAll()"
+											th:attr="data-seq=${list.seq}">
 									</div>
 								</td>
 								<td th:text="${list.seq}"></td>
 								<td th:text="${list.cgDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
-								<td class="cgName align-middle fw-semi-bold"><a href="javascript:void(0);" th:text="${list.cgName}" th:attr="onclick=|goForm('${list.seq}')|"></a></td>
+								<td class="cgName align-middle fw-semi-bold"><a
+									href="javascript:void(0);" th:text="${list.cgName}"
+									th:attr="onclick=|goForm('${list.seq}')|"></a></td>
 								<td></td>
 								<td th:text="${list.seqCount}"></td>
 								<td></td>
-								<td></td>
-								<td></td>
+								<td th:text="${list.cgReg}"></td>
+								<td th:text="${list.cgMof}"></td>
 							</tr>
 
 
@@ -218,30 +222,30 @@
 				</div>
 			</div>
 			<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modalConfirmTitle">title</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body" id="modalConfirmBody">body</div>
-				<div class="modal-footer">
-					<button type="button"
-						class="btn btn-outline-secondary btn-sm btn_custom"
-						data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
-						name="" id="btnModalDelete">
-						<i class="fa-solid fa-x fa-lg"></i>
-					</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
-						name="" id="btnModalUelete">삭제</button>
+				data-bs-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalConfirmTitle">title</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body" id="modalConfirmBody">body</div>
+						<div class="modal-footer">
+							<button type="button"
+								class="btn btn-outline-secondary btn-sm btn_custom"
+								data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-danger btn-sm btn_custom"
+								name="" id="btnModalDelete">
+								<i class="fa-solid fa-x fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-danger btn-sm btn_custom"
+								name="" id="btnModalUelete">삭제</button>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 		</form>
 	</section>
 
@@ -269,71 +273,70 @@
 
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
 <script type="text/javascript">
-	let seq = document.querySelector("input[name=seq]");	
-	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
+	let input = document.getElementsByClassName("ss");
+	let select = document.getElementsByClassName("dd");
+	let seq = document.querySelector("input[name=seq]");
+	let form = document.querySelector("form[name=formList]");
+
+	document.getElementById("btnForm").onclick = function() {
+		goForm(0);
 	}
 
-
-	goForm = function (keyValue) {
-	    seq.value = keyValue;
-	    form.action = "codeGroupXdmForm";
-	    form.submit();
+	goForm = function(keyValue) {
+		seq.value = keyValue;
+		form.action = "codeGroupXdmForm";
+		form.submit();
 	}
-
 
 	function selectAll(selectAll) {
-	    const checkboxes = document.getElementsByName("animal");
-
-	    for (let i = 0; i < checkboxes.length; i++) {
-	        checkboxes[i].checked = selectAll.checked;
-	    }
-	}
-	 function updateSelectAll() {
-         const checkboxes = document.querySelectorAll('input[name="animal"]');
-         
-         // 전체 선택 체크박스는 첫 번째 체크박스로 가정
-         const selectAllCheckbox = checkboxes[0]; 
-
-         // 모든 체크박스가 체크되었는지 확인
-       let allChecked = true;
+		const checkboxes = document.getElementsByName("animal");
 
 		for (let i = 0; i < checkboxes.length; i++) {
-    		if (!checkboxes[i].checked) {
-       			 allChecked = false;
-       			 break;
-   	 		 }
-		 }
+			checkboxes[i].checked = selectAll.checked;
+		}
+	}
+	function updateSelectAll() {
+		const checkboxes = document.querySelectorAll('input[name="animal"]');
 
-         // 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
-         selectAllCheckbox.checked = allChecked;
-     }
-	 
-	 /* function goList(pageNum) {
-		 let  num = pageNum;
-		
-	     let dfNum = document.getElementsByName("perPage")[0];
-		 let ixNum = dfNum.selectedIndex;
-		 let vlNum = dfNum.options[ixNum].value;
-		
-	   window.location.assign("/codeGroupXdmList?page="+num+"&perPage="+vlNum);
-	}  */
+		// 전체 선택 체크박스는 첫 번째 체크박스로 가정
+		const selectAllCheckbox = checkboxes[0];
+
+		// 모든 체크박스가 체크되었는지 확인
+		let allChecked = true;
+
+		for (let i = 0; i < checkboxes.length; i++) {
+			if (!checkboxes[i].checked) {
+				allChecked = false;
+				break;
+			}
+		}
+
+		// 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
+		selectAllCheckbox.checked = allChecked;
+	}
+
+	/* function goList(pageNum) {
+	 let  num = pageNum;
 	
-	let form = document.querySelector("form[name=formList]");
-	function goList(Num){
+	    let dfNum = document.getElementsByName("perPage")[0];
+	 let ixNum = dfNum.selectedIndex;
+	 let vlNum = dfNum.options[ixNum].value;
+	
+	  window.location.assign("/codeGroupXdmList?page="+num+"&perPage="+vlNum);
+	}  */
+
+	function goList(Num) {
 		document.querySelector("input[name=thisPage]").value = Num;
 		form.action = "/codeGroupXdmList"
 		form.submit();
 	}
-	 
-	 
-	
-	function getNum(){
+
+	function getNum() {
 		let dfNum = document.getElementsByName("perPage")[0];
 		let ixNum = dfNum.selectedIndex;
 		let vlNum = dfNum.options[ixNum].value;
 		document.querySelector("input[name=rowNumToShow]").value = vlNum;
-		
+
 		form.action = "/codeGroupXdmList"
 		form.submit();
 	}
@@ -348,112 +351,95 @@
 		window.location.assign("/codeGroupXdmList?page="+page+"&perPage="+vlNum);
 	  
 	} */
-	let shOption = document.getElementById("shOption");
-	 let shValue = document.getElementById("shValue");
-	 function enterkey(){
-		 if(event.key == "Enter"){
-			 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-				 shValue.classList.add("is-invalid");
-				 shValue.classList.remove("is-valid");
-				 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-					 shOption.classList.add("is-invalid");
-					 shOption.classList.remove("is-valid");
-					 document.getElementsByClassName("is-invalid")[0].focus();
-					 return false;
-				 }
-				 
-					 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }else if(shOption.value.trim() == null || shOption.value.trim() ==""){
-				 shOption.classList.add("is-invalid");
-				 shOption.classList.remove("is-valid");
-				 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-					 shValue.classList.add("is-invalid");
-					 shValue.classList.remove("is-valid");
-					 document.getElementsByClassName("is-invalid")[0].focus();
-					 return false;
-			 }
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-		 }
-			 form.action ="/codeGroupXdmList";
-			 form.submit();
-		 }
-	 }
-	 
-		 
-	 document.getElementById("btnSearch").onclick = function(){
-		 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-			 shValue.classList.add("is-invalid");
-			 shValue.classList.remove("is-valid");
-			 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-				 shOption.classList.add("is-invalid");
-				 shOption.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }
-			 
-				 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-		 }else if(shOption.value.trim() == null || shOption.value.trim() ==""){
-			 shOption.classList.add("is-invalid");
-			 shOption.classList.remove("is-valid");
-			 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-				 shValue.classList.add("is-invalid");
-				 shValue.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-		 }
-			 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-	 }
-		 form.action ="/codeGroupXdmList";
-		 form.submit();
-		 }
-		 document.getElementById("shOption").onchange = function(){
-				let shOption = this;
-				if(shOption.selectedIndex === 0){
-					shOption.classList.add("is-invalid");
-					shOption.classList.remove("is-valid");
-				}else{
-					shOption.classList.add("is-valid");
-					shOption.classList.remove("is-invalid");
-				}
-			}  	
-		 if(document.getElementById("btnUelete")){
-				document.getElementById("btnUelete").onclick = function () {
-			
-					document.querySelector("#modalConfirmTitle").textContent = "확 인";
-					document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-					document.querySelector("#btnModalUelete").style.display = '';
-					document.querySelector("#btnModalDelete").style.display = 'none';
-					$("#modalConfirm").modal("show");      	
-				}
+
+	function enterkey() {
+		if (event.key == "Enter") {
+			form.action = "/codeGroupXdmList";
+			form.submit();
+		}
+	}
+
+	document.getElementById("btnSearch").onclick = function() {
+		
+		form.action = "/codeGroupXdmList";
+		form.submit();
+	}
+
+	for (let i = 0; i < select.length; i++) {
+		select[i].onchange = function() {
+			let shOption = this;
+			if (shOption.selectedIndex === 0) {
+				shOption.classList.add("is-invalid");
+				shOption.classList.remove("is-valid");
+			} else {
+				shOption.classList.add("is-valid");
+				shOption.classList.remove("is-invalid");
 			}
+		}
+	}
+	for (let i = 0; i < input.length; i++) {
+		input[i].oninput = function() {
+			let input = this;
+			if (input.value.trim() == null || input.value.trim() == "" || input.value.includes(" ")) {
+				input.classList.add("is-invalid");
+				input.classList.remove("is-valid");
+			} else {
+				input.classList.add("is-valid");
+				input.classList.remove("is-invalid");
+			}
+		}
 
+	}
 
-			document.getElementById("btnModalUelete").onclick = function () {
-				let checkboxes = document.getElementsByName("animal");
-				let seqq = new Array();
-				let seqList = document.querySelector("input[name=seqList]");
-				let j = 0;
-				for(var i = 0; i < checkboxes.length ; i++){
-					if(checkboxes[i].checked){
-						var seq = checkboxes[i].getAttribute("data-seq");
-						seqq[j] = seq;
-						j++;
+	if (document.getElementById("btnUelete")) {
+		document.getElementById("btnUelete").onclick = function() {
+
+			document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+			document.querySelector("#btnModalUelete").style.display = '';
+			document.querySelector("#btnModalDelete").style.display = 'none';
+			$("#modalConfirm").modal("show");
+		}
+	}
+
+	document.getElementById("btnModalUelete").onclick = function() {
+		let checkboxes = document.getElementsByName("animal");
+		let seqq = new Array();
+		let seqList = document.querySelector("input[name=seqList]");
+		let j = 0;
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				var seq = checkboxes[i].getAttribute("data-seq");
+				seqq[j] = seq;
+				j++;
+			}
+		}
+		console.log(seqq);
+		seqList.value = seqq;
+		form.action = "codeGroupXdmUele";
+		form.submit();
+	}
+	 $("#btnSignout").on("click", function(){
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				,url: "/signoutXdmProc"
+				,data: {}
+				,success: function(response) {
+					if(response.rt == "success") {
+					
+						location.href = "/signinXdmForm";
+					} else {
+						// by pass
 					}
 				}
-				console.log(seqq);
-				seqList.value = seqq;
-				form.action = "codeGroupXdmUele";
-				form.submit();
-			}
-		
-	
-	
-
-	</script>
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		});
+</script>
 </body>
 
 </html>

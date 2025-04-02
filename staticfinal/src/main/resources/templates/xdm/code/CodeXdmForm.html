@@ -1,4 +1,4 @@
-\
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -217,6 +217,26 @@
 	function btnClick() {
 		cdModal.style.display = "none";
 	}
+	 $("#btnSignout").on("click", function(){
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				,url: "/signoutXdmProc"
+				,data: {}
+				,success: function(response) {
+					if(response.rt == "success") {
+					
+						location.href = "/signinXdmForm";
+					} else {
+						// by pass
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		});
 </script>
 
 </body>

@@ -1,6 +1,7 @@
 package com.staticfinal.module.code;
 
 import java.util.ArrayList;
+//import java.util.Arrays;
 import java.util.List;
 
 public class CodeDto {
@@ -15,6 +16,9 @@ public class CodeDto {
 	private String b_seq;
 	private String b_cgName;
 	private String b_cgDelNy;
+	private String cdReg;
+	private String cdMof;
+	private List<String> seqList;
 	
 	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
 	
@@ -25,6 +29,26 @@ public class CodeDto {
 	}
 	public static void setCachedCodeArrayList(List<CodeDto> cachedCodeArrayList) {
 		CodeDto.cachedCodeArrayList = cachedCodeArrayList;
+	}
+	
+	
+	public List<String> getSeqList() {
+		return seqList;
+	}
+	public void setSeqList(List<String> seqList) {
+		this.seqList = seqList;
+	}
+	public String getCdReg() {
+		return cdReg;
+	}
+	public void setCdReg(String cdReg) {
+		this.cdReg = cdReg;
+	}
+	public String getCdMof() {
+		return cdMof;
+	}
+	public void setCdMof(String cdMof) {
+		this.cdMof = cdMof;
 	}
 	public int getCgDelNy() {
 		return cgDelNy;

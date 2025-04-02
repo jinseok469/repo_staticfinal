@@ -22,10 +22,10 @@ public class BlogController {
 	
 	@RequestMapping(value = "/blogXdmList")
 	public String blogXdmList(Model model,@ModelAttribute("vo")BannerVo vo,BlogDto blogDto){
+		vo.setParamsPaging(blogService.selectCount());
 		
 //		model.addAttribute("vo",blogService.blogList(vo));
 		model.addAttribute("list",blogService.blogList(vo));
-		vo.setParamsPaging(blogService.selectCount());
 		
 		return "xdm/blog/blogXdmList";
 	}

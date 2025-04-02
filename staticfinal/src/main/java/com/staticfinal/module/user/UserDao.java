@@ -16,4 +16,5 @@ public interface UserDao {
 	public int selectCount();
 	public UserDto loginOne(UserDto userDto);
 	public UserDto loginDisplay();
+	public int userInsert(UserDto userDto);
 }

@@ -3,7 +3,7 @@ package com.staticfinal.module.user;
 public class UserDto {
 	private String seq;
 	private String name;
-	private int gender;
+	private int gender ;
 	private String dob;
 	private String nickName;
 	private String id;
@@ -11,9 +11,15 @@ public class UserDto {
 	private String email;
 	private int urDelNy;
 	private String cdName;
+	private String lastSeq;
 	
 	
-	
+	public String getLastSeq() {
+		return lastSeq;
+	}
+	public void setLastSeq(String lastSeq) {
+		this.lastSeq = lastSeq;
+	}
 	public String getCdName() {
 		return cdName;
 	}
@@ -57,12 +63,14 @@ public class UserDto {
 		this.nickName = nickName;
 	}
 	public String getId() {
+		System.out.println(id);
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
 	public String getPassword() {
+		System.out.println(password);
 		return password;
 	}
 	public void setPassword(String password) {

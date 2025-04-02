@@ -1,14 +1,14 @@
 
 package com.staticfinal.module.code;
 
-import java.util.List;
+//import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 
 import com.staticfinal.module.util.BannerVo;
 
@@ -61,8 +61,8 @@ public class CodeController {
 		return "redirect:/codeXdmList";
 	}
 	@RequestMapping(value = "/codeXdmUele")
-	public String codeXdmUele(@RequestParam("seqList")List<String> seqList) {
-		codeService.codeUelete(seqList);
+	public String codeXdmUele(CodeDto codeDto) {
+		codeService.codeUelete(codeDto);
 		return "redirect:/codeXdmList";
 	}
 	

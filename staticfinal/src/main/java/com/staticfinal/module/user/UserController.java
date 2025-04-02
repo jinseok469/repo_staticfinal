@@ -24,16 +24,19 @@ public class UserController {
 
 	@RequestMapping(value = "/userXdmList")
 	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo) {
+		vo.setParamsPaging(userService.selectCount());
 
 		model.addAttribute("list", userService.userList(vo));
+		System.out.println(vo.getShDateStart());
+		System.out.println(vo.getShDateEnd());
+		
 //		model.addAttribute("vo",vo);
-		vo.setParamsPaging(userService.selectCount());
 
 		return "xdm/user/userXdmList";
 	}
 
 	@RequestMapping(value = "/userXdmForm")
-	public String userXdmForm() {
+	public String userXdmForm(UserDto userDto) {
 		return "xdm/user/userXdmForm";
 	}
 
@@ -43,11 +46,21 @@ public class UserController {
 
 		return "xdm/user/userXdmView";
 	}
+	@RequestMapping(value = "/signupUsrForm")
+	public String userUsrForm() {
+		
+		return "xdm/user/signupUsrForm";
+	}
 
 	@RequestMapping(value = "/signinXdmForm")
 	public String signinXdmForm(Model model,UserDto userDto, HttpSession httpSession) {
 		model.addAttribute("login",userService.loginDisplay());
 		return "xdm/user/signinXdmForm";
+	}
+	@RequestMapping(value = "/signinUsrForm")
+	public String signinUsrForm(Model model,UserDto userDto, HttpSession httpSession) {
+		model.addAttribute("login",userService.loginDisplay());
+		return "xdm/user/signinUsrForm";
 	}
 
 	@ResponseBody
@@ -70,6 +83,29 @@ public class UserController {
 		return returnMap;
 	}
 	@ResponseBody
+	@RequestMapping(value = "/signinUsrProc")
+	public Map<String, Object> signinUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		UserDto value = userService.loginOne(userDto);
+		
+		if (value != null) {
+			returnMap.put("rt", "success");
+//			/		httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
+//			UserDto rtDto = userService.loginOne(userDto.getId(), userDto.getPassword());
+			httpSession.setAttribute("sessSeqUsr", value.getSeq());
+			httpSession.setAttribute("sessIdUsr", value.getId());
+			httpSession.setAttribute("sessNameUsr", value.getName());
+		} else {
+			
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
+	
+	
+	
+	
+	@ResponseBody
 	@RequestMapping(value = "/signoutXdmProc")
 	public Map<String, Object> signoutXdmProc(UserDto userDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -84,5 +120,16 @@ public class UserController {
 			returnMap.put("rt", "fail");
 		}
 		return returnMap;
+	}
+	
+	@RequestMapping(value = "/userUsrInst")
+	public String userUsrInst(UserDto userDto) {
+		userService.UserInsert(userDto);
+		return "redirect:/userXdmList";
+	}
+	@RequestMapping(value = "/userUsrInfo")
+	public String userUsrInfo() {
+		
+		return "xdm/user/userUsrInfo";
 	}
 }

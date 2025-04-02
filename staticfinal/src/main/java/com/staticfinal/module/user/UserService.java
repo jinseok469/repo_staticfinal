@@ -30,6 +30,8 @@ public class UserService {
 	public UserDto loginDisplay() {
 		return userDao.loginDisplay();
 	}
+	public int UserInsert(UserDto userDto) {
+		return userDao.userInsert(userDto);
+	}
 	
-
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 
 <div th:replace="~{xdm/include/pictureHead :: head}"></div>
-	
+
 
 
 <main id="main" class="main">
@@ -19,7 +19,7 @@
 			</ol>
 		</nav>
 		<h1 style="height: 50px;">
-			블로그<span style="font-size: 18px;"> (List)</span>
+			사진<span style="font-size: 18px;"> (List)</span>
 		</h1>
 	</div>
 	<!-- End Page Title -->
@@ -29,25 +29,26 @@
 			id="formList" method="post" autocomplete="off" default="1">
 			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
-				th:value="${vo.rowNumToShow}" />
+				th:value="${vo.rowNumToShow}" /> <input type="hidden" name="seq">
+			<input type="hidden" name="seqList">
 			<div class="col-md-2" style="height: 10px;">
 
-				<select class="form-select" id="">
-					<option selected disabled value="">N</option>
+				<select class="form-select" id="shDelNy" name="shDelNy">
+					<option value="0" th:selected="${vo.shDelNy == 0}">Y</option>
+					<option value="1" th:selected="${vo.shDelNy == 1}">N</option>
+				</select>
+				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
+			</div>
+			<div class="col-md-2">
+				<select class="form-select" id="" disabled>
+					<option selected value="">Y</option>
 					<option>아무거나</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<select class="form-select" id="">
-					<option selected disabled value="">Y</option>
-					<option>아무거나</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
-			<div class="col-md-2">
-				<select class="form-select" id="">
-					<option selected disabled value="">날짜</option>
+				<select class="form-select" id="" disabled>
+					<option selected value="">날짜</option>
 					<option>등록일</option>
 					<option>수정일</option>
 				</select>
@@ -55,36 +56,37 @@
 			</div>
 			<div class="col-md-2">
 				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-01-05">
+					placeholder="2025-01-05" disabled>
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
 				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-02-04">
+					placeholder="2025-02-04" disabled>
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
-				<select class="form-select" id="">
-					<option selected disabled value="">검색구분</option>
-					<option>코드그룹 코드</option>
-					<option>코드그룹 이름</option>
-					<option>코드그룹 이름(영문)</option>
+				<select class="form-select" id="shOption" name="shOption">
+					<option value="">검색구분</option>
+					<option value="1" th:selected="${vo.shOption == 1}">사진 번호</option>
+					<option value="2" th:selected="${vo.shOption == 2}">유저 이름</option>
+					<option value="3" th:selected="${vo.shOption == 3}">사진 블로그
+						제목</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
+				<input type="text" class="form-control" id="shValue" name="shValue"
 					placeholder="검색어">
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-8">
-				<button class="btn btn-outline-dark" type="button">
+				<button class="btn btn-outline-dark" type="button" id="btnSearch">
 					<i class="bi bi-search"></i>
 				</button>
-				<button class="btn btn-outline-dark" type="button">
+				<a href="/pictureXdmList" class="btn btn-outline-dark" type="button">
 					<i class="bi bi-arrow-clockwise"></i>
-				</button>
+				</a>
 			</div>
 
 			<div class="col-lg-12">
@@ -113,7 +115,7 @@
 								<th data-sortable="false"
 									style="text-align: center; width: 100px;"><div
 										class="checked">
-										<input type="checkbox" class="form-check" name="blogCheck"
+										<input type="checkbox" class="form-check" name="pictureCheck"
 											value="selectall" onclick="selectAll(this)">
 									</div></th>
 								<th data-sortable="false"
@@ -125,8 +127,8 @@
 								<th class="list-sort" style="text-align: center;">유저 닉네임</th>
 								<th class="list-sort" style="text-align: center;">사진 카테고리</th>
 								<th class="list-sort" style="text-align: center;">블로그 제목</th>
-								
-								
+
+
 
 							</tr>
 						</thead>
@@ -142,20 +144,23 @@
 							<tr th:if="${!#lists.isEmpty(list)}" th:each="list:${list}">
 								<td>
 									<div class="checked">
-										<input type="checkbox" class="form-check" name="blogCheck"
-											value="checke">
+										<input type="checkbox" class="form-check" name="pictureCheck"
+											value="checke" onclick="updatecheck()" th:attr="data-seq=${list.seq}">
 									</div>
 								</td>
-								<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
+								<td
+									th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
 								<td th:text="${list.ptDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
 								<td th:text="${list.user_seq}"></td>
 								<td th:text="${list.name}"></td>
 								<td th:text="${list.nickName}"></td>
 								<td th:text="${list.categoryName}"></td>
-								<td ><a th:href="@{/pictureXdmView(seq=${list.seq})}" th:text="${list.title}"></a></td>
-								
-								
+								<td><a href="javascript:void(0);"
+									th:attr="onclick=|goForm('${list.seq}')|"
+									th:text="${list.title}"></a></td>
+
+
 							</tr>
 
 
@@ -193,22 +198,48 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6 padding-left">
-							<button class="btn btn-danger">X</button>
-							<button class="btn btn-danger" id="cgSetBtn">
+							<button type="button" class="btn btn-danger">X</button>
+							<button type="button" class="btn btn-danger" id="btnUelete">
 								<i class="bi bi-trash"></i>
 							</button>
 						</div>
 						<div class="col-md-6 padding-right"
 							style="display: flex; justify-content: end;">
 
-							<button class="btn btn-success btn-right">
+							<button type="button" class="btn btn-success btn-right">
 								<i class="bi bi-journal-x"></i>
 							</button>
-							<a href="/userXdmForm" class="btn btn-primary"><i
-								class="bi bi-plus-lg"></i></a>
+							<button type="button" id="ptBtn" class="btn btn-primary">
+								<i class="bi bi-plus-lg"></i>
+							</button>
 						</div>
 					</div>
 
+				</div>
+			</div>
+			<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
+				data-bs-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalConfirmTitle">title</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body" id="modalConfirmBody">body</div>
+						<div class="modal-footer">
+							<button type="button"
+								class="btn btn-outline-secondary btn-sm btn_custom"
+								data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-danger btn-sm btn_custom"
+								name="" id="btnModalDelete">
+								<i class="fa-solid fa-x fa-lg"></i>
+							</button>
+							<button type="button" class="btn btn-danger btn-sm btn_custom"
+								name="" id="btnModalUelete">삭제</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</form>
@@ -238,63 +269,106 @@
 
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
 <script type="text/javascript">
+	let checkeded = document.getElementsByName("pictureCheck");
+	let form = document.getElementById("formList");
+	function selectAll(selectAll) {
 
+		for (let i = 0; i < checkeded.length; i++) {
+			checkeded[i].checked = selectAll.checked;
+		}
+	}
 
-	function selectAll(selectAll){
-	   	const checkeded = document.getElementsByName("blogCheck");
-	   	
-	   	checkeded.forEach((checkbox)=>{
-	   		checkbox.checked = selectAll.checked;
-	   	})
-	  	}
-	 
-	 /* function goList(pageNum) {
-		 let  num = pageNum;
-		
-	     let dfNum = document.getElementsByName("perPage")[0];
-		 let ixNum = dfNum.selectedIndex;
-		 let vlNum = dfNum.options[ixNum].value;
-		
-	   window.location.assign("/codeGroupXdmList?page="+num+"&perPage="+vlNum);
-	}  */
-	
-	let form = document.querySelector("form[name=formList]");
-	function goList(Num){
+	function updatecheck() {
+		console.log("sdf");
+		let unchecked = true;
+		for (let i = 1; i < checkeded.length; i++) {
+			if (!checkeded[i].checked) {
+				unchecked = false;
+				break;
+			}
+		}
+		checkeded[0].checked = unchecked;
+	}
+
+	function goList(Num) {
 		document.querySelector("input[name=thisPage]").value = Num;
-		form.action = "/blogXdmList"
+		form.action = "/pictureXdmList"
 		form.submit();
 	}
-	 
-	 
-	
-	function getNum(){
+
+	function getNum() {
 		let dfNum = document.getElementsByName("perPage")[0];
 		let ixNum = dfNum.selectedIndex;
 		let vlNum = dfNum.options[ixNum].value;
 		document.querySelector("input[name=rowNumToShow]").value = vlNum;
-		
-		form.action = "/blogXdmList"
+
+		form.action = "/pictureXdmList"
 		form.submit();
 	}
-	/* function getNum(){
-		const urlParams = new URLSearchParams(window.location.search);
-		const page = urlParams.get("page") || "1";
-		
-		let dfNum = document.getElementsByName("perPage")[0];
-		let ixNum = dfNum.selectedIndex;
-		let vlNum = dfNum.options[ixNum].value;
-		
-		window.location.assign("/codeGroupXdmList?page="+page+"&perPage="+vlNum);
-	  
-	} */
-		
-	
-	
-		
-	
-	
 
-	</script>
+	document.getElementById("btnSearch").onclick = function() {
+		console.log(document.getElementById("shValue").value);
+		form.action = "/pictureXdmList"
+		form.submit();
+	}
+	document.getElementById("ptBtn").onclick = function() {
+		goForm(0);
+	}
+	function goForm(num) {
+		document.querySelector("input[name=seq]").value = num;
+		form.action = "/pictureXdmView"
+		form.submit();
+	}
+
+	if (document.getElementById("btnUelete")) {
+		document.getElementById("btnUelete").onclick = function() {
+
+			document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+			document.querySelector("#btnModalUelete").style.display = '';
+			document.querySelector("#btnModalDelete").style.display = 'none';
+			$("#modalConfirm").modal("show");
+		}
+	}
+
+	document.getElementById("btnModalUelete").onclick = function() {
+		let checkboxes = document.getElementsByName("pictureCheck");
+		let seqq = new Array();
+		let seqList = document.querySelector("input[name=seqList]");
+		let j = 0;
+		for (let i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				let seq = checkboxes[i].getAttribute("data-seq");
+				seqq[j] = seq;
+				j++;
+			}
+		}
+		console.log(seqq);
+		seqList.value = seqq;
+		form.action = "pictureXdmUele";
+		form.submit();
+	}
+	 $("#btnSignout").on("click", function(){
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				,url: "/signoutXdmProc"
+				,data: {}
+				,success: function(response) {
+					if(response.rt == "success") {
+					
+						location.href = "/signinXdmForm";
+					} else {
+						// by pass
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		});
+</script>
 </body>
 
 </html>

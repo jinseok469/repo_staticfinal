@@ -128,15 +128,32 @@ public class BannerVo {
 	// search
 		private Integer shUseNy = 1; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
 		private Integer shDelNy = 0; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
-		private Integer shOptionDate = 2; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
+		private Integer shOptionDate ; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
 		private String shDateStart;
 		private String shDateEnd;
 		private Integer shOption; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
 		private String shValue;
 		private String bnSeq;
+		private String shDateStartDB;
+		private String shDateEndDB;
 		
 		
 		
+		public String getShDateStartDB() {
+			return shDateStart +" 00:00:00";
+		}
+
+		public void setShDateStartDB(String shDateStartDB) {
+			this.shDateStartDB = shDateStartDB;
+		}
+
+		public String getShDateEndDB() {
+			return shDateEnd +" 23:59:59";
+		}
+
+		public void setShDateEndDB(String shDateEndDB) {
+			this.shDateEndDB = shDateEndDB;
+		}
 
 		public String getBnSeq() {
 			return bnSeq;
@@ -163,7 +180,12 @@ public class BannerVo {
 		}
 
 		public Integer getShOptionDate() {
-			return shOptionDate;
+			if(shDateStart != null && !shDateStart.equals("") || shDateEnd != null && !shDateEnd.equals("")) {
+				return shOptionDate;
+			}else {
+				return null;
+			}
+			
 		}
 
 		public void setShOptionDate(Integer shOptionDate) {
@@ -179,7 +201,7 @@ public class BannerVo {
 		}
 
 		public String getShDateEnd() {
-			return shDateEnd;
+			return shDateEnd ;
 		}
 
 		public void setShDateEnd(String shDateEnd) {

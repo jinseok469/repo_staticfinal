@@ -34,10 +34,8 @@ public class CodeGroupController {
 
 		vo.setParamsPaging(codeGroupService.selectOneCount());
 		
-		if(vo.getTotalRows() > 0) {
+		
 		model.addAttribute("list",codeGroupService.selectList(vo));
-		model.addAttribute("vo",vo);
-		}
 		
 		
 //		int a = codeGroupService.selectOneCount();
