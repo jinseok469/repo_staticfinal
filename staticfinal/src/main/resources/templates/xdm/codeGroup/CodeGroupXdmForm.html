@@ -211,7 +211,17 @@
 				}
 			});
 		});
-	
+	 let targetUrl = window.location.pathname; // 원하는 URL로 변경
+	 let main = document.querySelector("#codeGroupMain");
+	 let serve = document.querySelector("#codeGroupServe");
+	let inner = document.querySelector("#codeGroupInner");
+	 
+	     if ("/codeGroupXdmForm" === targetUrl) {
+				main.classList.remove("collapsed");
+	    	 inner.classList.add("active");
+	    	
+				 serve.classList.remove("collapse");
+	     }
 
 	
 	function btnClick() {

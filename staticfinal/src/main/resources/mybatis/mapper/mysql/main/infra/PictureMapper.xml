@@ -13,6 +13,11 @@
 	 	left join user as c on a.user_seq = c.seq
 	 	where 1=1
 	 	<if test="shDelNy != null and !shDelNy.equals('')">and a.ptDelNy = #{shDelNy}</if>
+	 	<choose>
+					<when test="shOptionDate == 1">AND a.bpReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+					<when test="shOptionDate == 2">AND a.bpMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+ 				</choose>
+ 			
 	 	  <choose>
             <when test="shOption == 1">AND a.seq = #{shValue}</when>
             <when test="shOption == 2">AND c.name LIKE CONCAT('%',#{shValue},'%')</when>
@@ -34,7 +39,9 @@
 	 	a.user_seq,
 	 	b.categoryName,
 	 	c.name,
-	 	c.nickName
+	 	c.nickName,
+	 	a.bpReg,
+	 	a.bpMof
 	 	<include refid="selectCommon"></include>
 	 	order by a.seq desc
 	 	limit #{startRnumForMysql},#{rowNumToShow}
@@ -75,7 +82,8 @@ useCamera,
 photoPlace,
 photoIntroduce,
 pictureCategory_seq,
-user_seq
+user_seq,
+bpReg
 )values
 (
 #{title},
@@ -83,7 +91,8 @@ user_seq
 #{photoPlace},
 #{photoIntroduce},
 #{pictureCategory_seq},
-#{user_seq}
+#{user_seq},
+now()
 )
 </insert>
 <update id="pictureUpdate">
@@ -95,6 +104,7 @@ photoPlace = #{photoPlace},
 photoIntroduce = #{photoIntroduce},
 pictureCategory_seq = #{pictureCategory_seq},
 user_seq = #{user_seq}
+bpMof = now()
 where 1=1 
 and seq = #{seq}
 </update>

@@ -4,7 +4,7 @@
 
 
 
-<div th:replace="~{xdm/include/blogHead :: head}"></div>
+<div th:replace="~{xdm/include/head :: head}"></div>
 	
 
 
@@ -19,7 +19,7 @@
 			</ol>
 		</nav>
 		<h1 style="height: 50px;">
-			블로그<span style="font-size: 18px;"> (List)</span>
+			코디 블로그 관리
 		</h1>
 	</div>
 	<!-- End Page Title -->
@@ -32,40 +32,42 @@
 				th:value="${vo.rowNumToShow}" />
 				<input type="hidden" name="seqList">
 				<input type="hidden" name="seq">
-			<div class="col-md-2" style="height: 10px;">
+<!-- 			<div class="col-md-2" style="height: 10px;"> -->
 
-				<select class="form-select" id="shDelNy" name="shDelNy">
-					<option   value="">사용 여부</option>
-					<option   value="0" th:selected="${vo.shDelNy == 0}">Y</option>
-					<option value="1" th:selected="${vo.shDelNy ==1}">N</option>
+<!-- 				<select class="form-select" id="shDelNy" name="shDelNy"> -->
+<!-- 					<option   value="">사용 여부</option> -->
+<!-- 					<option   value="0" th:selected="${vo.shDelNy == 0}">Y</option> -->
+<!-- 					<option value="1" th:selected="${vo.shDelNy ==1}">N</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<select class="form-select" id="" disabled> -->
+<!-- 					<option selected disabled value="">Y</option> -->
+<!-- 					<option>아무거나</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
+			<div class="col-md-2">
+				<select class="form-select" id="shOptionDate" name="shOptionDate" >
+					<option   value="">날짜</option>
+					<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+					<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected disabled value="">Y</option>
-					<option>아무거나</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
-			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected disabled value="">날짜</option>
-					<option>등록일</option>
-					<option>수정일</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
-			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-01-05" disabled>
+				<input type="text" class="form-control datepicker" id="shDateStart"
+				name="shDateStart"	placeholder="시작일" >
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-02-04" disabled>
+				<input type="text" class="form-control datepicker" id="shDateEnd"
+				name="shDateEnd"	placeholder="종료일" >
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
 				<select class="form-select" id="shOption" name="shOption">
@@ -73,7 +75,6 @@
 					<option value="1" th:selected="${vo.shOption ==1}">블로그 번호</option>
 					<option value="2" th:selected="${vo.shOption ==2}">블로그 제목</option>
 					<option value="3" th:selected="${vo.shOption ==3}">유저 이름</option>
-					<option value="4" th:selected="${vo.shOption == 4}">유저 닉네임</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
@@ -122,15 +123,14 @@
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
-								<th style="text-align: center;">사용</th>
-								<th class="list-sort" style="text-align: center;">블로그 번호</th>
-								<th class="list-sort" style="text-align: center;">유저 번호</th>
+								<th class="list-sort" style="text-align: center;">seq</th>
 								<th class="list-sort" style="text-align: center;">유저 이름</th>
-								<th class="list-sort" style="text-align: center;">유저 닉네임</th>
 								<th class="list-sort" style="text-align: center;">블로그 카테고리</th>
 								<th class="list-sort" style="text-align: center;">블로그 제목</th>
-								<th  class="list-sort"
-									style="text-align: center;">구매 여부</th>
+								<th  class="list-sort" style="text-align: center;">구매 여부</th>
+								<th  class="list-sort" style="text-align: center;">등록일</th>
+								<th  class="list-sort" style="text-align: center;">수정일</th>
+									
 								
 
 							</tr>
@@ -152,14 +152,13 @@
 									</div>
 								</td>
 								<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
-								<td th:text="${list.bgDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
-								<td th:text="${list.user_seq}"></td>
 								<td th:text="${list.name}"></td>
-								<td th:text="${list.nickName}"></td>
 								<td th:text="${list.categoryName}"></td>
 								<td ><a th:href="@{/blogXdmForm(seq=${list.seq})}" th:text="${list.title}"></a></td>
 								<td th:text="${list.buied == 1 }?Y:N"></td>
+								<td th:text="${list.bgReg}"></td>
+								<td th:text="${list.bgMof}"></td>
 								
 							</tr>
 
@@ -330,50 +329,13 @@ function goList(Num){
  let shOption = document.getElementById("shOption");
  let shValue = document.getElementById("shValue");
  function enterkey(){
-	 if(event.key == "Enter"){
-		 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-			 shValue.classList.add("is-invalid");
-			 shValue.classList.remove("is-valid");
-			 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-				 shOption.classList.add("is-invalid");
-				 shOption.classList.remove("is-valid");
-				 document.getElementsByClassName("is-invalid")[0].focus();
-				 return false;
-			 }
-			 
-				 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-		 }
+	
 		 form.action ="/blogXdmList";
 		 form.submit();
-	 }
  }
  
 	 document.getElementById("btnSearch").onclick = function(){
-	 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-		 shValue.classList.add("is-invalid");
-		 shValue.classList.remove("is-valid");
-		 if(shOption.value.trim() == null || shOption.value.trim() ==""){
-			 shOption.classList.add("is-invalid");
-			 shOption.classList.remove("is-valid");
-			 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-		 }
-		 
-			 document.getElementsByClassName("is-invalid")[0].focus();
-		 return false;
-	 }else if(shOption.value.trim() == null || shOption.value.trim() ==""){
-		 shOption.classList.add("is-invalid");
-		 shOption.classList.remove("is-valid");
-		 if(shValue.value.trim() == null || shValue.value.trim() == ""){
-			 shValue.classList.add("is-invalid");
-			 shValue.classList.remove("is-valid");
-			 document.getElementsByClassName("is-invalid")[0].focus();
-			 return false;
-	 }
-		 document.getElementsByClassName("is-invalid")[0].focus();
-		 return false;
- }
+	
 	 form.action ="/blogXdmList";
 	 form.submit();
 	 }
@@ -448,7 +410,17 @@ function goList(Num){
 					}
 				});
 			});
+		 let targetUrl = window.location.pathname; // 원하는 URL로 변경
+		 let main = document.querySelector("#blogMain");
+		 let serve = document.querySelector("#blogServe");
+		 let inner = document.querySelector("#blogInner");
 
+		     if ("/blogXdmList" === targetUrl) {
+		 			main.classList.remove("collapsed");
+		    	 inner.classList.add("active");
+		    	
+		 			 serve.classList.remove("collapse");
+		     }
 
 	</script>
 </body>

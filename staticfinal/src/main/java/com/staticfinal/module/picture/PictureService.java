@@ -21,8 +21,8 @@ public class PictureService {
 	public PictureDto pictureOne(PictureDto pictureDto) {
 		return pictureDao.pictureOne(pictureDto);
 	}
-	public int selectCount() {
-		return pictureDao.selectCount();
+	public int selectCount(BannerVo vo) {
+		return pictureDao.selectCount(vo);
 	}
 	public List<PictureDto> pictureCategoryList(){
 		return pictureDao.pictureCategoryList();

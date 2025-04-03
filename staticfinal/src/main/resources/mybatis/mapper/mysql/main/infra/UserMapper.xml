@@ -17,8 +17,10 @@
 		<choose> <when test="shOptionDate != null and !shOptionDate.equals('') and shOptionDate == 1">
 		AND a.dob BETWEEN 
 			#{shDateStart} AND #{shDateEnd}</when> 
-<!-- 			<when test="shOptionDate == 2">AND  -->
-<!-- 			a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>  -->
+			<when test="shOptionDate == 2">AND 
+			a.urReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when> 
+			<when test="shOptionDate == 3">AND 
+			a.urMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when> 
 			</choose>
 		<choose>
 			<when test="shOption == 1">AND a.seq = #{shValue}</when>
@@ -46,7 +48,9 @@
 		a.postalCode,
 		a.betterAddress,
 		b.cdName,
-		a.urDelNy
+		a.urDelNy,
+		a.urReg,
+		a.urMof
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
@@ -68,7 +72,6 @@
 		user as a
 		where 1=1 and
 		a.seq = #{seq}
-
 	</select>
 	<select id="loginOne" resultMap="resultMapObj">
 		select
@@ -111,7 +114,8 @@
 		password,
 		email,
 		postalCode,
-		betterAddress
+		betterAddress,
+		urReg
 	)values
 	(
 		#{name},
@@ -122,8 +126,25 @@
 		#{password},
 		#{email},
 		#{postalCode},
-		#{betterAddress}
+		#{betterAddress},
+		now()
 	)
-	
 	</insert>
+	<update id="userUpdate">
+		update user
+		set
+		name = #{name},
+		gender = #{gender},
+		dob =  #{dob},
+		nickName = #{nickName},
+		id = #{id},
+		password = #{password},
+		email = #{email},
+		postalCode = #{postalCode},
+		betterAddress = #{betterAddress},
+		urMof = now()
+		where 1=1 
+		and seq = #{seq}
+	
+	</update>
 </mapper>

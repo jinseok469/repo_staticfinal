@@ -12,12 +12,12 @@
 		a.betterBlog_seq
 		where 1=1
 	 <if test="shDelNy != null and !shDelNy.equals('')">AND a.ifDelNy = #{shDelNy}</if>
-<!-- 				
+				
 				<choose>
-					<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-					<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 1">AND a.ciReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+					<when test="shOptionDate == 2">AND a.ciMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
 				</choose>
- -->				
+ 				
         <choose>
             <when test="shOption == 1">AND a.seq = #{shValue}</when>
             <when test="shOption == 2">AND b.title LIKE CONCAT('%',#{shValue},'%')</when>
@@ -41,7 +41,9 @@
 		a.itemBrand,
 		a.betterBlog_seq,
 		a.ifDelNy,
-		b.title
+		b.title,
+		a.ciReg,
+		a.ciMof
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
@@ -69,14 +71,15 @@
 	buyLink = #{buyLink},
 	infoPrice = #{infoPrice},
 	itemBrand = #{itemBrand},
-	betterBlog_seq = #{betterBlog_seq}
+	betterBlog_seq = #{betterBlog_seq},
+	ciMof = now()
 	where 1=1 
 	and seq = #{seq}
 	</update>
 	<insert id="codyInsert">
 	insert into clotheInfo
-	(item,buyLink,infoPrice,itemBrand,betterBlog_seq)
-	values(#{item},#{buyLink},#{infoPrice},#{itemBrand},#{betterBlog_seq})
+	(item,buyLink,infoPrice,itemBrand,betterBlog_seq,ciReg)
+	values(#{item},#{buyLink},#{infoPrice},#{itemBrand},#{betterBlog_seq},now())
 	
 	</insert>
 </mapper>

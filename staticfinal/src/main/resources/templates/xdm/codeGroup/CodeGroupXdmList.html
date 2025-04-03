@@ -28,22 +28,22 @@
 				name="thisPage" th:value="${vo.thisPage}" /> <input type="hidden"
 				id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}" />
 			<input type="hidden" name="seqList">
-			<div class="col-md-2" style="height: 10px;">
+<!-- 			<div class="col-md-2" style="height: 10px;"> -->
 
-				<select class="form-select" id="shDelNy" name="shDelNy">
-					<option value="">사용 여부</option>
-					<option value="0" th:selected="${vo.shDelNy==0}">Y</option>
-					<option value="1" th:selected="${vo.shDelNy==1}">N</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
-			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected disabled value="">Y</option>
-					<option>아무거나</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
+<!-- 				<select class="form-select" id="shDelNy" name="shDelNy"> -->
+<!-- 					<option value="">사용 여부</option> -->
+<!-- 					<option value="0" th:selected="${vo.shDelNy==0}">Y</option> -->
+<!-- 					<option value="1" th:selected="${vo.shDelNy==1}">N</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<select class="form-select" id="" disabled> -->
+<!-- 					<option selected disabled value="">Y</option> -->
+<!-- 					<option>아무거나</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
 			<div class="col-md-2">
 				<select class="form-select " id="shOptionDate" name="shOptionDate"
 					required>
@@ -64,6 +64,8 @@
 					name="shDateEnd" placeholder="종료일" onkeyup="enterkey()">
 				<div class="invalid-feedback">종료일을 입력해주세요.</div>
 			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
 				<select class="form-select dd" id="shOption" name="shOption">
@@ -125,7 +127,6 @@
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
-								<th style="text-align: center;">사용</th>
 								<th class="list-sort" style="text-align: center;">코드그룹 코드</th>
 								<th class="list-sort" style="text-align: center;">코드그룹 이름</th>
 								<th class="list-sort" style="text-align: center;">코드그룹
@@ -156,7 +157,6 @@
 									</div>
 								</td>
 								<td th:text="${list.seq}"></td>
-								<td th:text="${list.cgDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
 								<td class="cgName align-middle fw-semi-bold"><a
 									href="javascript:void(0);" th:text="${list.cgName}"
@@ -439,6 +439,20 @@
 				}
 			});
 		});
+	 
+	 let targetUrl = window.location.pathname; // 원하는 URL로 변경
+	 let main = document.querySelector("#codeGroupMain");
+	 let serve = document.querySelector("#codeGroupServe");
+	let inner = document.querySelector("#codeGroupInner");
+	 
+	     if ("/codeGroupXdmList" === targetUrl) {
+				main.classList.remove("collapsed");
+	    	 inner.classList.add("active");
+	    	
+				 serve.classList.remove("collapse");
+	     }
+	 
+	 
 </script>
 </body>
 

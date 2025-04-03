@@ -17,7 +17,7 @@ public class CodyController {
 	@RequestMapping(value = "/codyXdmList")
 	public String codyXdmList(@ModelAttribute("vo")BannerVo vo, Model model) {
 		
-		vo.setParamsPaging(codyService.selectCount());
+		vo.setParamsPaging(codyService.selectCount(vo));
 		model.addAttribute("codyList",codyService.codyList(vo));
 		System.out.println(vo.getThisPage());
 		return "xdm/cody/codyXdmList";

@@ -19,7 +19,7 @@ public interface CodeDao {
 	public CodeDto codeOne(CodeDto codeDto);
 	public int codeInsert(CodeDto codeDto);
 	public int codeUpdate(CodeDto codeDto);
-	public int selectCount();
+	public int selectCount(BannerVo vo);
 	public List<CodeDto> selectListCachedCodeArrayList();
 	public int codeUelete(CodeDto codeDto);
 }

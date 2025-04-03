@@ -22,7 +22,7 @@ public class CodeController {
 	@RequestMapping(value = "/codeXdmList")
 	public String codeXdmList(@ModelAttribute("vo")BannerVo vo,Model model,CodeDto codeDto) {
 		
-		vo.setParamsPaging(codeService.selectCount());
+		vo.setParamsPaging(codeService.selectCount(vo));
 		model.addAttribute("list",codeService.codeList(vo));
 		model.addAttribute("cgList",codeService.codeGroupList(codeDto));
 		return "xdm/code/CodeXdmList";

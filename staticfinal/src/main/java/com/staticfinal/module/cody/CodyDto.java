@@ -9,8 +9,23 @@ public class CodyDto {
 	private String betterBlog_seq;
 	private String title;
 	private int ifDelNy;
+	private String ciReg;
+	private String ciMof;
 	
 	
+	
+	public String getCiReg() {
+		return ciReg;
+	}
+	public void setCiReg(String ciReg) {
+		this.ciReg = ciReg;
+	}
+	public String getCiMof() {
+		return ciMof;
+	}
+	public void setCiMof(String ciMof) {
+		this.ciMof = ciMof;
+	}
 	public String getSeq() {
 		return seq;
 	}

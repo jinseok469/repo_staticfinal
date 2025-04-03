@@ -20,9 +20,9 @@ public class UserService {
 	public UserDto userOne(UserDto userDto) {
 		return userDao.userOne(userDto);
 	}
-	public int selectCount() {
+	public int selectCount(BannerVo vo) {
 		
-		return userDao.selectCount();
+		return userDao.selectCount(vo);
 	}
 	public UserDto loginOne(UserDto userDto) {
 		return userDao.loginOne(userDto);
@@ -30,8 +30,14 @@ public class UserService {
 	public UserDto loginDisplay() {
 		return userDao.loginDisplay();
 	}
-	public int UserInsert(UserDto userDto) {
+	public int userInsert(UserDto userDto) {
 		return userDao.userInsert(userDto);
+	}
+	public int userUpdate(UserDto userDto) {
+		return userDao.userUpdate(userDto);
+	}
+	public UserDto userLink(String seq) {
+		return userDao.userLink(seq);
 	}
 	
 }

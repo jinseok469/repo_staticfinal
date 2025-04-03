@@ -3,7 +3,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<div th:replace="~{xdm/include/codeHead :: head}"></div>
+<div th:replace="~{xdm/include/head :: head}"></div>
 <!-- End Sidebar-->
 <main id="main" class="main">
 	<div class="modal fade show" id="cdModal" tabindex="-1"
@@ -237,6 +237,17 @@
 				}
 			});
 		});
+	 let targetUrl = window.location.pathname; // 원하는 URL로 변경
+	 let main = document.querySelector("#codeGroupMain");
+	 let serve = document.querySelector("#codeGroupServe");
+	 let inner = document.querySelector("#codeInner");
+
+	     if ("/codeXdmForm" === targetUrl) {
+	 			main.classList.remove("collapsed");
+	    	 inner.classList.add("active");
+	    	
+	 			 serve.classList.remove("collapse");
+	     }
 </script>
 
 </body>

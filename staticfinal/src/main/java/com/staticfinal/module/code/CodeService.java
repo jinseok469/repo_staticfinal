@@ -35,8 +35,8 @@ public class CodeService {
 	public int codeInsert(CodeDto codeDto) {
 		return codeDao.codeInsert(codeDto);
 	}
-	public int selectCount() {
-		return codeDao.selectCount();
+	public int selectCount(BannerVo vo) {
+		return codeDao.selectCount(vo);
 	}
 	public int codeUelete(CodeDto codeDto) {
 		

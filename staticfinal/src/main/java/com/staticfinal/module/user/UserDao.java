@@ -13,8 +13,10 @@ public interface UserDao {
 	
 	public List<UserDto> userList(BannerVo vo);
 	public UserDto userOne(UserDto userDto);
-	public int selectCount();
+	public int selectCount(BannerVo vo);
 	public UserDto loginOne(UserDto userDto);
 	public UserDto loginDisplay();
 	public int userInsert(UserDto userDto);
+	public int userUpdate(UserDto userDto);
+	public UserDto userLink(String seq);
 }

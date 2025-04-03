@@ -4,7 +4,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-<div th:replace="~{xdm/include/userHead :: head}"></div>
+<div th:replace="~{xdm/include/head :: head}"></div>
 
 
 
@@ -19,60 +19,60 @@
 				<li class="breadcrumb-item active">Default</li>
 			</ol>
 		</nav>
-		<h1 style="height: 50px;">
-			User<span style="font-size: 18px;"> (List)</span>
-		</h1>
+		<h1 style="height: 50px;">유저 관리</h1>
 	</div>
 	<!-- End Page Title -->
 
 	<section class="section">
 		<form class="row g-3 needs-validation" novalidate name="formList"
-			id="formList" method="post" autocomplete="off" >
+			id="formList" method="post" autocomplete="off">
 			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
 				th:value="${vo.rowNumToShow}" />
-			<div class="col-md-2" style="height: 10px;">
+<!-- 			<div class="col-md-2" style="height: 10px;"> -->
 
-				<select class="form-select" id="shDelNy">
-					<option value="">사용 여부</option>
-					<option value="0" th:selected="${vo.shDelNy == 0}">Y</option>
-					<option value="1" th:selected="${vo.shDelNy == 1}">N</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
-			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected disabled value="">Y</option>
-					<option>아무거나</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
+<!-- 				<select class="form-select" id="shDelNy"> -->
+<!-- 					<option value="">사용 여부</option> -->
+<!-- 					<option value="0" th:selected="${vo.shDelNy == 0}">Y</option> -->
+<!-- 					<option value="1" th:selected="${vo.shDelNy == 1}">N</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<select class="form-select" id="" disabled> -->
+<!-- 					<option selected disabled value="">Y</option> -->
+<!-- 					<option>아무거나</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
+				
 			<div class="col-md-2">
 				<select class="form-select " id="shOptionDate" name="shOptionDate"
 					required>
 
 					<option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
 					<option value="1" th:selected="${vo.shOptionDate == 1}">생년월일</option>
-					<!-- 					<option value="1" th:value="${vo.shOptionDate == 1}">등록일</option> -->
-					<!-- 					<option value="2" th:valeu="${vo.shOptionDate == 2}">수정일</option> -->
+					<option value="2" th:selected="${vo.shOptionDate == 2}">등록일</option>
+					<option value="3" th:selected="${vo.shOptionDate == 3}">수정일</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control datepicker "
-					id="shDateStart" name="shDateStart"
-					placeholder="시작일" maxlength="10">
+				<input type="text" class="form-control datepicker " id="shDateStart"
+					name="shDateStart" placeholder="시작일" readonly>
 				<div class="invalid-feedback">시작 날짜를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
 				<input type="text" class="form-control datepicker " id="shDateEnd"
-					name="shDateEnd"
-					placeholder="종료일" maxlength="10">
+					name="shDateEnd" placeholder="종료일" readonly>
 				<div class="invalid-feedback">종료 날짜를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
+				<div class="col-md-2"></div>
 			<div class="col-md-2">
-				<select class="form-select dd" id="shOption" name="shOption" required>
+				<select class="form-select dd" id="shOption" name="shOption"
+					required>
 					<option value="">검색구분</option>
 					<option value="1" th:selected="${vo.shOption == 1}">유저 번호</option>
 					<option value="2" th:selected="${vo.shOption == 2}">유저 이름</option>
@@ -130,17 +130,15 @@
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
-								<th style="text-align: center;">사용</th>
-								<th class="list-sort" style="text-align: center;">유저 번호</th>
+								<th class="list-sort" style="text-align: center;">seq</th>
 								<th class="list-sort" style="text-align: center;">유저 이름</th>
 								<th class="list-sort" style="text-align: center;">성별</th>
 								<th class="list-sort" style="text-align: center;">생년 월일</th>
 								<th class="list-sort" style="text-align: center;">닉네임</th>
 								<th class="list-sort" style="text-align: center;">아이디</th>
-								<th class="list-sort" style="text-align: center;">패스워드</th>
 								<th class="list-sort" style="text-align: center;">이메일</th>
-								<th class="list-sort" style="text-align: center;">우편번호</th>
-								<th class="list-sort" style="text-align: center;">상세주소</th>
+								<th class="list-sort" style="text-align: center;">등록일</th>
+								<th class="list-sort" style="text-align: center;">수정일</th>
 
 							</tr>
 						</thead>
@@ -161,18 +159,16 @@
 									</div>
 								</td>
 								<td th:text="${list.seq}"></td>
-								<td th:text="${list.urDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
-								<td><a th:href="@{/userXdmView(seq=${list.seq})}"
+								<td><a th:href="@{/userXdmForm(seq=${list.seq})}"
 									th:text="${list.name}"></a></td>
 								<td th:text="${@codeService.selectOneCachedCode(list.gender)}"></td>
 								<td th:text="${list.dob}"></td>
 								<td th:text="${list.nickName}"></td>
 								<td th:text="${list.id}"></td>
-								<td th:text="${list.password}"></td>
 								<td th:text="${list.email}"></td>
-								<td th:text="${list.postalCode}"></td>
-								<td th:text="${list.betterAddress}"></td>
+								<td th:text="${list.urReg}"></td>
+								<td th:text="${list.urMof}"></td>
 							</tr>
 						</tbody>
 						<tfoot>
@@ -353,7 +349,17 @@ let form = document.querySelector("form[name=formList]");
 					}
 				});
 			});
-		
+		 let targetUrl = window.location.pathname; // 원하는 URL로 변경
+		 let main = document.querySelector("#userMain");
+		 let serve = document.querySelector("#blogServe");
+		 let inner = document.querySelector("#codyInner");
+
+		     if ("/userXdmList" === targetUrl) {
+		 			main.classList.remove("collapsed");
+// 		    	 inner.classList.add("active");
+		    	
+// 		 			 serve.classList.remove("collapse");
+		     }
 	
 	
 

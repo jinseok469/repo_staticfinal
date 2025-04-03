@@ -13,7 +13,7 @@ public interface BlogDao {
 	public List<BlogDto> blogList(BannerVo vo);
 	public List<BlogDto> betterInfo(BlogDto blogDto);
 	public BlogDto blogOne(BlogDto blogDto);
-	public int selectCount();
+	public int selectCount(BannerVo vo);
 	public List<BlogDto> blogCategoryList(BlogDto blogDto);
 	public int blogUpdate(BlogDto blogDto);
 	public int blogInsert(BlogDto blogDto);

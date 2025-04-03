@@ -19,8 +19,8 @@ public class CodyService {
 	public CodyDto codyOne(CodyDto codyDto) {
 		return codyDao.codyOne(codyDto);
 	}
-	public int selectCount() {
-		return codyDao.selectCount();
+	public int selectCount(BannerVo vo) {
+		return codyDao.selectCount(vo);
 	}
 	public int codyInsert(CodyDto codyDto) {
 		return codyDao.codyInsert(codyDto);

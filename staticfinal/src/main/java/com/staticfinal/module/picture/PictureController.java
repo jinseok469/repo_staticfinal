@@ -20,7 +20,7 @@ public class PictureController {
 	
 	@RequestMapping(value = "/pictureXdmList")
 	public String pictureList(@ModelAttribute("vo")BannerVo vo, Model model){
-		vo.setParamsPaging(pictureService.selectCount());
+		vo.setParamsPaging(pictureService.selectCount(vo));
 		
 		model.addAttribute("list",pictureService.pictureList(vo));
 		

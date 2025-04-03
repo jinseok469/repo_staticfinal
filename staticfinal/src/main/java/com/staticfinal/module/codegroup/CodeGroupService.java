@@ -33,8 +33,8 @@ public class CodeGroupService {
 	public int delete(CodeGroupDto codegroupDto) {
 		return codeGroupDao.delete(codegroupDto);
 	}
-	public int selectOneCount() {
-		return codeGroupDao.selectOneCount();
+	public int selectOneCount(BannerVo vo) {
+		return codeGroupDao.selectOneCount(vo);
 	}
 	
 }

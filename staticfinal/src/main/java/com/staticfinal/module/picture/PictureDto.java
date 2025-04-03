@@ -15,8 +15,23 @@ public class PictureDto {
 	private String nickName;
 	private int ptDelNy;
 	private List<String> seqList;
+	private String bpReg;
+	private String bpMof;
 	
 	
+	
+	public String getBpReg() {
+		return bpReg;
+	}
+	public void setBpReg(String bpReg) {
+		this.bpReg = bpReg;
+	}
+	public String getBpMof() {
+		return bpMof;
+	}
+	public void setBpMof(String bpMof) {
+		this.bpMof = bpMof;
+	}
 	public List<String> getSeqList() {
 		return seqList;
 	}

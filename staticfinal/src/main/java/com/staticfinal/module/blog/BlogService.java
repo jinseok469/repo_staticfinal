@@ -25,8 +25,8 @@ public class BlogService {
 	public BlogDto blogOne(BlogDto blogDto) {
 		return blogDao.blogOne(blogDto);
 	}
-	public int selectCount() {
-		return blogDao.selectCount();
+	public int selectCount(BannerVo vo) {
+		return blogDao.selectCount(vo);
 	}
 	public List<BlogDto> blogCategoryList(BlogDto blogDto){
 		return blogDao.blogCategoryList(blogDto);

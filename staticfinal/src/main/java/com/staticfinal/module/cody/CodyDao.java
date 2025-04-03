@@ -11,7 +11,7 @@ public interface CodyDao {
 
 	public List<CodyDto> codyList(BannerVo vo);
 	public CodyDto codyOne(CodyDto codyDto);
-	public int selectCount();
+	public int selectCount(BannerVo vo);
 	public int codyInsert(CodyDto codyDto);
 	public int codyUpdate(CodyDto codyDto);
 }

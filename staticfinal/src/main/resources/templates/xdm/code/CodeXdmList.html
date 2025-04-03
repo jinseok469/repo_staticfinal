@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<div th:replace="~{xdm/include/codeHead :: head}"></div>
+<div th:replace="~{xdm/include/head :: head}"></div>
 <!-- End Sidebar-->
 <main id="main" class="main">
 	<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
@@ -50,40 +50,42 @@
 				th:value="${vo.rowNumToShow}" /> <input type="hidden"
 				name="seqList">
 				<input type="hidden" name="seq">
-			<div class="col-md-2" style="height: 10px;">
+<!-- 			<div class="col-md-2" style="height: 10px;"> -->
 
-				<select class="form-select" id="shDelNy" name="shDelNy">
-					<option value="">사용 여부</option>
-					<option value="0" th:selected="${vo.shDelNy==0}">Y</option>
-					<option value="1" th:selected="${vo.shDelNy==1}">N</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
-			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected disabled value="">Y</option>
-					<option>아무거나</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
+<!-- 				<select class="form-select" id="shDelNy" name="shDelNy"> -->
+<!-- 					<option value="">사용 여부</option> -->
+<!-- 					<option value="0" th:selected="${vo.shDelNy==0}">Y</option> -->
+<!-- 					<option value="1" th:selected="${vo.shDelNy==1}">N</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<select class="form-select" id="" disabled> -->
+<!-- 					<option selected disabled value="">Y</option> -->
+<!-- 					<option>아무거나</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
 			<div class="col-md-2">
 				<select class="form-select dd" id="shOptionDate" name="shOptionDate" >
-					<option   value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+					<option   value="" >날짜</option>
 					<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
 					<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control datepicker ss" id="shDateStart"
-				name="shDateStart"	 placeholder="시작일">
+				<input type="text" class="form-control datepicker " id="shDateStart"
+				name="shDateStart"	 placeholder="시작일" readonly>
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control datepicker ss" id="shDateEnd"
-				name="shDateEnd"	placeholder="종료일">
+				<input type="text" class="form-control datepicker " id="shDateEnd"
+				name="shDateEnd"	placeholder="종료일" readonly>
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
 				<select class="form-select" id="shOption" name="shOption" required>
@@ -145,7 +147,7 @@
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
-								<th style="text-align: center;">사용</th>
+<!-- 								<th style="text-align: center;">사용</th> -->
 								<th class="list-sort">코드그룹 코드</th>
 								<th class="list-sort">코드그룹 이름</th>
 								<th class="list-sort">코드</th>
@@ -174,7 +176,7 @@
 								</td>
 								<td
 									th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
-								<td th:text="${list.cgDelNy == 0} ? Y : N"></td>
+<!-- 								<td th:text="${list.cgDelNy == 0} ? Y : N"></td> -->
 								<td th:text="${list.codeGroup_seq}"></td>
 								<td th:text="${list.cgName}"></td>
 								<td th:text="${list.seq}"></td>
@@ -436,6 +438,17 @@
 						}
 					});
 				});
+			 let targetUrl = window.location.pathname; // 원하는 URL로 변경
+			 let main = document.querySelector("#codeGroupMain");
+			 let serve = document.querySelector("#codeGroupServe");
+			 let inner = document.querySelector("#codeInner");
+
+			     if ("/codeXdmList" === targetUrl) {
+			 			main.classList.remove("collapsed");
+			    	 inner.classList.add("active");
+			    	
+			 			 serve.classList.remove("collapse");
+			     }
 	</script>
 </body>
 

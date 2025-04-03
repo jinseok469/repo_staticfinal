@@ -23,6 +23,22 @@ public class BlogDto {
 	private String nickName;
 	private String bcSeq;
 	private String betterBlog_seq;
+	private String bgReg;
+	private String bgMof;
+	
+	
+	public String getBgReg() {
+		return bgReg;
+	}
+	public void setBgReg(String bgReg) {
+		this.bgReg = bgReg;
+	}
+	public String getBgMof() {
+		return bgMof;
+	}
+	public void setBgMof(String bgMof) {
+		this.bgMof = bgMof;
+	}
 	public int getBgDelNy() {
 		return bgDelNy;
 	}

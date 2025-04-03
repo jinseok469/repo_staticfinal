@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<div th:replace="~{xdm/include/codyHead :: head}"></div>
+<div th:replace="~{xdm/include/head :: head}"></div>
 <!-- End Sidebar-->
   <main id="main" class="main">
 
@@ -13,7 +13,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>cody</h1>
+      <h1>블로그 별 코디 관리</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -147,6 +147,17 @@
 				}
 			});
 		});
+	 let targetUrl = window.location.pathname; // 원하는 URL로 변경
+	 let main = document.querySelector("#blogMain");
+	 let serve = document.querySelector("#blogServe");
+	 let inner = document.querySelector("#codyInner");
+
+	     if ("/codyXdmForm" === targetUrl) {
+	 			main.classList.remove("collapsed");
+	    	 inner.classList.add("active");
+	    	
+	 			 serve.classList.remove("collapse");
+	     }
 // 	document.getElementById("blog").onclick = function(){
 // 		document.getElementById("codeGroupForm").submit();
 // 	}

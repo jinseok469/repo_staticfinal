@@ -14,7 +14,7 @@ public interface PictureDao {
 	
 	public List<PictureDto> pictureList (BannerVo vo);
 	public PictureDto pictureOne(PictureDto pictureDto);
-	public int selectCount();
+	public int selectCount(BannerVo vo);
 	public List<PictureDto> pictureCategoryList();
 	public int pictureInsert(PictureDto pictureDto);
 	public int pictureUpdate(PictureDto pictureDto);

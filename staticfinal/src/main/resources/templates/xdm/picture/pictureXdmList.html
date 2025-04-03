@@ -4,7 +4,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 
-<div th:replace="~{xdm/include/pictureHead :: head}"></div>
+<div th:replace="~{xdm/include/head :: head}"></div>
 
 
 
@@ -19,7 +19,7 @@
 			</ol>
 		</nav>
 		<h1 style="height: 50px;">
-			사진<span style="font-size: 18px;"> (List)</span>
+			날씨 사진 블로그 관리
 		</h1>
 	</div>
 	<!-- End Page Title -->
@@ -31,39 +31,41 @@
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
 				th:value="${vo.rowNumToShow}" /> <input type="hidden" name="seq">
 			<input type="hidden" name="seqList">
-			<div class="col-md-2" style="height: 10px;">
+<!-- 			<div class="col-md-2" style="height: 10px;"> -->
 
-				<select class="form-select" id="shDelNy" name="shDelNy">
-					<option value="0" th:selected="${vo.shDelNy == 0}">Y</option>
-					<option value="1" th:selected="${vo.shDelNy == 1}">N</option>
+<!-- 				<select class="form-select" id="shDelNy" name="shDelNy"> -->
+<!-- 					<option value="0" th:selected="${vo.shDelNy == 0}">Y</option> -->
+<!-- 					<option value="1" th:selected="${vo.shDelNy == 1}">N</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"> -->
+<!-- 				<select class="form-select" id="" disabled> -->
+<!-- 					<option selected value="">Y</option> -->
+<!-- 					<option>아무거나</option> -->
+<!-- 				</select> -->
+<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+<!-- 			</div> -->
+			<div class="col-md-2">
+				<select class="form-select dd" id="shOptionDate" name="shOptionDate" >
+					<option   value="">날짜</option>
+					<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+					<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
 				</select>
 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
 			</div>
-			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected value="">Y</option>
-					<option>아무거나</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
-			<div class="col-md-2">
-				<select class="form-select" id="" disabled>
-					<option selected value="">날짜</option>
-					<option>등록일</option>
-					<option>수정일</option>
-				</select>
-				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-			</div>
-			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-01-05" disabled>
+		<div class="col-md-2">
+				<input type="text" class="form-control datepicker " id="shDateStart"
+				name="shDateStart"	 placeholder="시작일" readonly>
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control" id="validationCustom03"
-					placeholder="2025-02-04" disabled>
+				<input type="text" class="form-control datepicker " id="shDateEnd"
+				name="shDateEnd"	placeholder="종료일" readonly>
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
 				<select class="form-select" id="shOption" name="shOption">
@@ -120,13 +122,12 @@
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
-								<th style="text-align: center;">사용</th>
-								<th class="list-sort" style="text-align: center;">블로그 번호</th>
-								<th class="list-sort" style="text-align: center;">유저 번호</th>
+								<th class="list-sort" style="text-align: center;">seq</th>
 								<th class="list-sort" style="text-align: center;">유저 이름</th>
-								<th class="list-sort" style="text-align: center;">유저 닉네임</th>
 								<th class="list-sort" style="text-align: center;">사진 카테고리</th>
 								<th class="list-sort" style="text-align: center;">블로그 제목</th>
+								<th class="list-sort" style="text-align: center;">등록일</th>
+								<th class="list-sort" style="text-align: center;">수정일</th>
 
 
 
@@ -150,16 +151,14 @@
 								</td>
 								<td
 									th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
-								<td th:text="${list.ptDelNy == 0}? Y:N"></td>
 								<td th:text="${list.seq}"></td>
-								<td th:text="${list.user_seq}"></td>
 								<td th:text="${list.name}"></td>
-								<td th:text="${list.nickName}"></td>
 								<td th:text="${list.categoryName}"></td>
 								<td><a href="javascript:void(0);"
 									th:attr="onclick=|goForm('${list.seq}')|"
 									th:text="${list.title}"></a></td>
-
+								<td th:text="${list.bpReg}"></td>
+								<td th:text="${list.bpMof}"></td>
 
 							</tr>
 
@@ -368,6 +367,17 @@
 				}
 			});
 		});
+	 let targetUrl = window.location.pathname; // 원하는 URL로 변경
+	 let main = document.querySelector("#blogMain");
+	 let serve = document.querySelector("#blogServe");
+	 let inner = document.querySelector("#pictureInner");
+
+	     if ("/pictureXdmList" === targetUrl) {
+	 			main.classList.remove("collapsed");
+	    	 inner.classList.add("active");
+	    	
+	 			 serve.classList.remove("collapse");
+	     }
 </script>
 </body>
 

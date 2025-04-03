@@ -14,17 +14,16 @@
 		where 1=1
 <!-- 		      <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy = #{shUseNy}</if>  -->
         <if test="shDelNy != null and !shDelNy.equals('')">AND a.bgDelNy = #{shDelNy}</if>
-<!-- 				
+				
 				<choose>
-					<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-					<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-				</choose>
- -->				
+					<when test="shOptionDate == 1">AND a.bgReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+					<when test="shOptionDate == 2">AND a.bgMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+ 				</choose>
+ 				
         <choose>
             <when test="shOption == 1">AND a.seq = #{shValue}</when>
             <when test="shOption == 2">AND a.title LIKE CONCAT('%',#{shValue},'%')</when>
             <when test="shOption == 3">AND b.name LIKE CONCAT('%',#{shValue},'%')</when>
-            <when test="shOption == 4">AND b.nickName LIKE CONCAT('%',#{shValue},'%')</when>
         </choose>
 	</sql>
 	<select id="selectCount" resultType="Integer">
@@ -41,7 +40,9 @@
 		a.blogCategory_seq,
 		c.categoryName,
 		a.buied,
-		a.title
+		a.title,
+		a.bgReg,
+		a.bgMof
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 
@@ -106,7 +107,8 @@
 	blogCategory_seq = #{blogCategory_seq},
 	user_seq = #{user_seq},
 	buied = #{buied},
-	title = #{title}
+	title = #{title},
+	bgMof = now()
 	where 1=1 
 	and seq = #{seq}
 	</update>
@@ -123,7 +125,8 @@
 	user_seq ,
 	buied ,
 	title ,
-	bgDelNy
+	bgDelNy,
+	bgReg
 	)values
 	(
 	#{blogIntroduction},
@@ -135,7 +138,8 @@
 	#{user_seq},
 	#{buied},
 	#{title},
-	#{bgDelNy}
+	#{bgDelNy},
+	now()
 	)
 	</insert>
 	<delete id="bgUelete">

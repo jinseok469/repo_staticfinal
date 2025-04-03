@@ -71,14 +71,14 @@
                       <label for="yourUsername" class="form-label">ID</label>
                       <div class="input-group has-validation">
                         
-                        <input type="text" name="userId" class="form-control" id="userId" th:value="${login.id}"  onkeyup="enterkey(event)" required>
+                        <input type="text" name="userId" class="form-control ss" id="userId" th:value="${login.id}"  onkeyup="enterkey(event)" required>
                         <div class="invalid-feedback">항목을 확인 해주세요</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="userPassword" class="form-control" id="userPassword" th:value="${login.password}"  onkeyup="enterkey(event)" required>
+                      <input type="password" name="userPassword" class="form-control ss" id="userPassword" th:value="${login.password}"  onkeyup="enterkey(event)" required>
                       <div class="invalid-feedback">항목을 확인 해주세요</div>
                     </div>
 
@@ -246,6 +246,21 @@ function btnClick(){
 		  			codeName.classList.remove("is-invalid");
 		  		}
 		  	}
+			window.onload = function() {
+				let input = document.querySelectorAll(".ss");
+				for (let i = 0; i < input.length; i++) {
+					if (input[i].value.trim() == null
+							|| input[i].value.trim() == ""
+							|| input[i].value.includes(" ")
+							|| /[^a-zA-Z0-9가-힣]/.test(input[i].value)) {
+						input[i].classList.add("is-invalid");
+						input[i].classList.remove("is-valid");
+					} else {
+						input[i].classList.add("is-valid");
+						input[i].classList.remove("is-invalid");
+					}
+				}
+			}
   
  
   </script>

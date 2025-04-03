@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <head>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
@@ -35,7 +35,17 @@
 	$(document).ready(function() {
 		$(".datepicker").datetimepicker({
 			timepicker : false,
-			format : "Y-m-d"
+			format : "Y-m-d",
+			onChangeDateTime:function(ss,$input){
+				let input = $input.val();
+				if(!input){
+					$input.addClass("is-invalid");
+					$input.removeClass("is-valid");
+				}else{
+				$input.addClass("is-valid");
+				$input.removeClass("is-invalid");
+				}
+			}
 		});
 	});
 </script>
@@ -47,12 +57,12 @@
 		<nav class="navbar navbar-light py-2">
 			<div
 				class="container justify-content-center justify-content-lg-between">
-				<a class="navbar-brand" href="../index.html"> <img
+				<a class="navbar-brand" href="/indexUsrView"> <img
 					src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg"
 					alt="" class="d-inline-block align-text-top" style="height: 20px;"
 					id="sign-up-title"> <label for="sign-up-title"
 					style="color: gray; font-size: x-large;">내일은 맑음</label>
-				</a> <span class="navbar-text"> 이미 회원이신가요? <a style="color:blue;"
+				</a> <span class="navbar-text"> 이미 회원이신가요? <a style="color:green;"
 					href="/signinUsrForm">로그인 하기</a>
 				</span>
 			</div>
@@ -149,7 +159,7 @@
 									<div class="password-field position-relative">
 										<label for="password" class="form-label visually-hidden">Password</label>
 										<div class="password-field position-relative">
-											<input type="password" class="form-control fakePassword ss"
+											<input type="password" class="form-control fakePassword "
 												id="password" name="password"
 												placeholder="비밀번호 (영문과 특수문자조합 10자리이상)" required /> <span><i
 												class="bi bi-eye-slash passwordToggler"></i></span>
@@ -163,7 +173,7 @@
 										<div class="password-field position-relative">
 											<input type="password" class="form-control fakePassword "
 												id="passwordck" name="passwordck"
-												placeholder="비밀번호 확인 (영문과 특수문자조합 10자리이상)" required /> <span><i
+												placeholder="비밀번호 확인 (영문과 특수문자조합 10자리이상)" onkeyup="enterkey()" required /> <span><i
 												class="bi bi-eye-slash passwordToggler"></i></span>
 											<div class="invalid-feedback">입력하신 비밀번호와 일치하지 않습니다.</div>
 										</div>
@@ -171,7 +181,7 @@
 								</div>
 								<!-- btn -->
 								<div class="col-12 d-grid">
-									<button type="button" id="subtn" onclick="subtnClick()"
+									<button type="button" id="subtn" onclick="subtnClick()" 
 										class="btn btn-primary">회원가입</button>
 								</div>
 
@@ -518,20 +528,35 @@
 					name.classList.add("is-valid");
 					name.classList.remove("is-invalid");
 				}
-				if (passwordck.value.trim() != null && passwordck.value == password.value  
-						|| passwordck.value.trim() != "" && passwordck.value == password.value
-						|| passwordck.value.includes(" ") && passwordck.value == password.value) {
+				if (password.value.trim() == null && passwordck.value == password.value  
+						|| password.value.trim() == "" && passwordck.value == password.value
+						|| password.value.includes(" ") && passwordck.value == password.value
+						|| password.value != passwordck.value) {
+					password.classList.add("is-invalid");
+					password.classList.remove("is-valid");
+					document.getElementById("modalHead").textContent = "경고";
+					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+					flag = true;
+			}else {
+				password.classList.add("is-valid");
+				password.classList.remove("is-invalid");
+				document.getElementById("completeHead").textContent = "안내";
+				document.getElementById("completeText").textContent = "회원가입을 완료했습니다";
+			}
+				if (passwordck.value.trim() == null && passwordck.value == password.value  
+						|| passwordck.value.trim() == "" && passwordck.value == password.value
+						|| passwordck.value.includes(" ") && passwordck.value == password.value
+						|| passwordck.value != password.value) {
+					passwordck.classList.add("is-invalid");
+					passwordck.classList.remove("is-valid");
+					document.getElementById("modalHead").textContent = "경고";
+					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+					flag = true;
+			}else {
 				passwordck.classList.add("is-valid");
 				passwordck.classList.remove("is-invalid");
 				document.getElementById("completeHead").textContent = "안내";
 				document.getElementById("completeText").textContent = "회원가입을 완료했습니다";
-			}else {
-				passwordck.classList.add("is-invalid");
-				passwordck.classList.remove("is-valid");
-				document.getElementById("modalHead").textContent = "경고";
-				document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
-				flag = true;
-				
 			}
 		
 		
@@ -543,6 +568,11 @@
 					$("#completeModal").modal("show");
 				}
 
+		}
+		function enterkey(){
+			if(event.key == "Enter"){
+				subtnClick();
+			}
 		}
 		
 		
@@ -576,6 +606,17 @@
 			}
 		}
 		dob.oninput = function() {
+			let codeName = this;
+			if (codeName.value.trim() == null || codeName.value.trim() == ""
+					|| codeName.value.includes(" ")) {
+				codeName.classList.add("is-invalid");
+				codeName.classList.remove("is-valid");
+			} else {
+				codeName.classList.add("is-valid");
+				codeName.classList.remove("is-invalid");
+			}
+		}
+		password.oninput = function() {
 			let codeName = this;
 			if (codeName.value.trim() == null || codeName.value.trim() == ""
 					|| codeName.value.includes(" ")) {

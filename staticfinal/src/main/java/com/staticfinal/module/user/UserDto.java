@@ -12,8 +12,23 @@ public class UserDto {
 	private int urDelNy;
 	private String cdName;
 	private String lastSeq;
+	private String urReg;
+	private String urMof;
 	
 	
+	
+	public String getUrReg() {
+		return urReg;
+	}
+	public void setUrReg(String urReg) {
+		this.urReg = urReg;
+	}
+	public String getUrMof() {
+		return urMof;
+	}
+	public void setUrMof(String urMof) {
+		this.urMof = urMof;
+	}
 	public String getLastSeq() {
 		return lastSeq;
 	}
@@ -63,14 +78,12 @@ public class UserDto {
 		this.nickName = nickName;
 	}
 	public String getId() {
-		System.out.println(id);
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
 	public String getPassword() {
-		System.out.println(password);
 		return password;
 	}
 	public void setPassword(String password) {

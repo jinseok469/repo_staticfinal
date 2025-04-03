@@ -13,7 +13,7 @@
 				<li class="breadcrumb-item active">Default</li>
 			</ol>
 		</nav>
-		<h1>날씨 사진 블로그 관리</h1>
+		<h1>유저 관리</h1>
 	</div>
 	<!-- End Page Title -->
 
@@ -30,79 +30,60 @@
 							action="" method="post">
 							<input type="hidden" name="seq" th:value="${item?.seq}">
 							<div class="col-md-3" style="height: 100px;">
-								<label for="seq" class="form-label">블로그 번호 <sup>*</sup></label>
+								<label for="seq" class="form-label">유저 번호 <sup>*</sup></label>
 								<input type="text" class="form-control" id="seq" name="seq"
-									th:value="${item?.seq}" required disabled>
+									th:value="${item?.seq}" required readonly>
 								<div class="valid-feedback">Looks good!</div>
 							</div>
 							<div class="col-md-3">
-								<label for="select" class="form-label">사진 카테고리</label> <select
-									class="form-select ss" name="pictureCategory_seq">
-									<option value="">선택 하세요</option>
-									<option th:each="list:${ptList}"
-										th:text="${list?.categoryName}" th:value="${list?.seq}"
-										th:selected="${list?.seq == item?.pictureCategory_seq}"></option>
-								</select>
+								<label for="select" class="form-label">유저 이름</label> 
+								<input class="form-control" id="name" name="name" th:value="${item?.name}" readonly>
 								<div class="invalid-feedback"></div>
 							</div>
 							<div class="col-md-3" style="height: 100px;">
-								<label for="validationCustom08" class="form-label">사진 제목<sup>*</sup></label>
-								<input type="text" class="form-control ss" id="title"
-									name="title" th:value="${item?.title}" required>
+								<label for="validationCustom08" class="form-label">성별<sup>*</sup></label>
+								<input type="text" class="form-control ss" id="gender"
+									name="gender" th:value="${item?.gender == 1} ? '남자':'여자'" required readonly>
 								<div class="invalid-feedback"></div>
 							</div>
 
 							<div class="col-md-3" style="height: 100px;">
-								<label for="validationCustom02" class="form-label">유저 번호</label>
+								<label for="validationCustom02" class="form-label">생년 월일</label>
 								<input type="text" class="form-control ss" id="user_seq" name="user_seq"
-									th:value="${item?.user_seq}" required>
+									th:value="${item?.dob}" required readonly>
 								<div class="valid-feedback">코드를 입력해주세요!</div>
 							</div>
 							<div class="col-md-3">
-								<label for="cgName" class="form-label">유저 이름<sup>*</sup></label>
+								<label for="cgName" class="form-label">닉네임<sup>*</sup></label>
 								<input type="text" class="form-control" id="cgName"
-									name="cgName" th:value="${item?.name}" required disabled>
+									name="cgName" th:value="${item?.nickName}" required readonly>
 								<div class="invalid-feedback">코드를 입력해주세요.</div>
 							</div>
 							<div class="col-md-3">
-								<label for="cgnickName" class="form-label">유저 닉네임<sup>*</sup></label>
+								<label for="cgnickName" class="form-label">유저 아이디<sup>*</sup></label>
 								<input type="text" class="form-control" id="cgnickName"
-									name="cgnickName" th:value="${item?.nickName}" required
-									disabled>
+									name="cgnickName" th:value="${item?.id}" required
+									readonly>
 								<div class="invalid-feedback">코드를 입력해주세요.</div>
 							</div>
 
 
 							<div class="col-md-3" style="height: 100px;">
-								<label for="validationCustom21" class="form-label">사용
-									카메라</label> <input type="text" class="form-control ss" id="useCamera"
-									name="useCamera" th:value="${item?.useCamera}" required>
+								<label for="validationCustom21" class="form-label">
+								이메일</label> <input type="text" class="form-control ss" id="useCamera"
+									name="useCamera" th:value="${item?.email}" required readonly>
 								<div class="invalid-feedback">Please provide a valid zip.
 								</div>
 							</div>
-							<div class="col-md-3">
-								<label for="validationCustom22" class="form-label">촬영 장소</label>
-								<input type="text" class="form-control ss" id="photoPlace"
-									name="photoPlace" th:value="${item?.photoPlace}" required>
-								<div class="invalid-feedback">
-								</div>
-							</div>
-
-							<div class="col-md-3" style="height: 100px;">
-								<label for="validationCustom25" class="form-label">블로그
-									사용여부<sup>*</sup>
-								</label> <input class="form-control" id="ptDelNy"
-									th:value="${item?.ptDelNy == 0}? Y" required disabled>
+							
 								<!-- <option selected disabled value="">0</option>
                     <option>아무거나</option>
                   </select> -->
-								<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div>
-							</div>
-							<div class="col-12" style="height: 100px;">
-								<label for="validationCustom27" class="form-label">사진 설명</label>
+							<div class="col-md-3" style="height: 100px;">
+								<label for="validationCustom27" class="form-label">유저 탈퇴 여부</label>
 								<input class="form-control ss" id="photoIntroduce"
-									name="photoIntroduce" th:value="${item?.photoIntroduce}"
-									required>
+									name="photoIntroduce" th:value="${item?.urDelNy == 0} ? 'N':''"
+									required readonly>
 							</div>
 							<div class="col-md-6"></div>
 							<div class="col-md-6"></div>
@@ -111,10 +92,7 @@
 									class="bi bi-blockquote-right"></i></a>
 							</div>
 							<div class="col-md-6">
-								<div style="display: flex; justify-content: end;">
-									<a class="btn btn-primary" id="ptBtn" onclick="dataSubmit()"><i
-										class="bi bi-server"></i></a>
-								</div>
+								
 							</div>
 							<div class="modal fade" id="ptModal" tabindex="-1"
 								aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -285,18 +263,18 @@
 					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 				}
 			});
-		});
+		}); 
 	 let targetUrl = window.location.pathname; // 원하는 URL로 변경
-	 let main = document.querySelector("#blogMain");
-	 let serve = document.querySelector("#blogServe");
-	 let inner = document.querySelector("#pictureInner");
+		 let main = document.querySelector("#userMain");
+		 let serve = document.querySelector("#blogServe");
+		 let inner = document.querySelector("#codyInner");
 
-	     if ("/pictureXdmView" === targetUrl) {
-	 			main.classList.remove("collapsed");
-	    	 inner.classList.add("active");
-	    	
-	 			 serve.classList.remove("collapse");
-	     }
+		     if ("/userXdmForm" === targetUrl) {
+		 			main.classList.remove("collapsed");
+// 		    	 inner.classList.add("active");
+		    	
+// 		 			 serve.classList.remove("collapse");
+		     }
 </script>
 </body>
 

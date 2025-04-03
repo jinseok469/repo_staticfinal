@@ -24,27 +24,22 @@ public class UserController {
 
 	@RequestMapping(value = "/userXdmList")
 	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo) {
-		vo.setParamsPaging(userService.selectCount());
-
+		vo.setParamsPaging(userService.selectCount(vo));
+		
 		model.addAttribute("list", userService.userList(vo));
-		System.out.println(vo.getShDateStart());
-		System.out.println(vo.getShDateEnd());
 		
 //		model.addAttribute("vo",vo);
 
 		return "xdm/user/userXdmList";
 	}
 
-	@RequestMapping(value = "/userXdmForm")
-	public String userXdmForm(UserDto userDto) {
-		return "xdm/user/userXdmForm";
-	}
+	
 
-	@RequestMapping(value = "/userXdmView")
+	@RequestMapping(value = "/userXdmForm")
 	public String userXdmView(Model model, UserDto userDto) {
 		model.addAttribute("item", userService.userOne(userDto));
 
-		return "xdm/user/userXdmView";
+		return "xdm/user/userXdmForm";
 	}
 	@RequestMapping(value = "/signupUsrForm")
 	public String userUsrForm() {
@@ -82,28 +77,6 @@ public class UserController {
 		}
 		return returnMap;
 	}
-	@ResponseBody
-	@RequestMapping(value = "/signinUsrProc")
-	public Map<String, Object> signinUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
-		UserDto value = userService.loginOne(userDto);
-		
-		if (value != null) {
-			returnMap.put("rt", "success");
-//			/		httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
-//			UserDto rtDto = userService.loginOne(userDto.getId(), userDto.getPassword());
-			httpSession.setAttribute("sessSeqUsr", value.getSeq());
-			httpSession.setAttribute("sessIdUsr", value.getId());
-			httpSession.setAttribute("sessNameUsr", value.getName());
-		} else {
-			
-			returnMap.put("rt", "fail");
-		}
-		return returnMap;
-	}
-	
-	
-	
 	
 	@ResponseBody
 	@RequestMapping(value = "/signoutXdmProc")
@@ -122,14 +95,60 @@ public class UserController {
 		return returnMap;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/signinUsrProc")
+	public Map<String, Object> signinUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		UserDto value = userService.loginOne(userDto);
+		
+		if (value != null) {
+			returnMap.put("rt", "success");
+//			/		httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
+//			UserDto rtDto = userService.loginOne(userDto.getId(), userDto.getPassword());
+			httpSession.setAttribute("sessSeqUsr", value.getSeq());
+			httpSession.setAttribute("sessIdUsr", value.getId());
+			httpSession.setAttribute("sessNameUsr", value.getName());
+			
+		} else {
+			
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/signoutUsrProc")
+	public Map<String, Object> signoutUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		UserDto value = userService.loginOne(userDto);
+		if (value == null) {
+			httpSession.setAttribute("sessSeqUsr", null);
+			httpSession.setAttribute("sessIdUsr", null);
+			httpSession.setAttribute("sessNameUsr", null);
+			returnMap.put("rt", "success");
+		} else {
+			
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
+	
 	@RequestMapping(value = "/userUsrInst")
 	public String userUsrInst(UserDto userDto) {
-		userService.UserInsert(userDto);
-		return "redirect:/userXdmList";
+		userService.userInsert(userDto);
+		return "redirect:/signinUsrForm";
 	}
 	@RequestMapping(value = "/userUsrInfo")
-	public String userUsrInfo() {
-		
+	public String userUsrInfo(Model model, UserDto userDto, HttpSession httpSession) {
+		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("item" , userService.userOne(userDto));
 		return "xdm/user/userUsrInfo";
+	}
+	@RequestMapping(value = "/userUsrUpdt")
+	public String userUsrUpdt(UserDto userDto, HttpSession httpSession) {
+		userService.userUpdate(userDto);
+		httpSession.setAttribute("sessSeqUsr", userDto.getSeq());
+		return "redirect:/userUsrInfo";
 	}
 }

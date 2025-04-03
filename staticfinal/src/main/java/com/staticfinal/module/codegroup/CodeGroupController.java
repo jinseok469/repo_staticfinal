@@ -32,7 +32,7 @@ public class CodeGroupController {
 //		vo.setRowNumToShow(perPage);
 //	    vo.setThisPage(page);
 
-		vo.setParamsPaging(codeGroupService.selectOneCount());
+		vo.setParamsPaging(codeGroupService.selectOneCount(vo));
 		
 		
 		model.addAttribute("list",codeGroupService.selectList(vo));
