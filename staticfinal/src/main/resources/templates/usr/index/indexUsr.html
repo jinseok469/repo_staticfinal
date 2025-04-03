@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<div th:replace="~{xdm/include/indexUsrHead :: head}"></div>
+<div th:replace="~{usr/include/indexUsrHead :: head}"></div>
 	<main>
 		<section class="mt-8">
 			<div class="container">
@@ -552,9 +552,13 @@
 	<script type="text/javascript" th:inline="javascript">
 	let loginf = document.getElementById("loginf");
 	let logins = document.getElementById("logins");
+	let wish = document.getElementById("wish");
+	let cart = document.getElementById("cart");
 	let form = document.getElementById("formList");
 	let sessionSeq = [[${session.sessSeqUsr}]];
 	if(!sessionSeq){
+		wish.style.display="none";
+		cart.style.display="none";
 		logins.style.display = "none";
 	}else{
 		loginf.style.display = "none";

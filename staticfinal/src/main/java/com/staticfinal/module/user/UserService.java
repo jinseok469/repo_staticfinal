@@ -39,5 +39,8 @@ public class UserService {
 	public UserDto userLink(String seq) {
 		return userDao.userLink(seq);
 	}
+	public Integer idDistinct(UserDto userDto) {
+		return userDao.idDistinct(userDto);
+	}
 	
 }

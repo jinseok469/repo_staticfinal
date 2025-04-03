@@ -32,7 +32,7 @@ public class IndexController {
 	public String indexUsrView() {
 		
 		
-		return "xdm/indexUsr";
+		return "usr/index/indexUsr";
 	}
 
 }

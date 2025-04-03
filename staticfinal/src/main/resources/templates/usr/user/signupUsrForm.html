@@ -93,15 +93,16 @@
 						</div>
 						<!-- form -->
 						<form class="needs-validation" novalidate id="suForm">
-							<input type="hidden" name="gender" default="1">
+							<input type="hidden" name="gender" >
 							<div class="row g-3">
 								<!-- col -->
 								<div class="col-8">
 									<!-- input -->
 									<label for="formSignupfname" class="form-label visually-hidden">First
 										Name</label> <input type="text" class="form-control "
-										id="name" name="name" placeholder="이름" required />
-									<div class="invalid-feedback">이름을 입력해주세요</div>
+										id="name" name="name" placeholder="이름" required autocomplete="off"/>
+									<div class="invalid-feedback" id="nameInvalid">이름을 입력해주세요</div>
+									<div class="valid-feedback" id="nameValid">이름을 입력해주세요</div>
 								</div>
 								<div class="col-2">
 									<input type="radio" class="btn-check" id="boy" name="team"
@@ -117,12 +118,14 @@
 										Name</label> <input type="text" class="form-control datepicker"
 										id="dob" name="dob" placeholder="생년월일 8자리"
 										readonly required />
-									<div class="invalid-feedback">생년월일 필수정보 입니다</div>
+									<div class="invalid-feedback" id="dobInvalid"></div>
+									<div class="valid-feedback" id="dobValid"></div>
 								</div>
 								<div class="col-8">
 									<input type="text" class="form-control ss" name="postalCode" maxlength="5"
-										placeholder="우편번호" required>
+										placeholder="우편번호" required autocomplete="off"/>
 									<div class="invalid-feedback">우편번호를 입력해주세요</div>
+									<div class="valid-feedback">good!</div>
 								</div>
 
 								<div class="col-4">
@@ -131,29 +134,35 @@
 								</div>
 								<div class="col-12">
 									<input type="text" class="form-control ss" name="betterAddress"
-										placeholder="상세주소">
+										placeholder="상세주소" autocomplete="off">
+										<div class="invalid-feedback">주소를 입력해주세요</div>
+									<div class="valid-feedback">good!</div>
 								</div>
 
 								<div class="col-12">
 									<!-- input -->
 									<label for="email" class="form-label visually-hidden">Email</label>
 									<input type="text" class="form-control" id="email"
-										name="email" placeholder="email" required />
-									<div class="invalid-feedback">이메일을 입력해주세요</div>
+										name="email" placeholder="email" required autocomplete="off"/>
+									<div class="invalid-feedback" id="emailInvalid"></div>
+									<div class="valid-feedback" id="emailValid"></div>
 								</div>
 								<div class="col-12">
 									<!-- input -->
 									<label for="nickname" class="form-label visually-hidden">Email</label>
-									<input type="text" class="form-control ss" id="nickname"
-										name="nickName" placeholder="닉네임" required />
-									<div class="invalid-feedback">사용하실 닉네임을 입력해주세요</div>
+									<input type="text" class="form-control " id="nickName"
+										name="nickName" placeholder="닉네임" required autocomplete="off"/>
+									<div class="invalid-feedback" id="nickNameInvalid"></div>
+									<div class="valid-feedback" id="nickNameValid"></div>
 								</div>
 								<div class="col-12">
 									<!-- input -->
-									<label for="formSignupEmail" class="form-label visually-hidden">ID</label>
-									<input type="email" class="form-control ss"
-										id="formSignupEmail" name="id" placeholder="아이디" required />
-									<div class="invalid-feedback">사용하실 아이디를 입력해주세요</div>
+									<label for="userId" class="form-label visually-hidden">ID</label>
+									<input type="email" class="form-control "
+										id="userId" name="id" placeholder="아이디" required autocomplete="off"/>
+									<div class="invalid-feedback" id=invalid></div>
+									<div class="valid-feedback" id=valid></div>
+									
 								</div>
 								<div class="col-12">
 									<div class="password-field position-relative">
@@ -163,7 +172,8 @@
 												id="password" name="password"
 												placeholder="비밀번호 (영문과 특수문자조합 10자리이상)" required /> <span><i
 												class="bi bi-eye-slash passwordToggler"></i></span>
-											<div class="invalid-feedback">사용하실 비밀번호를 입력해주세요</div>
+											<div class="invalid-feedback" id="passwordInvalid"></div>
+											<div class="valid-feedback" id="passwordValid"></div>
 										</div>
 									</div>
 								</div>
@@ -175,7 +185,8 @@
 												id="passwordck" name="passwordck"
 												placeholder="비밀번호 확인 (영문과 특수문자조합 10자리이상)" onkeyup="enterkey()" required /> <span><i
 												class="bi bi-eye-slash passwordToggler"></i></span>
-											<div class="invalid-feedback">입력하신 비밀번호와 일치하지 않습니다.</div>
+											<div class="invalid-feedback" id="passwordckInvalid"></div>
+											<div class="valid-feedback" id="passwordckValid"></div>
 										</div>
 									</div>
 								</div>
@@ -450,12 +461,18 @@
 		let subtn = document.querySelector("button[id=subtn]");
 		let password = document.querySelector("input[name=password]");
 		let passwordck = document.querySelector("input[name=passwordck]");
+		let id = document.querySelector("input[name=id]");
 		let input = document.getElementsByClassName("ss");
 		let dob = document.querySelector("input[name=dob]");
 		let email = document.querySelector("input[name=email]");
 		let form = document.getElementById("suForm");
 		let name = document.getElementById("name");
+		let valid = document.getElementById("valid");
+		let invalid = document.getElementById("invalid");
+		let nickName = document.getElementById("nickName");
 		const emailRegex = /^(?![a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$).+$/;
+		
+		
 
 		boy.onclick = function() {
 			gender.value = 1;
@@ -498,6 +515,7 @@
 					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
 					dob.classList.add("is-invalid");
 					dob.classList.remove("is-valid");
+					document.getElementById("dobInvalid").textContent = "생년월일 필수 정보입니다!";
 					flag = true;
 				} else {
 					dob.classList.add("is-valid");
@@ -511,6 +529,7 @@
 					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
 					email.classList.add("is-invalid");
 					email.classList.remove("is-valid");
+					document.getElementById("emailInvalid").textContent = "이메일을 입력해주세요!";
 					flag = true;
 				} else {
 					email.classList.add("is-valid");
@@ -523,10 +542,37 @@
 					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
 					name.classList.add("is-invalid");
 					name.classList.remove("is-valid");
+					document.getElementById("nameInvalid").textContent = "이름 필수 정보입니다!";
 					flag = true;
 				} else {
 					name.classList.add("is-valid");
 					name.classList.remove("is-invalid");
+				}
+				if (id.value.trim() == null || id.value.includes(" ")
+						|| id.value.trim() == ""
+						||  /[^a-zA-Z0-9가-힣]/.test(id.value)) {
+					document.getElementById("modalHead").textContent = "경고";
+					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+					id.classList.add("is-invalid");
+					id.classList.remove("is-valid");
+					invalid.textContent = "항목을 다시 확인해 주세요!";
+					flag = true;
+				} else {
+					id.classList.add("is-valid");
+					id.classList.remove("is-invalid");
+				}
+				if (nickName.value.trim() == null || nickName.value.includes(" ")
+						|| nickName.value.trim() == ""
+						||  /[^a-zA-Z0-9가-힣]/.test(nickName.value)) {
+					document.getElementById("modalHead").textContent = "경고";
+					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+					nickName.classList.add("is-invalid");
+					nickName.classList.remove("is-valid");
+					document.getElementById("nickNameInvalid").textContent = "항목을 확인해주세요!";
+					flag = true;
+				} else {
+					nickName.classList.add("is-valid");
+					nickName.classList.remove("is-invalid");
 				}
 				if (password.value.trim() == null && passwordck.value == password.value  
 						|| password.value.trim() == "" && passwordck.value == password.value
@@ -536,6 +582,7 @@
 					password.classList.remove("is-valid");
 					document.getElementById("modalHead").textContent = "경고";
 					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+					document.getElementById("passwordInvalid").textContent = "항목을 확인해주세요!";
 					flag = true;
 			}else {
 				password.classList.add("is-valid");
@@ -551,6 +598,7 @@
 					passwordck.classList.remove("is-valid");
 					document.getElementById("modalHead").textContent = "경고";
 					document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+					document.getElementById("passwordckInvalid").textContent = "패스워드 확인은 필수입니다!";
 					flag = true;
 			}else {
 				passwordck.classList.add("is-valid");
@@ -600,6 +648,7 @@
 					|| codeName.value.includes(" ") || /[^가-힣]/.test(codeName.value)) {
 				codeName.classList.add("is-invalid");
 				codeName.classList.remove("is-valid");
+				document.getElementById("nameInvalid").textContent = "한글만 입력해주세요!";
 			} else {
 				codeName.classList.add("is-valid");
 				codeName.classList.remove("is-invalid");
@@ -609,6 +658,33 @@
 			let codeName = this;
 			if (codeName.value.trim() == null || codeName.value.trim() == ""
 					|| codeName.value.includes(" ")) {
+				codeName.classList.add("is-invalid");
+				codeName.classList.remove("is-valid");
+				document.getElementById("dobInvalid").textContent = "생년월일 필수입력 입니다!";
+			} else {
+				codeName.classList.add("is-valid");
+				codeName.classList.remove("is-invalid");
+			}
+		}
+		id.oninput = function() {
+			let codeName = this;
+			if (codeName.value.trim() == null || codeName.value.trim() == ""
+					|| codeName.value.includes(" ") ||
+					/[^a-zA-Z0-9가-힣]/.test(codeName.value)) {
+				invalid.textContent = "특수문자 공백 제거해주세요";
+				codeName.classList.add("is-invalid");
+				codeName.classList.remove("is-valid");
+			} else {
+				codeName.classList.add("is-valid");
+				codeName.classList.remove("is-invalid");
+			}
+		}
+		nickName.oninput = function() {
+			let codeName = this;
+			if (codeName.value.trim() == null || codeName.value.trim() == ""
+					|| codeName.value.includes(" ") ||
+					/[^a-zA-Z0-9가-힣]/.test(codeName.value)) {
+				document.getElementById("nickNameInvalid").textContent = "특수문자 공백 제거해주세요!";
 				codeName.classList.add("is-invalid");
 				codeName.classList.remove("is-valid");
 			} else {
@@ -622,6 +698,7 @@
 					|| codeName.value.includes(" ")) {
 				codeName.classList.add("is-invalid");
 				codeName.classList.remove("is-valid");
+				document.getElementById("passwordInvalid").textContent = "항목을 확인해주세요!";
 			} else {
 				codeName.classList.add("is-valid");
 				codeName.classList.remove("is-invalid");
@@ -634,9 +711,11 @@
 					|| codeName.value.includes(" ") && codeName.value.trim() == password.value.trim()) {
 				codeName.classList.add("is-valid");
 				codeName.classList.remove("is-invalid");
+				document.getElementById("passwordckInvalid").textContent = "패스워드와 입력값이 다릅니다!";
 			} else {
 				codeName.classList.add("is-invalid");
 				codeName.classList.remove("is-valid");
+				document.getElementById("passwordckValid").textContent = "항목이 일치합니다!";
 			}
 		}
 		
@@ -647,6 +726,7 @@
 					|| emailRegex.test(email.value)) {
 				codeName.classList.add("is-invalid");
 				codeName.classList.remove("is-valid");
+				document.getElementById("emailInvalid").textContent = "이메일 형식에 맞춰주세요!";
 			} else {
 				codeName.classList.add("is-valid");
 				codeName.classList.remove("is-invalid");
@@ -661,6 +741,46 @@
 			form.action="/userUsrInst";
 			form.submit();
 		}
+		
+		id.onblur = function(){
+			if (id.value.trim() == null || id.value.includes(" ")
+					|| id.value.trim() == ""
+					||  /[^a-zA-Z0-9가-힣]/.test(id.value)) {
+				document.getElementById("modalHead").textContent = "경고";
+				document.getElementById("modalText").textContent = "항목을 다시 확인해주세요 !";
+				id.classList.add("is-invalid");
+				id.classList.remove("is-valid");
+				invalid.textContent = "항목을 다시 확인해 주세요!";
+				flag = true;
+			} else {
+				$.ajax({
+					async: true 
+					,cache: false
+					,type: "post"
+					/* ,dataType:"json" */
+					,url: "/signidUsrProc"
+					/* ,data : $("#formLogin").serialize() */
+					,data : { "id" : $("#userId").val()}
+					,success: function(response) {
+						if(response.rt == "success") {
+							id.classList.add("is-valid");
+							id.classList.remove("is-invalid");	
+							valid.textContent = "사용가능한 아이디 입니다";
+							
+						} else {
+							id.classList.add("is-invalid");
+							id.classList.remove("is-valid");	
+							invalid.textContent = "이미 사용중인 아이디 입니다";
+							id.focus();
+						}
+					}
+					,error : function(jqXHR, textStatus, errorThrown){
+						alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+					}
+				});
+			}
+			}
+			
 	</script>
 </body>
 

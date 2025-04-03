@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.staticfinal.module.code.CodeService;
@@ -44,7 +45,7 @@ public class UserController {
 	@RequestMapping(value = "/signupUsrForm")
 	public String userUsrForm() {
 		
-		return "xdm/user/signupUsrForm";
+		return "usr/user/signupUsrForm";
 	}
 
 	@RequestMapping(value = "/signinXdmForm")
@@ -55,7 +56,7 @@ public class UserController {
 	@RequestMapping(value = "/signinUsrForm")
 	public String signinUsrForm(Model model,UserDto userDto, HttpSession httpSession) {
 		model.addAttribute("login",userService.loginDisplay());
-		return "xdm/user/signinUsrForm";
+		return "usr/user/signinUsrForm";
 	}
 
 	@ResponseBody
@@ -115,6 +116,20 @@ public class UserController {
 		}
 		return returnMap;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/signidUsrProc")
+	public Map<String, Object> signidUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		 		Integer value = userService.idDistinct(userDto);
+		if (value == 0 || value == null) {
+			returnMap.put("rt", "success");
+			
+		} else {
+			
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
 	
 	
 	@ResponseBody
@@ -143,12 +158,25 @@ public class UserController {
 	public String userUsrInfo(Model model, UserDto userDto, HttpSession httpSession) {
 		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		model.addAttribute("item" , userService.userOne(userDto));
-		return "xdm/user/userUsrInfo";
+		return "usr/user/userUsrInfo";
 	}
 	@RequestMapping(value = "/userUsrUpdt")
 	public String userUsrUpdt(UserDto userDto, HttpSession httpSession) {
 		userService.userUpdate(userDto);
 		httpSession.setAttribute("sessSeqUsr", userDto.getSeq());
-		return "redirect:/userUsrInfo";
+		return "redirect:"+userDto.getUrl();
 	}
+	@RequestMapping(value = "/userUsrAddr")
+	public String userUsrAddr(UserDto userDto, HttpSession httpSession,Model model) {
+		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("item",userService.userOne(userDto));
+		return "usr/user/userUsrAddr";
+	}
+	@RequestMapping(value = "/userUsrPass")
+	public String userUsrPass(UserDto userDto, HttpSession httpSession,Model model) {
+		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("item",userService.userOne(userDto));
+		return "usr/user/userUsrPass";
+	}
+	
 }

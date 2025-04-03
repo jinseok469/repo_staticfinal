@@ -19,4 +19,5 @@ public interface UserDao {
 	public int userInsert(UserDto userDto);
 	public int userUpdate(UserDto userDto);
 	public UserDto userLink(String seq);
+	public Integer idDistinct(UserDto userDto);
 }

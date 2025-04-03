@@ -101,7 +101,14 @@
 		 where 1=1 
 		 and a.seq =1
 	</select>
-	
+	<select id="idDistinct" resultType="Integer">
+	select
+	count(*)
+	from
+	user as a
+	where 1=1
+	and upper(a.id) = upper(#{id})
+	</select>
 	<insert id="userInsert"  useGeneratedKeys="true" keyProperty="lastSeq">
 	insert into
 	user
