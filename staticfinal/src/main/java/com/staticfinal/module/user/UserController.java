@@ -102,7 +102,7 @@ public class UserController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		UserDto value = userService.loginOne(userDto);
 		
-		if (value != null) {
+		if (value != null && value.getUrDelNy() == 0) {
 			returnMap.put("rt", "success");
 //			/		httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
 //			UserDto rtDto = userService.loginOne(userDto.getId(), userDto.getPassword());
@@ -121,6 +121,20 @@ public class UserController {
 	public Map<String, Object> signidUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		 		Integer value = userService.idDistinct(userDto);
+		if (value == 0 || value == null) {
+			returnMap.put("rt", "success");
+			
+		} else {
+			
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/signpwUsrProc")
+	public Map<String, Object> signpwUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		Integer value = userService.pwDistinct(userDto);
 		if (value == 0 || value == null) {
 			returnMap.put("rt", "success");
 			
@@ -162,7 +176,19 @@ public class UserController {
 	}
 	@RequestMapping(value = "/userUsrUpdt")
 	public String userUsrUpdt(UserDto userDto, HttpSession httpSession) {
+		if(userDto.getId() == null && userDto.getPassword() != null) {
+			userService.userPwupdate(userDto);
+			return "redirect:/signinUsrForm";
+		}else if(userDto.getId() == null && userDto.getPassword() == null) {
+			userService.userUelete(userDto);
+			httpSession.setAttribute("sessSeqUsr", null);
+			httpSession.setAttribute("sessIdUsr", null);
+			httpSession.setAttribute("sessNameUsr", null);
+			return "redirect:/indexUsrView";
+		}
+		else {
 		userService.userUpdate(userDto);
+		}
 		httpSession.setAttribute("sessSeqUsr", userDto.getSeq());
 		return "redirect:"+userDto.getUrl();
 	}
@@ -177,6 +203,12 @@ public class UserController {
 		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		model.addAttribute("item",userService.userOne(userDto));
 		return "usr/user/userUsrPass";
+	}
+	@RequestMapping(value = "/userUsrDele")
+	public String userUsrDele(UserDto userDto, HttpSession httpSession,Model model) {
+		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("item",userService.userOne(userDto));
+		return "usr/user/userUsrDele";
 	}
 	
 }

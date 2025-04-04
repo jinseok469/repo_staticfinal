@@ -48,27 +48,26 @@
 			<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
 				th:value="${vo.rowNumToShow}" /> <input type="hidden"
-				name="seqList">
-				<input type="hidden" name="seq">
-<!-- 			<div class="col-md-2" style="height: 10px;"> -->
+				name="seqList"> <input type="hidden" name="seq">
+			<!-- 			<div class="col-md-2" style="height: 10px;"> -->
 
-<!-- 				<select class="form-select" id="shDelNy" name="shDelNy"> -->
-<!-- 					<option value="">사용 여부</option> -->
-<!-- 					<option value="0" th:selected="${vo.shDelNy==0}">Y</option> -->
-<!-- 					<option value="1" th:selected="${vo.shDelNy==1}">N</option> -->
-<!-- 				</select> -->
-<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-2"> -->
-<!-- 				<select class="form-select" id="" disabled> -->
-<!-- 					<option selected disabled value="">Y</option> -->
-<!-- 					<option>아무거나</option> -->
-<!-- 				</select> -->
-<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
-<!-- 			</div> -->
+			<!-- 				<select class="form-select" id="shDelNy" name="shDelNy"> -->
+			<!-- 					<option value="">사용 여부</option> -->
+			<!-- 					<option value="0" th:selected="${vo.shDelNy==0}">Y</option> -->
+			<!-- 					<option value="1" th:selected="${vo.shDelNy==1}">N</option> -->
+			<!-- 				</select> -->
+			<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+			<!-- 			</div> -->
+			<!-- 			<div class="col-md-2"> -->
+			<!-- 				<select class="form-select" id="" disabled> -->
+			<!-- 					<option selected disabled value="">Y</option> -->
+			<!-- 					<option>아무거나</option> -->
+			<!-- 				</select> -->
+			<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
+			<!-- 			</div> -->
 			<div class="col-md-2">
-				<select class="form-select dd" id="shOptionDate" name="shOptionDate" >
-					<option   value="" >날짜</option>
+				<select class="form-select dd" id="shOptionDate" name="shOptionDate">
+					<option value="">날짜</option>
 					<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
 					<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
 				</select>
@@ -76,12 +75,12 @@
 			</div>
 			<div class="col-md-2">
 				<input type="text" class="form-control datepicker " id="shDateStart"
-				name="shDateStart"	 placeholder="시작일" readonly>
+					name="shDateStart" placeholder="시작일" readonly>
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2">
 				<input type="text" class="form-control datepicker " id="shDateEnd"
-				name="shDateEnd"	placeholder="종료일" readonly>
+					name="shDateEnd" placeholder="종료일" readonly>
 				<div class="invalid-feedback">코드를 입력해주세요.</div>
 			</div>
 			<div class="col-md-2"></div>
@@ -102,9 +101,9 @@
 
 			</div>
 			<div class="col-md-2">
-				<input type="text" class="form-control ss" id="shValue" name="shValue"
-					th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어"
-					required>
+				<input type="text" class="form-control ss" id="shValue"
+					name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()"
+					placeholder="검색어" required>
 				<div class="invalid-feedback">항목을 입력해주세요.</div>
 				<div class="valid-feedback">훌륭 합니다!</div>
 			</div>
@@ -147,7 +146,7 @@
 									</div></th>
 								<th data-sortable="false"
 									style="width: 10px; text-align: center;">#</th>
-<!-- 								<th style="text-align: center;">사용</th> -->
+								<!-- 								<th style="text-align: center;">사용</th> -->
 								<th class="list-sort">코드그룹 코드</th>
 								<th class="list-sort">코드그룹 이름</th>
 								<th class="list-sort">코드</th>
@@ -176,7 +175,7 @@
 								</td>
 								<td
 									th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
-<!-- 								<td th:text="${list.cgDelNy == 0} ? Y : N"></td> -->
+								<!-- 								<td th:text="${list.cgDelNy == 0} ? Y : N"></td> -->
 								<td th:text="${list.codeGroup_seq}"></td>
 								<td th:text="${list.cgName}"></td>
 								<td th:text="${list.seq}"></td>
@@ -290,166 +289,165 @@
 <!-- Template Main JS File -->
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
 <script type="text/javascript">
-	let seq = document.querySelector("input[name=seq]");	
+	let seq = document.querySelector("input[name=seq]");
 	let form = document.getElementById("formList");
 	let input = document.getElementsByClassName("ss");
 	let select = document.getElementsByClassName("dd");
-	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
+	document.getElementById("btnForm").onclick = function() {
+		goForm(0);
 	}
-	
-	goForm = function (keyValue) {
-	    seq.value = keyValue;
-	    form.action = "codeXdmForm";
-	    form.submit();
-	}
-	
-	
-	function selectAll(selectAll){
-	   	const checkeded = document.getElementsByName("chch");
-	   
-	   	for(let i = 0 ; i < checkeded.length; i++){
-	   		checkeded[i].checked = selectAll.checked;
-	   	}
-	}
-	 function updateSelectAll() {
-         const checkboxes = document.querySelectorAll('input[name="chch"]');
-         
-         // 전체 선택 체크박스는 첫 번째 체크박스로 가정
-         const selectAllCheckbox = checkboxes[0]; 
 
-         // 모든 체크박스가 체크되었는지 확인
-         let allChecked = true;
+	goForm = function(keyValue) {
+		seq.value = keyValue;
+		form.action = "codeXdmForm";
+		form.submit();
+	}
+
+	function selectAll(selectAll) {
+		const checkeded = document.getElementsByName("chch");
+
+		for (let i = 0; i < checkeded.length; i++) {
+			checkeded[i].checked = selectAll.checked;
+		}
+	}
+	function updateSelectAll() {
+		const checkboxes = document.querySelectorAll('input[name="chch"]');
+
+		// 전체 선택 체크박스는 첫 번째 체크박스로 가정
+		const selectAllCheckbox = checkboxes[0];
+
+		// 모든 체크박스가 체크되었는지 확인
+		let allChecked = true;
 
 		for (let i = 0; i < checkboxes.length; i++) {
-    		if (!checkboxes[i].checked) {
-       			 allChecked = false;
-       			 break;
-   	 		}
+			if (!checkboxes[i].checked) {
+				allChecked = false;
+				break;
+			}
 		}
 
-         // 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
-         selectAllCheckbox.checked = allChecked;
-     }
+		// 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
+		selectAllCheckbox.checked = allChecked;
+	}
 
-	
-	
-	
-	function goList(Num){
+	function goList(Num) {
 		document.querySelector("input[name=thisPage]").value = Num;
 		form.action = "/codeXdmList"
 		form.submit();
 	}
-	 
-	 
-	
-	 function getNum(){
-		document.querySelector("input[name=rowNumToShow]").value = document.getElementById("perPage").value;
-		
+
+	function getNum() {
+		document.querySelector("input[name=rowNumToShow]").value = document
+				.getElementById("perPage").value;
+
 		form.action = "/codeXdmList"
 		form.submit();
-	} 
-	 
-	 function enterkey(){
-		 if(event.key == "Enter"){
-			 
-			 form.action ="/codeXdmList";
-			 form.submit();
-		 }
-	 }
-	 
-		 document.getElementById("btnSearch").onclick = function(){
-		
-		 form.action ="/codeXdmList";
-		 form.submit();
-		 }
-		 
-		 for(let i = 0 ; i < input.length; i++){
-			 input[i].oninput = function(){
-		  		let input = this;
-		  		if(input.value.trim() == null || input.value.trim() == "" || input.value.includes(" ") || /[^a-zA-Z0-9가-힣]/.test(codeName.value)){
-		  			input.classList.add("is-invalid");
-		  			input.classList.remove("is-valid");
-		  		}else{
-		  			input.classList.add("is-valid");
-		  			input.classList.remove("is-invalid");
-		  		}
-		  	}
-		 }
-		 
-		 for(let i = 0; i< select.length; i++){
-		 select[i].onchange = function(){
-				let select = this;
-				if(select.selectedIndex === 0){
-					select.classList.add("is-invalid");
-					select.classList.remove("is-valid");
-				}else{
-					select.classList.add("is-valid");
-					select.classList.remove("is-invalid");
-				}
-			}  	
-		 }
-		 if(document.getElementById("btnUelete")){
-				document.getElementById("btnUelete").onclick = function () {
-			
-					document.querySelector("#modalConfirmTitle").textContent = "확 인";
-					document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-					document.querySelector("#btnModalUelete").style.display = '';
-					document.querySelector("#btnModalDelete").style.display = 'none';
-					$("#modalConfirm").modal("show");      	
-				}
+	}
+
+	function enterkey() {
+		if (event.key == "Enter") {
+
+			form.action = "/codeXdmList";
+			form.submit();
+		}
+	}
+
+	document.getElementById("btnSearch").onclick = function() {
+
+		form.action = "/codeXdmList";
+		form.submit();
+	}
+
+	for (let i = 0; i < input.length; i++) {
+		input[i].oninput = function() {
+			let input = this;
+			if (input.value.trim() == null || input.value.trim() == ""
+					|| input.value.includes(" ")
+					|| /[^a-zA-Z0-9가-힣]/.test(codeName.value)) {
+				input.classList.add("is-invalid");
+				input.classList.remove("is-valid");
+			} else {
+				input.classList.add("is-valid");
+				input.classList.remove("is-invalid");
 			}
+		}
+	}
 
+	for (let i = 0; i < select.length; i++) {
+		select[i].onchange = function() {
+			let select = this;
+			if (select.selectedIndex === 0) {
+				select.classList.add("is-invalid");
+				select.classList.remove("is-valid");
+			} else {
+				select.classList.add("is-valid");
+				select.classList.remove("is-invalid");
+			}
+		}
+	}
+	if (document.getElementById("btnUelete")) {
+		document.getElementById("btnUelete").onclick = function() {
 
-			document.getElementById("btnModalUelete").onclick = function () {
-				let checkboxes = document.getElementsByName("chch");
-				let seqq = new Array();
-				let seqList = document.querySelector("input[name=seqList]");
-				let j = 0;
-				for(var i = 0; i < checkboxes.length ; i++){
-					if(checkboxes[i].checked){
-						var seq = checkboxes[i].getAttribute("data-seq");
-						seqq[j] = seq;
-						j++;
+			document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+			document.querySelector("#btnModalUelete").style.display = '';
+			document.querySelector("#btnModalDelete").style.display = 'none';
+			$("#modalConfirm").modal("show");
+		}
+	}
+
+	document.getElementById("btnModalUelete").onclick = function() {
+		let checkboxes = document.getElementsByName("chch");
+		let seqq = new Array();
+		let seqList = document.querySelector("input[name=seqList]");
+		let j = 0;
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				var seq = checkboxes[i].getAttribute("data-seq");
+				seqq[j] = seq;
+				j++;
+			}
+		}
+		console.log(seqq);
+		seqList.value = seqq;
+		form.action = "codeXdmUele";
+		form.submit();
+	}
+	$("#btnSignout").on(
+			"click",
+			function() {
+				$.ajax({
+					async : true,
+					cache : false,
+					type : "post",
+					url : "/signoutXdmProc",
+					data : {},
+					success : function(response) {
+						if (response.rt == "success") {
+
+							location.href = "/signinXdmForm";
+						} else {
+							// by pass
+						}
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						alert("ajaxUpdate " + jqXHR.textStatus + " : "
+								+ jqXHR.errorThrown);
 					}
-				}
-				console.log(seqq);
-				seqList.value = seqq;
-				form.action = "codeXdmUele";
-				form.submit();
-			}
-			 $("#btnSignout").on("click", function(){
-					$.ajax({
-						async: true 
-						,cache: false
-						,type: "post"
-						,url: "/signoutXdmProc"
-						,data: {}
-						,success: function(response) {
-							if(response.rt == "success") {
-							
-								location.href = "/signinXdmForm";
-							} else {
-								// by pass
-							}
-						}
-						,error : function(jqXHR, textStatus, errorThrown){
-							alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
-						}
-					});
 				});
-			 let targetUrl = window.location.pathname; // 원하는 URL로 변경
-			 let main = document.querySelector("#codeGroupMain");
-			 let serve = document.querySelector("#codeGroupServe");
-			 let inner = document.querySelector("#codeInner");
+			});
+	let targetUrl = window.location.pathname; // 원하는 URL로 변경
+	let main = document.querySelector("#codeGroupMain");
+	let serve = document.querySelector("#codeGroupServe");
+	let inner = document.querySelector("#codeInner");
 
-			     if ("/codeXdmList" === targetUrl) {
-			 			main.classList.remove("collapsed");
-			    	 inner.classList.add("active");
-			    	
-			 			 serve.classList.remove("collapse");
-			     }
-	</script>
+	if ("/codeXdmList" === targetUrl) {
+		main.classList.remove("collapsed");
+		inner.classList.add("active");
+
+		serve.classList.remove("collapse");
+	}
+</script>
 </body>
 
 </html>

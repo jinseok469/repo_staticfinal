@@ -18,6 +18,9 @@ public interface UserDao {
 	public UserDto loginDisplay();
 	public int userInsert(UserDto userDto);
 	public int userUpdate(UserDto userDto);
+	public int userPwupdate(UserDto userDto);
+	public int userUelete(UserDto userDto);
 	public UserDto userLink(String seq);
 	public Integer idDistinct(UserDto userDto);
+	public Integer pwDistinct(UserDto userDto);
 }

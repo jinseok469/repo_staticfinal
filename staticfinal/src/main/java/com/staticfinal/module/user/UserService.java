@@ -36,11 +36,20 @@ public class UserService {
 	public int userUpdate(UserDto userDto) {
 		return userDao.userUpdate(userDto);
 	}
+	public int userUelete(UserDto userDto) {
+		return userDao.userUelete(userDto);
+	}
+	public int userPwupdate(UserDto userDto) {
+		return userDao.userPwupdate(userDto);
+	}
 	public UserDto userLink(String seq) {
 		return userDao.userLink(seq);
 	}
 	public Integer idDistinct(UserDto userDto) {
 		return userDao.idDistinct(userDto);
+	}
+	public Integer pwDistinct(UserDto userDto) {
+		return userDao.pwDistinct(userDto);
 	}
 	
 }

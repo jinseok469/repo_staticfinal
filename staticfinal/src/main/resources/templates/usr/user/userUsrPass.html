@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{usr/include/infoHead :: head}"></div>
+<div class="col-lg-9 col-md-8 col-12">
+
+	<div class="py-6 p-md-6 p-lg-10">
+		<div class="mb-6">
+			<!-- heading -->
+			<h2 class="mb-0">새로운 비밀번호 설정</h2>
+		</div>
+
+		<hr class="my-10" />
+		<div class="pe-lg-14">
+			<!-- heading -->
+			<h5 class="mb-4">비밀번호</h5>
+			<form class="row row-cols-1 row-cols-lg-2 needs-validation"
+				id="formList" method="post" novalidate>
+				<input type="hidden" name="url"> <input type="hidden" id="userSeq"
+					name="seq" th:value="${item.seq}">
+				<!-- input -->
+				<div class="mb-3 col">
+					<label class="form-label" for="password">새 비밀번호</label> <input
+						type="password" class="form-control" placeholder="**********"
+						id="userPassword" name="password" required />
+					<div class="invalid-feedback" id="passwordInvalid"></div>
+					<div class="valid-feedback" id="passwordValid"></div>
+				</div>
+				<!-- input -->
+				<div class="mb-3 col">
+					<label class="form-label" for="passwordck">비밀번호 확인</label> <input
+						type="password" class="form-control" placeholder="**********"
+						id="passwordck" name="passwordck" required />
+					<div class="invalid-feedback" id="passwordckInvalid"></div>
+					<div class="valid-feedback" id="passwordckValid"></div>
+				</div>
+				<!-- input -->
+
+				<div class="col-12" style="padding-top: 30px;">
+					<!-- <p class="mb-4">
+											비밀번호를 찾고 싶으신가요?
+											<a href="#">Reset your password.</a>
+										</p> -->
+					<button type="button" onclick="btnSubmit()" class="btn btn-primary">비밀번호
+						저장</button>
+				</div>
+				<div class="modal fade" id="cModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+			</form>
+		</div>
+
+		<!-- <hr class="my-10" /> -->
+		<div>
+			<!-- heading -->
+			<!-- <h5 class="mb-4">회원 탈퇴</h5>
+								<p class="mb-2">회원 탈퇴를 원하시나요?</p>
+								<p class="mb-5">삭제 하기 버튼을 누르시면 회원님의 모든 정보가 모두 삭제 됩니다</p> -->
+			<!-- btn -->
+			<!-- <a href="#" class="btn btn-outline-danger">삭제하기</a> -->
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<!-- modal -->
+<div class="offcanvas offcanvas-start" tabindex="-1"
+	id="offcanvasAccount" aria-labelledby="offcanvasAccountLabel">
+	<!-- offcanvas header -->
+	<div class="offcanvas-header">
+		<h5 class="offcanvas-title" id="offcanvasAccountLabel">Offcanvas</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+			aria-label="Close"></button>
+	</div>
+	<!-- offcanvas body -->
+	<div class="offcanvas-body">
+		<ul class="nav flex-column nav-pills nav-pills-dark">
+			<!-- nav item -->
+			<li class="nav-item"><a class="nav-link" aria-current="page"
+				href="account-orders.html"> <i
+					class="feather-icon icon-shopping-bag me-2"></i> 나의 블로그
+			</a></li>
+			<!-- nav item -->
+
+			<li class="nav-item"><a class="nav-link active"
+				href="account-settings.html"> <i
+					class="feather-icon icon-settings me-2"></i> 개인정보 수정
+			</a></li>
+			<!-- nav item -->
+
+			<li class="nav-item"><a class="nav-link"
+				href="account-address.html"> <i
+					class="feather-icon icon-map-pin me-2"></i> 비밀번호 변경
+			</a></li>
+			<!-- nav item -->
+
+			<li class="nav-item"><a class="nav-link"
+				href="account-payment-method.html"> <i
+					class="feather-icon icon-credit-card me-2"></i> 회원 탈퇴
+			</a></li>
+			<!-- nav item -->
+
+			<li class="nav-item"><a class="nav-link"
+				href="account-notification.html"> <i
+					class="feather-icon icon-bell me-2"></i> Notification
+			</a></li>
+		</ul>
+		<hr class="my-6" />
+		<div>
+			<!-- navs -->
+			<ul class="nav flex-column nav-pills nav-pills-dark">
+				<!-- nav item -->
+				<li class="nav-item"><a class="nav-link" href="../index.html">
+						<i class="feather-icon icon-log-out me-2"></i> Log out
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div th:replace="~{usr/include/footer :: footer}"></div><!-- Javascript-->
+<!-- Libs JS -->
+<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+<script src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
+
+<!-- Theme JS -->
+<script src="/usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+<script type="text/javascript">
+	let form = document.getElementById("formList");
+	let url = window.location.pathname;
+	let password = document.querySelector("input[name=password]");
+	let passwordck = document.getElementById("passwordck");
+
+	if ("/userUsrPass" === url) {
+		document.getElementById("passwordMain").classList.add("active");
+	}
+
+	document.querySelector("input[name=url]").value = url;
+
+	$("#btnSignout").on(
+			"click",
+			function() {
+				$.ajax({
+					async : true,
+					cache : false,
+					type : "post",
+					url : "/signoutUsrProc",
+					data : {},
+					success : function(response) {
+						if (response.rt == "success") {
+
+							location.href = "/indexUsrView";
+						} else {
+							// by pass
+						}
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						alert("ajaxUpdate " + jqXHR.textStatus + " : "
+								+ jqXHR.errorThrown);
+					}
+				});
+			});
+
+	password.onblur = function() {
+		if (password.value.trim() == null || password.value.includes(" ")
+				|| password.value.trim() == "") {
+			document.getElementById("passwordInvalid").textContent = "항목을 다시 확인해 주세요!";
+			password.classList.add("is-invalid");
+			password.classList.remove("is-valid");
+			password.focus();
+		} else {
+			$
+					.ajax({
+						async : true,
+						cache : false,
+						type : "post"
+						/* ,dataType:"json" */
+						,
+						url : "/signpwUsrProc"
+						/* ,data : $("#formLogin").serialize() */
+						,
+						data : { "seq" : $("#userSeq").val() ,
+							"password" : $("#userPassword").val()
+						},
+						success : function(response) {
+							if (response.rt == "success") {
+								password.classList.add("is-valid");
+								password.classList.remove("is-invalid");
+								document.getElementById("passwordValid").textContent = "사용가능한 비밀번호 입니다!";
+
+							} else {
+								password.classList.add("is-invalid");
+								password.classList.remove("is-valid");
+								document.getElementById("passwordInvalid").textContent = "현재 비밀번호와 다르게 설정해주세요!";
+								password.focus();
+							}
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							alert("ajaxUpdate " + jqXHR.textStatus + " : "
+									+ jqXHR.errorThrown);
+						}
+					});
+		}
+	}
+
+	function btnSubmit() {
+		let flag = false;
+		if (password.value.trim() == null && passwordck.value == password.value
+				|| password.value.trim() == ""
+				&& passwordck.value == password.value
+				|| password.value.includes(" ")
+				&& passwordck.value == password.value
+				|| password.value != passwordck.value) {
+			password.classList.add("is-invalid");
+			password.classList.remove("is-valid");
+			document.getElementById("passwordInvalid").textContent = "항목을 확인해주세요!";
+			flag = true;
+		} else {
+			password.classList.add("is-valid");
+			password.classList.remove("is-invalid");
+		}
+		if (passwordck.value.trim() == null
+				&& passwordck.value == password.value
+				|| passwordck.value.trim() == ""
+				&& passwordck.value == password.value
+				|| passwordck.value.includes(" ")
+				&& passwordck.value == password.value
+				|| passwordck.value != password.value) {
+			passwordck.classList.add("is-invalid");
+			passwordck.classList.remove("is-valid");
+			document.getElementById("passwordckInvalid").textContent = "패스워드 확인은 필수입니다!";
+			flag = true;
+		} else {
+			passwordck.classList.add("is-valid");
+			passwordck.classList.remove("is-invalid");
+		}
+
+		if (flag) {
+			document.getElementsByClassName("is-invalid")[0].focus();
+		} else {
+			document.getElementById("modalHead").textContent = "확인";
+			document.getElementById("modalText").textContent = "비밀번호를 변경하여 로그인 화면으로 돌아갑니다";
+
+			$("#cModal").modal("show");
+			
+		}
+	}
+	function enterkey() {
+		btnSubmit();
+	}
+	function btnClick() {
+		form.action = "/userUsrUpdt";
+		form.submit();
+	}
+
+	password.oninput = function() {
+		let codeName = this;
+		if (codeName.value.trim() == null || codeName.value.trim() == ""
+				|| codeName.value.includes(" ")) {
+			document.getElementById("passwordInvalid").textContent = "항목을 확인해주세요!";
+			codeName.classList.add("is-invalid");
+			codeName.classList.remove("is-valid");
+		} else {
+			codeName.classList.add("is-valid");
+			codeName.classList.remove("is-invalid");
+		}
+	}
+	passwordck.oninput = function() {
+		let codeName = this;
+		if (codeName.value.trim() != null
+				&& codeName.value.trim() == password.value.trim()
+				|| codeName.value.trim() != ""
+				&& codeName.value.trim() == password.value.trim()
+				|| !codeName.value.includes(" ")
+				&& codeName.value.trim() == password.value.trim()) {
+			document.getElementById("passwordckValid").textContent = "항목이 일치합니다!";
+			codeName.classList.add("is-valid");
+			codeName.classList.remove("is-invalid");
+		} else {
+			document.getElementById("passwordckInvalid").textContent = "패스워드와 입력값이 다릅니다!";
+			codeName.classList.add("is-invalid");
+			codeName.classList.remove("is-valid");
+		}
+	}
+</script>
+</body>
+
+</html>

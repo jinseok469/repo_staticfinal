@@ -107,7 +107,16 @@
 	from
 	user as a
 	where 1=1
-	and upper(a.id) = upper(#{id})
+	and binary a.id = binary #{id}
+	</select>
+	<select id="pwDistinct" resultType="Integer">
+	select
+	count(*)
+	from
+	user as a
+	where 1=1
+	and seq = #{seq}
+	and binary a.password = binary #{password}
 	</select>
 	<insert id="userInsert"  useGeneratedKeys="true" keyProperty="lastSeq">
 	insert into
@@ -152,6 +161,21 @@
 		urMof = now()
 		where 1=1 
 		and seq = #{seq}
+	
+	</update>
+	<update id="userPwupdate">
+	update user
+	set
+	password = #{password}
+	where 1=1
+	and seq = #{seq}
+	</update>
+	<update id="userUelete">
+	update user
+	set
+	urDelNy = 1
+	where 1=1 
+	and seq = #{seq}
 	
 	</update>
 </mapper>

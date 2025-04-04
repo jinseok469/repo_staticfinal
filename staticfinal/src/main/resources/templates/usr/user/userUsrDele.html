@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{usr/include/infoHead :: head}"></div>
+<div class="col-lg-9 col-md-8 col-12">
+	<form id="formList" method="post">
+		<input type="hidden" name="url"> <input type="hidden"
+			name="seq" th:value="${item.seq}">
+		<div class="py-6 p-md-6 p-lg-10">
+			<div class="mb-6">
+				<!-- heading -->
+				<h2 class="mb-0">회원 탈퇴</h2>
+			</div>
+			<hr>
+			<p class="mb-2">회원 탈퇴를 원하시나요?</p>
+			<p class="mb-5">삭제 하기 버튼을 누르시면 회원님의 모든 정보가 모두 삭제 됩니다</p>
+			<!-- btn -->
+			<button type="button" class="btn btn-outline-danger"
+				onclick="btnSubmit()">삭제하기</button>
+		</div>
+	</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<!-- modal -->
+<div class="offcanvas offcanvas-start" tabindex="-1"
+	id="offcanvasAccount" aria-labelledby="offcanvasAccountLabel">
+	<!-- offcanvas header -->
+	<div class="offcanvas-header">
+		<h5 class="offcanvas-title" id="offcanvasAccountLabel">Offcanvas</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+			aria-label="Close"></button>
+	</div>
+	<!-- offcanvas body -->
+	<div class="offcanvas-body">
+		<ul class="nav flex-column nav-pills nav-pills-dark">
+			<!-- nav item -->
+			<li class="nav-item"><a class="nav-link" aria-current="page"
+				href="account-orders.html"> <i
+					class="feather-icon icon-shopping-bag me-2"></i> Your Orders
+			</a></li>
+			<!-- nav item -->
+
+			<li class="nav-item"><a class="nav-link active"
+				href="account-settings.html"> <i
+					class="feather-icon icon-settings me-2"></i> 개인정보 수정
+			</a></li>
+			<!-- nav item -->
+
+			<li class="nav-item"><a class="nav-link"
+				href="account-address.html"> <i
+					class="feather-icon icon-map-pin me-2"></i> Address
+			</a></li>
+			<!-- nav item -->
+
+			<li class="nav-item"><a class="nav-link"
+				href="account-payment-method.html"> <i
+					class="feather-icon icon-credit-card me-2"></i> Payment Method
+			</a></li>
+			<!-- nav item -->
+
+			<li class="nav-item"><a class="nav-link"
+				href="account-notification.html"> <i
+					class="feather-icon icon-bell me-2"></i> Notification
+			</a></li>
+		</ul>
+		<hr class="my-6" />
+		<div>
+			<!-- navs -->
+			<ul class="nav flex-column nav-pills nav-pills-dark">
+				<!-- nav item -->
+				<li class="nav-item"><a class="nav-link" href="../index.html">
+						<i class="feather-icon icon-log-out me-2"></i> Log out
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="dModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="modalHead"></h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="modalText"></div>
+			<div class="modal-footer">
+				<a class="btn btn-outline-dark" data-bs-dismiss="modal"
+					onclick="backClick()">취소</a>
+				<a class="btn btn-secondary" data-bs-dismiss="modal"
+					onclick="btnClick()">확인</a>
+				<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div th:replace="~{usr/include/footer :: footer}"></div>
+<!-- Javascript-->
+<!-- Libs JS -->
+<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+<script
+	src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
+
+<!-- Theme JS -->
+<script src="/usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+<script type="text/javascript">
+	let url = window.location.pathname;
+	let form = document.getElementById("formList");
+	if ("/userUsrDele" === url) {
+		document.getElementById("deleteMain").classList.add("active");
+	}
+	function btnSubmit() {
+		document.getElementById("modalHead").textContent = "확인";
+		document.getElementById("modalText").textContent = "정말 탈퇴 하시겠습니까?";
+		$("#dModal").modal("show");
+	}
+	function btnClick() {
+		form.action = "userUsrUpdt";
+		form.submit();
+	}
+	function backClick() {
+		document.getElementById("dModal").style.display = "none";
+		return false;
+	}
+
+	$("#btnSignout").on(
+			"click",
+			function() {
+				$.ajax({
+					async : true,
+					cache : false,
+					type : "post",
+					url : "/signoutUsrProc",
+					data : {},
+					success : function(response) {
+						if (response.rt == "success") {
+
+							location.href = "/indexUsrView";
+						} else {
+							// by pass
+						}
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						alert("ajaxUpdate " + jqXHR.textStatus + " : "
+								+ jqXHR.errorThrown);
+					}
+				});
+			});
+</script>
+</body>
+
+</html>
