@@ -15,8 +15,15 @@ public class UserDto {
 	private String urReg;
 	private String urMof;
 	private String url;
+	private String urSeq;
 	
 	
+	public String getUrSeq() {
+		return urSeq;
+	}
+	public void setUrSeq(String urSeq) {
+		this.urSeq = urSeq;
+	}
 	public String getUrl() {
 		return url;
 	}

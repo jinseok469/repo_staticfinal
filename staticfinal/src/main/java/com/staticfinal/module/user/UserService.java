@@ -51,5 +51,8 @@ public class UserService {
 	public Integer pwDistinct(UserDto userDto) {
 		return userDao.pwDistinct(userDto);
 	}
+	public int wishCount(UserDto userDto) {
+		return userDao.wishCount(userDto);
+	}
 	
 }

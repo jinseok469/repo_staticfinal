@@ -12,6 +12,8 @@ import com.staticfinal.module.user.UserDto;
 import com.staticfinal.module.user.UserService;
 import com.staticfinal.module.util.BannerVo;
 
+import jakarta.servlet.http.HttpSession;
+
 //import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -29,8 +31,8 @@ public class IndexController {
 		return "xdm/indexXdm";
 	}
 	@RequestMapping(value = "/indexUsrView")
-	public String indexUsrView() {
-		
+	public String indexUsrView(@ModelAttribute("vo")BannerVo vo,HttpSession httpSession,UserDto userDto) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		
 		return "usr/index/indexUsr";
 	}

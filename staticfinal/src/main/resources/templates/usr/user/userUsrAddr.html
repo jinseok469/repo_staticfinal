@@ -168,7 +168,11 @@ let inner = document.querySelector("#pictureInner");
 					}
 				});
 			});
-
+    function blogLink(){
+		document.querySelector("input[name=blogCategory_seq]").value = 1;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
 </script>
 </body>
 

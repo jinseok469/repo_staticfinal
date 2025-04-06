@@ -19,4 +19,7 @@ public interface BlogDao {
 	public int blogInsert(BlogDto blogDto);
 	public int infoUpdate(BlogDto blogDto);
 	public int bgUelete(@Param("seqList")List<String> seq);
+	public BlogDto blogCategory(BlogDto blogDto);
+	public int wishList(BlogDto blogDto);
+	
 }

@@ -106,10 +106,11 @@ public class UserController {
 			returnMap.put("rt", "success");
 //			/		httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
 //			UserDto rtDto = userService.loginOne(userDto.getId(), userDto.getPassword());
-			httpSession.setAttribute("sessSeqUsr", value.getSeq());
+			httpSession.setAttribute("sessSeqUsr", value.getUrSeq());
 			httpSession.setAttribute("sessIdUsr", value.getId());
 			httpSession.setAttribute("sessNameUsr", value.getName());
-			
+			userDto.setUrSeq(value.getUrSeq());
+			httpSession.setAttribute("sessWishUsr", userService.wishCount(userDto));
 		} else {
 			
 			returnMap.put("rt", "fail");
@@ -134,6 +135,7 @@ public class UserController {
 	@RequestMapping(value = "/signpwUsrProc")
 	public Map<String, Object> signpwUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		Integer value = userService.pwDistinct(userDto);
 		if (value == 0 || value == null) {
 			returnMap.put("rt", "success");
@@ -170,16 +172,18 @@ public class UserController {
 	}
 	@RequestMapping(value = "/userUsrInfo")
 	public String userUsrInfo(Model model, UserDto userDto, HttpSession httpSession) {
-		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		model.addAttribute("item" , userService.userOne(userDto));
 		return "usr/user/userUsrInfo";
 	}
 	@RequestMapping(value = "/userUsrUpdt")
 	public String userUsrUpdt(UserDto userDto, HttpSession httpSession) {
 		if(userDto.getId() == null && userDto.getPassword() != null) {
+			userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 			userService.userPwupdate(userDto);
 			return "redirect:/signinUsrForm";
 		}else if(userDto.getId() == null && userDto.getPassword() == null) {
+			userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 			userService.userUelete(userDto);
 			httpSession.setAttribute("sessSeqUsr", null);
 			httpSession.setAttribute("sessIdUsr", null);
@@ -187,26 +191,27 @@ public class UserController {
 			return "redirect:/indexUsrView";
 		}
 		else {
+			userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		userService.userUpdate(userDto);
 		}
-		httpSession.setAttribute("sessSeqUsr", userDto.getSeq());
+		httpSession.setAttribute("sessSeqUsr", userDto.getUrSeq());
 		return "redirect:"+userDto.getUrl();
 	}
 	@RequestMapping(value = "/userUsrAddr")
 	public String userUsrAddr(UserDto userDto, HttpSession httpSession,Model model) {
-		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		model.addAttribute("item",userService.userOne(userDto));
 		return "usr/user/userUsrAddr";
 	}
 	@RequestMapping(value = "/userUsrPass")
 	public String userUsrPass(UserDto userDto, HttpSession httpSession,Model model) {
-		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		model.addAttribute("item",userService.userOne(userDto));
 		return "usr/user/userUsrPass";
 	}
 	@RequestMapping(value = "/userUsrDele")
 	public String userUsrDele(UserDto userDto, HttpSession httpSession,Model model) {
-		userDto.setSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		model.addAttribute("item",userService.userOne(userDto));
 		return "usr/user/userUsrDele";
 	}

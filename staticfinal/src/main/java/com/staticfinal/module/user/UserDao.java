@@ -23,4 +23,5 @@ public interface UserDao {
 	public UserDto userLink(String seq);
 	public Integer idDistinct(UserDto userDto);
 	public Integer pwDistinct(UserDto userDto);
+	public int wishCount(UserDto userDto);
 }

@@ -43,5 +43,10 @@ public class BlogService {
 	public int bgUelete(List<String> seq) {
 		return blogDao.bgUelete(seq);
 	}
-	
+	public BlogDto blogCategory(BlogDto blogDto) {
+		return blogDao.blogCategory(blogDto);
+	}
+	public int wishList(BlogDto blogDto) {
+		return blogDao.wishList(blogDto);
+	}
 }

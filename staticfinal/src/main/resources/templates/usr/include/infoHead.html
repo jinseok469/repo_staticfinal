@@ -66,6 +66,8 @@
 <body>
 	<!-- navbar -->
 	<div class="border-bottom">
+	<form class="needs-validation" method="post" id="formList"
+						novalidate>
 		<div class="bg-light py-1">
 			<div class="container">
 				<div class="row">
@@ -91,14 +93,13 @@
 							style="padding-top: 3%; font-size: x-large">내일은 맑음</label>
 						</a>
 						<div class="d-flex justify-content-between w-100 d-lg-none">
-							<a class="navbar-brand" href="./index.html"> <img
+							<a class="navbar-brand" href="/indexUsrView"> <img
 								src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg"
 								alt="eCommerce HTML Template" />
 							</a>
 						</div>
 					</div>
 					<div class="col-xxl-5 col-lg-5 d-none d-lg-block">
-						<form action="#">
 							<div class="input-group">
 								<input class="form-control rounded" type="search"
 									placeholder="Search for Location" /> <span
@@ -116,7 +117,6 @@
 									</button>
 								</span>
 							</div>
-						</form>
 					</div>
 					<div class="col-md-2 col-xxl-3 d-none d-lg-block">
 						<!-- Button trigger modal -->
@@ -139,7 +139,7 @@
 										</path>
 									</svg> <span
 									class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-										0 <span class="visually-hidden">unread messages</span>
+										[[${session.sessWishUsr}]]<span class="visually-hidden">unread messages</span>
 								</span>
 								</a>
 							</div>
@@ -205,7 +205,6 @@
 					</div>
 					<div class="offcanvas-body">
 						<div class="d-block d-lg-none mb-4">
-							<form action="#">
 								<div class="input-group">
 									<input class="form-control rounded" type="search"
 										placeholder="Search for products" /> <span
@@ -224,7 +223,6 @@
 										</button>
 									</span>
 								</div>
-							</form>
 							<div class="mt-2">
 								<button type="button"
 									class="btn btn-outline-gray-400 text-muted w-100"
@@ -277,10 +275,11 @@
 
 						</div>
 						<div>
+						<input type="hidden" name="blogCategory_seq" >
 							<ul class="navbar-nav align-items-center">
 								<li class="nav-item dropdown w-100 w-lg-auto"><a
 									class="nav-link "
-									href="/usr/template/staticfinal/dist/pages/blogCategory.html"
+									onclick="blogLink()"
 									role="button">블로그</a></li>
 								
 						</div>
@@ -302,7 +301,6 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form class="needs-validation" novalidate>
 						<div class="row g-3">
 							<div class="col-8">
 								<label for="fullName" class="form-label visually-hidden">Name</label>
@@ -362,7 +360,6 @@
 
 							<button type="button" class="btn btn-primary">회원가입</button>
 						</div>
-					</form>
 				</div>
 				<div class="modal-footer border-0 justify-content-center">
 					이미 회원이신가요? <a href="./signin.html">로그인 하기</a>

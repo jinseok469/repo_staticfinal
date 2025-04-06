@@ -10,37 +10,41 @@
 					<div class="col-3">
 						<!-- list -->
 						<ul class="nav flex-column">
-							<li class="nav-item mb-2"><a
-								href="../pages/blogCategory.html" class="nav-link">봄 남성 코디</a></li>
-							<li class="nav-item mb-2"><a href="#!" class="nav-link">봄
-									여성 코디 </a></li>
+							<li class="nav-item"><a  id="springMinner" onclick="springM()" class="nav-link" >봄 남성 코디</a></li>
+                                          <!-- nav item -->
+                                          <li class="nav-item"><a  id="springFinner" class="nav-link">봄 여성 코디</a></li>
+                                          <!-- nav item -->
 						</ul>
 					</div>
 					<div class="col-3">
 						<!-- list -->
 						<ul class="nav flex-column">
-							<li class="nav-item mb-2"><a href="#!" class="nav-link">여름
-									남성 코디</a></li>
-							<li class="nav-item mb-2"><a href="#!" class="nav-link">여름
-									여성 코디</a></li>
+							<li class="nav-item"><a  id="summerMinner" class="nav-link">여름 남성 옷 코디</a></li>
+                                          <!-- nav item -->
+                                          <li class="nav-item"><a  id="summerFinner" class="nav-link">여름 여성 옷 코디</a></li>
+                                          <!-- nav item -->
 						</ul>
 					</div>
 					<div class="col-3">
 						<!-- list -->
 						<ul class="nav flex-column">
-							<li class="nav-item mb-2"><a href="#!" class="nav-link">가을
-									남성 코디</a></li>
-							<li class="nav-item mb-2"><a href="#!" class="nav-link">가을
-									여성 코디</a></li>
+							 <li class="nav-item">
+                                             <a class="nav-link"  id="fallMinner" >가을 남성 옷 코디
+                                                </a>
+                                          </li>
+                                          <!-- nav item -->
+                                          <li class="nav-item">
+                                             <a class="nav-link" id="fallFinner" >가을 여성 옷 코디</a>
+                                          </li>
 						</ul>
 					</div>
 					<div class="col-3">
 						<!-- list -->
 						<ul class="nav flex-column">
-							<li class="nav-item mb-2"><a href="#!" class="nav-link">겨울
-									남성 코디</a></li>
-							<li class="nav-item mb-2"><a href="#!" class="nav-link">겨울
-									여성 코디</a></li>
+							 <li class="nav-item"><a  id="winterMinner" class="nav-link">겨울 남성 옷 코디</a></li>
+                                          <!-- nav item -->
+                                          <li class="nav-item"><a  id="winterFinner" class="nav-link">겨울 여성 옷 코디</a></li>
+                                         
 						</ul>
 					</div>
 				</div>
@@ -127,5 +131,48 @@
 
 		</div>
 	</div>
+	<script type="text/javascript">
+	function springM(){
+		document.querySelector("input[name=blogCategory_seq]").value = 1;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
+	document.getElementById("springFinner").onclick = function(){
+		document.querySelector("input[name=blogCategory_seq]").value = 2;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
+	document.getElementById("summerMinner").onclick = function(){
+		console.log("gd");
+		document.querySelector("input[name=blogCategory_seq]").value = 3;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
+	document.getElementById("summerFinner").onclick = function(){
+		document.querySelector("input[name=blogCategory_seq]").value = 4;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
+	document.getElementById("fallMinner").onclick = function(){
+		document.querySelector("input[name=blogCategory_seq]").value = 5;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
+	document.getElementById("fallFinner").onclick = function(){
+		document.querySelector("input[name=blogCategory_seq]").value = 6;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
+	document.getElementById("winterMinner").onclick = function(){
+		document.querySelector("input[name=blogCategory_seq]").value = 7;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
+	document.getElementById("winterFinner").onclick = function(){
+		document.querySelector("input[name=blogCategory_seq]").value = 8;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
+	</script>
 </footer>
 </th:block>

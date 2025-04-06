@@ -17,12 +17,12 @@
 			<form class="row row-cols-1 row-cols-lg-2 needs-validation"
 				id="formList" method="post" novalidate>
 				<input type="hidden" name="url"> <input type="hidden" id="userSeq"
-					name="seq" th:value="${item.seq}">
+					name="urSeq" th:value="${item.seq}">
 				<!-- input -->
 				<div class="mb-3 col">
 					<label class="form-label" for="password">새 비밀번호</label> <input
 						type="password" class="form-control" placeholder="**********"
-						id="userPassword" name="password" required />
+						id="userPassword" name="password" required  style="width:400px"/>
 					<div class="invalid-feedback" id="passwordInvalid"></div>
 					<div class="valid-feedback" id="passwordValid"></div>
 				</div>
@@ -30,7 +30,7 @@
 				<div class="mb-3 col">
 					<label class="form-label" for="passwordck">비밀번호 확인</label> <input
 						type="password" class="form-control" placeholder="**********"
-						id="passwordck" name="passwordck" required />
+						id="passwordck" name="passwordck" required style="width:400px"/>
 					<div class="invalid-feedback" id="passwordckInvalid"></div>
 					<div class="valid-feedback" id="passwordckValid"></div>
 				</div>
@@ -202,7 +202,7 @@
 						url : "/signpwUsrProc"
 						/* ,data : $("#formLogin").serialize() */
 						,
-						data : { "seq" : $("#userSeq").val() ,
+						data : { "urSeq" : $("#userSeq").val() ,
 							"password" : $("#userPassword").val()
 						},
 						success : function(response) {
@@ -304,6 +304,11 @@
 			codeName.classList.add("is-invalid");
 			codeName.classList.remove("is-valid");
 		}
+	}
+	function blogLink(){
+		document.querySelector("input[name=blogCategory_seq]").value = 1;
+		form.action ="/blogUsrList";
+		form.submit();
 	}
 </script>
 </body>

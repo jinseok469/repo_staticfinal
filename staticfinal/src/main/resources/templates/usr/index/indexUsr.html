@@ -225,7 +225,7 @@
 									<div class="col-12 col-md-6 mb-3 mb-lg-0">
 										<div>
 											<div class="py-10 px-8 rounded"
-												style="background-color:#EEEEEE	;">
+												style="background-color:beige	;">
 												<div>
 												<h3 class="fw-bold mb-1" style="text-align:center;">오늘의 날씨 뉴스</h3>
 													<ul id="newsList" style="font-size:x-large;">
@@ -413,6 +413,7 @@
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
 </main>
 <div th:replace="~{usr/include/footer :: footer}"></div>
@@ -448,6 +449,7 @@
 	let cart = document.getElementById("cart");
 	let form = document.getElementById("formList");
 	let sessionSeq = [[${session.sessSeqUsr}]];
+	console.log(sessionSeq);
 	if(!sessionSeq){
 		wish.style.display="none";
 		cart.style.display="none";
@@ -457,6 +459,11 @@
 	}
 	function infoLink() {
 		form.action ="/userUsrInfo";
+		form.submit();
+	}
+	function blogLink(){
+		document.querySelector("input[name=blogCategory_seq]").value = 1;
+		form.action ="/blogUsrList";
 		form.submit();
 	}
 	
@@ -469,7 +476,7 @@
 	    })
 	    .then(function(data) {
 	      let container = document.getElementById("newsList");
-	      let item = data.items.slice(0,2);  // 가장 최신 기사 하나만 선택!
+	      let item = data.items.slice(0,3);  // 가장 최신 기사 하나만 선택!
 		
 	      for(let i = 0 ;  i < item.length ; i++){
 	      let li = document.createElement("li");

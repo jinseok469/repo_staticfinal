@@ -12,13 +12,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.staticfinal.module.user.UserDto;
+import com.staticfinal.module.user.UserService;
 import com.staticfinal.module.util.BannerVo;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BlogController {
 	
 	@Autowired
 	BlogService blogService;
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping(value = "/blogXdmList")
 	public String blogXdmList(Model model,@ModelAttribute("vo")BannerVo vo,BlogDto blogDto){
@@ -65,7 +71,40 @@ public class BlogController {
 		blogService.bgUelete(seq);
 		return "redirect:/blogXdmList";
 	}
-	
+	@RequestMapping(value = "/blogUsrList")
+	public String springUsrMale(@ModelAttribute("vo")BannerVo vo,Model model,BlogDto blogDto,HttpSession httpSession,UserDto userDto) {
+		vo.setParamsPaging(blogService.selectCount(vo));
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		if(vo.getBlogCategory_seq() == null || vo.getBlogCategory_seq().equals("")) {
+			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+		}
+		model.addAttribute("count",blogService.selectCount(vo));
+		model.addAttribute("blogList",blogService.blogList(vo));
+		model.addAttribute("blogCategory",blogService.blogCategory(blogDto));
+		httpSession.setAttribute("sessBlogCategory_seq", vo.getBlogCategory_seq());
+		return "usr/blog/blogUsrList";
+	}
+	@RequestMapping(value = "blogUsrView")
+	public String blogUsrView(@ModelAttribute("vo")BannerVo vo,Model model,UserDto userDto, BlogDto blogDto, HttpSession httpSession) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("item",blogService.blogOne(blogDto));
+		model.addAttribute("blogList", blogService.blogList(vo));
+		model.addAttribute("clotheList",blogService.betterInfo(blogDto));
+		
+		return "usr/blog/blogUsrView";
+	}
+	@RequestMapping(value = "/wishUsrInst")
+	public String wishUsrInst(BlogDto blogDto, HttpSession httpSession,UserDto userDto) throws Exception{
+		try {
+		blogService.wishList(blogDto);
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		httpSession.setAttribute("sessWishUsr", userService.wishCount(userDto));
+		return "redirect:/blogUsrList";
+		}catch (Exception e){
+			return "redirect:/blogUsrList";
+		}
+	}
 	
 	
 	

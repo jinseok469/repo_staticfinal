@@ -234,4 +234,15 @@ public class BannerVo {
 		public void setSeq(String seq) {
 			this.seq = seq;
 		}
+		private String blogCategory_seq ;
+
+
+
+		public String getBlogCategory_seq() {
+			return blogCategory_seq;
+		}
+
+		public void setBlogCategory_seq(String blogCategory_seq) {
+			this.blogCategory_seq = blogCategory_seq;
+		}
 }

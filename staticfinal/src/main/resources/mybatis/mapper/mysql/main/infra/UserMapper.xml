@@ -37,7 +37,7 @@
 
 	<select id="userList" resultMap="resultMapObj">
 		select
-		a.seq,
+		a.seq as urSeq,
 		a.name,
 		a.gender,
 		a.dob,
@@ -52,12 +52,12 @@
 		a.urReg,
 		a.urMof
 		<include refid="selectCommon"></include>
-		order by a.seq desc
+		order by urSeq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
 	</select>
 	<select id="userOne" resultMap="resultMapObj">
 		select
-		a.seq,
+		a.seq as urSeq,
 		a.name,
 		a.gender,
 		a.dob,
@@ -71,11 +71,11 @@
 		from
 		user as a
 		where 1=1 and
-		a.seq = #{seq}
+		a.seq = #{urSeq}
 	</select>
 	<select id="loginOne" resultMap="resultMapObj">
 		select
-		a.seq,
+		a.seq as urSeq,
 		a.name,
 		a.gender,
 		a.dob,
@@ -115,8 +115,16 @@
 	from
 	user as a
 	where 1=1
-	and seq = #{seq}
+	and seq = #{urSeq}
 	and binary a.password = binary #{password}
+	</select>
+	<select id="wishCount" resultType="Integer">
+	select count(*)
+	from
+	wishlist
+	where 1=1 
+	and user_seq = #{urSeq}
+	
 	</select>
 	<insert id="userInsert"  useGeneratedKeys="true" keyProperty="lastSeq">
 	insert into
@@ -160,7 +168,7 @@
 		betterAddress = #{betterAddress},
 		urMof = now()
 		where 1=1 
-		and seq = #{seq}
+		and seq = #{urSeq}
 	
 	</update>
 	<update id="userPwupdate">
@@ -168,14 +176,14 @@
 	set
 	password = #{password}
 	where 1=1
-	and seq = #{seq}
+	and seq = #{urSeq}
 	</update>
 	<update id="userUelete">
 	update user
 	set
 	urDelNy = 1
 	where 1=1 
-	and seq = #{seq}
+	and seq = #{urSeq}
 	
 	</update>
 </mapper>

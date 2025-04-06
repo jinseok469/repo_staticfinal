@@ -3,7 +3,7 @@
 
 <div th:replace="~{usr/include/infoHead :: head}"></div>
 <div class="col-lg-9 col-md-8 col-12">
-	<form id="formList" method="post">
+	
 		<input type="hidden" name="url"> <input type="hidden"
 			name="seq" th:value="${item.seq}">
 		<div class="py-6 p-md-6 p-lg-10">
@@ -157,6 +157,12 @@
 					}
 				});
 			});
+	
+	function blogLink(){
+		document.querySelector("input[name=blogCategory_seq]").value = 1;
+		form.action ="/blogUsrList";
+		form.submit();
+	}
 </script>
 </body>
 
