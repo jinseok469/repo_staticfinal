@@ -27,7 +27,7 @@ public class IndexController {
 	@RequestMapping(value = "/indexXdmView")
 	public String indexXdmView(Model model,UserDto userDto,@ModelAttribute("vo")BannerVo vo) {
 		model.addAttribute("user",userService.selectCount(vo));
-		model.addAttribute("blog",blogService.selectCount(vo));
+		model.addAttribute("blog",blogService.blogAllCount());
 		return "xdm/indexXdm";
 	}
 	@RequestMapping(value = "/indexUsrView")

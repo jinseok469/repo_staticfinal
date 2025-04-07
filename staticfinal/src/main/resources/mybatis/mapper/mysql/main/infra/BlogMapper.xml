@@ -26,11 +26,41 @@
             <when test="shOption == 3">AND b.name LIKE CONCAT('%',#{shValue},'%')</when>
         </choose>
 	</sql>
+	<sql id="selectXdmCommon">
+		from
+		betterBlog as a
+		left join user as b on b.seq =
+		a.user_seq
+		left join blogCategory as c on c.seq = a.blogCategory_seq
+		where 1=1 
+<!-- 		      <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy = #{shUseNy}</if>  -->
+        <if test="shDelNy != null and !shDelNy.equals('')">AND a.bgDelNy = #{shDelNy}</if>
+				
+				<choose>
+					<when test="shOptionDate == 1">AND a.bgReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+					<when test="shOptionDate == 2">AND a.bgMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+ 				</choose>
+ 				
+        <choose>
+            <when test="shOption == 1">AND a.seq = #{shValue}</when>
+            <when test="shOption == 2">AND a.title LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND b.name LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
+	</sql>
 	<select id="selectCount" resultType="Integer">
 		select count(*)
 		<include refid="selectCommon"></include>
 	</select>
-
+	<select id="selectXdmCount" resultType="Integer">
+		select count(*)
+		<include refid="selectXdmCommon"></include>
+	</select>
+	<select id="blogAllCount" resultType="Integer">
+	select count(*)
+	from betterBlog
+	where 1=1 and
+	bgDelNy = 0
+	</select>
 	<select id="blogList" resultMap="resultMapObj">
 		select
 		a.seq,
@@ -44,6 +74,22 @@
 		a.bgReg,
 		a.bgMof
 		<include refid="selectCommon"></include>
+		order by a.seq desc
+
+	</select>
+	<select id="blogXdmList" resultMap="resultMapObj">
+		select
+		a.seq,
+		b.name,
+		b.nickName,
+		a.user_seq,
+		a.blogCategory_seq,
+		c.categoryName,
+		a.buied,
+		a.title,
+		a.bgReg,
+		a.bgMof
+		<include refid="selectXdmCommon"></include>
 		order by a.seq desc
 
 	</select>
@@ -114,6 +160,47 @@
 	#{betterBlog_seq},
 	#{user_seq}
 	)
+	</insert>
+	<insert id="insertBlog" useGeneratedKeys="true" keyProperty="blogKey">
+	insert into
+	betterBlog
+	(
+	blogIntroduction,
+	modelHeight,
+	modelWeight,
+	modelSize,
+	modelShoesSize,
+	blogCategory_seq,
+	user_seq,
+	title,
+	bgReg
+	)values
+	(
+	#{blogIntroduction},
+	#{modelHeight},
+	#{modelWeight},
+	#{modelSize},
+	#{modelShoesSize},
+	#{blogCategory_seq},
+	#{user_seq},
+	#{title},
+	now()
+	)
+	
+	</insert>
+	<insert id="insertClothe">
+	insert into clotheInfo
+	(
+	item,
+	itemBrand,
+	buyLink,
+	infoPrice,
+	betterBlog_seq,
+	ciReg
+	)values
+	<foreach collection="items" item="item" separator=",">
+	(#{item.item},#{item.itemBrand},#{item.buyLink},#{item.infoPrice},${blogKey},now())
+	</foreach>
 	</insert>
 	<update id="blogUpdate">
 	update betterBlog

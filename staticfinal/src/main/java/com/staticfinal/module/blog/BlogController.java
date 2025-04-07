@@ -27,16 +27,18 @@ public class BlogController {
 	UserService userService;
 	
 	@RequestMapping(value = "/blogXdmList")
-	public String blogXdmList(Model model,@ModelAttribute("vo")BannerVo vo,BlogDto blogDto){
-		vo.setParamsPaging(blogService.selectCount(vo));
+	public String blogXdmList(Model model,@ModelAttribute("vo")BannerVo vo,BlogDto blogDto,UserDto userDto ,HttpSession httpSession){
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
+		vo.setParamsPaging(blogService.selectXdmCount(vo));
 		
 //		model.addAttribute("vo",blogService.blogList(vo));
-		model.addAttribute("list",blogService.blogList(vo));
+		model.addAttribute("list",blogService.blogXdmList(vo));
 		
 		return "xdm/blog/blogXdmList";
 	}
 	@RequestMapping(value = "/blogXdmForm")
-	public String blogXdmView(Model model, BlogDto blogDto) {
+	public String blogXdmView(Model model, BlogDto blogDto,UserDto userDto , HttpSession httpSession) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		if (blogDto.getSeq().equals("0") || blogDto.getSeq().equals("")) {
 //			insert mode
 			model.addAttribute("bcList",blogService.blogCategoryList(blogDto));
@@ -104,6 +106,18 @@ public class BlogController {
 		}catch (Exception e){
 			return "redirect:/blogUsrList";
 		}
+	}
+	@RequestMapping(value = "blogUsrForm")
+	public String blogUsrForm(BlogDto blogDto, HttpSession httpSession,UserDto userDto) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		return "usr/blog/blogUsrForm";
+	}
+	@RequestMapping(value = "blogUsrInst")
+	public String blogUsrInst(BlogDto blogDto, HttpSession httpSession,UserDto userDto) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		blogService.insertBlog(blogDto);
+		blogService.insertClothe(blogDto);
+		return "redirect:/blogUsrList";
 	}
 	
 	

@@ -158,8 +158,8 @@
 											value="checke" onclick="updateSelectAll()">
 									</div>
 								</td>
-								<td th:text="${list.seq}"></td>
-								<td th:text="${list.seq}"></td>
+								<td th:text="${list.urSeq}"></td>
+								<td th:text="${list.urSeq}"></td>
 								<td><a th:href="@{/userXdmForm(seq=${list.seq})}"
 									th:text="${list.name}"></a></td>
 								<td th:text="${@codeService.selectOneCachedCode(list.gender)}"></td>

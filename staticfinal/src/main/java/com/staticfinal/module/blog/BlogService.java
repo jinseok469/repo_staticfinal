@@ -49,4 +49,19 @@ public class BlogService {
 	public int wishList(BlogDto blogDto) {
 		return blogDao.wishList(blogDto);
 	}
+	public List<BlogDto> blogXdmList(BannerVo vo){
+		return blogDao.blogXdmList(vo);
+	}
+	public int selectXdmCount(BannerVo vo) {
+		return blogDao.selectXdmCount(vo);
+	}
+	public int blogAllCount() {
+		return blogDao.blogAllCount();
+	}
+	public int insertBlog(BlogDto blogDto) {
+		return blogDao.insertBlog(blogDto);
+	}
+	public int insertClothe(BlogDto blogDto) {
+		return blogDao.insertClothe(blogDto);
+	}
 }

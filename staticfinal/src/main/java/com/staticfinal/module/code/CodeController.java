@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 
+import com.staticfinal.module.user.UserDto;
 import com.staticfinal.module.util.BannerVo;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CodeController {
@@ -20,15 +23,17 @@ public class CodeController {
 	
 	
 	@RequestMapping(value = "/codeXdmList")
-	public String codeXdmList(@ModelAttribute("vo")BannerVo vo,Model model,CodeDto codeDto) {
+	public String codeXdmList(@ModelAttribute("vo")BannerVo vo,Model model,CodeDto codeDto,UserDto userDto ,HttpSession httpSession) {
 		
 		vo.setParamsPaging(codeService.selectCount(vo));
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		model.addAttribute("list",codeService.codeList(vo));
 		model.addAttribute("cgList",codeService.codeGroupList(codeDto));
 		return "xdm/code/CodeXdmList";
 	}
 	@RequestMapping(value = "/codeXdmForm")
-	public String codeXdmForm(CodeDto codeDto,Model model,@ModelAttribute("vo")BannerVo vo) {
+	public String codeXdmForm(CodeDto codeDto,Model model,@ModelAttribute("vo")BannerVo vo,UserDto userDto,HttpSession httpSession) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		if (codeDto.getSeq().equals("0") || codeDto.getSeq().equals("")) {
 //			insert mode
 			model.addAttribute("cgList",codeService.codeGroupList(codeDto));

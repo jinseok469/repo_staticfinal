@@ -21,5 +21,10 @@ public interface BlogDao {
 	public int bgUelete(@Param("seqList")List<String> seq);
 	public BlogDto blogCategory(BlogDto blogDto);
 	public int wishList(BlogDto blogDto);
+	public List<BlogDto> blogXdmList(BannerVo vo);
+	public int selectXdmCount(BannerVo vo);
+	public int blogAllCount();
+	public int insertBlog(BlogDto blogDto);
+	public int insertClothe(BlogDto blogDto);
 	
 }

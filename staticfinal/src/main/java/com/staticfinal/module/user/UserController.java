@@ -24,9 +24,9 @@ public class UserController {
 	CodeService codeService;
 
 	@RequestMapping(value = "/userXdmList")
-	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo) {
+	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo,UserDto userDto,HttpSession httpSession) {
 		vo.setParamsPaging(userService.selectCount(vo));
-		
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		model.addAttribute("list", userService.userList(vo));
 		
 //		model.addAttribute("vo",vo);
@@ -37,7 +37,8 @@ public class UserController {
 	
 
 	@RequestMapping(value = "/userXdmForm")
-	public String userXdmView(Model model, UserDto userDto) {
+	public String userXdmView(Model model, UserDto userDto,HttpSession httpSession) {
+userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		model.addAttribute("item", userService.userOne(userDto));
 
 		return "xdm/user/userXdmForm";
@@ -69,7 +70,7 @@ public class UserController {
 			returnMap.put("rt", "success");
 //			/		httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
 //			UserDto rtDto = userService.loginOne(userDto.getId(), userDto.getPassword());
-			httpSession.setAttribute("sessSeqXdm", value.getSeq());
+			httpSession.setAttribute("sessSeqXdm", value.getUrSeq());
 			httpSession.setAttribute("sessIdXdm", value.getId());
 			httpSession.setAttribute("sessNameXdm", value.getName());
 		} else {

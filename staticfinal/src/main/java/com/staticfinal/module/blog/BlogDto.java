@@ -1,5 +1,7 @@
 package com.staticfinal.module.blog;
 
+import java.util.List;
+
 public class BlogDto {
 	
 	private String seq;
@@ -25,8 +27,22 @@ public class BlogDto {
 	private String betterBlog_seq;
 	private String bgReg;
 	private String bgMof;
+	private List<BlogDto> items;
+	private String blogKey;
 	
 	
+	public String getBlogKey() {
+		return blogKey;
+	}
+	public void setBlogKey(String blogKey) {
+		this.blogKey = blogKey;
+	}
+	public List<BlogDto> getItems() {
+		return items;
+	}
+	public void setItems(List<BlogDto> items) {
+		this.items = items;
+	}
 	public String getBgReg() {
 		return bgReg;
 	}

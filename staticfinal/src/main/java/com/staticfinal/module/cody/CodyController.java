@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.staticfinal.module.user.UserDto;
 import com.staticfinal.module.util.BannerVo;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CodyController {
@@ -15,16 +18,18 @@ public class CodyController {
 	CodyService codyService;
 	
 	@RequestMapping(value = "/codyXdmList")
-	public String codyXdmList(@ModelAttribute("vo")BannerVo vo, Model model) {
-		
+	public String codyXdmList(@ModelAttribute("vo")BannerVo vo, Model model,UserDto userDto ,HttpSession httpSession) {
 		vo.setParamsPaging(codyService.selectCount(vo));
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
+		
 		model.addAttribute("codyList",codyService.codyList(vo));
 		System.out.println(vo.getThisPage());
 		return "xdm/cody/codyXdmList";
 	}
 	
 	@RequestMapping(value = "/codyXdmForm")
-	public String codyXdmForm(Model model,CodyDto codyDto) {
+	public String codyXdmForm(Model model,CodyDto codyDto,UserDto userDto ,HttpSession httpSession) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		model.addAttribute("item",codyService.codyOne(codyDto));
 		
 		return "xdm/cody/codyXdmForm";

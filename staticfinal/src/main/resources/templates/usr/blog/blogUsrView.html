@@ -31,7 +31,9 @@
 	<!-- navbar -->
 	<div class="border-bottom">
 	<form method="post" id="formList" class="needs-validation" novalidate>
-	<input name="blogCategory_seq" type="hidden" th:value="${item.blogCategory_seq}">
+	<input id="blogCategory_seq" name="blogCategory_seq" type="hidden" th:value="${item.blogCategory_seq}">
+	<input id="betterBlog_seq" name="betterBlog_seq" type="hidden" th:value="${item.seq}">
+	<input id="user_seq" name="user_seq" type="hidden" th:value="${item.user_seq}">
 		<div class="bg-light py-1">
 			<div class="container">
 				<div class="row">
@@ -50,12 +52,12 @@
 			<div class="container">
 				<div class="row w-100 align-items-center gx-lg-2 gx-0">
 					<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
-						<a class="navbar-brand d-none d-lg-block" href="./index.html">
+						<a class="navbar-brand d-none d-lg-block" href="/indexUsrView">
 							<img src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg" alt="eCommerce HTML Template" style="width: 7cap;" id="title-logo">
 							<label for="title-logo" style="padding-top: 3%; font-size:x-large ">내일은 맑음</label>
 						</a>
 						<div class="d-flex justify-content-between w-100 d-lg-none">
-							<a class="navbar-brand" href="./index.html">
+							<a class="navbar-brand" href="/indexUsrView">
 								<img src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg" alt="eCommerce HTML Template" />
 							</a>
 						</div>
@@ -88,7 +90,8 @@
 					</div>
 					<div class="col-lg-2 col-xxl-2 text-end col-md-6 col-7">
 					
-					<input type="hidden" name="seq" th:value="${session.sessSeqUsr}">
+					<input type="hidden" id="urSeq" name="urSeq" th:value="${session.sessSeqUsr}">
+					<input type="hidden" name="seq">
 						<div class="list-inline">
 							<div class="list-inline-item me-5">
 								<a href="/usr/template/staticfinal/dist/pages/shop-wishlist.html" class="text-muted position-relative">
@@ -825,8 +828,7 @@
 									<a class="btn btn-light" href="shop-wishlist.html" data-bs-toggle="tooltip"
 										data-bs-html="true" aria-label="Wishlist"><i
 											class="feather-icon icon-heart"></i></a>
-									<a class="btn btn-light" href="./shop-cart.html" data-bs-toggle="tooltip" data-bs-html="true"
-										aria-label="Compare"><i class="bi bi-cart"></i></a>
+									
 								</div>
 							</div>
 							<!-- hr -->
@@ -836,13 +838,10 @@
 								<table class="table table-borderless mb-0" style="font-size: 20px;">
 									<tbody>
 										<tr >
-											<td style="color: black; font-size: 22px; width:500px;">착용 아이템</td>
+											<td style="color: black; font-size: 22px; width:550px;">착용 아이템</td>
 											<td style="color: black; font-size: 22px; width:300px;">구매 링크</td>
 											<td style="color: black; font-size: 22px; width:200px;">가격</td>
-											<td>
-												<div class="form-check"><input type="checkbox" class="form-check-input"
-														name="checked" onclick="selectAll(this)" /></div>
-											</td>
+											
 
 										</tr>
 										<th:block th:each="infoList:${clotheList}">
@@ -850,18 +849,16 @@
 											<td th:text="${infoList.item}"></td>
 											<td><a th:href="${#strings.startsWith(infoList.buyLink, 'http')? infoList.buyLink : 'https://' +infoList.buyLink}" th:text="${infoList.buyLink}" target="_blank"></a></td>
 											<td th:text="${infoList.infoPrice}"></td>
-											<td>
-												<div class="form-check"><input type="checkbox" class="form-check-input"
-														name="checked" onclick="updateCheck()"></div>
-											</td>
+											<td><button type="button"><i class="bi bi-cart"></i></button></td>
 										</tr>
 										
 									</tbody>
 								</table>
 							</div>
-							<div class="mt-8">
+							<div class="mt-8 row" >
 								<!-- dropdown -->
-								<div class="dropdown">
+								
+								<div class="dropdown col-4">
 									<a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button"
 										data-bs-toggle="dropdown" aria-expanded="false">Share</a>
 
@@ -885,6 +882,13 @@
 											</a>
 										</li>
 									</ul>
+									
+								</div>
+								<div class="col-6" style="display:flex; justify-content:end;" id="blogUpdate">
+								<button type="button" class="btn btn-outline-secondary">수정</button>
+								</div>
+								<div class="col-2" style="display:flex; justify-content:start;" id="blogDelete">
+								<button type="button" class="btn btn-outline-secondary">삭제</button>
 								</div>
 							</div>
 						</div>
@@ -1663,6 +1667,16 @@
 
 		// 모든 체크박스가 체크되었을 때만 전체 선택 체크박스를 체크, 하나라도 해제되면 해제
 		selectAllCheckbox.checked = allChecked;
+	}
+	
+	console.log(document.getElementById("urSeq").value);
+	console.log(document.getElementById("betterBlog_seq").value);
+	if(document.getElementById("user_seq").value == document.getElementById("urSeq").value){
+		document.getElementById("blogUpdate").style.display="show";
+		document.getElementById("blogDelete").style.display="show";
+	}else{
+		document.getElementById("blogUpdate").style.display="none";
+		document.getElementById("blogDelete").style.display="none";
 	}
 	
 	</script>

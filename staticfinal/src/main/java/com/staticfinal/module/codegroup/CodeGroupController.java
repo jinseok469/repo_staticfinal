@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.staticfinal.module.user.UserDto;
 import com.staticfinal.module.util.BannerVo;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CodeGroupController {
@@ -23,9 +26,7 @@ public class CodeGroupController {
 	@RequestMapping(value="/codeGroupXdmList")
 	public String codeGruopXdmList(@ModelAttribute("vo")
 			BannerVo vo,
-//			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-//			@RequestParam(value = "perPage",required = false,defaultValue = "5" ) int perPage,
-			 
+			UserDto userDto,HttpSession httpSession,
 			Model model
 		) {
 		// 페이지 값을 설정
@@ -33,7 +34,7 @@ public class CodeGroupController {
 //	    vo.setThisPage(page);
 
 		vo.setParamsPaging(codeGroupService.selectOneCount(vo));
-		
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		
 		model.addAttribute("list",codeGroupService.selectList(vo));
 		
@@ -48,7 +49,8 @@ public class CodeGroupController {
 		return "xdm/codeGroup/CodeGroupXdmView";
 	}
 	@RequestMapping(value="/codeGroupXdmForm")
-	public String codeGroupXdmForm(@ModelAttribute("vo")BannerVo vo,CodeGroupDto codeGroupDto,Model model) {
+	public String codeGroupXdmForm(@ModelAttribute("vo")BannerVo vo,CodeGroupDto codeGroupDto,Model model,UserDto userDto,HttpSession httpSession) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		if (codeGroupDto.getSeq().equals("0") || codeGroupDto.getSeq().equals("")) {
 //			insert mode
 		} else {

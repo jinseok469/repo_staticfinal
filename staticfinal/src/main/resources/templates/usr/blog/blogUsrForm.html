@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="Codescandy" name="author">
+<title>내일은 맑음</title>
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.css"
+	rel="stylesheet" />
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/slick-carousel/slick/slick.css"
+	rel="stylesheet" />
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/slick-carousel/slick/slick-theme.css"
+	rel="stylesheet" />
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/tiny-slider/dist/tiny-slider.css"
+	rel="stylesheet" />
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon"
+	href="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg">
+
+
+<!-- Libs CSS -->
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/bootstrap-icons/font/bootstrap-icons.min.css"
+	rel="stylesheet">
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/feather-webfont/dist/feather-icons.css"
+	rel="stylesheet">
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.css"
+	rel="stylesheet">
+
+
+<!-- Theme CSS -->
+<link rel="stylesheet"
+	href="/usr/template/staticfinal/dist/assets/css/theme.min.css">
+</head>
+
+<body>
+	<!-- navbar -->
+	<div class="border-bottom">
+		<form method="post" id="formList" class="needs-validation" novalidate>
+			<input name="blogCategory_seq" type="hidden">
+			<input name="user_seq" type="hidden" th:value="${session.sessSeqUsr}">
+			<div class="bg-light py-1">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-12 text-center text-md-start">
+							<span>안녕하세요 ! 내일은 맑음은 날씨를 알려주고 오늘의 옷 코디를 추천해주는 웹 사이트 입니다 </span>
+						</div>
+						<div class="col-6 text-end d-none d-md-block">
+							<div id="logins">[[${session.sessNameUsr}]] 님 반가워요!</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="py-5">
+				<div class="container">
+					<div class="row w-100 align-items-center gx-lg-2 gx-0">
+						<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
+							<a class="navbar-brand d-none d-lg-block" href="/indexUsrView">
+								<img
+								src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg"
+								alt="eCommerce HTML Template" style="width: 7cap;"
+								id="title-logo"> <label for="title-logo"
+								style="padding-top: 3%; font-size: x-large">내일은 맑음</label>
+							</a>
+							<div class="d-flex justify-content-between w-100 d-lg-none">
+								<a class="navbar-brand" href="/indexUsrView"> <img
+									src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg"
+									alt="eCommerce HTML Template" />
+								</a>
+							</div>
+						</div>
+						<div class="col-xxl-5 col-lg-5 d-none d-lg-block">
+							<div class="input-group">
+								<input class="form-control rounded" type="search"
+									placeholder="Search for Location" /> <span
+									class="input-group-append">
+									<button
+										class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+										type="button">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round"
+											stroke-linejoin="round" class="feather feather-search">
+											<circle cx="11" cy="11" r="8"></circle>
+											<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+										</svg>
+									</button>
+								</span>
+							</div>
+						</div>
+
+						<div class="col-md-2 col-xxl-3 d-none d-lg-block">
+
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-outline-gray-400 text-muted">
+								<i class="feather-icon icon-map-pin me-2"></i> 검색
+							</button>
+						</div>
+						<div class="col-lg-2 col-xxl-2 text-end col-md-6 col-7">
+
+							<input type="hidden" name="urSeq"
+								th:value="${session.sessSeqUsr}"> <input type="hidden"
+								name="seq">
+							<div class="list-inline">
+								<div class="list-inline-item me-5">
+									<a
+										href="/usr/template/staticfinal/dist/pages/shop-wishlist.html"
+										class="text-muted position-relative"> <svg
+											xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round"
+											stroke-linejoin="round" class="feather feather-heart">
+										<path
+												d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+										</path>
+									</svg> <span id="wish"
+										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+											[[${session.sessWishUsr}]] <span class="visually-hidden">unread
+												messages</span>
+									</span>
+									</a>
+								</div>
+
+								<div class="list-inline-item me-5">
+									<a onclick="infoLink()" type="button"> <svg
+											xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+											viewBox="0 0 24 24" fill="none" stroke="gray"
+											stroke-width="2" stroke-linecap="round"
+											stroke-linejoin="round" class="feather feather-user">
+										<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+										<circle cx="12" cy="7" r="4"></circle>
+									</svg>
+									</a>
+								</div>
+								<div class="list-inline-item me-5 me-lg-0">
+									<a class="text-muted position-relative" type="button"
+										href="/usr/template/staticfinal/dist/pages/shop-cart.html">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round"
+											stroke-linejoin="round" class="feather feather-shopping-bag">
+										<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+										<line x1="3" y1="6" x2="21" y2="6"></line>
+										<path d="M16 10a4 4 0 0 1-8 0"></path>
+									</svg> <span id="cart"
+										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+											0 <span class="visually-hidden">unread messages</span>
+									</span>
+									</a>
+								</div>
+								<div class="list-inline-item d-inline-block d-lg-none">
+									<!-- Button -->
+									<button class="navbar-toggler collapsed" type="button"
+										data-bs-toggle="offcanvas" data-bs-target="#navbar-default"
+										aria-controls="navbar-default" aria-label="Toggle navigation">
+										<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+											fill="currentColor"
+											class="bi bi-text-indent-left text-primary"
+											viewBox="0 0 16 16">
+										<path
+												d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+									</svg>
+									</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<nav
+				class="navbar navbar-expand-lg navbar-light navbar-default py-0 pb-lg-4"
+				aria-label="Offcanvas navbar large">
+				<div class="container">
+					<div class="offcanvas offcanvas-start" tabindex="-1"
+						id="navbar-default" aria-labelledby="navbar-defaultLabel">
+						<div class="offcanvas-header pb-1">
+							<a href="/usr/template/staticfinal/dist/index.html"><img
+								src="/usr/template/staticfinal/dist/assets/images/logo/freshcart-logo.svg"
+								alt="eCommerce HTML Template" /></a>
+							<button type="button" class="btn-close"
+								data-bs-dismiss="offcanvas" aria-label="Close"></button>
+						</div>
+						<div class="offcanvas-body">
+							<div class="d-block d-lg-none mb-4">
+								<div class="input-group">
+									<input class="form-control rounded" type="search"
+										placeholder="Search for products" /> <span
+										class="input-group-append">
+										<button
+											class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+											type="button">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16"
+												height="16" viewBox="0 0 24 24" fill="none"
+												stroke="currentColor" stroke-width="2"
+												stroke-linecap="round" stroke-linejoin="round"
+												class="feather feather-search">
+												<circle cx="11" cy="11" r="8"></circle>
+												<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+											</svg>
+										</button>
+									</span>
+								</div>
+								<div class="mt-2">
+									<button type="button"
+										class="btn btn-outline-gray-400 text-muted w-100"
+										data-bs-toggle="modal" data-bs-target="#locationModal">
+										<i class="feather-icon icon-map-pin me-2"></i> Pick Location
+									</button>
+								</div>
+							</div>
+							<div class="d-block d-lg-none mb-4">
+								<a
+									class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+									data-bs-toggle="collapse" href="#collapseExample" role="button"
+									aria-expanded="false" aria-controls="collapseExample"> <span
+									class="me-2"> <svg xmlns="http://www.w3.org/2000/svg"
+											width="16" height="16" viewBox="0 0 24 24" fill="none"
+											stroke="currentColor" stroke-width="1.5"
+											stroke-linecap="round" stroke-linejoin="round"
+											class="feather feather-grid">
+										<rect x="3" y="3" width="7" height="7"></rect>
+										<rect x="14" y="3" width="7" height="7"></rect>
+										<rect x="14" y="14" width="7" height="7"></rect>
+										<rect x="3" y="14" width="7" height="7"></rect>
+									</svg>
+								</span> 메뉴
+								</a>
+								<div class="collapse mt-2" id="collapseExample">
+									<div class="card card-body">
+										<ul class="mb-0 list-unstyled">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="dropdown me-3 d-none d-lg-block">
+								<button class="btn btn-light px-6" type="button"
+									id="dropdownMenuButton1" data-bs-toggle="dropdown"
+									aria-expanded="false">
+									<span class="me-1"> <svg
+											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="1.2" stroke-linecap="round"
+											stroke-linejoin="round" class="feather feather-grid">
+										<rect x="3" y="3" width="7" height="7"></rect>
+										<rect x="14" y="3" width="7" height="7"></rect>
+										<rect x="14" y="14" width="7" height="7"></rect>
+										<rect x="3" y="14" width="7" height="7"></rect>
+									</svg>
+									</span> 메뉴
+								</button>
+
+							</div>
+							<div>
+								<ul class="navbar-nav align-items-center">
+									<li class="nav-item dropdown w-100 w-lg-auto"><a
+										class="nav-link " onclick="blogLink()" role="button">블로그</a>
+
+									</li>
+
+								</ul>
+
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+	</div>
+	<!-- Modal -->
+
+
+
+
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
+
+	<main class="main-content-wrapper" style="padding-left: 300px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-12">
+					<div class="row mb-9">
+
+						<div class="col-md-12">
+							<div>
+								<h2>코디 블로그 만들기</h2>
+								<!-- breacrumb -->
+								<!-- <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="#" class="text-inherit">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="text-inherit">Blog</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Create New Post</li>
+                            </ol>
+                        </nav> -->
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="row g-6">
+								<div class="col-lg-8 col-12">
+									<div class="card card-lg">
+										<div class="card-body p-6 d-flex flex-column gap-3">
+											<div class="col-12">
+												<!-- input -->
+												<label for="blognewTitle" class="form-label">제목</label> <input
+													type="text" class="form-control" id="title" name="title"
+													placeholder="제목을 입력해주세요" required autocomplete="off"/>
+												<div class="invalid-feedback">제목을 입력해주세요</div>
+											</div>
+											<div class="col-12">
+												<!-- heading -->
+												<label class="form-label">사진등록</label>
+
+												<!-- input -->
+												<div id="my-dropzone"
+													class="dropzone border-dashed rounded-2 min-h-0"></div>
+											</div>
+											<div class="col-12">
+												<label class="form-label" for="sell-product">소개</label>
+												<textarea class="form-control" id="blogIntroduction"
+													name="blogIntroduction" row="5" placeholder="인사말을 적어주세요"
+													required autocomplete="off"></textarea>
+												<!-- <div class="py-8" id="editor"></div> -->
+												<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+											</div>
+											<div class="col-12">
+												<label class="form-label" for="model-info">모델 정보</label>
+											</div>
+											<div class="row">
+												<div class="col-3">
+													<input type="text" class="form-control" name="modelHeight"
+														placeholder="모델 신장" autocomplete="off">
+												</div>
+												<div class="col-3">
+													<input type="text" class="form-control" name="modelWeight"
+														placeholder="모델 몸무게" autocomplete="off">
+												</div>
+												<div class="col-3">
+													<input type="text" class="form-control" name="modelSize"
+														placeholder="모델 옷 사이즈" autocomplete="off">
+												</div>
+												<div class="col-3">
+													<input type="text" class="form-control"
+														name="modelShoesSize" placeholder="모델 신발 사이즈" autocomplete="off">
+												</div>
+											</div>
+											<div class="col-12">
+												<hr>
+											</div>
+											<div class="row">
+												<div class="col-12">착용 아이템과 구매출처 (최대 5개)</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="item1" name="items[0].item" 
+														placeholder="착용아이템1" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="itemBrand1"
+														name="items[0].itemBrand"  placeholder="착용아이템1 (브랜드 이름)"
+														required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-9">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="buyLink1" name="items[0].buyLink"
+														 placeholder="착용 아이템1 (구매 링크)" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-3">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="infoPrice1"
+														name="items[0].infoPrice" placeholder="정보 공개 가격" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-12">
+													<hr>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="item2" name="items[1].item" 
+														placeholder="착용아이템2" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="itemBrand2"
+														name="items[1].itemBrand"  placeholder="착용아이템2 (브랜드 이름)"
+														required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-9">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="buyLink2" name="items[1].buyLink"
+														 placeholder="착용 아이템2 (구매 링크)" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-3">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="infoPrice2"
+														name="items[1].infoPrice"  placeholder="정보 공개 가격" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-12">
+													<hr>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="item3" name="items[2].item" 
+														placeholder="착용아이템3" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="itemBrand3"
+														name="items[2].itemBrand"  placeholder="착용아이템3 (브랜드 이름)"
+														required autocomplete="off" />
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-9">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="buyLink3" name="items[2].buyLink"
+														 placeholder="착용 아이템3 (구매 링크)" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-3">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="infoPrice3"
+														name="items[2].infoPrice"  placeholder="정보 공개 가격" required autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-12">
+													<hr>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="item4" name="items[3].item" 
+														placeholder="착용아이템4" required  autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="itemBrand4"
+														name="items[3].itemBrand"  placeholder="착용아이템4 (브랜드 이름)"
+														required autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-9">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="buyLink4" name="items[3].buyLink"
+														 placeholder="착용 아이템4 (구매 링크)" required autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-3">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="infoPrice4"
+														name="items[3].infoPrice"  placeholder="정보 공개 가격" required autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-12">
+													<hr>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="item5" name="items[4].item" 
+														placeholder="착용아이템5" required autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-6">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="itemBrand5"
+														name="items[4].itemBrand"  placeholder="착용아이템5 (브랜드 이름)"
+														required autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-9">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="buyLink5" name="items[4].buyLink"
+														 placeholder="착용 아이템5 (구매 링크)" required autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+												<div class="col-3">
+													<label for="blogdescriptionTextarea" class="form-label"></label>
+													<input class="form-control item" id="infoPrice5"
+														name="items[4].infoPrice"  placeholder="정보 공개 가격" required autocomplete="off"/>
+													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												</div>
+
+
+											</div>
+
+
+
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-12">
+									<div class="card card-lg">
+										<div class="card-body p-6 d-flex flex-column gap-3">
+											<div class="col-12">
+												<div class="d-flex flex-column gap-3">
+													<div>
+														<label for="validationCustom04" class="form-label">코디
+															카테고리</label> <select class="form-select" id="blogCategory_seq"
+															required>
+															<option value="">카테고리를 선택해주세요</option>
+
+															<option value="1">봄 남성코디</option>
+															<option value="2">봄 여성코디</option>
+															<option value="3">여름 남성코디</option>
+															<option value="4">여름 여성코디</option>
+															<option value="5">가을 남성코디</option>
+															<option value="6">가을 여성코디</option>
+															<option value="7">겨울 남성코디</option>
+															<option value="8">겨울 여성코디</option>
+														</select>
+														<div class="invalid-feedback">카테고리를 결정해주세요</div>
+													</div>
+													<div>
+														<!-- <label for="price" class="form-label">구독료</label> -->
+														<!-- <input type="text" class="form-control" id="price" placeholder="원하시는 구독료를 숫자로 적어주세요"> -->
+
+														<!-- <div>
+                                                    <label class="form-label" for="tags">Tags</label>
+                                                    <input name="tags" id="tags" value='[{"value":"grocery", "editable":false}, {"value":"shop"}]' class="w-100" placeholder="Tags" required />
+                                                    <div class="invalid-feedback">Please enter tags</div>
+                                                </div> -->
+													</div>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="d-flex flex-column gap-2">
+													<!-- <div>
+                                                <label for="blognewContent" class="form-label">SEO Content</label>
+                                                <input type="text" class="form-control" id="blognewContent" placeholder="Meta Title" required />
+
+                                                <div class="invalid-feedback">Please enter seo content</div>
+                                            </div> -->
+
+													<!-- <div>
+                                                <label for="blogdeseoTextarea" class="form-label visually-hidden">Content</label>
+                                                <textarea class="form-control" id="blogdeseoTextarea" row="7" placeholder="Meta Descriptions" required></textarea>
+                                                <div class="invalid-feedback">Please enter a message in the textarea.</div>
+                                            </div> -->
+												</div>
+											</div>
+											<div class="col-12">
+												<!-- <div class="form-check form-switch ps-0">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Publish</label>
+                                            <input class="form-check-input ms-auto" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked />
+                                        </div> -->
+											</div>
+											<div class="col-12">
+												<!-- <div class="form-check form-switch ps-0">
+                                            <label class="form-check-label" for="flexSwitchCheckChecked">Enable comments</label>
+                                            <input class="form-check-input ms-auto" type="checkbox" role="switch" id="flexSwitchCheckChecked" />
+                                        </div> -->
+											</div>
+											<div class="col-12">
+												<div class="d-flex flex-row gap-2">
+													<button class="btn btn-primary w-100" type="button"
+														id="blogInsert">등록하기</button>
+													<!-- <button class="btn btn-light w-100" type="button">Preview</button> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</div>
+	</main>
+	<!-- Footer -->
+	<div th:replace="~{usr/include/footer::footer}"></div>
+	<!-- footer -->
+	<!-- modal -->
+
+
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/@yaireo/tagify/dist/tagify.js"></script>
+	<!-- Libs JS -->
+	<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+	<!-- Theme JS -->
+	<script src="/usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
+			<script src="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+			<script src="/usr/template/staticfinal/dist/assets/js/vendors/dropzone.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/quill/dist/quill.min.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/editor.js"></script>
+
+
+	<!-- Javascript-->
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/rater-js/index.js"></script>
+<!-- 		<script src="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.js"></script> -->
+	<!-- Libs JS -->
+	<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+	<!-- Theme JS -->
+	<script src="/usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/jquery.min.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/tiny-slider/dist/min/tiny-slider.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/tns-slider.js"></script>
+	<script src="/usr/template/staticfinal/dist/assets/js/vendors/zoom.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/slick-carousel/slick/slick.min.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/slick-slider.js"></script>
+		<script src="/usr/template/staticfinal/dist/assets/js/vendors/dropzone.js"></script>
+	<script type="text/javascript">
+		let form = document.getElementById("formList");
+		let blogInsert = document.getElementById("blogInsert");
+		let itemBrand = document.getElementsByName("itemBrand");
+		let buyLink = document.getElementsByName("buyLink");
+		let infoPrice = document.getElementsByName("infoPrice");
+		let items = document.querySelector("input[name=items]");
+		let item = document.getElementsByClassName("item");
+		function infoLink() {
+			form.action = "/userUsrInfo";
+			form.submit();
+		}
+		function blogLink() {
+			document.querySelector("input[name=blogCategory_seq]").value = 1;
+			form.action = "/blogUsrList";
+			form.submit();
+		}
+		document.getElementById("blogCategory_seq").onchange=function(){
+			document.querySelector("input[name=blogCategory_seq]").value =	document.getElementById("blogCategory_seq").value;
+		}
+		blogInsert.onclick = function() {
+			for(let i = 0; i < item.length ; i++){
+				if(item[i].value == null || item[i].value == ""){
+					item[i].removeAttribute("name");
+					
+				}
+			}
+			form.action="/blogUsrInst";
+			form.submit();
+		}
+	</script>
+</body>
+
+</html>
