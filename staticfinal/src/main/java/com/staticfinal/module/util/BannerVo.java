@@ -1,5 +1,7 @@
 package com.staticfinal.module.util;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class BannerVo {
 
 	
@@ -143,13 +145,13 @@ public class BannerVo {
 			return shDateStart +" 00:00:00";
 		}
 
+		public String getShDateEndDB() {
+			return shDateEnd +" 23:59:59";
+		}
 		public void setShDateStartDB(String shDateStartDB) {
 			this.shDateStartDB = shDateStartDB;
 		}
 
-		public String getShDateEndDB() {
-			return shDateEnd +" 23:59:59";
-		}
 
 		public void setShDateEndDB(String shDateEndDB) {
 			this.shDateEndDB = shDateEndDB;
@@ -245,4 +247,13 @@ public class BannerVo {
 		public void setBlogCategory_seq(String blogCategory_seq) {
 			this.blogCategory_seq = blogCategory_seq;
 		}
+		
+		public  String encodeBcrypt(String planeText, int strength) {
+			  return new BCryptPasswordEncoder(strength).encode(planeText);
+		}
+		
+		public  boolean matchesBcrypt(String planeText, String hashValue, int strength) {
+			  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(strength);
+			  return passwordEncoder.matches(planeText, hashValue);
+			}
 }

@@ -29,8 +29,17 @@ public class BlogDto {
 	private String bgMof;
 	private List<BlogDto> items;
 	private String blogKey;
+	private String url;
 	
 	
+	
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public String getBlogKey() {
 		return blogKey;
 	}

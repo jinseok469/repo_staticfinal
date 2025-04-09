@@ -9,6 +9,7 @@
 				th:value="${vo.rowNumToShow}" />
 				<input type="hidden" name="betterBlog_seq">
 				<input type="hidden" name="user_seq">
+				<input type="hidden" name="url">
                   <!-- card -->
                   <div class="card mb-4 bg-light border-0">
                      <!-- card body -->
@@ -164,6 +165,8 @@
    <script type="text/javascript">
    let form = document.getElementById("formList");
    let url = window.location.pathname;
+	
+	document.querySelector("input[name=url]").value = url;
    console.log(document.querySelector("input[name=blogCategory_seq]").value)
    if(document.querySelector("input[name=blogCategory_seq]").value == 1){
 	   document.getElementById("spring").classList.remove("collapse");

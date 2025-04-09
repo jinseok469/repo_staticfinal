@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.staticfinal.module.code.CodeService;
@@ -99,11 +99,11 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 	
 	@ResponseBody
 	@RequestMapping(value = "/signinUsrProc")
-	public Map<String, Object> signinUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
+	public Map<String, Object> signinUsrProc(BannerVo vo,UserDto userDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		UserDto value = userService.loginOne(userDto);
-		
-		if (value != null && value.getUrDelNy() == 0) {
+		boolean bool =  vo.matchesBcrypt(userDto.getPassword(), value.getPassword(), 10);
+		if (value != null && value.getUrDelNy() == 0 && bool) {
 			returnMap.put("rt", "success");
 //			/		httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
 //			UserDto rtDto = userService.loginOne(userDto.getId(), userDto.getPassword());
@@ -134,11 +134,12 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 	}
 	@ResponseBody
 	@RequestMapping(value = "/signpwUsrProc")
-	public Map<String, Object> signpwUsrProc(UserDto userDto, HttpSession httpSession) throws Exception {
+	public Map<String, Object> signpwUsrProc(BannerVo vo,UserDto userDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
-		Integer value = userService.pwDistinct(userDto);
-		if (value == 0 || value == null) {
+		UserDto value = userService.userOne(userDto);
+		boolean bool = vo.matchesBcrypt(userDto.getPassword(), value.getPassword(), 10);
+		if (!bool) {
 			returnMap.put("rt", "success");
 			
 		} else {
@@ -167,7 +168,9 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 	}
 	
 	@RequestMapping(value = "/userUsrInst")
-	public String userUsrInst(UserDto userDto) {
+	public String userUsrInst(UserDto userDto,BannerVo vo) {
+		String pwd = vo.encodeBcrypt(userDto.getPassword(), 10);
+		userDto.setPassword(pwd);
 		userService.userInsert(userDto);
 		return "redirect:/signinUsrForm";
 	}
@@ -196,6 +199,10 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		userService.userUpdate(userDto);
 		}
 		httpSession.setAttribute("sessSeqUsr", userDto.getUrSeq());
+		System.out.println(userDto.getUrl());
+		System.out.println(userDto.getUrl());
+		System.out.println(userDto.getUrl());
+		System.out.println(userDto.getUrl());
 		return "redirect:"+userDto.getUrl();
 	}
 	@RequestMapping(value = "/userUsrAddr")
@@ -216,5 +223,6 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		model.addAttribute("item",userService.userOne(userDto));
 		return "usr/user/userUsrDele";
 	}
+	
 	
 }

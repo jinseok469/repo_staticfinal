@@ -64,4 +64,7 @@ public class BlogService {
 	public int insertClothe(BlogDto blogDto) {
 		return blogDao.insertClothe(blogDto);
 	}
+	public int wishDelete(BlogDto blogDto) {
+		return blogDao.wishDelete(blogDto);
+	}
 }

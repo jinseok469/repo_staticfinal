@@ -90,22 +90,36 @@ public class BlogController {
 	@RequestMapping(value = "blogUsrView")
 	public String blogUsrView(@ModelAttribute("vo")BannerVo vo,Model model,UserDto userDto, BlogDto blogDto, HttpSession httpSession) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		if(blogDto.getBlogCategory_seq() == null || blogDto.getBlogCategory_seq().equals("")) {
+			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+			blogDto.setSeq(String.valueOf(httpSession.getAttribute("sessBetterBlog_seq")));
+		}
 		model.addAttribute("item",blogService.blogOne(blogDto));
 		model.addAttribute("blogList", blogService.blogList(vo));
 		model.addAttribute("clotheList",blogService.betterInfo(blogDto));
-		
+		httpSession.setAttribute("sessBlogCategory_seq", blogDto.getBlogCategory_seq());
+		httpSession.setAttribute("sessBetterBlog_seq", blogDto.getSeq());
 		return "usr/blog/blogUsrView";
 	}
 	@RequestMapping(value = "/wishUsrInst")
 	public String wishUsrInst(BlogDto blogDto, HttpSession httpSession,UserDto userDto) throws Exception{
+		 String url = blogDto.getUrl();
 		try {
 		blogService.wishList(blogDto);
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		httpSession.setAttribute("sessWishUsr", userService.wishCount(userDto));
-		return "redirect:/blogUsrList";
+		return "redirect:"+url;
 		}catch (Exception e){
-			return "redirect:/blogUsrList";
+			
+			return "redirect:"+url;
 		}
+	}
+	@RequestMapping(value = "/wishUsrDele")
+	public String wishUsrDele(BlogDto blogDto) {
+		String url = blogDto.getUrl();
+		blogService.wishDelete(blogDto);
+		return "redirect:"+ url;
 	}
 	@RequestMapping(value = "blogUsrForm")
 	public String blogUsrForm(BlogDto blogDto, HttpSession httpSession,UserDto userDto) {
