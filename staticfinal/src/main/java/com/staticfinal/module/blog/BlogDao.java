@@ -27,4 +27,5 @@ public interface BlogDao {
 	public int insertBlog(BlogDto blogDto);
 	public int insertClothe(BlogDto blogDto);
 	public int wishDelete(BlogDto blogDto);
+	public int clotheInfoUpdate(BlogDto blogDto);
 }

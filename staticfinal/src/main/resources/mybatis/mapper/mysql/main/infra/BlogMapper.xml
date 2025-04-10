@@ -219,6 +219,16 @@
 			(#{item.item},#{item.itemBrand},#{item.buyLink},#{item.infoPrice},${blogKey},now())
 		</foreach>
 	</insert>
+	<update id="clotheInfoUpdate">
+		update clotheInfo
+		set
+		item = #{item},
+		infoPrice = #{infoPrice},
+		buyLink = #{buyLink},
+		betterBlog_seq = #{betterBlog_seq}
+		where 1=1
+		and seq = #{infoseq}
+	</update>
 	<update id="blogUpdate">
 		update betterBlog
 		set
@@ -233,7 +243,6 @@
 		blogCategory_seq = #{blogCategory_seq},
 		user_seq =
 		#{user_seq},
-		buied = #{buied},
 		title = #{title},
 		bgMof = now()
 		where 1=1

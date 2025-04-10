@@ -67,4 +67,7 @@ public class BlogService {
 	public int wishDelete(BlogDto blogDto) {
 		return blogDao.wishDelete(blogDto);
 	}
+	public int clotheInfoUpdate(BlogDto blogDto) {
+		return blogDao.clotheInfoUpdate(blogDto);
+	}
 }

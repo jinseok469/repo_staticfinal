@@ -92,15 +92,7 @@
 		a.id = #{id}
 		
 	</select>
-	<select id="loginDisplay" resultMap="resultMapObj">
-		 select
-		 a.id,
-		 a.password
-		 from
-		 user as a
-		 where 1=1 
-		 and a.seq =1
-	</select>
+	
 	<select id="idDistinct" resultType="Integer">
 	select
 	count(*)

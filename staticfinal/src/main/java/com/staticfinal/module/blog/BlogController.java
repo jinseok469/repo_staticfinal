@@ -102,6 +102,17 @@ public class BlogController {
 		httpSession.setAttribute("sessBetterBlog_seq", blogDto.getSeq());
 		return "usr/blog/blogUsrView";
 	}
+	@RequestMapping(value = "/blogUsrUpdt")
+	public String blogUsrUpdt(HttpSession httpSession,UserDto userDto,BlogDto blogDto) {
+		String url = blogDto.getUrl();
+		blogService.blogUpdate(blogDto);
+		return "redirect:"+url;
+	}
+	@RequestMapping(value = "/clotheInfoUsrUpdt")
+	public String clotheInfoUpdt(HttpSession httpSession,UserDto userDto, BlogDto blogDto) {
+		blogService.clotheInfoUpdate(blogDto);
+		return "redirect:/blogUsrView";
+	}
 	@RequestMapping(value = "/wishUsrInst")
 	public String wishUsrInst(BlogDto blogDto, HttpSession httpSession,UserDto userDto) throws Exception{
 		 String url = blogDto.getUrl();

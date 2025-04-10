@@ -27,9 +27,7 @@ public class UserService {
 	public UserDto loginOne(UserDto userDto) {
 		return userDao.loginOne(userDto);
 	}
-	public UserDto loginDisplay() {
-		return userDao.loginDisplay();
-	}
+	
 	public int userInsert(UserDto userDto) {
 		return userDao.userInsert(userDto);
 	}

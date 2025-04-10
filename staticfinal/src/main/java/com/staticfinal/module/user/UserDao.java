@@ -15,7 +15,6 @@ public interface UserDao {
 	public UserDto userOne(UserDto userDto);
 	public int selectCount(BannerVo vo);
 	public UserDto loginOne(UserDto userDto);
-	public UserDto loginDisplay();
 	public int userInsert(UserDto userDto);
 	public int userUpdate(UserDto userDto);
 	public int userPwupdate(UserDto userDto);

@@ -51,12 +51,10 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 
 	@RequestMapping(value = "/signinXdmForm")
 	public String signinXdmForm(Model model,UserDto userDto, HttpSession httpSession) {
-		model.addAttribute("login",userService.loginDisplay());
 		return "xdm/user/signinXdmForm";
 	}
 	@RequestMapping(value = "/signinUsrForm")
 	public String signinUsrForm(Model model,UserDto userDto, HttpSession httpSession) {
-		model.addAttribute("login",userService.loginDisplay());
 		return "usr/user/signinUsrForm";
 	}
 
