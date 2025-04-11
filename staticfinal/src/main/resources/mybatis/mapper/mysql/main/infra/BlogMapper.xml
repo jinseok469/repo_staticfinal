@@ -14,6 +14,7 @@
 		blogCategory as c on c.seq = a.blogCategory_seq
 		where 1=1 and
 		a.blogCategory_seq = #{blogCategory_seq}
+		
 		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy 
 			= #{shUseNy}</if> -->
 		<if test="shDelNy != null and !shDelNy.equals('')">AND a.bgDelNy = #{shDelNy}</if>
@@ -151,6 +152,7 @@
 		from
 		clotheInfo as b
 		where 1=1
+		and ifDelNy = 0
 		and b.betterBlog_seq = #{seq}
 		order by infoseq
 		asc
@@ -296,5 +298,20 @@
 		and user_seq =
 		#{user_seq}
 		betterBlog_seq = #{betterBlog_seq}
+	</delete>
+	<delete id="clotheDelete">
+		update clotheInfo
+		set
+		ifDelNy = 1
+		where 1=1
+		and seq = #{infoseq}
+		and betterBlog_seq = #{betterBlog_seq}
+	</delete>
+	<delete id="blogDelete">
+		update betterBlog
+		set
+		bgDelNy = 1
+		where 1=1
+		and seq = #{seq}
 	</delete>
 </mapper>

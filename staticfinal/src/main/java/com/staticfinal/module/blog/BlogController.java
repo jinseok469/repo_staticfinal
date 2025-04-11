@@ -113,6 +113,16 @@ public class BlogController {
 		blogService.clotheInfoUpdate(blogDto);
 		return "redirect:/blogUsrView";
 	}
+	@RequestMapping(value = "/blogUsrUele")
+	public String blogUsrUele(HttpSession httpSession, BlogDto blogDto) {
+		blogService.blogDelete(blogDto);
+		return "redirect:/blogUsrList";
+	}
+	@RequestMapping(value = "/clotheInfoUsrUele")
+	public String clotheInfoUele(HttpSession httpSession, BlogDto blogDto) {
+		blogService.clotheDelete(blogDto);
+		return "redirect:/blogUsrView";
+	}
 	@RequestMapping(value = "/wishUsrInst")
 	public String wishUsrInst(BlogDto blogDto, HttpSession httpSession,UserDto userDto) throws Exception{
 		 String url = blogDto.getUrl();

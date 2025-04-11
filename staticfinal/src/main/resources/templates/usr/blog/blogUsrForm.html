@@ -46,10 +46,10 @@
 
 <body>
 	<!-- navbar -->
-	<div class="border-bottom">
 		<form method="post" id="formList" class="needs-validation" novalidate>
-			<input name="blogCategory_seq" type="hidden">
-			<input name="user_seq" type="hidden" th:value="${session.sessSeqUsr}">
+	<div class="border-bottom">
+			<input name="blogCategory_seq" type="hidden"> <input
+				name="user_seq" type="hidden" th:value="${session.sessSeqUsr}">
 			<div class="bg-light py-1">
 				<div class="container">
 					<div class="row">
@@ -267,9 +267,7 @@
 							<div>
 								<ul class="navbar-nav align-items-center">
 									<li class="nav-item dropdown w-100 w-lg-auto"><a
-										class="nav-link " onclick="blogLink()" role="button">블로그</a>
-
-									</li>
+										class="nav-link " onclick="blogLink()" role="button">블로그</a></li>
 
 								</ul>
 
@@ -291,21 +289,12 @@
 	<main class="main-content-wrapper" style="padding-left: 300px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-3"></div>
 				<div class="col-12">
 					<div class="row mb-9">
-
 						<div class="col-md-12">
 							<div>
 								<h2>코디 블로그 만들기</h2>
-								<!-- breacrumb -->
-								<!-- <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="#" class="text-inherit">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="text-inherit">Blog</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Create New Post</li>
-                            </ol>
-                        </nav> -->
+
 							</div>
 						</div>
 					</div>
@@ -320,7 +309,7 @@
 												<!-- input -->
 												<label for="blognewTitle" class="form-label">제목</label> <input
 													type="text" class="form-control" id="title" name="title"
-													placeholder="제목을 입력해주세요" required autocomplete="off"/>
+													placeholder="제목을 입력해주세요" required autocomplete="off" />
 												<div class="invalid-feedback">제목을 입력해주세요</div>
 											</div>
 											<div class="col-12">
@@ -357,157 +346,56 @@
 												</div>
 												<div class="col-3">
 													<input type="text" class="form-control"
-														name="modelShoesSize" placeholder="모델 신발 사이즈" autocomplete="off">
+														name="modelShoesSize" placeholder="모델 신발 사이즈"
+														autocomplete="off">
 												</div>
 											</div>
 											<div class="col-12">
 												<hr>
 											</div>
-											<div class="row">
-												<div class="col-12">착용 아이템과 구매출처 (최대 5개)</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="item1" name="items[0].item" 
-														placeholder="착용아이템1" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+											<div class="row" id="item-control">
+												<div class="col-9">착용 아이템과 구매출처</div>
+												<div class="col-3"
+													style="display: flex; justify-content: end;">
+													<a style="color: black; width: 20px;" type="button"
+														class="btn-sm btn-outline-secondary" id="minusBtn"><i
+														class="bi bi-dash-lg"></i></a> <a style="color: black;"
+														type="button" class="btn-sm btn-outline-secondary"
+														id="plusBtn"><i class="bi bi-plus-lg"></i></a>
 												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="itemBrand1"
-														name="items[0].itemBrand"  placeholder="착용아이템1 (브랜드 이름)"
-														required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+												<div class="item-input row">
+													<div class="col-6">
+														<label for="blogdescriptionTextarea" class="form-label"></label>
+														<input class="form-control item " name="items[0].item"
+															placeholder="착용아이템" required autocomplete="off" />
+														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+													</div>
+													<div class="col-6">
+														<label for="blogdescriptionTextarea" class="form-label"></label>
+														<input class="form-control itemBrand "
+															name="items[0].itemBrand" placeholder="착용아이템 (브랜드 이름)"
+															required autocomplete="off" />
+														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+													</div>
+													<div class="col-9">
+														<label for="blogdescriptionTextarea" class="form-label"></label>
+														<input class="form-control buyLink "
+															name="items[0].buyLink" placeholder="착용 아이템 (구매 링크)"
+															required autocomplete="off" />
+														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+													</div>
+													<div class="col-3">
+														<label for="blogdescriptionTextarea" class="form-label"></label>
+														<input class="form-control infoPrice "
+															name="items[0].infoPrice" placeholder="정보 공개 가격" required
+															autocomplete="off" />
+														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+													</div>
+													<div class="col-12">
+														<hr>
+													</div>
 												</div>
-												<div class="col-9">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="buyLink1" name="items[0].buyLink"
-														 placeholder="착용 아이템1 (구매 링크)" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-3">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="infoPrice1"
-														name="items[0].infoPrice" placeholder="정보 공개 가격" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-12">
-													<hr>
-												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="item2" name="items[1].item" 
-														placeholder="착용아이템2" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="itemBrand2"
-														name="items[1].itemBrand"  placeholder="착용아이템2 (브랜드 이름)"
-														required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-9">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="buyLink2" name="items[1].buyLink"
-														 placeholder="착용 아이템2 (구매 링크)" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-3">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="infoPrice2"
-														name="items[1].infoPrice"  placeholder="정보 공개 가격" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-12">
-													<hr>
-												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="item3" name="items[2].item" 
-														placeholder="착용아이템3" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="itemBrand3"
-														name="items[2].itemBrand"  placeholder="착용아이템3 (브랜드 이름)"
-														required autocomplete="off" />
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-9">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="buyLink3" name="items[2].buyLink"
-														 placeholder="착용 아이템3 (구매 링크)" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-3">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="infoPrice3"
-														name="items[2].infoPrice"  placeholder="정보 공개 가격" required autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-12">
-													<hr>
-												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="item4" name="items[3].item" 
-														placeholder="착용아이템4" required  autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="itemBrand4"
-														name="items[3].itemBrand"  placeholder="착용아이템4 (브랜드 이름)"
-														required autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-9">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="buyLink4" name="items[3].buyLink"
-														 placeholder="착용 아이템4 (구매 링크)" required autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-3">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="infoPrice4"
-														name="items[3].infoPrice"  placeholder="정보 공개 가격" required autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-12">
-													<hr>
-												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="item5" name="items[4].item" 
-														placeholder="착용아이템5" required autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-6">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="itemBrand5"
-														name="items[4].itemBrand"  placeholder="착용아이템5 (브랜드 이름)"
-														required autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-9">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="buyLink5" name="items[4].buyLink"
-														 placeholder="착용 아이템5 (구매 링크)" required autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-												<div class="col-3">
-													<label for="blogdescriptionTextarea" class="form-label"></label>
-													<input class="form-control item" id="infoPrice5"
-														name="items[4].infoPrice"  placeholder="정보 공개 가격" required autocomplete="off"/>
-													<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
-												</div>
-
-
 											</div>
-
-
-
 										</div>
 									</div>
 								</div>
@@ -585,12 +473,13 @@
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
-				<div class="col"></div>
 			</div>
 		</div>
 	</main>
+	</form>
 	<!-- Footer -->
 	<div th:replace="~{usr/include/footer::footer}"></div>
 	<!-- footer -->
@@ -611,8 +500,10 @@
 
 	<script
 		src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
-			<script src="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-			<script src="/usr/template/staticfinal/dist/assets/js/vendors/dropzone.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/dropzone.js"></script>
 	<script
 		src="/usr/template/staticfinal/dist/assets/libs/quill/dist/quill.min.js"></script>
 	<script
@@ -622,7 +513,7 @@
 	<!-- Javascript-->
 	<script
 		src="/usr/template/staticfinal/dist/assets/libs/rater-js/index.js"></script>
-<!-- 		<script src="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.js"></script> -->
+	<!-- 		<script src="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.js"></script> -->
 	<!-- Libs JS -->
 	<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
 	<script
@@ -644,7 +535,8 @@
 		src="/usr/template/staticfinal/dist/assets/libs/slick-carousel/slick/slick.min.js"></script>
 	<script
 		src="/usr/template/staticfinal/dist/assets/js/vendors/slick-slider.js"></script>
-		<script src="/usr/template/staticfinal/dist/assets/js/vendors/dropzone.js"></script>
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/dropzone.js"></script>
 	<script type="text/javascript">
 		let form = document.getElementById("formList");
 		let blogInsert = document.getElementById("blogInsert");
@@ -652,7 +544,6 @@
 		let buyLink = document.getElementsByName("buyLink");
 		let infoPrice = document.getElementsByName("infoPrice");
 		let items = document.querySelector("input[name=items]");
-		let item = document.getElementsByClassName("item");
 		function infoLink() {
 			form.action = "/userUsrInfo";
 			form.submit();
@@ -662,17 +553,62 @@
 			form.action = "/blogUsrList";
 			form.submit();
 		}
-		document.getElementById("blogCategory_seq").onchange=function(){
-			document.querySelector("input[name=blogCategory_seq]").value =	document.getElementById("blogCategory_seq").value;
+		document.getElementById("blogCategory_seq").onchange = function() {
+			document.querySelector("input[name=blogCategory_seq]").value = document
+					.getElementById("blogCategory_seq").value;
 		}
+
 		blogInsert.onclick = function() {
-			for(let i = 0; i < item.length ; i++){
-				if(item[i].value == null || item[i].value == ""){
-					item[i].removeAttribute("name");
+			let itemInputs = document.querySelectorAll(".item-input");
+
+			for (let j = 0; j < itemInputs.length; j++) {
+				let ncheck = itemInputs[j].querySelectorAll("input");
+				for (let i = 0; i < ncheck.length; i++) {
+					if (ncheck[i].value == null
+							|| ncheck[i].value.trim() === "") {
+						ncheck[i].removeAttribute("name");
+					}
 				}
 			}
-			form.action="/blogUsrInst";
+			form.action = "/blogUsrInst";
 			form.submit();
+		}
+
+		document.querySelector("#plusBtn").onclick = function() {
+			let itemControl = document.querySelector("#item-control");
+			let itemInput = document.querySelector(".item-input");
+			let itemInputs = document.querySelectorAll(".item-input");
+			let col = itemInput.cloneNode(true);
+
+			col.querySelector(".item").value = "";
+			col.querySelector(".itemBrand").value = "";
+			col.querySelector(".buyLink").value = "";
+			col.querySelector(".infoPrice").value = "";
+			col.querySelector(".item").removeAttribute("name");
+			col.querySelector(".itemBrand").removeAttribute("name");
+			col.querySelector(".buyLink").removeAttribute("name");
+			col.querySelector(".infoPrice").removeAttribute("name");
+			col.querySelector(".item").setAttribute("name",
+					"items[" + itemInputs.length + "].item");
+			col.querySelector(".itemBrand").setAttribute("name",
+					"items[" + itemInputs.length + "].itemBrand");
+			col.querySelector(".buyLink").setAttribute("name",
+					"items[" + itemInputs.length + "].buyLink");
+			col.querySelector(".infoPrice").setAttribute("name",
+					"items[" + itemInputs.length + "].infoPrice");
+			itemInput.parentNode.appendChild(col);
+			console.log(col.querySelector(".item").name);
+		}
+
+		document.querySelector("#minusBtn").onclick = function() {
+			let itemControl = document.querySelector("#item-control");
+			let itemInput = itemControl.querySelectorAll(".item-input");
+			if (itemInput.length > 1) {
+				itemInput[itemInput.length - 1].remove();
+			} else {
+				return false;
+			}
+
 		}
 	</script>
 </body>

@@ -44,8 +44,8 @@
 
 <body>
 	<!-- navbar -->
-	<div class="border-bottom">
 		<form method="post" id="formList" class="needs-validation" novalidate>
+	<div class="border-bottom">
 			<input id="blogCategory_seq" name="blogCategory_seq" type="hidden"
 				th:value="${item.blogCategory_seq}"> <input
 				id="betterBlog_seq" name="betterBlog_seq" type="hidden"
@@ -273,9 +273,7 @@
 							<div>
 								<ul class="navbar-nav align-items-center">
 									<li class="nav-item dropdown w-100 w-lg-auto"><a
-										class="nav-link " onclick="blogLink()" role="button">블로그</a>
-
-									</li>
+										class="nav-link " onclick="blogLink()" role="button">블로그</a></li>
 
 								</ul>
 
@@ -857,10 +855,10 @@
 									style="display: inline;"></h1>
 								<span class="blogUpdatePencil"
 									style="display: flex; align-items: center;"><a
-										id="TitleUptBtn" type="button"
-										class="btn-sm btn-outline-secondary">
-										<i class="bi bi-pencil"></i>
-									</a></span>
+									id="TitleUptBtn" type="button"
+									class="btn-sm btn-outline-secondary"> <i
+										class="bi bi-pencil"></i>
+								</a></span>
 							</div>
 							<div class="mb-4">
 								<!-- rating -->
@@ -886,51 +884,52 @@
 							<div>
 								<!-- table -->
 								<table class="table table-borderless "
-									style="font-size: 20px; ">
+									style="font-size: large; text-align: center; width: 110%">
 									<tbody>
 										<tr>
-											<td style="color: black; font-size: 22px; width: 200px; height:50px;">
-												품목</td>
-											<td style="color: black; font-size: 22px; width: 300px;">구매
-												링크</td>
-											<td style="color: black; font-size: 22px; width: 200px;">가격</td>
-											<td style="width:100px;"></td>
-										
+											<td style="color: black;">품목</td>
+											<td style="color: black;">구매 링크</td>
+											<td style="color: black;">가격</td>
+											<td></td>
+											<td></td>
+											<td></td>
+
 
 										</tr>
 										<th:block th:each="infoList:${clotheList}">
 											<tr>
-										<td style="display:none;"><input type="hidden" name="betterBlog_seq" th:value="${session.sessBetterBlog_seq}"></td>
-										<td style="display:none;"><input type="hidden" name="infoseq" th:value="${infoList.infoseq}"></td>
-												<td th:text="${infoList.item}" class="view-mode" style="height:60px;"></td>
+												<td style="display: none;"><input type="hidden"
+													name="betterBlog_seq"
+													th:value="${session.sessBetterBlog_seq}"></td>
+												<td style="display: none;"><input type="hidden"
+													name="infoseq" th:value="${infoList.infoseq}"></td>
+												<td th:text="${infoList.item}" class="view-mode"></td>
 												<td class="view-mode"><a
 													th:href="${#strings.startsWith(infoList.buyLink, 'http')? infoList.buyLink : 'https://' +infoList.buyLink}"
 													th:text="${infoList.buyLink}" target="_blank"></a></td>
 												<td class="view-mode" th:text="${infoList.infoPrice}"></td>
-												<td class="edit-mode" style="display: none; "><input
+												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.item}"
 													name="item" /></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.buyLink}"
 													name="buyLink" /></td>
-												<td class="edit-mode" style="display: none; "><input
+												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.infoPrice}"
 													name="infoPrice" /></td>
-												<td class="shopCart" id="shopCart"><button
-														type="button">
-														<i class="bi bi-cart"></i>
-													</button></td>
-												<td class="blogUpdatePencil" style="width:100px" ><a
-														onclick="edit(this)" type="button"
-														class="btn-sm btn-outline-secondary" >
-														<i class="bi bi-pencil"></i>
-													</a><a type="button" class="btn-sm btn-outline-secondary" style="padding-left:20px;" ><i class="bi bi-x"></i></a></td>
-												
-												<td class="blogUpdateSave" style="display:none;"><button
-														onclick="save(this)" type="button"
-														class="btn btn-outline-secondary">
-															<i class="bi bi-server"></i>
-													</button></td>
+												<td class="shopCart" id="shopCart" style="display: none;"><a
+													type="button"> <i class="bi bi-cart"></i>
+												</a></td>
+												<td><a onclick="edit(this)" type="button"
+													class=" blogUpdatePencil"> <i class="bi bi-pencil"></i>
+												</a></td>
+												<td><a style="display: none;" onclick="uele(this)"
+													class="blogDeletePencil" type="button">x</a></td>
+
+												<td><a onclick="save(this)" type="button"
+													style="display: none;" class=" blogUpdateSave"> <i
+														class="bi bi-check-square"></i>
+												</a></td>
 											</tr>
 									</tbody>
 								</table>
@@ -958,7 +957,8 @@
 
 								<div class="col-3" style="display: flex; justify-content: end;"
 									id="blogDelete">
-									<button type="button" class="btn btn-outline-secondary">블로그 삭제</button>
+									<button type="button" onclick="blogDelete()"
+										class="btn btn-outline-secondary">블로그 삭제</button>
 								</div>
 							</div>
 						</div>
@@ -1016,10 +1016,10 @@
 												th:text="${item.blogIntroduction}"></p>
 											<span class="blogUpdatePencil"
 												style="display: flex; align-items: center;"><a
-													id="IntroductionUptBtn" type="button"
-													class="btn-sm btn-outline-secondary">
-													<i class="bi bi-pencil"></i>
-												</a></span>
+												id="IntroductionUptBtn" type="button"
+												class="btn-sm btn-outline-secondary"> <i
+													class="bi bi-pencil"></i>
+											</a></span>
 										</div>
 									</div>
 								</div>
@@ -1042,15 +1042,15 @@
 															class="form-control" type="text"
 															th:value="${item.modelHeight}" name="modelHeight"
 															style="display: inline; width: 100px;">
-														<button id="blogUpdateBtn2" type="button"
+															<button id="blogUpdateBtn2" type="button"
 																class="btn btn-outline-secondary">완료</button></td>
 														<td id="blogModelHeight"><span
-															th:text="${item.modelHeight}" 
-															style="display: inline; align-items: center;"></span>
-														<a id="ModelHeightUptBtn" type="button"
-																class="btn-sm btn-outline-secondary blogUpdatePencil">
+															th:text="${item.modelHeight}"
+															style="display: inline; align-items: center;"></span> <a
+															id="ModelHeightUptBtn" type="button"
+															class="btn-sm btn-outline-secondary blogUpdatePencil">
 																<i class="bi bi-pencil"></i>
-															</a></td>
+														</a></td>
 													</tr>
 													<tr>
 														<th>몸무게</th>
@@ -1058,31 +1058,31 @@
 															class="form-control" type="text" autocomplete="off"
 															th:value="${item.modelWeight}" name="modelWeight"
 															style="display: inline; width: 100px;">
-														<button id="blogUpdateBtn3" type="button"
+															<button id="blogUpdateBtn3" type="button"
 																class="btn btn-outline-secondary">완료</button></td>
 														<td id="blogModelWeight"><span
-															th:text="${item.modelWeight}" 
-															style="display: inline; align-items: center;"></span>
-														<a id="ModelWeightUptBtn" type="button"
-																class="btn-sm btn-outline-secondary blogUpdatePencil">
+															th:text="${item.modelWeight}"
+															style="display: inline; align-items: center;"></span> <a
+															id="ModelWeightUptBtn" type="button"
+															class="btn-sm btn-outline-secondary blogUpdatePencil">
 																<i class="bi bi-pencil"></i>
-															</a></td>
+														</a></td>
 													</tr>
 													<tr>
 														<th>착용 사이즈</th>
 														<td id="modelSize" style="display: none;"><input
 															class="form-control" type="text"
-															th:value="${item.modelSize}" name="modelSize" autocomplete="off"
-															style="display: inline; width: 100px;">
-														<button id="blogUpdateBtn" type="button"
+															th:value="${item.modelSize}" name="modelSize"
+															autocomplete="off" style="display: inline; width: 100px;">
+															<button id="blogUpdateBtn" type="button"
 																class="btn btn-outline-secondary">완료</button></td>
 														<td id="blogModelSize"><span
-															th:text="${item.modelSize}" 
-															style="display: inline; align-items: center;"></span>
-														<a id="ModelSizeUptBtn" type="button"
-																class="btn-sm btn-outline-secondary blogUpdatePencil">
+															th:text="${item.modelSize}"
+															style="display: inline; align-items: center;"></span> <a
+															id="ModelSizeUptBtn" type="button"
+															class="btn-sm btn-outline-secondary blogUpdatePencil">
 																<i class="bi bi-pencil"></i>
-															</a></td>
+														</a></td>
 													</tr>
 													<tr>
 														<th>신발 사이즈</th>
@@ -1090,15 +1090,15 @@
 															class="form-control" type="text"
 															th:value="${item.modelShoesSize}" name="modelShoesSize"
 															style="display: inline; width: 100px;" autocomplete="off">
-														<button id="blogUpdateBtn4" type="button"
+															<button id="blogUpdateBtn4" type="button"
 																class="btn btn-outline-secondary">완료</button></td>
 														<td id="blogModelShoesSize"><span
-															th:text="${item.modelShoesSize}" 
-															style="display: inline; align-items: center;"></span>
-														<a id="ModelShoesSizeUptBtn" type="button"
-																class="btn-sm btn-outline-secondary blogUpdatePencil">
+															th:text="${item.modelShoesSize}"
+															style="display: inline; align-items: center;"></span> <a
+															id="ModelShoesSizeUptBtn" type="button"
+															class="btn-sm btn-outline-secondary blogUpdatePencil">
 																<i class="bi bi-pencil"></i>
-															</a></td>
+														</a></td>
 													</tr>
 													<tr>
 														<!-- <th>Form</th>
@@ -1718,7 +1718,57 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalConfirmTitle">title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalConfirmBody">body</div>
+				<div class="modal-footer">
+					<button type="button" id="btnReturn"
+						class="btn btn-outline-secondary btn-sm btn_custom"
+						data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalDelete">
+						<i class="fa-solid fa-x fa-lg"></i>
+					</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalUelete">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalConfirm1" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalConfirmTitle1">title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalConfirmBody1">body</div>
+				<div class="modal-footer">
+					<button type="button" id="btnReturn1"
+						class="btn btn-outline-secondary btn-sm btn_custom"
+						data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalDelete1">
+						<i class="fa-solid fa-x fa-lg"></i>
+					</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalUelete1">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
 	<div th:replace="~{usr/include/footer::footer}"></div>
 	<!-- Javascript-->
 	<script
@@ -1806,15 +1856,18 @@
 	
 	console.log(document.getElementById("urSeq").value);
 	console.log(document.getElementById("user_seq").value);
-	const blogUpdateList = document.querySelectorAll(".blogUpdatePencil");
-	const shopCartList = document.querySelectorAll(".shopCart");
-
+	let blogUpdateList = document.querySelectorAll(".blogUpdatePencil");
+	let shopCartList = document.querySelectorAll(".shopCart");
+	let dele = document.querySelectorAll(".blogDeletePencil");
 	if (document.getElementById("user_seq").value === document.getElementById("urSeq").value) {
 	  for (let i = 0; i < blogUpdateList.length; i++) {
 	    blogUpdateList[i].style.display = "inline-block";
 	  }
 	  for (let i = 0; i < shopCartList.length; i++) {
 	    shopCartList[i].style.display = "none";
+	  }
+	  for (let i = 0 ; i< dele.length ; i++){
+		  dele[i].style.display = "inline-block";
 	  }
 	  document.getElementById("blogDelete").style.display = "block";
 	} else {
@@ -1823,6 +1876,9 @@
 	  }
 	  for (let i = 0; i < shopCartList.length; i++) {
 	    shopCartList[i].style.display = "inline-block";
+	  }
+	  for (let i = 0 ; i< dele.length ; i++){
+		  dele[i].style.display = "none";
 	  }
 	  document.getElementById("blogDelete").style.display = "none";
 	}
@@ -1897,6 +1953,9 @@
 		for(let i = 0 ; i < save.length; i++){
 			save[i].style.display = "";
 		}
+		for (let i = 0 ; i< dele.length ; i++){
+			  dele[i].style.display = "none";
+		  }
 	  }
 	function save(button){
 		let row = button.closest("tr");
@@ -1910,6 +1969,54 @@
 		}
 		form.action="/clotheInfoUsrUpdt";
 		form.submit();
+	}
+	
+	function uele(button){
+		let row = button.closest("tr");
+		let input = document.querySelectorAll("input");
+		let rowInput = row.querySelectorAll("input");
+		for(let i = 0 ; i < input.length; i++){
+			input[i].disabled = true;
+		}
+		for(let i = 0 ; i< rowInput.length; i++){
+			rowInput[i].disabled = false;
+		}
+		document.querySelector("#modalConfirmTitle").textContent = "확 인";
+		document.querySelector("#modalConfirmBody").textContent = "해당 항목을 삭제하시겠습니까 ?";
+		document.querySelector("#btnModalUelete").style.display = '';
+		document.querySelector("#btnModalDelete").style.display = 'none';
+		$("#modalConfirm").modal("show");    
+	}
+	document.querySelector("#btnModalUelete").onclick = function(){
+		
+		form.action="/clotheInfoUsrUele";
+		form.submit();
+	}
+	
+	document.querySelector("#btnReturn").onclick = function(){
+		let input = document.querySelectorAll("input");
+		for(let i = 0 ; i < input.length; i++){
+			input[i].disabled = false;
+			
+		}
+		return false;
+	}
+	function blogDelete(){
+		document.querySelector("#modalConfirmTitle1").textContent = "확 인";
+		document.querySelector("#modalConfirmBody1").textContent = "해당 블로그를 정말 삭제하시겠습니까 ?";
+		document.querySelector("#btnModalUelete1").style.display = '';
+		document.querySelector("#btnModalDelete1").style.display = 'none';
+		$("#modalConfirm1").modal("show");   
+	}
+	
+document.querySelector("#btnModalUelete1").onclick = function(){
+		
+		form.action="/blogUsrUele";
+		form.submit();
+	}
+	
+	document.querySelector("#btnReturn1").onclick = function(){
+		return false;
 	}
 	</script>
 </body>

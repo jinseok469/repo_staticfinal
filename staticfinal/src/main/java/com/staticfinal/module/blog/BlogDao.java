@@ -28,4 +28,6 @@ public interface BlogDao {
 	public int insertClothe(BlogDto blogDto);
 	public int wishDelete(BlogDto blogDto);
 	public int clotheInfoUpdate(BlogDto blogDto);
+	public int clotheDelete(BlogDto blogDto);
+	public int blogDelete(BlogDto blogDto);
 }

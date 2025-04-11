@@ -70,4 +70,10 @@ public class BlogService {
 	public int clotheInfoUpdate(BlogDto blogDto) {
 		return blogDao.clotheInfoUpdate(blogDto);
 	}
+	public int clotheDelete(BlogDto blogDto) {
+		return blogDao.clotheDelete(blogDto);
+	}
+	public int blogDelete(BlogDto blogDto) {
+		return blogDao.blogDelete(blogDto);
+	}
 }
