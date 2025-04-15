@@ -226,8 +226,7 @@
 		set
 		item = #{item},
 		infoPrice = #{infoPrice},
-		buyLink = #{buyLink},
-		betterBlog_seq = #{betterBlog_seq}
+		buyLink = #{buyLink}
 		where 1=1
 		and seq = #{infoseq}
 	</update>

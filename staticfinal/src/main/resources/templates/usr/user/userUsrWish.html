@@ -1,10 +1,142 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-</body>
+<div th:replace="~{usr/include/indexUsrHead::head}"></div>
+      <main>
+      <input type="hidden" name="seq">
+      <input type="hidden" name="blogCategory_seq">
+         <!-- section-->
+         <div class="mt-4">
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <!-- col -->
+                  <div class="col-12">
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- section -->
+         <section class="mt-8 mb-14">
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="mb-8">
+                        <!-- heading -->
+                        <h1 class="mb-1">나의 위시리스트</h1>
+                        <p>찜하기는 최대 5개 까지 가능합니다</p>
+                     </div>
+                     <div>
+                        <!-- table -->
+                        <div class="table-responsive">
+                           <table class="table text-nowrap table-with-checkbox">
+                              <thead class="table-light">
+                                 <tr>
+                                    <th>
+                                       <!-- form check -->
+<!--                                        <div class="form-check"> -->
+<!--                                           input -->
+<!--                                           <input class="form-check-input" type="checkbox" value="" id="checkAll" /> -->
+<!--                                           label -->
+<!--                                           <label class="form-check-label" for="checkAll"></label> -->
+<!--                                        </div> -->
+                                    </th>
+                                    <th></th>
+                                    <th>블로그 제목</th>
+                                    <th>작성자</th>
+                                    <!-- <th>Status</th> -->
+                                    <th>페이지로 이동하기</th>
+                                    <th>삭제</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr th:if="${!#lists.isEmpty(wishList)}" th:each="list :${wishList}">
+                                    <td class="align-middle">
+                                       <!-- form check -->
+<!--                                        <div class="form-check"> -->
+<!--                                           input -->
+<!--                                           <input class="form-check-input" type="checkbox" value="" id="chechboxTwo" /> -->
+<!--                                           label -->
+<!--                                           <label class="form-check-label" for="chechboxTwo"></label> -->
+<!--                                        </div> -->
+                                    </td>
+                                    <td class="align-middle">
+                                       <a  th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])"><img src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg" class="icon-shape icon-xxl" alt="" /></a>
+                                    </td>
+                                    <td class="align-middle">
+                                       <div>
+                                          <h5 class="fs-6 mb-0"><a href="./betterBlog.html" class="text-inherit" th:text="${list.title}"></a></h5>
+                                          <!-- <small>$.98 / lb</small> -->
+                                       </div>
+                                    </td>
+                                    <td class="align-middle" th:text="${list.nickName}"></td>
+                                    <!-- <td class="align-middle"><span class="badge bg-success">In Stock</span></td> -->
+                                    <td class="align-middle">
+                                       <div class="btn btn-primary btn-sm">이동하기</div>
+                                    </td>
+                                    <td class="align-middle">
+                                       <a href="#" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                          <i class="feather-icon icon-trash-2"></i>
+                                       </a>
+                                    </td>
+                                 </tr>
+                               
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </main>
+
+      <!-- Footer -->
+      <!-- footer -->
+<div th:replace="~{usr/include/footer::footer}"></div>
+      <!-- Javascript-->
+      <!-- Libs JS -->
+<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+<script src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+<!-- Theme JS -->
+<script src="/usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+<script type="text/javascript">
+let loginf = document.getElementById("loginf");
+let logins = document.getElementById("logins");
+let wish = document.getElementById("wish");
+let cart = document.getElementById("cart");
+let form = document.getElementById("formList");
+let sessionSeq = [[${session.sessSeqUsr}]];
+console.log(sessionSeq);
+if(!sessionSeq){
+	wish.style.display="none";
+	cart.style.display="none";
+	logins.style.display = "none";
+}else{
+	loginf.style.display = "none";
+}
+function infoLink() {
+	form.action ="/userUsrInfo";
+	form.submit();
+}
+function blogLink(){
+	document.querySelector("input[name=blogCategory_seq]").value = 1;
+	form.action ="/blogUsrList";
+	form.submit();
+}
+function blogView(num,num1){
+	console.log(num);
+	document.querySelector("input[name=seq]").value = num;
+	document.querySelector("input[name=blogCategory_seq]").value = num1;
+	form.action = "/blogUsrView";
+	form.submit();
+}
+
+
+</script>
+   </body>
 </html>

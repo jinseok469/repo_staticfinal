@@ -52,5 +52,8 @@ public class UserService {
 	public int wishCount(UserDto userDto) {
 		return userDao.wishCount(userDto);
 	}
+	public List<UserDto> wishListList(UserDto userDto){
+		return userDao.wishListList(userDto);
+	}
 	
 }

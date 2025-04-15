@@ -221,6 +221,12 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		model.addAttribute("item",userService.userOne(userDto));
 		return "usr/user/userUsrDele";
 	}
+	@RequestMapping(value = "/userUsrWish")
+	public String userUsrWish(HttpSession httpSession,Model model,UserDto userDto) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("wishList",userService.wishListList(userDto));
+		return "usr/user/userUsrWish";
+	}
 	
 	
 }

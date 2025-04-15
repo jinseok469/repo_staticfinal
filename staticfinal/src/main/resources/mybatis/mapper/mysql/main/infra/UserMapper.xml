@@ -92,6 +92,20 @@
 		a.id = #{id}
 		
 	</select>
+	<select id="wishListList" resultMap="resultMapObj">
+		select 
+		a.betterBlog_seq,
+		a.seq as wSeq,
+		b.title,
+		b.blogCategory_seq,
+		c.nickName
+		from
+		wishlist as a
+		left join betterBlog as b on b.seq = a.betterBlog_seq
+		left join user as c on c.seq = a.user_seq
+		where 1=1
+		and a.user_seq = #{urSeq}
+	</select>
 	
 	<select id="idDistinct" resultType="Integer">
 	select

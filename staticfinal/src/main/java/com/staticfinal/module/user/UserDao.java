@@ -23,4 +23,5 @@ public interface UserDao {
 	public Integer idDistinct(UserDto userDto);
 	public Integer pwDistinct(UserDto userDto);
 	public int wishCount(UserDto userDto);
+	public List<UserDto> wishListList(UserDto userDto);
 }

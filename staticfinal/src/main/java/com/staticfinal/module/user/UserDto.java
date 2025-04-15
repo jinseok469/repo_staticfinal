@@ -16,8 +16,30 @@ public class UserDto {
 	private String urMof;
 	private String url;
 	private String urSeq;
+	private String title;
+	private String betterBlog_seq;
+	private String blogCategory_seq;
 	
 	
+	
+	public String getBlogCategory_seq() {
+		return blogCategory_seq;
+	}
+	public void setBlogCategory_seq(String blogCategory_seq) {
+		this.blogCategory_seq = blogCategory_seq;
+	}
+	public String getBetterBlog_seq() {
+		return betterBlog_seq;
+	}
+	public void setBetterBlog_seq(String betterBlog_seq) {
+		this.betterBlog_seq = betterBlog_seq;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getUrSeq() {
 		return urSeq;
 	}

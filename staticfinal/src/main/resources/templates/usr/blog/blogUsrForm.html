@@ -42,6 +42,17 @@
 <!-- Theme CSS -->
 <link rel="stylesheet"
 	href="/usr/template/staticfinal/dist/assets/css/theme.min.css">
+	<style>
+  .main-content-wrapper {
+    padding-left: 300px;
+  }
+
+  @media (max-width: 991.98px) {
+    .main-content-wrapper {
+      padding-left: 0 !important;
+    }
+  }
+</style>
 </head>
 
 <body>
@@ -115,7 +126,7 @@
 							<div class="list-inline">
 								<div class="list-inline-item me-5">
 									<a
-										href="/usr/template/staticfinal/dist/pages/shop-wishlist.html"
+										href="/userUsrWish"
 										class="text-muted position-relative"> <svg
 											xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 											viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -286,7 +297,7 @@
 	<script
 		src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
 
-	<main class="main-content-wrapper" style="padding-left: 300px;">
+	<main class="main-content-wrapper" >
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -331,20 +342,20 @@
 											<div class="col-12">
 												<label class="form-label" for="model-info">모델 정보</label>
 											</div>
-											<div class="row">
-												<div class="col-3">
+											<div class="row g-3">
+												<div class="col-sm-6 col-md-3">
 													<input type="text" class="form-control" name="modelHeight"
 														placeholder="모델 신장" autocomplete="off">
 												</div>
-												<div class="col-3">
+												<div class="col-sm-6 col-md-3">
 													<input type="text" class="form-control" name="modelWeight"
 														placeholder="모델 몸무게" autocomplete="off">
 												</div>
-												<div class="col-3">
+												<div class="col-sm-6 col-md-3">
 													<input type="text" class="form-control" name="modelSize"
 														placeholder="모델 옷 사이즈" autocomplete="off">
 												</div>
-												<div class="col-3">
+												<div class="col-sm-6 col-md-3">
 													<input type="text" class="form-control"
 														name="modelShoesSize" placeholder="모델 신발 사이즈"
 														autocomplete="off">
@@ -354,8 +365,8 @@
 												<hr>
 											</div>
 											<div class="row" id="item-control">
-												<div class="col-9">착용 아이템과 구매출처</div>
-												<div class="col-3"
+												<div class="col-md-9">착용 아이템과 구매출처</div>
+												<div class="col-md-3"
 													style="display: flex; justify-content: end;">
 													<a style="color: black; width: 20px;" type="button"
 														class="btn-sm btn-outline-secondary" id="minusBtn"><i
@@ -364,34 +375,34 @@
 														id="plusBtn"><i class="bi bi-plus-lg"></i></a>
 												</div>
 												<div class="item-input row">
-													<div class="col-6">
+													<div class="col-md-6">
 														<label for="blogdescriptionTextarea" class="form-label"></label>
 														<input class="form-control item " name="items[0].item"
 															placeholder="착용아이템" required autocomplete="off" />
 														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
 													</div>
-													<div class="col-6">
+													<div class="col-md-6">
 														<label for="blogdescriptionTextarea" class="form-label"></label>
 														<input class="form-control itemBrand "
 															name="items[0].itemBrand" placeholder="착용아이템 (브랜드 이름)"
 															required autocomplete="off" />
 														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
 													</div>
-													<div class="col-9">
+													<div class="col-md-9">
 														<label for="blogdescriptionTextarea" class="form-label"></label>
 														<input class="form-control buyLink "
 															name="items[0].buyLink" placeholder="착용 아이템 (구매 링크)"
 															required autocomplete="off" />
 														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
 													</div>
-													<div class="col-3">
+													<div class="col-md-3">
 														<label for="blogdescriptionTextarea" class="form-label"></label>
 														<input class="form-control infoPrice "
 															name="items[0].infoPrice" placeholder="정보 공개 가격" required
 															autocomplete="off" />
 														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
 													</div>
-													<div class="col-12">
+													<div class="col-md-12">
 														<hr>
 													</div>
 												</div>
@@ -422,44 +433,20 @@
 														<div class="invalid-feedback">카테고리를 결정해주세요</div>
 													</div>
 													<div>
-														<!-- <label for="price" class="form-label">구독료</label> -->
-														<!-- <input type="text" class="form-control" id="price" placeholder="원하시는 구독료를 숫자로 적어주세요"> -->
-
-														<!-- <div>
-                                                    <label class="form-label" for="tags">Tags</label>
-                                                    <input name="tags" id="tags" value='[{"value":"grocery", "editable":false}, {"value":"shop"}]' class="w-100" placeholder="Tags" required />
-                                                    <div class="invalid-feedback">Please enter tags</div>
-                                                </div> -->
+													
 													</div>
 												</div>
 											</div>
 											<div class="col-12">
 												<div class="d-flex flex-column gap-2">
-													<!-- <div>
-                                                <label for="blognewContent" class="form-label">SEO Content</label>
-                                                <input type="text" class="form-control" id="blognewContent" placeholder="Meta Title" required />
-
-                                                <div class="invalid-feedback">Please enter seo content</div>
-                                            </div> -->
-
-													<!-- <div>
-                                                <label for="blogdeseoTextarea" class="form-label visually-hidden">Content</label>
-                                                <textarea class="form-control" id="blogdeseoTextarea" row="7" placeholder="Meta Descriptions" required></textarea>
-                                                <div class="invalid-feedback">Please enter a message in the textarea.</div>
-                                            </div> -->
+													
 												</div>
 											</div>
 											<div class="col-12">
-												<!-- <div class="form-check form-switch ps-0">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Publish</label>
-                                            <input class="form-check-input ms-auto" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked />
-                                        </div> -->
+											
 											</div>
 											<div class="col-12">
-												<!-- <div class="form-check form-switch ps-0">
-                                            <label class="form-check-label" for="flexSwitchCheckChecked">Enable comments</label>
-                                            <input class="form-check-input ms-auto" type="checkbox" role="switch" id="flexSwitchCheckChecked" />
-                                        </div> -->
+											
 											</div>
 											<div class="col-12">
 												<div class="d-flex flex-row gap-2">

@@ -8,6 +8,7 @@
 				type="hidden" id="rowNumToShow" name="rowNumToShow"
 				th:value="${vo.rowNumToShow}" />
 				<input type="hidden" name="betterBlog_seq">
+				<input type="hidden" name="blogCategory_seq">
 				<input type="hidden" name="user_seq">
 				<input type="hidden" name="url">
                   <!-- card -->
@@ -67,7 +68,7 @@
                                  <div class="position-absolute top-0 start-0">
                                     <span class="badge bg-danger">Hot</span>
                                  </div>
-                                 <a th:onclick="blogView([[${list.seq}]])">
+                                 <a th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])">
                                     <!-- img -->
                                     <img src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
                                        alt="Grocery Ecommerce Template" class="mb-3 img-fluid" style="height: 222px; width: 100%;" />
@@ -247,8 +248,9 @@
 		form.action="/wishUsrInst";
 		form.submit();
 	}
-	function blogView(num){
+	function blogView(num,num1){
 		document.querySelector("input[name=seq]").value = num;
+		document.querySelector("input[name=blogCategory_seq]").value = num1;
 		form.action="/blogUsrView";
 		form.submit();
 	}
