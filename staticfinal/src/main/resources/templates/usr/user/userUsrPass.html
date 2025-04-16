@@ -17,8 +17,15 @@
 			<form class="row row-cols-1 row-cols-lg-2 needs-validation"
 				id="formList" method="post" novalidate>
 				<input type="hidden" name="url"> <input type="hidden" id="userSeq"
-					name="urSeq" th:value="${item.seq}">
+					name="urSeq" th:value="${session.sessSeqUsr}">
 				<!-- input -->
+				<div class="mb-3 col">
+					<label class="form-label" for="password">현재 비밀번호</label> <input
+						type="password" class="form-control" placeholder="**********"
+						id="PasswordNow" name="passwordNow" required  style="width:400px"/>
+					<div class="invalid-feedback" id="nowInvalid"></div>
+					<div class="valid-feedback" id="nowValid"></div>
+				</div>
 				<div class="mb-3 col">
 					<label class="form-label" for="password">새 비밀번호</label> <input
 						type="password" class="form-control" placeholder="**********"
@@ -190,7 +197,7 @@
 			document.getElementById("passwordInvalid").textContent = "항목을 다시 확인해 주세요!";
 			password.classList.add("is-invalid");
 			password.classList.remove("is-valid");
-			password.focus();
+// 			password.focus();
 		} else {
 			$
 					.ajax({
@@ -309,6 +316,43 @@
 		document.querySelector("input[name=blogCategory_seq]").value = 1;
 		form.action ="/blogUsrList";
 		form.submit();
+	}
+	let passwordNow = document.querySelector("#PasswordNow");
+	document.querySelector("#PasswordNow").onblur = function(){
+		if (passwordNow.value.trim() == null || passwordNow.value.includes(" ")
+				|| passwordNow.value.trim() == "") {
+			document.getElementById("nowInvalid").textContent = "항목을 다시 확인해 주세요!";
+			passwordNow.classList.remove("is-valid");
+			passwordNow.classList.add("is-invalid");
+			passwordNow.focus();
+		} else {
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			/* ,dataType:"json" */
+			,url: "/userUsrPassCheck"
+			/* ,data : $("#formLogin").serialize() */
+			,data : {
+				"password" : $("#PasswordNow").val(),
+				"urSeq" : $("#userSeq").val()
+				}
+			,success: function(response) {
+				if(response.rt == "success") {
+					passwordNow.classList.remove("is-invalid");
+					passwordNow.classList.add("is-valid");
+				} else {
+					document.getElementById("nowInvalid").textContent = "현재 비밀번호가 일치하지 않습니다 !";
+					passwordNow.classList.remove("is-valid");
+					passwordNow.classList.add("is-invalid");
+					passwordNow.focus();
+				}
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+		}
 	}
 </script>
 </body>

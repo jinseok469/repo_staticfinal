@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.staticfinal.module.blog.BlogService;
 import com.staticfinal.module.code.CodeService;
 import com.staticfinal.module.util.BannerVo;
 
@@ -21,7 +21,10 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
 	CodeService codeService;
+	@Autowired
+	BlogService blogService;
 
 	@RequestMapping(value = "/userXdmList")
 	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo,UserDto userDto,HttpSession httpSession) {
@@ -179,9 +182,10 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		return "usr/user/userUsrInfo";
 	}
 	@RequestMapping(value = "/userUsrUpdt")
-	public String userUsrUpdt(UserDto userDto, HttpSession httpSession) {
+	public String userUsrUpdt(UserDto userDto, HttpSession httpSession,BannerVo vo) {
 		if(userDto.getId() == null && userDto.getPassword() != null) {
 			userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+			userDto.setPassword(vo.encodeBcrypt(userDto.getPassword(), 10));
 			userService.userPwupdate(userDto);
 			return "redirect:/signinUsrForm";
 		}else if(userDto.getId() == null && userDto.getPassword() == null) {
@@ -224,9 +228,55 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 	@RequestMapping(value = "/userUsrWish")
 	public String userUsrWish(HttpSession httpSession,Model model,UserDto userDto) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		httpSession.setAttribute("sessWishUsr", userService.wishCount(userDto));
 		model.addAttribute("wishList",userService.wishListList(userDto));
 		return "usr/user/userUsrWish";
 	}
+	@ResponseBody
+	@RequestMapping(value = "/userUsrWishDele")
+	public Map<String,Object> userUsrWishDele(HttpSession httpSession,UserDto userDto,Model model){
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		if((userDto.getUrSeq() != null && userDto.getBetterBlog_seq() != null)
+				&&(userDto.getUrSeq() != "" && userDto.getBetterBlog_seq() != "")
+				) {
+			int wishDele = userService.wishDelete(userDto);
+			if(wishDele > 0) {
+				 resultMap.put("rt", "success");
+				 
+			}else {
+				resultMap.put("rt", "fail");
+			}
+		}else {
+			resultMap.put("rt", "fail");
+		}
+		return resultMap;
+	}
+	@RequestMapping(value = "/userUsrBuys")
+	public String userUsrBuys(HttpSession httpSession,Model model, UserDto userDto) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("buyPeople",userService.buyPeople(userDto));
+		model.addAttribute("sellPeople",userService.sellPeople(userDto));
+		
+		return "usr/user/userUsrBuys";
+	}
+	@RequestMapping(value = "/userUsrBlog")
+	public String userUsrBlog(HttpSession httpSession, Model model,UserDto userDto) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("myBlog",userService.myBlogList(userDto));
+		return "usr/user/userUsrBlog";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/userUsrPassCheck")
+	public Map<String,Object> userUsrPassCheck(UserDto userDto,BannerVo vo){
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+			UserDto value = userService.userOne(userDto);
+		boolean bool = vo.matchesBcrypt(userDto.getPassword(), value.getPassword(), 10);
+		if(	bool) {
+			resultMap.put("rt", "success");
+		}else {
+			resultMap.put("rt", "fail");
+		}
 	
-	
+	return resultMap;
+	}
 }

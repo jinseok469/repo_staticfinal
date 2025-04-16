@@ -10,18 +10,36 @@ public class UserDto {
 	private String password;
 	private String email;
 	private int urDelNy;
-	private String cdName;
-	private String lastSeq;
 	private String urReg;
 	private String urMof;
-	private String url;
 	private String urSeq;
+	
+	private String cdName;
+	
+	private String lastSeq;
+	
+	private String url;
+	
 	private String title;
 	private String betterBlog_seq;
 	private String blogCategory_seq;
+	private String item;
+	private String infoPrice;
 	
 	
 	
+	public String getItem() {
+		return item;
+	}
+	public void setItem(String item) {
+		this.item = item;
+	}
+	public String getInfoPrice() {
+		return infoPrice;
+	}
+	public void setInfoPrice(String infoPrice) {
+		this.infoPrice = infoPrice;
+	}
 	public String getBlogCategory_seq() {
 		return blogCategory_seq;
 	}

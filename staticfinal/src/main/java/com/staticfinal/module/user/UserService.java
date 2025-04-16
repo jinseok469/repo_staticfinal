@@ -55,5 +55,17 @@ public class UserService {
 	public List<UserDto> wishListList(UserDto userDto){
 		return userDao.wishListList(userDto);
 	}
+	public int wishDelete(UserDto userDto) {
+		return userDao.wishDelete(userDto);
+	}
+	public UserDto buyPeople(UserDto userDto) {
+		return userDao.buyPeople(userDto);
+	}
+	public UserDto sellPeople(UserDto userDto) {
+		return userDao.sellPeople(userDto);
+	}
+	public List<UserDto> myBlogList(UserDto userDto){
+		return userDao.myBlogList(userDto);
+	}
 	
 }

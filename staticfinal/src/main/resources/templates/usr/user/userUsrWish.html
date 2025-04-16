@@ -36,12 +36,6 @@
                                  <tr>
                                     <th>
                                        <!-- form check -->
-<!--                                        <div class="form-check"> -->
-<!--                                           input -->
-<!--                                           <input class="form-check-input" type="checkbox" value="" id="checkAll" /> -->
-<!--                                           label -->
-<!--                                           <label class="form-check-label" for="checkAll"></label> -->
-<!--                                        </div> -->
                                     </th>
                                     <th></th>
                                     <th>블로그 제목</th>
@@ -52,7 +46,11 @@
                                  </tr>
                               </thead>
                               <tbody>
+                              <tr  th:if="${#lists.isEmpty(wishList)}">
+                              <td colspan="6" style="text-align:center;" >찜한 블로그가 없습니다</td>
+                              </tr>
                                  <tr th:if="${!#lists.isEmpty(wishList)}" th:each="list :${wishList}">
+                                 <td style="display:none;"><input id="betterBlog_seq" name="betterBlog_seq" th:value="${list.betterBlog_seq}"></td>
                                     <td class="align-middle">
                                        <!-- form check -->
 <!--                                        <div class="form-check"> -->
@@ -67,17 +65,17 @@
                                     </td>
                                     <td class="align-middle">
                                        <div>
-                                          <h5 class="fs-6 mb-0"><a href="./betterBlog.html" class="text-inherit" th:text="${list.title}"></a></h5>
+                                          <h5 class="fs-6 mb-0"><a th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])"  class="text-inherit" th:text="${list.title}"></a></h5>
                                           <!-- <small>$.98 / lb</small> -->
                                        </div>
                                     </td>
                                     <td class="align-middle" th:text="${list.nickName}"></td>
                                     <!-- <td class="align-middle"><span class="badge bg-success">In Stock</span></td> -->
                                     <td class="align-middle">
-                                       <div class="btn btn-primary btn-sm">이동하기</div>
+                                       <div class="btn btn-primary btn-sm" th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])">이동하기</div>
                                     </td>
                                     <td class="align-middle">
-                                       <a href="#" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                       <a onclick="btnDelete()" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                           <i class="feather-icon icon-trash-2"></i>
                                        </a>
                                     </td>
@@ -90,6 +88,31 @@
                   </div>
                </div>
             </div>
+            <div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalConfirmTitle">title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalConfirmBody">body</div>
+				<div class="modal-footer">
+					<button type="button"
+						class="btn btn-outline-secondary btn-sm btn_custom" id="btnModalReturn"
+						data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalDelete">
+						<i class="fa-solid fa-x fa-lg"></i>
+					</button>
+					<button type="button" class="btn btn-danger btn-sm btn_custom"
+						name="" id="btnModalUelete">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
          </section>
       </main>
 
@@ -134,6 +157,43 @@ function blogView(num,num1){
 	document.querySelector("input[name=blogCategory_seq]").value = num1;
 	form.action = "/blogUsrView";
 	form.submit();
+}
+function btnDelete(){
+	document.querySelector("#modalConfirmTitle").textContent = "확 인";
+	document.querySelector("#modalConfirmBody").textContent = "해당 항목을 삭제하시겠습니까 ?";
+	document.querySelector("#btnModalUelete").style.display = '';
+	document.querySelector("#btnModalDelete").style.display = 'none';
+	$("#modalConfirm").modal("show");    
+}
+document.querySelector("#btnModalUelete").onclick = function(){
+	console.log("12323");
+	$.ajax({
+		async: true 
+		,cache: false
+		,type: "post"
+		/* ,dataType:"json" */
+		,url: "/userUsrWishDele"
+		/* ,data : $("#formLogin").serialize() */
+		,data : {
+			"urSeq" : $("#urSeq").val(), "betterBlog_seq" : $("#betterBlog_seq").val()
+			}
+		,success: function(response) {
+			if(response.rt == "success") {
+				
+					form.action = "/userUsrWish";
+					form.submit();
+				
+			} else {
+		 		alert($("#betterBlog_seq").val());
+			}
+		}
+		,error : function(jqXHR, textStatus, errorThrown){
+			alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+		}
+	});
+}
+document.querySelector("#btnModalReturn").onclick = function(){
+	return false;
 }
 
 

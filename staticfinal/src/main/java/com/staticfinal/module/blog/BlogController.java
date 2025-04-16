@@ -132,7 +132,8 @@ public class BlogController {
 		httpSession.setAttribute("sessWishUsr", userService.wishCount(userDto));
 		return "redirect:"+url;
 		}catch (Exception e){
-			
+			userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+			httpSession.setAttribute("sessWishUsr", userService.wishCount(userDto));
 			return "redirect:"+url;
 		}
 	}

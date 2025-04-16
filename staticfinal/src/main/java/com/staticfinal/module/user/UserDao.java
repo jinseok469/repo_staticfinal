@@ -24,4 +24,8 @@ public interface UserDao {
 	public Integer pwDistinct(UserDto userDto);
 	public int wishCount(UserDto userDto);
 	public List<UserDto> wishListList(UserDto userDto);
+	public int wishDelete(UserDto userDto);
+	public UserDto buyPeople(UserDto userDto);
+	public UserDto sellPeople(UserDto userDto);
+	public List<UserDto> myBlogList(UserDto userDto);
 }

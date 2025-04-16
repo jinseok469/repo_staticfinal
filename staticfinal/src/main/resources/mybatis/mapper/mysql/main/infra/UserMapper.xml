@@ -104,7 +104,31 @@
 		left join betterBlog as b on b.seq = a.betterBlog_seq
 		left join user as c on c.seq = a.user_seq
 		where 1=1
+		and b.bgDelNy = 0
 		and a.user_seq = #{urSeq}
+	</select>
+	<select id="buyPeople" resultMap="resultMapObj">
+		select
+		a.id,
+		a.nickName
+		from
+		user as a
+		where 1=1 
+		and a.seq = #{urSeq}
+	</select>
+	<select id="sellPeople" resultMap="resultMapObj">
+		select
+		a.id,
+		a.nickName,
+		b.item,
+		b.infoPrice,
+		c.title
+		from
+		user as a
+		left join betterBlog as c on a.seq = c.user_seq
+		left join clotheInfo as b on b.betterBlog_seq = c.seq
+		where 1=1 
+		and b.seq = #{seq}
 	</select>
 	
 	<select id="idDistinct" resultType="Integer">
@@ -127,10 +151,24 @@
 	<select id="wishCount" resultType="Integer">
 	select count(*)
 	from
-	wishlist
+	wishlist as a
+	left join betterBlog as b on a.betterBlog_seq = b.seq
 	where 1=1 
-	and user_seq = #{urSeq}
+	and b.bgDelNy = 0
+	and a.user_seq = #{urSeq}
 	
+	</select>
+	<select id="myBlogList" resultMap="resultMapObj">
+	select 
+	a.nickName,
+	b.title,
+	b.seq,
+	b.blogCategory_seq
+	from 
+	user as a
+	left join betterBlog as b on a.seq = b.user_seq
+	where 1=1
+	and a.seq = #{urSeq}
 	</select>
 	<insert id="userInsert"  useGeneratedKeys="true" keyProperty="lastSeq">
 	insert into
@@ -192,4 +230,12 @@
 	and seq = #{urSeq}
 	
 	</update>
+	<delete id="wishDelete">
+		delete from wishlist
+		where 1=1
+		and user_seq =
+		#{urSeq}
+		and
+		betterBlog_seq = #{betterBlog_seq}
+	</delete>
 </mapper>
