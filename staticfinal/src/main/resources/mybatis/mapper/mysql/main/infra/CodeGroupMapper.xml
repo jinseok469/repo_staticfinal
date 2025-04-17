@@ -8,21 +8,25 @@
 		type="com.staticfinal.module.codegroup.CodeGroupDto" id="resultMapObj"></resultMap>
 
 	<sql id="selectCommon">
-		 FROM codeGroup as a
-        WHERE 1=1
-<!--         <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy = #{shUseNy}</if> -->
-        <if test="shDelNy != null and !shDelNy.equals('')">AND a.cgDelNy = #{shDelNy}</if>
-				
-				<choose>
-					<when test="shOptionDate != null and !shOptionDate.equals('') and shOptionDate == 1">AND a.cgReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
-					<when test="shOptionDate != null and !shOptionDate.equals('') and shOptionDate == 2">AND a.cgMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
-				</choose>
-				
-        <choose>
-            <when test="shOption == 1">AND a.seq = #{shValue}</when>
-            <when test="shOption == 2">AND a.cgName LIKE CONCAT('%',#{shValue},'%')</when>
-             <when test="shOption == 3">AND a.ifcgNameEng LIKE CONCAT('%',#{shValue},'%')</when> 
-        </choose>
+		FROM codeGroup as a
+		WHERE 1=1
+		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy 
+			= #{shUseNy}</if> -->
+		<if test="shDelNy != null and !shDelNy.equals('')">AND a.cgDelNy = #{shDelNy}</if>
+
+		<choose>
+			<when
+				test="shOptionDate != null and !shOptionDate.equals('') and shOptionDate == 1">AND a.cgReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+			<when
+				test="shOptionDate != null and !shOptionDate.equals('') and shOptionDate == 2">AND a.cgMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when>
+		</choose>
+
+		<choose>
+			<when test="shOption == 1">AND a.seq = #{shValue}</when>
+			<when test="shOption == 2">AND a.cgName LIKE CONCAT('%',#{shValue},'%')</when>
+			<when test="shOption == 3">AND a.ifcgNameEng LIKE CONCAT('%',#{shValue},'%')
+			</when>
+		</choose>
 
 	</sql>
 
@@ -39,7 +43,9 @@
 		a.cgDelNy,
 		a.cgReg,
 		a.cgMof,
-		(select count(b.seq) from code as b where 1=1 and b.cdDelNy = 0 and b.codeGroup_seq = a.seq) as seqCount
+		(select count(b.seq)
+		from code as b where 1=1 and b.cdDelNy = 0 and b.codeGroup_seq =
+		a.seq) as seqCount
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
@@ -50,10 +56,12 @@
 		a.seq,
 		a.cgName,
 		a.cgDelNy,
-		(select count(b.seq) from code as b where 1=1 and b.cdDelNy = 0 and b.codeGroup_seq = a.seq) as seqCount
+		(select count(b.seq) from code as b where 1=1 and b.cdDelNy
+		= 0 and b.codeGroup_seq = a.seq) as seqCount
 		from
 		codeGroup as a
-		where 1=1 and
+		where
+		1=1 and
 		a.seq = #{seq}
 		order by a.seq desc
 	</select>
@@ -86,11 +94,12 @@
 		set
 		cgDelNy = 1
 		where seq in
-		<foreach collection="seqList" item="seq" open="(" separator="," close=")">
-		
-		#{seq}
+		<foreach collection="seqList" item="seq" open="("
+			separator="," close=")">
+
+			#{seq}
 		</foreach>
-		
+
 
 	</delete>
 	<delete id="delete">

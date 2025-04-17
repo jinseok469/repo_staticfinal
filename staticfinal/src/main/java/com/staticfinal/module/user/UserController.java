@@ -260,10 +260,25 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		return "usr/user/userUsrBuys";
 	}
 	@RequestMapping(value = "/userUsrBlog")
-	public String userUsrBlog(HttpSession httpSession, Model model,UserDto userDto) {
+	public String userUsrBlog(@ModelAttribute("vo")BannerVo vo,HttpSession httpSession, Model model,UserDto userDto) {
+		vo.setParamsPaging(userService.myBlogCount(vo));
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
-		model.addAttribute("myBlog",userService.myBlogList(userDto));
+		model.addAttribute("myBlog",userService.myBlogList(vo));
+		
 		return "usr/user/userUsrBlog";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/buysUsrInst")
+	public Map<String,Object> buysUsrInst(UserDto userDto) {
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		int buyCount = userService.buyCount(userDto);
+		if(buyCount > 0 ) {
+			resultMap.put("rt", "fail");
+		}else {
+			userService.buyInsert(userDto);
+			resultMap.put("rt", "success");
+		}
+		return resultMap;
 	}
 	@ResponseBody
 	@RequestMapping(value = "/userUsrPassCheck")
@@ -279,4 +294,21 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 	
 	return resultMap;
 	}
+	@RequestMapping(value = "/userUsrHist")
+	public String userUsrHist(HttpSession httpSession,Model model,UserDto userDto) {
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		model.addAttribute("list",userService.buySelect(userDto));
+		return "usr/user/userUsrHist";
+	}
+//	@ResponseBody
+//	@RequestMapping(value = "/userUsrHistCheck")
+//	public Map<String,Object> userUsrHistCheck(HttpSession httpSession,UserDto userDto) {
+//		Map<String,Object> resultMap = new HashMap<String,Object>();
+//		int buyCount = userService.buyCount(userDto);
+//		
+//		if(buyCount > 0 ) {
+//			
+//		}
+//		
+//	}
 }

@@ -66,6 +66,7 @@
 		a.password,
 		a.email,
 		a.postalCode,
+		a.streetAddress,
 		a.betterAddress,
 		a.urDelNy
 		from
@@ -92,13 +93,24 @@
 		a.id = #{id}
 		
 	</select>
+	<select id="wishListCount" resultType="integer">
+		select count(*)
+		from
+		wishlist as a
+		left join betterBlog as b on b.seq = a.betterBlog_seq
+		left join user as c on c.seq = a.user_seq
+		where 1=1
+		and b.bgDelNy = 0
+		and a.user_seq = #{urSeq}
+	</select>
 	<select id="wishListList" resultMap="resultMapObj">
 		select 
 		a.betterBlog_seq,
 		a.seq as wSeq,
 		b.title,
 		b.blogCategory_seq,
-		c.nickName
+		(select c.nickName from user as c where 1=1 and 
+		 c.seq = b.user_seq) as nickName
 		from
 		wishlist as a
 		left join betterBlog as b on b.seq = a.betterBlog_seq
@@ -120,15 +132,16 @@
 		select
 		a.id,
 		a.nickName,
-		b.item,
-		b.infoPrice,
-		c.title
+		b.title,
+		c.item,
+		c.infoPrice,
+		c.seq as infoseq
 		from
 		user as a
-		left join betterBlog as c on a.seq = c.user_seq
-		left join clotheInfo as b on b.betterBlog_seq = c.seq
+		left join betterBlog as b on a.seq = b.user_seq
+		left join clotheInfo as c on c.betterBlog_seq = b.seq
 		where 1=1 
-		and b.seq = #{seq}
+		and c.seq = #{infoseq}
 	</select>
 	
 	<select id="idDistinct" resultType="Integer">
@@ -158,17 +171,25 @@
 	and a.user_seq = #{urSeq}
 	
 	</select>
+	<sql id="myBlogCommon">
+	from 
+	user as a
+	left join betterBlog as b on a.seq = b.user_seq
+	where 1=1
+	and a.seq = #{urSeq}
+	</sql>
+	<select id="myBlogCount" resultType="integer">
+	select count(*)
+	<include refid="myBlogCommon"></include>
+	</select>
 	<select id="myBlogList" resultMap="resultMapObj">
 	select 
 	a.nickName,
 	b.title,
 	b.seq,
 	b.blogCategory_seq
-	from 
-	user as a
-	left join betterBlog as b on a.seq = b.user_seq
-	where 1=1
-	and a.seq = #{urSeq}
+	<include refid="myBlogCommon"></include>
+	limit #{startRnumForMysql},#{rowNumToShow}
 	</select>
 	<insert id="userInsert"  useGeneratedKeys="true" keyProperty="lastSeq">
 	insert into
@@ -183,6 +204,11 @@
 		email,
 		postalCode,
 		betterAddress,
+		streetAddress,
+		lotNameAddress,
+		notes,
+		latitude,
+		longitude,
 		urReg
 	)values
 	(
@@ -195,9 +221,65 @@
 		#{email},
 		#{postalCode},
 		#{betterAddress},
+		#{streetAddress},
+		#{lotNameAddress},
+		#{notes},
+		#{latitude},
+		#{longitude},
 		now()
 	)
 	</insert>
+	<insert id="buyInsert">
+		insert into buyInfo
+		(
+		user_seq,
+		clotheInfo_seq,
+		buyDate,
+		paymentCategory_seq
+		)
+		values
+		(
+		#{user_seq},
+		#{clotheInfo_seq},
+		now(),
+		1
+		)
+	</insert>
+	<select id="buyInfoSelect" resultType="java.lang.Integer">
+		select
+		a.clotheInfo_seq
+		from
+		buyInfo as a
+		where 1=1
+		and a.user_seq = #{urSeq}
+	
+	</select>
+	<select id="buySelect" resultMap="resultMapObj">
+		select 
+		a.user_seq,
+		a.clotheInfo_seq,
+		a.buyDate,
+		b.title,
+		b.seq,
+		b.blogCategory_seq,
+		c.item,
+		c.infoPrice
+		from
+		buyInfo as a
+		left join clotheInfo as c on c.seq = a.clotheInfo_seq
+		left join betterBlog as b on b.seq = c.betterBlog_seq
+		where 1=1
+		and a.user_seq = #{urSeq}
+	</select>
+	<select id="buyCount" resultType="integer">
+		select count(*)
+		from
+		buyInfo
+		where 1=1
+		and user_seq = #{user_seq}
+		and clotheInfo_seq = #{clotheInfo_seq}
+	
+	</select>
 	<update id="userUpdate">
 		update user
 		set

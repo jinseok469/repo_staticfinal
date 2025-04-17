@@ -54,6 +54,7 @@
 				type="hidden" id="url" name="url"> <input type="hidden"
 				id="urSeq" name="urSeq" th:value="${session.sessSeqUsr}"> <input
 				type="hidden" name="seq" th:value="${item.seq}">
+				<input type="hidden" name="infoseq">
 			<div class="bg-light py-1">
 				<div class="container">
 					<div class="row">
@@ -2026,9 +2027,13 @@ document.querySelector("#btnModalUelete1").onclick = function(){
 		return false;
 	}
 	function buy(num){
-		document.querySelector("input[name=seq]").value = num;
+		document.querySelector("input[name=infoseq]").value = num;
+		console.log(num);
 		form.action = "/userUsrBuys";
 		form.submit();
+	}
+	window.onload = function(){
+		
 	}
 	</script>
 </body>

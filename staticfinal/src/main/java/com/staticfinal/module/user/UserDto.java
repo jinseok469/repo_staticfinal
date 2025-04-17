@@ -13,7 +13,37 @@ public class UserDto {
 	private String urReg;
 	private String urMof;
 	private String urSeq;
+	private String streetAddress;
+	private String notes;
+	private double latitude;
+	private double longitude;
 	
+	
+	
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+	public String getNotes() {
+		return notes;
+	}
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 	private String cdName;
 	
 	private String lastSeq;
@@ -26,8 +56,38 @@ public class UserDto {
 	private String item;
 	private String infoPrice;
 	
+	private String clotheInfo_seq;
+	private String user_seq;
+	private String infoseq;
+	
+	private String buyDate;
 	
 	
+	
+	public String getBuyDate() {
+		return buyDate;
+	}
+	public void setBuyDate(String buyDate) {
+		this.buyDate = buyDate;
+	}
+	public String getInfoseq() {
+		return infoseq;
+	}
+	public void setInfoseq(String infoseq) {
+		this.infoseq = infoseq;
+	}
+	public String getClotheInfo_seq() {
+		return clotheInfo_seq;
+	}
+	public void setClotheInfo_seq(String clotheInfo_seq) {
+		this.clotheInfo_seq = clotheInfo_seq;
+	}
+	public String getUser_seq() {
+		return user_seq;
+	}
+	public void setUser_seq(String user_seq) {
+		this.user_seq = user_seq;
+	}
 	public String getItem() {
 		return item;
 	}

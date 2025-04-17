@@ -27,5 +27,11 @@ public interface UserDao {
 	public int wishDelete(UserDto userDto);
 	public UserDto buyPeople(UserDto userDto);
 	public UserDto sellPeople(UserDto userDto);
-	public List<UserDto> myBlogList(UserDto userDto);
+	public List<UserDto> myBlogList(BannerVo vo);
+	public int myBlogCount(BannerVo vo);
+	public int buyInsert(UserDto userDto);
+	public int buyCount(UserDto userDto);
+	public List<UserDto> buySelect(UserDto userDto);
+	public int wishListCount(UserDto userDto);
+	public List<Integer> buyInfoSelect(UserDto userDto);
 }

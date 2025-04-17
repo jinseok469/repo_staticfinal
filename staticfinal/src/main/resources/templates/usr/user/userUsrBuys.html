@@ -3,187 +3,217 @@
 
 <div th:replace="~{usr/include/indexUsrHead::head}"></div>
 
-	<main>
-		<!-- section-->
-		<div class="mt-4">
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- col -->
-					<div class="col-12">
-						
-                    
-					</div>
-				</div>
+<main>
+	<!-- section-->
+	<div class="mt-4">
+		<div class="container">
+			<input type="hidden" id="user_seq" name="user_seq"
+				th:value="${session.sessSeqUsr}"> <input type="hidden"
+				id="clotheInfo_seq" name="clotheInfo_seq"
+				th:value="${sellPeople.infoseq}">
+			<!-- row -->
+			<div class="row">
+				<!-- col -->
+				<div class="col-12"></div>
 			</div>
 		</div>
-		<!-- section -->
-		<section class="mt-8 mb-14">
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="mb-8">
-							<!-- heading -->
-							<h1 class="mb-1">결제</h1>
-							<p>결제 수단과 선택하신 항목을 확인합니다</p>
-						</div>
-						
-							<!-- table -->
-							<div class="row">
-								<div class="col-6">
-									<div class="card">
-									<div class="card-body">
+	</div>
+	<!-- section -->
+	<section class="mt-8 mb-14">
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="mb-8">
+						<!-- heading -->
+						<h1 class="mb-1">결제</h1>
+						<p>결제 수단과 선택하신 항목을 확인합니다</p>
+					</div>
+
+					<!-- table -->
+					<div class="row">
+						<div class="col-6">
+							<div class="card">
+								<div class="card-body">
 									<h3>구매자 정보</h3>
 									<hr>
 									<div class="row">
-										<div class="col-8" >
-									<label class="form-label" for="rf-name">아이디</label>
-									<input type="text" class="form-control" id=""  th:value="${buyPeople.id}" required
-										disabled />
-									</div>
-									<div class="col-2"></div>
+										<div class="col-8">
+											<label class="form-label" for="rf-name">아이디</label> <input
+												type="text" class="form-control" th:value="${buyPeople.id}"
+												required disabled />
+										</div>
+										<div class="col-2"></div>
 
 										<div class="col-8" style="padding-top: 10px;">
-									<label class="form-label" for="rf-name" >닉네임</label>
-									<input type="text" class="form-control" id=""  th:value="${buyPeople.nickName}" required
-										disabled />
-									</div>
-									<div class="col-2"></div>
-									
+											<label class="form-label" for="rf-name">닉네임</label> <input
+												type="text" class="form-control"
+												th:value="${buyPeople.nickName}" required disabled />
+										</div>
+										<div class="col-2"></div>
+
 									</div>
 									<hr>
 									<h3>판매자 정보</h3>
 									<hr>
 									<div class="row">
-										<div class="col-8" >
-									<label class="form-label" for="rf-name">아이디</label>
-									<input type="text" class="form-control"  id=""   th:value="${sellPeople.id}" required
-										disabled />
-									</div>
-									<div class="col-2"></div>
+										<div class="col-8">
+											<label class="form-label" for="rf-name">아이디</label> <input
+												type="text" class="form-control" th:value="${sellPeople.id}"
+												required disabled />
+										</div>
+										<div class="col-2"></div>
 
 										<div class="col-8" style="padding-top: 10px;">
-									<label class="form-label" for="rf-name" >닉네임</label>
-									<input type="text" class="form-control"  th:value="${sellPeople.nickName}"  required
-										disabled />
+											<label class="form-label" for="rf-name">닉네임</label> <input
+												type="text" class="form-control"
+												th:value="${sellPeople.nickName}" required disabled />
+										</div>
+										<div class="col-2"></div>
+
 									</div>
-									<div class="col-2"></div>
-									
-									</div>
-				
+
 								</div>
 							</div>
-							</div>
-								<div class="col-6">
-									<div class="card">
-										<div class="card-body">
-											<h3>상품 정보</h3>
-											<hr>
-											<div class="table-responsive">
-												<table class="table text-nowrap table-with-checkbox">
-												   <thead class="table-light">
-													  <tr>
-														 <th></th>
-														 <th></th>
-														 <th>상품명</th>
-														 <th></th>
-														 <th></th>
-														 <th>금액</th>
-													  </tr>
-												   </thead>
-												   <tbody>
-													  <tr>
-														 <td class="align-middle">
-															<a href="javascript:history.back()"><img src="usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg" class="icon-shape icon-xxl" alt="" /></a>
-														 </td>
-														 <td class="align-middle">
-															<div>
-															  
-															</div>
-														 </td>
-														 <td class="align-middle">
-															<h5 class="fs-6 mb-0" style="padding-top: 2px;" th:text="${sellPeople.item}"></h5>
-														 </td>
-														 <!-- <td class="align-middle"><span class="badge bg-success">In Stock</span></td> -->
-														 <td class="align-middle">
-															<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
-															<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
-															<!-- <input type="radio" id="kakaoPay" checked> -->
-														 </td>
-														 <td class="align-middle">
-															<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
-															<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
-														</td>
-														 <td class="align-middle" th:text="${sellPeople.infoPrice}">
-														
-															<!-- <a href="#" class="btn btn-secondary" type="button">
+						</div>
+						<div class="col-6">
+							<div class="card">
+								<div class="card-body">
+									<h3>상품 정보</h3>
+									<hr>
+									<div class="table-responsive">
+										<table class="table text-nowrap table-with-checkbox">
+											<thead class="table-light">
+												<tr>
+													<th></th>
+													<th></th>
+													<th>상품명</th>
+													<th></th>
+													<th></th>
+													<th>금액</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="align-middle"><a
+														href="javascript:history.back()"><img
+															src="usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
+															class="icon-shape icon-xxl" alt="" /></a></td>
+													<td class="align-middle">
+														<div></div>
+													</td>
+													<td class="align-middle">
+														<h5 class="fs-6 mb-0" style="padding-top: 2px;"
+															th:text="${sellPeople.item}"></h5>
+													</td>
+													<!-- <td class="align-middle"><span class="badge bg-success">In Stock</span></td> -->
+													<td class="align-middle">
+														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
+														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5> <!-- <input type="radio" id="kakaoPay" checked> -->
+													</td>
+													<td class="align-middle">
+														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
+														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
+													</td>
+													<td class="align-middle" th:text="${sellPeople.infoPrice}">
+
+														<!-- <a href="#" class="btn btn-secondary" type="button">
 															   결제하기
 															</a> -->
-														 </td>
-													  </tr>
-													  
-													  </tbody>
-													  </table>
-													  </div>
-													  <hr>
-													  <div class="row">
-														<div class="col-12">
-															<h3>결제 수단</h3>
-														</div>
-														
-														<div class="col-12">
-															<hr>
-															<div class="row" style="align-items: center;">
-																
-																<div class="col-3">
-																	<label for="kakaoPay">KakaoPay</label>
-															<input type="radio" class="form-check-input"
-															 id="kakaoPay" checked name="team">
-																</div>
-																<div class="col-3">
-																	<label for="samsung">SamsungPay</label>
-																	<input type="radio" class="form-check-input"
-																	 id="samsung" name="team">
-															</div>
-															<div class="col-3">
-																<label for="kbpay">KBPay</label>
-																<input type="radio" class="form-check-input"
-																 id="kbpay" name="team">
-														</div>
-														<div class="col-3">
-															<button class="btn btn-secondary">결제 하기</button>
-														</div>
-															</div>
-														</div>
-														
-													  </div>
-													  <hr>
-													 
-													  </div>
-													 
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-12">
+											<h3>결제 수단</h3>
+										</div>
+
+										<div class="col-12">
+											<hr>
+											<div class="row" style="align-items: center;">
+
+												<div class="col-3"></div>
+												<div class="col-3"></div>
+												<div class="col-3">
+													<label for="samsung">tossPay</label> <input type="radio"
+														class="form-check-input" id="tossPay" name="team" checked>
+												</div>
+												<div class="col-3">
+													<button type="button" id="btnBuys"
+														class="btn btn-secondary">결제 하기</button>
+												</div>
+											</div>
 										</div>
 
 									</div>
+									<hr>
+
 								</div>
-								
+
 							</div>
+
 						</div>
 					</div>
-		</section>
-	</main>
 
-	<!-- Footer -->
-	<!-- footer -->
+				</div>
+			</div>
+		</div>
+		  <div class="modal fade" id="buyModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+		  <div class="modal fade" id="buyModal1" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead1"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText1"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClicks()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+</main>
+
+<!-- Footer -->
+<!-- footer -->
 <div th:replace="~{usr/include/footer :: footer}"></div>
-	<!-- Javascript-->
-	<!-- Libs JS -->
-	<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
-	<script src="usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+<!-- Javascript-->
+<!-- Libs JS -->
+<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+<script
+	src="usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
 
-	<!-- Theme JS -->
-	<script src="usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+<!-- Theme JS -->
+<script src="usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
 <script type="text/javascript">
 let loginf = document.getElementById("loginf");
 let logins = document.getElementById("logins");
@@ -207,6 +237,42 @@ function blogLink(){
 	document.querySelector("input[name=blogCategory_seq]").value = 1;
 	form.action ="/blogUsrList";
 	form.submit();
+}
+document.getElementById("btnBuys").onclick = function(){
+$.ajax({
+	async: true 
+	,cache: false
+	,type: "post"
+	/* ,dataType:"json" */
+	,url: "/buysUsrInst"
+	/* ,data : $("#formLogin").serialize() */
+	,data : {
+		"user_seq" : $("#user_seq").val(), "clotheInfo_seq" : $("#clotheInfo_seq").val()
+		}
+	,success: function(response) {
+		if(response.rt == "success") {
+			document.getElementById("modalHead").textContent = "확인";
+			document.getElementById("modalText").textContent = "결제가 완료되었습니다";
+				$("#buyModal").modal("show");
+			
+		} else {
+			document.getElementById("modalHead1").textContent = "실패";
+			document.getElementById("modalText1").textContent = "이미 구매한 상품이거나 잘못된 접근 방식입니다";
+				$("#buyModal1").modal("show");
+	 		
+		}
+	}
+	,error : function(jqXHR, textStatus, errorThrown){
+		alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+	}
+});
+}
+function btnClick(){
+	form.action = "/userUsrHist";
+	form.submit();
+}
+function btnClicks(){
+	return false;
 }
 </script>
 </body>

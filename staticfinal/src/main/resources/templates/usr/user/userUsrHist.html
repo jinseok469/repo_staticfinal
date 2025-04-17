@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{usr/include/infoHead :: head}"></div>
+<input type="hidden" name="seq">
+<input type="hidden" name="blogCategory_seq">
+					<div class="col-lg-9 col-md-8 col-12">
+						<div class="py-6 p-md-6 p-lg-10">
+							<div class="mb-6">
+								<!-- heading -->
+								<h2 class="mb-0">구매한 블로그</h2>
+							</div>
+							
+							<hr class="my-10" />
+                          
+        
+                                    <div class="table-responsive-xxl border-0">
+                                        <!-- Table -->
+                                        <table class="table mb-0 text-nowrap table-centered">
+                                            <!-- Table Head -->
+                                            <thead class="bg-light">
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th>블로그</th>
+                                                    <th>구매 아이템</th>
+                                                    <th>구매 날짜</th>
+                                                    <!-- <th>Items</th> -->
+                                                    <!-- <th>Status</th> -->
+                                                    <th>구매 금액</th>
+        
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:if="${#lists.isEmpty(list)}">
+                                            <td colspan="4">구매 내역이 없습니다.</td>
+                                            </tr>
+                                                <!-- Table body -->
+                                                <tr th:if="${!#lists.isEmpty(list)}" th:each="list :${list}">
+                                                    <td class="align-middle border-top-0 w-0">
+                                                        <a th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])"><img src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
+                                                                alt="Ecommerce" class="icon-shape icon-xl" /></a>
+                                                    </td>
+                                                    <td class="align-middle border-top-0">
+                                                        <a th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])" class="fw-semibold text-inherit">
+                                                            <h6 class="mb-0" th:text="${list.title}"></h6>
+                                                        </a>
+                                                        <!-- <span><small class="text-muted">400g</small></span> -->
+                                                    </td>
+                                                    <td class="align-middle border-top-0">
+                                                       <h6 th:text="${list.item}"></h6>
+                                                       
+                                                    </td>
+                                                    <td class="align-middle border-top-0" th:text="${list.buyDate}"></td>
+                                                    <!-- <td class="align-middle border-top-0">1</td> -->
+                                                    <!-- <td class="align-middle border-top-0">
+                                                        <span class="badge bg-warning">Processing</span>
+                                                    </td> -->
+                                                    <td class="align-middle border-top-0" th:text="${list.infoPrice}"></td>
+                                                    <td class="text-muted align-middle border-top-0">
+                                                        <a th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])" class="text-inherit" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-title="View"><i
+                                                                class="feather-icon icon-eye"></i></a>
+                                                    </td>
+                                                </tr>
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- modal -->
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasAccount" aria-labelledby="offcanvasAccountLabel">
+		<!-- offcanvas header -->
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasAccountLabel">Offcanvas</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<!-- offcanvas body -->
+		<div class="offcanvas-body">
+			<ul class="nav flex-column nav-pills nav-pills-dark">
+				<!-- nav item -->
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="account-orders.html">
+						<i class="feather-icon icon-shopping-bag me-2"></i>
+						나의 블로그
+					</a>
+				</li>
+				<!-- nav item -->
+
+				<li class="nav-item">
+					<a class="nav-link active" href="account-settings.html">
+						<i class="feather-icon icon-settings me-2"></i>
+						개인정보 수정
+					</a>
+				</li>
+				<!-- nav item -->
+
+				<li class="nav-item">
+					<a class="nav-link" href="account-address.html">
+						<i class="feather-icon icon-map-pin me-2"></i>
+						비밀번호 변경
+					</a>
+				</li>
+				<!-- nav item -->
+
+				<li class="nav-item">
+					<a class="nav-link" href="account-payment-method.html">
+						<i class="feather-icon icon-credit-card me-2"></i>
+						회원 탈퇴
+					</a>
+				</li>
+				<!-- nav item -->
+
+				<li class="nav-item">
+					<a class="nav-link" href="account-notification.html">
+						<i class="feather-icon icon-bell me-2"></i>
+						Notification
+					</a>
+				</li>
+			</ul>
+			<hr class="my-6" />
+			<div>
+				<!-- navs -->
+				<ul class="nav flex-column nav-pills nav-pills-dark">
+					<!-- nav item -->
+					<li class="nav-item">
+						<a class="nav-link" href="../index.html">
+							<i class="feather-icon icon-log-out me-2"></i>
+							Log out
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<!-- footer -->
+	<div th:replace="~{usr/include/footer :: footer}"></div>
+	<!-- Javascript-->
+	<!-- Libs JS -->
+	<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+	<script src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+	<script src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
+
+	<!-- Theme JS -->
+	<script src="/usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+	
+	<script type="text/javascript">
+let form = document.getElementById("formList");
+function infoLink() {
+	form.action ="/userUsrInfo";
+	form.submit();
+}
+function blogLink(){
+	document.querySelector("input[name=blogCategory_seq]").value = 1;
+	form.action ="/blogUsrList";
+	form.submit();
+}
+$("#btnSignout").on(
+		"click",
+		function() {
+			$.ajax({
+				async : true,
+				cache : false,
+				type : "post",
+				url : "/signoutUsrProc",
+				data : {},
+				success : function(response) {
+					if (response.rt == "success") {
+
+						location.href = "/indexUsrView";
+					} else {
+						// by pass
+					}
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("ajaxUpdate " + jqXHR.textStatus + " : "
+							+ jqXHR.errorThrown);
+				}
+			});
+		});
+		
+let targetUrl = window.location.pathname; // 원하는 URL로 변경
+let main = document.querySelector("#hist");
+if ("/userUsrHist" === targetUrl) {
+	main.classList.add("active");
+
+}
+function blogView(num,num1){
+	console.log(num);
+	document.querySelector("input[name=seq]").value = num;
+	document.querySelector("input[name=blogCategory_seq]").value = num1;
+	form.action = "/blogUsrView";
+	form.submit();
+}
+</script>
+
+</body>
+
+</html>

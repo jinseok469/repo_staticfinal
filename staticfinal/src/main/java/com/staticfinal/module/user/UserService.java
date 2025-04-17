@@ -64,8 +64,26 @@ public class UserService {
 	public UserDto sellPeople(UserDto userDto) {
 		return userDao.sellPeople(userDto);
 	}
-	public List<UserDto> myBlogList(UserDto userDto){
-		return userDao.myBlogList(userDto);
+	public List<UserDto> myBlogList(BannerVo vo){
+		return userDao.myBlogList(vo);
+	}
+	public int myBlogCount(BannerVo vo) {
+		return userDao.myBlogCount(vo);
+	}
+	public int buyInsert(UserDto userDto) {
+		return userDao.buyInsert(userDto);
+	}
+	public int buyCount(UserDto UserDto) {
+		return userDao.buyCount(UserDto);
+	}
+	public List<UserDto> buySelect(UserDto userDto){
+		return userDao.buySelect(userDto);
+	}
+	public int wishListCount(UserDto userDto) {
+		return userDao.wishListCount(userDto);
+	}
+	public List<Integer> buyInfoSelect(UserDto userDto){
+		return userDao.buyInfoSelect(userDto);
 	}
 	
 }
