@@ -14,14 +14,19 @@
 			= #{shUseNy}</if> -->
 		<if test="shDelNy != null and !shDelNy.equals('')">AND a.urDelNy = #{shDelNy}</if>
 
-		<choose> <when test="shOptionDate != null and !shOptionDate.equals('') and shOptionDate == 1">
-		AND a.dob BETWEEN 
-			#{shDateStart} AND #{shDateEnd}</when> 
-			<when test="shOptionDate == 2">AND 
-			a.urReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when> 
-			<when test="shOptionDate == 3">AND 
-			a.urMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}</when> 
-			</choose>
+		<choose>
+			<when
+				test="shOptionDate != null and !shOptionDate.equals('') and shOptionDate == 1">
+				AND a.dob BETWEEN
+				#{shDateStart} AND #{shDateEnd}
+			</when>
+			<when test="shOptionDate == 2">AND
+				a.urReg BETWEEN #{shDateStartDB} AND #{shDateEndDB}
+			</when>
+			<when test="shOptionDate == 3">AND
+				a.urMof BETWEEN #{shDateStartDB} AND #{shDateEndDB}
+			</when>
+		</choose>
 		<choose>
 			<when test="shOption == 1">AND a.seq = #{shValue}</when>
 			<when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shValue},'%')</when>
@@ -68,6 +73,7 @@
 		a.postalCode,
 		a.streetAddress,
 		a.betterAddress,
+		a.notes,
 		a.urDelNy
 		from
 		user as a
@@ -91,7 +97,7 @@
 		user as a
 		where 1=1 and
 		a.id = #{id}
-		
+
 	</select>
 	<select id="wishListCount" resultType="integer">
 		select count(*)
@@ -104,16 +110,18 @@
 		and a.user_seq = #{urSeq}
 	</select>
 	<select id="wishListList" resultMap="resultMapObj">
-		select 
+		select
 		a.betterBlog_seq,
 		a.seq as wSeq,
 		b.title,
 		b.blogCategory_seq,
-		(select c.nickName from user as c where 1=1 and 
-		 c.seq = b.user_seq) as nickName
+		(select c.nickName from user
+		as c where 1=1 and
+		c.seq = b.user_seq) as nickName
 		from
 		wishlist as a
-		left join betterBlog as b on b.seq = a.betterBlog_seq
+		left join betterBlog as b
+		on b.seq = a.betterBlog_seq
 		left join user as c on c.seq = a.user_seq
 		where 1=1
 		and b.bgDelNy = 0
@@ -124,8 +132,9 @@
 		a.id,
 		a.nickName
 		from
-		user as a
-		where 1=1 
+		user
+		as a
+		where 1=1
 		and a.seq = #{urSeq}
 	</select>
 	<select id="sellPeople" resultMap="resultMapObj">
@@ -138,63 +147,66 @@
 		c.seq as infoseq
 		from
 		user as a
-		left join betterBlog as b on a.seq = b.user_seq
-		left join clotheInfo as c on c.betterBlog_seq = b.seq
-		where 1=1 
+		left join
+		betterBlog as b on a.seq = b.user_seq
+		left join clotheInfo as c on
+		c.betterBlog_seq = b.seq
+		where 1=1
 		and c.seq = #{infoseq}
 	</select>
-	
+
 	<select id="idDistinct" resultType="Integer">
-	select
-	count(*)
-	from
-	user as a
-	where 1=1
-	and binary a.id = binary #{id}
+		select
+		count(*)
+		from
+		user as a
+		where 1=1
+		and binary a.id = binary #{id}
 	</select>
 	<select id="pwDistinct" resultType="Integer">
-	select
-	count(*)
-	from
-	user as a
-	where 1=1
-	and seq = #{urSeq}
-	and binary a.password = binary #{password}
+		select
+		count(*)
+		from
+		user as a
+		where 1=1
+		and seq = #{urSeq}
+		and binary a.password = binary #{password}
 	</select>
 	<select id="wishCount" resultType="Integer">
-	select count(*)
-	from
-	wishlist as a
-	left join betterBlog as b on a.betterBlog_seq = b.seq
-	where 1=1 
-	and b.bgDelNy = 0
-	and a.user_seq = #{urSeq}
-	
+		select count(*)
+		from
+		wishlist as a
+		left join betterBlog as b on a.betterBlog_seq = b.seq
+		where 1=1
+		and b.bgDelNy = 0
+		and a.user_seq = #{urSeq}
+
 	</select>
 	<sql id="myBlogCommon">
-	from 
-	user as a
-	left join betterBlog as b on a.seq = b.user_seq
-	where 1=1
-	and a.seq = #{urSeq}
+		from
+		user as a
+		left join betterBlog as b on a.seq = b.user_seq
+		where 1=1
+		and a.seq = #{urSeq}
 	</sql>
 	<select id="myBlogCount" resultType="integer">
-	select count(*)
-	<include refid="myBlogCommon"></include>
+		select count(*)
+		<include refid="myBlogCommon"></include>
 	</select>
 	<select id="myBlogList" resultMap="resultMapObj">
-	select 
-	a.nickName,
-	b.title,
-	b.seq,
-	b.blogCategory_seq
-	<include refid="myBlogCommon"></include>
-	limit #{startRnumForMysql},#{rowNumToShow}
+		select
+		a.nickName,
+		b.title,
+		b.seq,
+		b.blogCategory_seq
+		<include refid="myBlogCommon"></include>
+		limit #{startRnumForMysql},#{rowNumToShow}
 	</select>
-	<insert id="userInsert"  useGeneratedKeys="true" keyProperty="lastSeq">
-	insert into
-	user
-	(
+	<insert id="userInsert" useGeneratedKeys="true"
+		keyProperty="lastSeq">
+		insert into
+		user
+		(
 		name,
 		gender,
 		dob,
@@ -205,13 +217,12 @@
 		postalCode,
 		betterAddress,
 		streetAddress,
-		lotNameAddress,
 		notes,
 		latitude,
 		longitude,
 		urReg
-	)values
-	(
+		)values
+		(
 		#{name},
 		#{gender},
 		#{dob},
@@ -222,12 +233,11 @@
 		#{postalCode},
 		#{betterAddress},
 		#{streetAddress},
-		#{lotNameAddress},
 		#{notes},
 		#{latitude},
 		#{longitude},
 		now()
-	)
+		)
 	</insert>
 	<insert id="buyInsert">
 		insert into buyInfo
@@ -252,10 +262,21 @@
 		buyInfo as a
 		where 1=1
 		and a.user_seq = #{urSeq}
-	
+
+	</select>
+	<select id="buySelectCount" resultType="integer">
+		select count(*)
+		from
+		buyInfo as a
+		left join clotheInfo as c on c.seq = a.clotheInfo_seq
+		left
+		join betterBlog as b on b.seq = c.betterBlog_seq
+		where 1=1
+		and
+		a.user_seq = #{urSeq}
 	</select>
 	<select id="buySelect" resultMap="resultMapObj">
-		select 
+		select
 		a.user_seq,
 		a.clotheInfo_seq,
 		a.buyDate,
@@ -266,7 +287,8 @@
 		c.infoPrice
 		from
 		buyInfo as a
-		left join clotheInfo as c on c.seq = a.clotheInfo_seq
+		left join clotheInfo as c on c.seq =
+		a.clotheInfo_seq
 		left join betterBlog as b on b.seq = c.betterBlog_seq
 		where 1=1
 		and a.user_seq = #{urSeq}
@@ -277,40 +299,56 @@
 		buyInfo
 		where 1=1
 		and user_seq = #{user_seq}
-		and clotheInfo_seq = #{clotheInfo_seq}
-	
+		and clotheInfo_seq =
+		#{clotheInfo_seq}
+
 	</select>
 	<update id="userUpdate">
 		update user
 		set
 		name = #{name},
 		gender = #{gender},
-		dob =  #{dob},
+		dob =
+		#{dob},
 		nickName = #{nickName},
 		id = #{id},
 		password = #{password},
-		email = #{email},
+		email
+		= #{email},
 		postalCode = #{postalCode},
-		betterAddress = #{betterAddress},
+		betterAddress =
+		#{betterAddress},
 		urMof = now()
-		where 1=1 
+		where 1=1
 		and seq = #{urSeq}
-	
+
 	</update>
 	<update id="userPwupdate">
-	update user
-	set
-	password = #{password}
-	where 1=1
-	and seq = #{urSeq}
+		update user
+		set
+		password = #{password}
+		where 1=1
+		and seq = #{urSeq}
 	</update>
 	<update id="userUelete">
-	update user
-	set
-	urDelNy = 1
-	where 1=1 
-	and seq = #{urSeq}
-	
+		update user
+		set
+		urDelNy = 1
+		where 1=1
+		and seq = #{urSeq}
+
+	</update>
+	<update id="userAddressUpdate">
+		update user
+		set 
+		streetAddress = #{streetAddress},
+		postalCode = #{postalCode},
+		notes = #{notes},
+		betterAddress = #{betterAddress}
+		where 1=1 
+		and seq = #{urSeq}
+		
+
 	</update>
 	<delete id="wishDelete">
 		delete from wishlist

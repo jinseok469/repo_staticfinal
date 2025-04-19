@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.staticfinal.module.blog.BlogService;
 import com.staticfinal.module.code.CodeService;
+import com.staticfinal.module.mail.MailService;
 import com.staticfinal.module.util.BannerVo;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,6 +26,8 @@ public class UserController {
 	CodeService codeService;
 	@Autowired
 	BlogService blogService;
+	@Autowired
+	MailService mailService;
 
 	@RequestMapping(value = "/userXdmList")
 	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo,UserDto userDto,HttpSession httpSession) {
@@ -169,10 +172,22 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 	}
 	
 	@RequestMapping(value = "/userUsrInst")
-	public String userUsrInst(UserDto userDto,BannerVo vo) {
+	public String userUsrInst(UserDto userDto,BannerVo vo) throws Exception {
 		String pwd = vo.encodeBcrypt(userDto.getPassword(), 10);
 		userDto.setPassword(pwd);
 		userService.userInsert(userDto);
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					mailService.sendMailWelcome(userDto);
+				}catch(Exception e){
+					e.printStackTrace();
+				};
+			}
+		});
+		thread.start();
+		
 		return "redirect:/signinUsrForm";
 	}
 	@RequestMapping(value = "/userUsrInfo")
@@ -212,6 +227,18 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		model.addAttribute("item",userService.userOne(userDto));
 		return "usr/user/userUsrAddr";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/userUsrAddrUpdt")
+	public Map<String,Object> userUsrAddrUpdt(UserDto userDto, HttpSession httpSession){
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		if(userDto.getBetterAddress() == null || userDto.getBetterAddress().equals("")) {
+			resultMap.put("rt", "fail");
+		}else {
+			userService.userAddressUpdate(userDto);
+			resultMap.put("rt", "success");
+		}
+		return resultMap;
 	}
 	@RequestMapping(value = "/userUsrPass")
 	public String userUsrPass(UserDto userDto, HttpSession httpSession,Model model) {
@@ -295,20 +322,12 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 	return resultMap;
 	}
 	@RequestMapping(value = "/userUsrHist")
-	public String userUsrHist(HttpSession httpSession,Model model,UserDto userDto) {
+	public String userUsrHist(HttpSession httpSession,Model model,UserDto userDto,@ModelAttribute("vo")BannerVo vo) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
-		model.addAttribute("list",userService.buySelect(userDto));
+		vo.setParamsPaging(userService.buySelectCount(vo));
+		vo.setUrSeq(userDto.getUrSeq());
+		model.addAttribute("list",userService.buySelect(vo));
 		return "usr/user/userUsrHist";
 	}
-//	@ResponseBody
-//	@RequestMapping(value = "/userUsrHistCheck")
-//	public Map<String,Object> userUsrHistCheck(HttpSession httpSession,UserDto userDto) {
-//		Map<String,Object> resultMap = new HashMap<String,Object>();
-//		int buyCount = userService.buyCount(userDto);
-//		
-//		if(buyCount > 0 ) {
-//			
-//		}
-//		
-//	}
+
 }

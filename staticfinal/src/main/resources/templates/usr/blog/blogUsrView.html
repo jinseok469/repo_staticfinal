@@ -897,9 +897,8 @@
 
 
 										</tr>
-										<th:block th:each="infoList:${clotheList}">
-											<tr>
-												<td style="display: none;"><input type="hidden"
+											<tr th:each="infoList:${clotheList}">
+												<td style="display: none;"><input class="infoseq" type="hidden"
 													name="infoseq" th:value="${infoList.infoseq}"></td>
 												<td th:text="${infoList.item}" class="view-mode"></td>
 												<td class="ssInfo view-mode"><a
@@ -910,13 +909,13 @@
 												<td class="view-mode" th:text="${infoList.infoPrice}"></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.item}"
-													name="item" /></td>
+													name="item" autocomplete="off"/></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.buyLink}"
-													name="buyLink" /></td>
+													name="buyLink" autocomplete="off"/></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.infoPrice}"
-													name="infoPrice" /></td>
+													name="infoPrice" autocomplete="off"/></td>
 												<td class="shopCart" id="shopCart" style="display: none;"><a
 													type="button"> <i class="bi bi-cart"></i>
 												</a></td>
@@ -1802,6 +1801,8 @@
 	let form = document.getElementById("formList");
 	let sessionSeq = [[${session.sessSeqUsr}]];
 	let url = window.location.pathname;
+	let buyInfoList = [[${buyInfoList}]];
+	console.log(buyInfoList);
 	document.getElementById("url").value = url;
 	if(!sessionSeq){
 		wish.style.display="none";
@@ -1886,6 +1887,7 @@
 		  buyInfo[i].style.display ="inline-block";
 	  }
 	  for(let i = 0 ; i< ssInfo.length; i++){
+		  console.log("ssInfo:"+ssInfo.length);
 		  ssInfo[i].style.display = "none";
 	  }
 	  document.getElementById("blogDelete").style.display = "none";
@@ -2033,7 +2035,18 @@ document.querySelector("#btnModalUelete1").onclick = function(){
 		form.submit();
 	}
 	window.onload = function(){
-		
+		let infoseq = document.querySelectorAll(".infoseq");
+		let ssInfo = document.querySelectorAll(".ssInfo");
+		let buyInfo = document.querySelectorAll(".buyInfo");
+		for(let i = 0 ; i < buyInfoList.length; i++){
+			for(let j = 0; j < infoseq.length; j++){
+				if(buyInfoList[i] == infoseq[j].value){
+					ssInfo[j].style.display = "inline-block";
+					buyInfo[j].style.display = "none";
+					break;
+				}
+			}
+		}
 	}
 	</script>
 </body>

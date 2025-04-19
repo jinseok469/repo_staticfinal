@@ -18,8 +18,17 @@ public class UserDto {
 	private double latitude;
 	private double longitude;
 	
+	private String tpTitle = "회원가입을 진심으로 축하드립니다";
 	
 	
+	
+	
+	public String getTpTitle() {
+		return tpTitle;
+	}
+	public void setTpTitle(String tpTitle) {
+		this.tpTitle = tpTitle;
+	}
 	public String getStreetAddress() {
 		return streetAddress;
 	}

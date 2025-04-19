@@ -203,32 +203,30 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-12 col-md-6">
-					<div>
-						<div class="py-10 px-8 rounded"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/indexBlog.jpg) no-repeat; background-size: cover; background-position: center">
-							<div>
-								<h3 class="fw-bold mb-1">내일은 뭐입지?</h3>
-								<h3 class="fw-bold mb-1">코디 블로그</h3>
-								<p class="mb-4">
-
-									<span class="fw-bold"></span>
-
-								</p>
-								<a href="./pages/blogCategory.html" class="btn btn-dark">이동하기</a>
-							</div>
+				<div class="col-12 col-md-6 mb-3">
+					<div class="h-100 py-5 px-4 rounded"
+						style="height:300px; background: url(/usr/template/staticfinal/dist/assets/images/weather/indexBlog.jpg) no-repeat center center/cover;">
+						<div style="padding-top:20px; padding-left:20px;">
+						
+							<h3 class="fw-bold mb-1">내일은 뭐입지?</h3>
+							<h3 class="fw-bold mb-1">코디 블로그</h3>
+							<p class="mb-4">
+								<span class="fw-bold"></span>
+							</p>
+							<a onclick="blogLink()" class="btn btn-dark">이동하기</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-12 col-md-6 mb-3 mb-lg-0">
-					<div>
-						<div class="py-10 px-8 rounded" style="background-color: beige;">
-							<div>
-								<h3 class="fw-bold mb-1" style="text-align: center;">오늘의 날씨
-									뉴스</h3>
-								<ul id="newsList" style="font-size: x-large;">
-								</ul>
-							</div>
+
+				<!-- 오른쪽 날씨 뉴스 카드 -->
+				<div class="col-12 col-md-6 mb-3">
+					<div class="h-100 py-5 px-4 rounded"
+						style="height:300px; background-color: beige;">
+						<div>
+							<h3 class="fw-bold mb-4 text-center">오늘의 날씨 뉴스</h3>
+							<ul id="newsList" class="fs-4">
+								<!-- 뉴스 항목들 동적으로 추가됨 -->
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -411,7 +409,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 </main>
 </form>

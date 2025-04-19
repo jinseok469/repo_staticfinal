@@ -276,11 +276,20 @@ public class BannerVo {
 		private String url;
 		
 		private String title;
+		private String user_seq;
 		private String betterBlog_seq;
 		private String item;
 		private String infoPrice;
 
 
+		
+		public String getUser_seq() {
+			return user_seq;
+		}
+
+		public void setUser_seq(String user_seq) {
+			this.user_seq = user_seq;
+		}
 
 		public String getName() {
 			return name;

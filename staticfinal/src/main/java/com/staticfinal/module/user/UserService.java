@@ -76,8 +76,8 @@ public class UserService {
 	public int buyCount(UserDto UserDto) {
 		return userDao.buyCount(UserDto);
 	}
-	public List<UserDto> buySelect(UserDto userDto){
-		return userDao.buySelect(userDto);
+	public List<UserDto> buySelect(BannerVo vo){
+		return userDao.buySelect(vo);
 	}
 	public int wishListCount(UserDto userDto) {
 		return userDao.wishListCount(userDto);
@@ -85,5 +85,10 @@ public class UserService {
 	public List<Integer> buyInfoSelect(UserDto userDto){
 		return userDao.buyInfoSelect(userDto);
 	}
-	
+	public int buySelectCount(BannerVo vo) {
+		return userDao.buySelectCount(vo);
+	}
+	public int userAddressUpdate(UserDto userDto) {
+		return userDao.userAddressUpdate(userDto);
+	}
 }

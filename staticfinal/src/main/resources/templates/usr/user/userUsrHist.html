@@ -4,6 +4,9 @@
 <div th:replace="~{usr/include/infoHead :: head}"></div>
 <input type="hidden" name="seq">
 <input type="hidden" name="blogCategory_seq">
+<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
+				type="hidden" id="rowNumToShow" name="rowNumToShow"
+				th:value="${vo.rowNumToShow}" />
 					<div class="col-lg-9 col-md-8 col-12">
 						<div class="py-6 p-md-6 p-lg-10">
 							<div class="mb-6">
@@ -27,13 +30,12 @@
                                                     <!-- <th>Items</th> -->
                                                     <!-- <th>Status</th> -->
                                                     <th>구매 금액</th>
-        
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <tr th:if="${#lists.isEmpty(list)}">
-                                            <td colspan="4">구매 내역이 없습니다.</td>
+                                            <td colspan="5" style="text-align:center;">구매 내역이 없습니다.</td>
                                             </tr>
                                                 <!-- Table body -->
                                                 <tr th:if="${!#lists.isEmpty(list)}" th:each="list :${list}">
@@ -63,11 +65,37 @@
                                                                 class="feather-icon icon-eye"></i></a>
                                                     </td>
                                                 </tr>
-                                               
                                             </tbody>
                                         </table>
+                                       
                                     </div>
                                 </div>
+                                 <div class="row" >
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-4" style="display:flex; justify-content:center;">
+                                        <ul class="pagination">
+								<li th:if="${vo.startPage gt vo.pageNumToShow}"
+									class="page-item" style="cursor: pointer;"><a
+									class="page-link" href="javascript:goList(${vo.startPage - 1})"
+									th:attr="onclick=|goList('${vo.startPage - 1}')|"> <i
+										class="fa-solid fa-angle-left"></i>
+								</a></li>
+								<li
+									th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+									th:classappend="${num eq vo.thisPage} ? active : ''"
+									class="page-item" style="cursor: pointer;"><a
+									class="page-link" th:attr="onclick=|goList('${num}')|"
+									th:text="${num}"> <!-- ${i.index} -->
+								</a></li>
+								<li th:if="${vo.endPage ne vo.totalPages}" class="page-item"
+									style="cursor: pointer;"><a class="page-link"
+									th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
+										class="fa-solid fa-angle-right"></i>
+								</a></li>
+							</ul></div>
+                                        <div class="col-lg-4"></div>
+                                        
+                                        </div>
                             </div>
 							
 							</div>
@@ -203,6 +231,11 @@ function blogView(num,num1){
 	document.querySelector("input[name=seq]").value = num;
 	document.querySelector("input[name=blogCategory_seq]").value = num1;
 	form.action = "/blogUsrView";
+	form.submit();
+}
+function goList(Num) {
+	document.querySelector("input[name=thisPage]").value = Num;
+	form.action = "/userUsrHist"
 	form.submit();
 }
 </script>
