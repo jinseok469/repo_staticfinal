@@ -344,7 +344,9 @@
 		streetAddress = #{streetAddress},
 		postalCode = #{postalCode},
 		notes = #{notes},
-		betterAddress = #{betterAddress}
+		betterAddress = #{betterAddress},
+		latitude = #{latitude},
+		longitude = #{longitude}
 		where 1=1 
 		and seq = #{urSeq}
 		
