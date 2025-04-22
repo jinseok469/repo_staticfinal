@@ -2,10 +2,10 @@ package com.staticfinal.module.weather;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,16 +27,19 @@ public class WeatherService {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
-        BufferedReader reader = new BufferedReader(
-            new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-        StringBuilder response = new StringBuilder();
-        String line = null;
+        InputStream input = conn.getInputStream(); // 응답 데이터를 바이트로 받음
+        InputStreamReader isr = new InputStreamReader(input, "UTF-8"); // 문자로 바꿔줌
+        BufferedReader reader = new BufferedReader(isr); // 한 줄씩 읽기 쉽게 만듦
 
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
+        String response = ""; // 결과를 담을 변수
+
+        String line = reader.readLine(); // 한 줄 읽기
+        while (line != null) {
+            response += line; // 줄을 이어 붙이기
+            line = reader.readLine(); // 다음 줄 읽기
         }
-        reader.close();
 
+        reader.close(); // 끝나면 닫아주기
         // JSON 파싱
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response.toString());

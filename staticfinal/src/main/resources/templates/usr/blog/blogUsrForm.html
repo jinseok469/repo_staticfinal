@@ -57,7 +57,7 @@
 
 <body>
 	<!-- navbar -->
-		<form method="post" id="formList" class="needs-validation" novalidate>
+		<form method="post" id="formList" class="needs-validation" enctype="multipart/form-data" novalidate>
 	<div class="border-bottom">
 			<input name="blogCategory_seq" type="hidden"> <input
 				name="user_seq" type="hidden" th:value="${session.sessSeqUsr}">
@@ -328,8 +328,7 @@
 												<label class="form-label">사진등록</label>
 
 												<!-- input -->
-												<div id="my-dropzone"
-													class="dropzone border-dashed rounded-2 min-h-0"></div>
+												<div><input type="file" name="uploadImg1" multiple></div>
 											</div>
 											<div class="col-12">
 												<label class="form-label" for="sell-product">소개</label>
@@ -476,7 +475,6 @@
 	<script
 		src="/usr/template/staticfinal/dist/assets/libs/@yaireo/tagify/dist/tagify.js"></script>
 	<!-- Libs JS -->
-	<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
 	<script
 		src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script
@@ -502,7 +500,6 @@
 		src="/usr/template/staticfinal/dist/assets/libs/rater-js/index.js"></script>
 	<!-- 		<script src="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.js"></script> -->
 	<!-- Libs JS -->
-	<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
 	<script
 		src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script
@@ -545,6 +542,7 @@
 					.getElementById("blogCategory_seq").value;
 		}
 
+		
 		blogInsert.onclick = function() {
 			let itemInputs = document.querySelectorAll(".item-input");
 
@@ -560,7 +558,8 @@
 			form.action = "/blogUsrInst";
 			form.submit();
 		}
-
+	
+				 
 		document.querySelector("#plusBtn").onclick = function() {
 			let itemControl = document.querySelector("#item-control");
 			let itemInput = document.querySelector(".item-input");
@@ -597,6 +596,7 @@
 			}
 
 		}
+		
 	</script>
 </body>
 

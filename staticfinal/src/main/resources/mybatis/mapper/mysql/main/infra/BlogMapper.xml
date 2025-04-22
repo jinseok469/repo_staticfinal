@@ -12,6 +12,8 @@
 		a.user_seq
 		left join
 		blogCategory as c on c.seq = a.blogCategory_seq
+		left join 
+		image as d  on d.pSeq = a.seq
 		where 1=1 and
 		a.blogCategory_seq = #{blogCategory_seq}
 		
@@ -87,7 +89,8 @@
 		a.buied,
 		a.title,
 		a.bgReg,
-		a.bgMof
+		a.bgMof,
+		d.path
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
@@ -167,7 +170,7 @@
 		where 1=1
 		order by a.seq asc
 	</select>
-
+	
 	<insert id="wishList">
 		insert into wishlist
 		(
@@ -207,6 +210,28 @@
 		)
 
 	</insert>
+	<insert id="imageInsert">
+		insert into image
+		(
+		path,
+		originalName,
+		uuidName,
+		ext,
+		size,
+		pSeq,
+		uploadedDate
+		)values
+		(
+		#{path},
+		#{originalName},
+		#{uuidName},
+		#{ext},
+		#{size},
+		#{blogKey},
+		now()
+		)
+	</insert>
+	
 	<insert id="insertClothe">
 		insert into clotheInfo
 		(

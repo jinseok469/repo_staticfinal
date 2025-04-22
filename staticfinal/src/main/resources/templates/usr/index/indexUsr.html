@@ -11,27 +11,23 @@
 					<div class="card-title text-center"></div>
 					<div class="card">
 
-						<div 
+						<div
 							class="card-body d-flex align-items-center justify-content-center"
-							style="min-height: 400px; background: url('/usr/template/staticfinal/dist/assets/images/backImage/해뜬날%20블러.png') no-repeat center center/cover; border-radius: 0.5rem;">
+							style="background-color:#ffffff; border-radius:16px; padding:24px; box-shadow:0 8px 24px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; text-align:center;">
 
 							<div class="row w-100">
 								<div
 									class="col-md-6 col-12 text-center mb-4 mb-md-0 d-flex flex-column justify-content-center"
 									style="min-height: 100%;">
-									<h3 id="weather-Info" style="color: white;"></h3>
-									<h1 id="temp" style="color: white; font-size: 50px;"></h1>
-									<h3 id="minMax" style="color: white;"></h3>
+									<h3 id="weather-Info" style="font-size:1.2rem; color:#6a4a2f; font-weight:500;"></h3>
+									<h1 id="temp" style="font-size:2.5rem; font-weight:bold; color:#6a4a2f; margin:12px 0;"></h1>
 								</div>
 								<div class="col-md-6 col-12 text-center">
 									<div class="pt-md-3 pt-1">
-										<h2 class="text-light" id="locationName"
-											style="font-size: 1.5rem;"></h2>
-										<img
-											id="weatherIcon"
-											src=""
-											alt="날씨 이미지"
-											style="width: 100%; max-width: 300px; height: auto; ">
+										<h2  id="locationName"
+											style="font-size:1.2rem; color:#9c897b;" ></h2>
+										<img id="weatherIcon" src="" alt="날씨 이미지"
+											style="width: 100%; max-width: 300px; height: auto;">
 									</div>
 								</div>
 							</div>
@@ -41,12 +37,12 @@
 				</div>
 
 				<div class="col-lg-4 col-12">
-					<div class="card">
+					<div class="card" style="background-color:#ffffff; border-radius:16px; padding:24px; box-shadow:0 8px 24px rgba(0,0,0,0.05); text-align:center;">
 						<div class="card-body" id="clothe"
-							style="min-height: 400px; background: ''; border-radius: 0.5rem;">
+							style="width:100%; border-radius:12px; margin-bottom:12px; min-height:370px; background-color:#fdf6ec;">
 						</div>
 						<div class="text-center py-4">
-							<!-- 							<h3>오늘의 추천 옷차림</h3> -->
+							<h3 style="color:#6a4a2f;">오늘의 추천 옷차림</h3>
 							<!-- 							<h1 style="font-size: 2rem; color: darkslategray;">얇은 셔츠, -->
 							<!-- 								청바지</h1> -->
 							<!-- 							<h2>입니다</h2> -->
@@ -217,7 +213,7 @@
 				<!-- 오른쪽 날씨 뉴스 카드 -->
 				<div class="col-12 col-md-6 mb-3">
 					<div class="h-100 py-5 px-4 rounded"
-						style="height: 300px; background-color: beige;">
+						style="height: 300px; background-color:#fdf6ec;">
 						<div>
 							<h3 class="fw-bold mb-4 text-center">오늘의 날씨 뉴스</h3>
 							<ul id="newsList" class="fs-4">
@@ -488,84 +484,77 @@
 	    .catch(function(error) {
 	      console.error("RSS 불러오기 실패:", error);
 	    });
-	  
 	  // 위치 가져오기
 	  navigator.geolocation.getCurrentPosition(function(position) {
  	 // 위치 권한 허용한 경우
  	 var lat = position.coords.latitude;
  	 var lon = position.coords.longitude;
- 	 useWeather(lat, lon);
+ 	var geocoder = new kakao.maps.services.Geocoder();
+ 	geocoder.coord2RegionCode(lon, lat, function(result, status) {
+ 	  if (status === kakao.maps.services.Status.OK) {
+ 	    var region = result[0];
+ 	    var locationName = region.region_1depth_name + " " +
+ 	                       region.region_2depth_name + " " +
+ 	                       region.region_3depth_name;
+
+ 	    callWeatherApi(lat, lon, locationName); // 지역명 같이 넘기기
+ 	  }
+ 	});
 		}, function(error) {
  	 // 위치 권한 실패한 경우 fallback
  	 console.warn("위치 실패:", error.message);
 
  	 var lat = 37.6515320453855;
  	 var lon = 127.113100516238;
- 	 useWeather(lat, lon);
+ 	var geocoder = new kakao.maps.services.Geocoder();
+ 	geocoder.coord2RegionCode(lon, lat, function(result, status) {
+ 	  if (status === kakao.maps.services.Status.OK) {
+ 	    var region = result[0];
+ 	    var locationName = region.region_1depth_name + " " +
+ 	                       region.region_2depth_name + " " +
+ 	                       region.region_3depth_name;
+
+ 	    callWeatherApi(lat, lon, locationName); // 지역명 같이 넘기기
+ 	  }
+ 	});
 		});
 
-	  function useWeather(lat, lon) {
-		  var geocoder = new kakao.maps.services.Geocoder();
+	  function callWeatherApi(lat, lon, locationName) {
+		  fetch("/api/weather", {
+			  method: "POST",
+			  headers: {
+			    "Content-Type": "application/json"
+			  },
+			  body: JSON.stringify({ lat: lat, lon: lon })
+			})
+			.then(function(response) {
+			  return response.json();
+			})
+			.then(function(data) {
+			  let tempInt = parseInt(data.temp);
+			  let iconUrl = "https://openweathermap.org/img/wn/" + data.icon + "@2x.png";
+			
+			  document.getElementById("locationName").innerHTML = locationName;
+			  document.getElementById("weather-Info").innerHTML = "<b>" + data.description + "</b>";
+			  document.getElementById("temp").innerHTML = tempInt + "°C";
+			  document.getElementById("weatherIcon").src = iconUrl;
 
-		  geocoder.coord2RegionCode(lon, lat, function(result, status) {
-		    if (status === kakao.maps.services.Status.OK) {
-		      var region = result[0];
-		      var locationName = region.region_1depth_name + " " +
-		                         region.region_2depth_name + " " +
-		                         region.region_3depth_name;
+			  var backgroundUrl = "";
+			  if(tempInt > -20 && tempInt <= -5) backgroundUrl = "-10.jpg";
+			  else if(tempInt > -5 && tempInt <= 5) backgroundUrl = "-5.jpg";
+			  else if(tempInt > 5 && tempInt <= 13) backgroundUrl = "5.jpg";
+			  else if(tempInt > 13 && tempInt <= 18) backgroundUrl = "13.jpg";
+			  else if(tempInt > 18 && tempInt <= 27) backgroundUrl = "18.jpg";
+			  else if(tempInt > 27 && tempInt <= 31) backgroundUrl = "27.jpg";
+			  else if(tempInt > 31) backgroundUrl = "31.jpg";
 
-		      var xhr = new XMLHttpRequest();
-		      xhr.open("POST", "/api/weather", true);
-		      xhr.setRequestHeader("Content-Type", "application/json");
-
-		      xhr.onreadystatechange = function() {
-		        if (xhr.readyState === 4 && xhr.status === 200) {
-		          var data = JSON.parse(xhr.responseText);
-		          let temp = data.temp;
-		          let tempInt = parseInt(temp);
-		          let minInt = parseInt(data.tempMin);
-		          let maxInt = parseInt(data.tempMax);
-		          let iconCode = data.icon; // "01d"
-		          let iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
-		          var infoDiv = document.getElementById("weather-Info");
-		          document.getElementById("locationName").innerHTML = locationName;
-		          infoDiv.innerHTML =
-		              "<b>" + data.description + "</b>";
-		              
-		           document.getElementById("temp").innerHTML =  tempInt + "°C";
-		           document.getElementById("weatherIcon").src = iconUrl;
-// 		           document.getElementById("minMax").innerHTML =  minInt + "°C / "+maxInt+"°C";
-		     	  if(tempInt > -20 && tempInt <= -5){
-		     		  document.getElementById("clothe").style.background =
-		     			  "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/-10.jpg') no-repeat center center/contain";
-		     	  }else if(tempInt > -5 && tempInt <= 5){
-		     		 document.getElementById("clothe").style.background =
-		     			  "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/-5.jpg') no-repeat center center/contain";
-		     	  }else if(tempInt > 5 && tempInt <= 13){
-			     		 document.getElementById("clothe").style.background =
-			     			  "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/5.jpg') no-repeat center center/contain";
-			      }else if(tempInt > 13 && tempInt <= 18){
-				     		 document.getElementById("clothe").style.background =
-				     			  "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/13.jpg') no-repeat center center/contain";
-				  }else if(tempInt > 18 && tempInt <= 27){
-			     		 document.getElementById("clothe").style.background =
-			     			  "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/18.jpg') no-repeat center/contain";
-			      }else if(tempInt > 27 && tempInt <= 31){
-			     		 document.getElementById("clothe").style.background =
-			     			  "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/27.jpg') no-repeat center center/contain";
-			      }else if(tempInt > 31 ){
-			     		 document.getElementById("clothe").style.background =
-			     			  "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/31.jpg') no-repeat center center/contain";
-			     	  }
-		        }
-		      };
-
-		      var jsonData = JSON.stringify({ lat: lat, lon: lon });
-		      xhr.send(jsonData);
-		    }
-		  });
+			  document.getElementById("clothe").style.background =
+			    "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/" + backgroundUrl + "') no-repeat center center/contain";
+			})
+		  	.catch(function(error) {
+			  console.error("날씨 정보 가져오기 실패:", error);
+			});
 		}
-	 
 
 </script>
 

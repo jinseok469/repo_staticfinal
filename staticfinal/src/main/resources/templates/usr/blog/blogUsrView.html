@@ -760,83 +760,25 @@
 				<div class="row">
 					<div class="col-md-5 col-xl-6">
 						<div class="slider slider-for">
-							<div>
+							<div th:each="list:${blogList}">
 								<div class="zoom" onmousemove="zoom(event)"
-									style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg)">
+									th:style="'background-image: url(' + ${list.path} + ')'">
 									<!-- img -->
 									<!-- img -->
 									<img
-										src="/usr/template/staticfinal/dist/assets/images/manClothe/man-6691158_640.jpg"
+										th:src="${list.path}"
 										alt="" style="height: 700px;" />
 								</div>
 							</div>
-							<div>
-								<div class="zoom" onmousemove="zoom(event)"
-									style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg)">
-									<!-- img -->
-									<!-- img -->
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
-										alt="" style="height: 700px;" />
-								</div>
-							</div>
-							<div>
-								<div class="zoom" onmousemove="zoom(event)"
-									style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg)">
-									<!-- img -->
-									<!-- img -->
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
-										alt="" style="height: 700px;" />
-								</div>
-							</div>
-							<div>
-								<div class="zoom" onmousemove="zoom(event)"
-									style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg)">
-									<!-- img -->
-									<!-- img -->
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
-										alt="" style="height: 700px;" />
-								</div>
-							</div>
-							<div>
-								<div class="zoom" onmousemove="zoom(event)"
-									style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg)">
-									<!-- img -->
-									<!-- img -->
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
-										alt="" style="height: 700px;" />
-								</div>
-							</div>
+							
 						</div>
-						<div class="slider slider-nav mt-4">
-							<div>
+						<div class="slider slider-nav mt-4" >
+							<div th:each="list:${blogList}">
 								<img
-									src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
+									th:src="${list.path}"
 									alt="" class="w-100 rounded" />
 							</div>
-							<div>
-								<img
-									src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
-									alt="" class="w-100 rounded" />
-							</div>
-							<div>
-								<img
-									src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
-									alt="" class="w-100 rounded" />
-							</div>
-							<div>
-								<img
-									src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
-									alt="" class="w-100 rounded" />
-							</div>
-							<div>
-								<img
-									src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
-									alt="" class="w-100 rounded" />
-							</div>
+							
 						</div>
 					</div>
 					<div class="col-md-7 col-xl-6">
@@ -1491,7 +1433,7 @@
 											<span class="badge bg-danger">Hot</span>
 										</div>
 										<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
-											src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
+											th:src="${list.path}"
 											alt="Grocery Ecommerce Template" class="mb-3 img-fluid"
 											style="height: 210px; width: 210px;" />
 										</a>

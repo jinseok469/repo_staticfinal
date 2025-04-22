@@ -81,12 +81,13 @@ public class BlogController {
 	@RequestMapping(value = "/blogUsrList")
 	public String springUsrMale(@ModelAttribute("vo") BannerVo vo, Model model, BlogDto blogDto,
 			HttpSession httpSession, UserDto userDto) {
-		vo.setParamsPaging(blogService.selectCount(vo));
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		if (vo.getBlogCategory_seq() == null || vo.getBlogCategory_seq().equals("")) {
 			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
 			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+			vo.setParamsPaging(blogService.selectCount(vo));
 		}
+		vo.setParamsPaging(blogService.selectCount(vo));
 		model.addAttribute("count", blogService.selectCount(vo));
 		model.addAttribute("blogList", blogService.blogList(vo));
 		model.addAttribute("blogCategory", blogService.blogCategory(blogDto));
@@ -171,9 +172,10 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "blogUsrInst")
-	public String blogUsrInst(BlogDto blogDto, HttpSession httpSession, UserDto userDto) {
+	public String blogUsrInst(@ModelAttribute BlogDto blogDto, HttpSession httpSession, UserDto userDto) throws Exception {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		blogService.insertBlog(blogDto);
+		
 		blogService.insertClothe(blogDto);
 		return "redirect:/blogUsrList";
 	}

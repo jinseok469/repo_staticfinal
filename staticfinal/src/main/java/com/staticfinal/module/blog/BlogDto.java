@@ -2,7 +2,10 @@ package com.staticfinal.module.blog;
 
 import java.util.List;
 
-public class BlogDto {
+
+import com.staticfinal.module.upload.UploadDto;
+
+public class BlogDto extends UploadDto{
 	
 	private String seq;
 	private String name;
@@ -30,6 +33,9 @@ public class BlogDto {
 	private List<BlogDto> items;
 	private String blogKey;
 	private String url;
+	
+	
+	
 	
 	
 	

@@ -30,4 +30,5 @@ public interface BlogDao {
 	public int clotheInfoUpdate(BlogDto blogDto);
 	public int clotheDelete(BlogDto blogDto);
 	public int blogDelete(BlogDto blogDto);
+	public int imageInsert(BlogDto blogDto);
 }
