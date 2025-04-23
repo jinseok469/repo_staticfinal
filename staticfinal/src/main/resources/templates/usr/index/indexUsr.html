@@ -21,6 +21,7 @@
 									style="min-height: 100%;">
 									<h3 id="weather-Info" style="font-size:1.2rem; color:#6a4a2f; font-weight:500;"></h3>
 									<h1 id="temp" style="font-size:2.5rem; font-weight:bold; color:#6a4a2f; margin:12px 0;"></h1>
+									<h1 id="minMax" style="font-size:1.5rem; font-weight:bold; color:#6a4a2f; margin:12px 0;"></h1>
 								</div>
 								<div class="col-md-6 col-12 text-center">
 									<div class="pt-md-3 pt-1">
@@ -61,127 +62,110 @@
 					<h3 class="mb-0">이번주 날씨</h3>
 				</div>
 			</div>
-			<div class="category-slider">
+			<div class="category-slider ">
 				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
 					<div class="card-title">
-						<h5>2월 17일</h5>
+						<h5 id="dailyTitle0"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해\,구름\,눈1.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
+						<div class="card-body " id="dailyImage0"
+							style="background-size:cover;
+				  background-position:center;
+				  border-radius:0.5rem;">
 						</div>
+						<div> <h5 class="dayMinMax"id="dayMinMax0" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
 					</div>
-					</a>
 				</div>
 				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
 					<div class="card-title">
-						<h5>2월 18일</h5>
+						<h5 id="dailyTitle1"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
+						<div class="card-body " id="dailyImage1"
+							style="background-size:cover;
+				  background-position:center;
+				  border-radius:0.5rem;">
 						</div>
+						<div> <h5 class="dayMinMax" id="dayMinMax1" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
 					</div>
-					</a>
 				</div>
 				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
 					<div class="card-title">
-						<h5>2월 19일</h5>
+						<h5 id="dailyTitle2"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/맑은데\ 비.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
+						<div class="card-body " id="dailyImage2"
+							style="background-size:cover;
+				  background-position:center;
+				  border-radius:0.5rem;">
 						</div>
+						<div> <h5 class="dayMinMax" id="dayMinMax2" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
 					</div>
-					</a>
 				</div>
 				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
 					<div class="card-title">
-						<h5>2월 20일</h5>
+						<h5 id="dailyTitle3"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
+						<div class="card-body " id="dailyImage3"
+							style="background-size:cover;
+				  background-position:center;
+				  border-radius:0.5rem;">
 						</div>
+						<div> <h5 class="dayMinMax" id="dayMinMax3" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
 					</div>
-					</a>
 				</div>
 				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
 					<div class="card-title">
-						<h5>2월 21일</h5>
+						<h5 id="dailyTitle4"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해\,구름\,비or눈.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
+						<div class="card-body " id="dailyImage4"
+							style="background-size:cover;
+				  background-position:center;
+				  border-radius:0.5rem;">
 						</div>
+						<div> <h5 class="dayMinMax" id="dayMinMax4" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
 					</div>
-					</a>
 				</div>
 				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
 					<div class="card-title">
-						<h5>2월 22일</h5>
+						<h5 id="dailyTitle5"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
+						<div class="card-body " id="dailyImage5"
+							style="background-size:cover;
+				  background-position:center;
+				  border-radius:0.5rem;">
 						</div>
+						<div> <h5 class="dayMinMax" id="dayMinMax5" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
 					</div>
-					</a>
-				</div>
-
-				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
-					<div class="card-title">
-						<h5>2월 23일</h5>
-					</div>
-					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해\,구름\,눈1.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
-						</div>
-					</div>
-					</a>
 				</div>
 				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
 					<div class="card-title">
-						<h5>2월 24일</h5>
+						<h5 id="dailyTitle6"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해\,구름\,눈1.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
+						<div class="card-body "  id="dailyImage6"
+							style="background-size:cover;
+				  background-position:center;
+				  border-radius:0.5rem;">
 						</div>
+						<div> <h5 class="dayMinMax" id="dayMinMax6" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
 					</div>
-					</a>
 				</div>
 				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
 					<div class="card-title">
-						<h5>2월 25일</h5>
+						<h5 id="dailyTitle7"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해\,구름\,눈1.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
+						<div class="card-body "  id="dailyImage7"
+							style="background-size:cover;
+				  background-position:center;
+				  border-radius:0.5rem;">
 						</div>
+						<div> <h5 class="dayMinMax" id="dayMinMax7" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
 					</div>
-					</a>
-				</div>
-				<div class="item" style="text-align: center;">
-					<!-- <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit"> -->
-					<div class="card-title">
-						<h5>2월 26일</h5>
-					</div>
-					<div class="card" style="height: 160px;">
-						<div class="card-body"
-							style="background: url(/usr/template/staticfinal/dist/assets/images/weather/해\,구름\,눈1.png) no-repeat; background-size: cover; border-radius: 0.5rem; background-position: center;">
-						</div>
-					</div>
-					</a>
 				</div>
 
 			</div>
@@ -432,7 +416,7 @@
 	src="/usr/template/staticfinal/dist/assets/js/vendors/tns-slider.js"></script>
 <script src="/usr/template/staticfinal/dist/assets/js/vendors/zoom.js"></script>
 <script
-	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3595fd95168217ecefbded46f50a7404&libraries=services"></script>
+	th:src="'https://dapi.kakao.com/v2/maps/sdk.js?appkey='+${kakaojskey}+'&libraries=services'"></script>
 
 <script type="text/javascript" th:inline="javascript">
 	let loginf = document.getElementById("loginf");
@@ -484,6 +468,8 @@
 	    .catch(function(error) {
 	      console.error("RSS 불러오기 실패:", error);
 	    });
+	  
+	  
 	  // 위치 가져오기
 	  navigator.geolocation.getCurrentPosition(function(position) {
  	 // 위치 권한 허용한 경우
@@ -518,7 +504,7 @@
  	  }
  	});
 		});
-
+	  
 	  function callWeatherApi(lat, lon, locationName) {
 		  fetch("/api/weather", {
 			  method: "POST",
@@ -533,11 +519,16 @@
 			.then(function(data) {
 			  let tempInt = parseInt(data.temp);
 			  let iconUrl = "https://openweathermap.org/img/wn/" + data.icon + "@2x.png";
-			
+			  let tempMin = parseInt(data.tempMin);	
+			  let tempMax = parseInt(data.tempMax);	
+			  let dailyList = data.daily;
+			  console.log(dailyList.length);
 			  document.getElementById("locationName").innerHTML = locationName;
 			  document.getElementById("weather-Info").innerHTML = "<b>" + data.description + "</b>";
+			  document.getElementById("minMax").innerHTML = tempMin+ "°C" + " / "+ tempMax+ "°C";
 			  document.getElementById("temp").innerHTML = tempInt + "°C";
 			  document.getElementById("weatherIcon").src = iconUrl;
+			 
 
 			  var backgroundUrl = "";
 			  if(tempInt > -20 && tempInt <= -5) backgroundUrl = "-10.jpg";
@@ -550,12 +541,48 @@
 
 			  document.getElementById("clothe").style.background =
 			    "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/" + backgroundUrl + "') no-repeat center center/contain";
+			  for(let i = 0 ; i < dailyList.length; i++){
+				  let dailyMin = parseInt(dailyList[i].min);
+				  let dailyMax = parseInt(dailyList[i].max);
+				  let dailyIcon = "https://openweathermap.org/img/wn/" + dailyList[i].icon + "@2x.png";
+				  document.getElementById("dailyImage"+i).style.background = "url('"+dailyIcon+"')no-repeat center/cover";
+				  document.getElementById("dayMinMax"+i).innerHTML = dailyMin+ "°C"+ " / "+ dailyMax+ "°C";
+				  document.getElementById("dailyTitle"+i).innerHTML = dailyList[i].date;
+			  }
 			})
 		  	.catch(function(error) {
 			  console.error("날씨 정보 가져오기 실패:", error);
 			});
 		}
+	  
+	  function searchWeather() {
+		  var address = document.getElementById("searchLocation").value;
+		  if (!address.trim()) {
+		    alert("지역명을 입력해주세요!");
+		    return;
+		  }
 
+		  var geocoder = new kakao.maps.services.Geocoder();
+		  geocoder.addressSearch(address, function(result, status) {
+		    if (status === kakao.maps.services.Status.OK) {
+		      var lat = result[0].y;
+		      var lon = result[0].x;
+
+		      var locationName = result[0].address_name;
+
+		      callWeatherApi(lat, lon, locationName);
+		    } else {
+		      alert("해당 지역을 찾을 수 없습니다.");
+		    }
+		  });
+	  }
+	  
+	  function enterKey(event){
+		  if(event.key =="Enter"){
+			  searchWeather();
+		  }
+	  }
+	  
 </script>
 
 </body>

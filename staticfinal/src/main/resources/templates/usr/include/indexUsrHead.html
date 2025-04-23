@@ -15,7 +15,7 @@
 	<link href="/usr/template/staticfinal/dist/assets/libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet" />
 
 	<!-- Favicon icon-->
-	<link rel="shortcut icon" type="image/x-icon" href="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg">
+	<link rel="shortcut icon" type="image/x-icon" href="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png">
 
 
 	<!-- Libs CSS -->
@@ -26,6 +26,7 @@
 
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="/usr/template/staticfinal/dist/assets/css/theme.min.css">
+	
 </head>
 
 <body>
@@ -64,7 +65,7 @@
 					</div>
 					<div class="col-xxl-5 col-lg-5 d-none d-lg-block">
 							<div class="input-group">
-								<input class="form-control rounded" type="search" placeholder="Search for Location" />
+								<input class="form-control rounded" type="search" id="searchLocation" placeholder="지역 검색" onkeyup="enterKey(event)" autocomplete="off"/>
 								<span class="input-group-append">
 									<button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
 										type="button">
@@ -83,7 +84,7 @@
 					<div class="col-md-2 col-xxl-3 d-none d-lg-block">
 					
 						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-outline-gray-400 text-muted" >
+						<button type="button" class="btn btn-outline-gray-400 text-muted" onclick="searchWeather()" >
 							<i class="feather-icon icon-map-pin me-2"></i>
 							검색
 						</button>

@@ -186,7 +186,9 @@
 		from
 		user as a
 		left join betterBlog as b on a.seq = b.user_seq
+		left join image as c on c.pSeq = b.seq
 		where 1=1
+		and b.bgDelNy = 0
 		and a.seq = #{urSeq}
 	</sql>
 	<select id="myBlogCount" resultType="integer">
@@ -198,7 +200,8 @@
 		a.nickName,
 		b.title,
 		b.seq,
-		b.blogCategory_seq
+		b.blogCategory_seq,
+		c.path
 		<include refid="myBlogCommon"></include>
 		limit #{startRnumForMysql},#{rowNumToShow}
 	</select>

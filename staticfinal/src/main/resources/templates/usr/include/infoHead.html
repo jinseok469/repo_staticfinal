@@ -22,7 +22,7 @@
 
 <!-- Favicon icon-->
 <link rel="shortcut icon" type="image/x-icon"
-	href="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg">
+	href="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png">
 
 
 <!-- Libs CSS -->
@@ -63,13 +63,13 @@
 </script>
 </head>
 
-<body>
+<body style="background-color:#fdf3e5;">
 	<!-- navbar -->
 	<div class="border-bottom">
 	<form class="needs-validation" method="post" id="formList"
 						novalidate>
 						<input type="hidden" id="urSeq" name="urSeq" th:value="${session.sessSeqUsr}">
-		<div class="bg-light py-1">
+		<div class="bg-light py-1" style="background-color:#fdf6ec !important;">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-12 text-center text-md-start">
@@ -87,16 +87,13 @@
 				<div class="row w-100 align-items-center gx-lg-2 gx-0">
 					<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
 						<a class="navbar-brand d-none d-lg-block" href="/indexUsrView">
-							<img
-							src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg"
-							alt="eCommerce HTML Template" style="width: 7cap;"
-							id="title-logo"> <label for="title-logo"
-							style="padding-top: 3%; font-size: x-large">내일은 맑음</label>
+							<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template" style="width: 7cap; padding-bottom:5%;" id="title-logo">
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
 						</a>
 						<div class="d-flex justify-content-between w-100 d-lg-none">
-							<a class="navbar-brand" href="/indexUsrView"> <img
-								src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg"
-								alt="eCommerce HTML Template" />
+							<a class="navbar-brand" href="/indexUsrView">
+								<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template"style="width: 7cap; padding-bottom:5%;" id="title-logo" />
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
 							</a>
 						</div>
 					</div>
@@ -260,7 +257,7 @@
 						<div class="dropdown me-3 d-none d-lg-block">
 							<button class="btn btn-light px-6" type="button"
 								id="dropdownMenuButton1" data-bs-toggle="dropdown"
-								aria-expanded="false">
+								aria-expanded="false" style="background-color:#fdf6ec !important;">
 								<span class="me-1"> <svg
 										xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										viewBox="0 0 24 24" fill="none" stroke="currentColor"

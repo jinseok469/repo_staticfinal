@@ -1,6 +1,8 @@
 package com.staticfinal.module.user;
 
-public class UserDto {
+import com.staticfinal.module.upload.UploadDto;
+
+public class UserDto extends UploadDto{
 	private String seq;
 	private String name;
 	private int gender ;
