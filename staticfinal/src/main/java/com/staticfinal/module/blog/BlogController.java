@@ -1,6 +1,8 @@
 package com.staticfinal.module.blog;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //import java.util.List;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.staticfinal.module.user.UserDto;
 import com.staticfinal.module.user.UserService;
@@ -104,10 +107,13 @@ public class BlogController {
 			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
 			blogDto.setSeq(String.valueOf(httpSession.getAttribute("sessBetterBlog_seq")));
 		}
+		vo.setParamsPaging(blogService.reviewCounnt(vo));
 		model.addAttribute("item", blogService.blogOne(blogDto));
 		model.addAttribute("blogList", blogService.blogList(vo));
 		model.addAttribute("clotheList", blogService.betterInfo(blogDto));
 		model.addAttribute("buyInfoList",userService.buyInfoSelect(userDto));
+		model.addAttribute("reviewList",blogService.reviewList(vo));
+		model.addAttribute("reviewCount",blogService.reviewCounnt(vo));
 		httpSession.setAttribute("sessBlogCategory_seq", blogDto.getBlogCategory_seq());
 		httpSession.setAttribute("sessBetterBlog_seq", blogDto.getSeq());
 		return "usr/blog/blogUsrView";
@@ -178,6 +184,18 @@ public class BlogController {
 		
 		blogService.insertClothe(blogDto);
 		return "redirect:/blogUsrList";
+	}
+	@RequestMapping(value = "/reviewUsrInst")
+	@ResponseBody
+	public Map<String,Object> reviewUsrInst(BlogDto blogDto) {
+		Map<String,Object> result = new HashMap<String,Object>();
+		int rt = blogService.reviewInsert(blogDto);
+		if(rt > 0 ) {
+			result.put("rt", "success");
+		}else {
+			result.put("rt", "fail");
+		}
+		return result;
 	}
 
 }

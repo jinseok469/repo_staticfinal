@@ -105,4 +105,13 @@ public class BlogService {
 	public int blogDelete(BlogDto blogDto) {
 		return blogDao.blogDelete(blogDto);
 	}
+	public int reviewInsert(BlogDto blogDto) {
+		return blogDao.reviewInsert(blogDto);
+	}
+	public List<BlogDto> reviewList(BannerVo vo){
+		return blogDao.reviewList(vo);
+	}
+	public int reviewCounnt(BannerVo vo) {
+		return blogDao.reviewCount(vo);
+	}
 }

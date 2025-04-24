@@ -31,4 +31,7 @@ public interface BlogDao {
 	public int clotheDelete(BlogDto blogDto);
 	public int blogDelete(BlogDto blogDto);
 	public int imageInsert(BlogDto blogDto);
+	public int reviewInsert(BlogDto blogDto);
+	public List<BlogDto> reviewList(BannerVo vo);
+	public int reviewCount(BannerVo vo);
 }

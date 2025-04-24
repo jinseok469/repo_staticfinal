@@ -33,13 +33,26 @@ public class BlogDto extends UploadDto{
 	private List<BlogDto> items;
 	private String blogKey;
 	private String url;
+	private String coment;
+	private String rReg;
 	
 	
 	
 	
 	
 	
-	
+	public String getrReg() {
+		return rReg;
+	}
+	public void setrReg(String rReg) {
+		this.rReg = rReg;
+	}
+	public String getComent() {
+		return coment;
+	}
+	public void setComent(String coment) {
+		this.coment = coment;
+	}
 	public String getUrl() {
 		return url;
 	}

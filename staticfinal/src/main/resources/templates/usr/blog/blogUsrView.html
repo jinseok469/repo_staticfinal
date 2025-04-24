@@ -45,6 +45,9 @@
 <body style="background-color:#fdf3e5;">
 	<!-- navbar -->
 		<form method="post" id="formList" class="needs-validation" novalidate>
+		<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
+				type="hidden" id="rowNumToShow" name="rowNumToShow"
+				th:value="${vo.rowNumToShow}" />
 	<div class="border-bottom">
 			<input id="blogCategory_seq" name="blogCategory_seq" type="hidden"
 				th:value="${item.blogCategory_seq}"> <input
@@ -803,10 +806,11 @@
 							<div class="mb-4">
 								<!-- rating -->
 								<!-- rating -->
-								<small class="text-warning"> <i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
-								</small> <a href="#" class="ms-2">(30 reviews)</a>
+<!-- 								<small class="text-warning"> <i class="bi bi-star-fill"></i> -->
+<!-- 									<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> -->
+<!-- 									<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> -->
+<!-- 								</small> -->
+								 <h6  class="ms-2" style="color:orange;">([[${reviewCount}]] reviews)</h6>
 							</div>
 							<hr class="my-6" />
 							<div class="mb-5"></div>
@@ -876,20 +880,20 @@
 								<!-- dropdown -->
 
 								<div class="dropdown col-9">
-									<a class="btn btn-outline-secondary dropdown-toggle" href="#"
-										role="button" data-bs-toggle="dropdown" aria-expanded="false">Share</a>
+<!-- 									<a class="btn btn-outline-secondary dropdown-toggle" href="#" -->
+<!-- 										role="button" data-bs-toggle="dropdown" aria-expanded="false">Share</a> -->
 
-									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="#"> <i
-												class="bi bi-facebook me-2"></i> Facebook
-										</a></li>
-										<li><a class="dropdown-item" href="#"> <i
-												class="bi bi-twitter me-2"></i> Twitter
-										</a></li>
-										<li><a class="dropdown-item" href="#"> <i
-												class="bi bi-instagram me-2"></i> Instagram
-										</a></li>
-									</ul>
+<!-- 									<ul class="dropdown-menu"> -->
+<!-- 										<li><a class="dropdown-item" href="#"> <i -->
+<!-- 												class="bi bi-facebook me-2"></i> Facebook -->
+<!-- 										</a></li> -->
+<!-- 										<li><a class="dropdown-item" href="#"> <i -->
+<!-- 												class="bi bi-twitter me-2"></i> Twitter -->
+<!-- 										</a></li> -->
+<!-- 										<li><a class="dropdown-item" href="#"> <i -->
+<!-- 												class="bi bi-instagram me-2"></i> Instagram -->
+<!-- 										</a></li> -->
+<!-- 									</ul> -->
 
 								</div>
 
@@ -1072,101 +1076,13 @@
 									<div class="row">
 										<div class="col-md-4">
 											<div class="me-lg-12 mb-6 mb-md-0">
-												<div class="mb-5">
-													<!-- title -->
-													<h4 class="mb-3">코디 별점</h4>
-													<span> <!-- rating --> <small class="text-warning">
-															<i class="bi bi-star-fill"></i> <i
-															class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-															<i class="bi bi-star-fill"></i> <i
-															class="bi bi-star-half"></i>
-													</small> <span class="ms-3">4.1 out of 5</span> <small class="ms-3">11,130
-															global ratings</small>
-													</span>
-												</div>
-												<div class="mb-8">
-													<!-- progress -->
-													<div class="d-flex align-items-center mb-2">
-														<div class="text-nowrap me-3 text-muted">
-															<span class="d-inline-block align-middle text-muted">5</span>
-															<i class="bi bi-star-fill ms-1 small text-warning"></i>
-														</div>
-														<div class="w-100">
-															<div class="progress" style="height: 6px">
-																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: 60%" aria-valuenow="60" aria-valuemin="0"
-																	aria-valuemax="100"></div>
-															</div>
-														</div>
-														<span class="text-muted ms-3">53%</span>
-													</div>
-													<!-- progress -->
-													<div class="d-flex align-items-center mb-2">
-														<div class="text-nowrap me-3 text-muted">
-															<span class="d-inline-block align-middle text-muted">4</span>
-															<i class="bi bi-star-fill ms-1 small text-warning"></i>
-														</div>
-														<div class="w-100">
-															<div class="progress" style="height: 6px">
-																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-																	aria-valuemax="50"></div>
-															</div>
-														</div>
-														<span class="text-muted ms-3">22%</span>
-													</div>
-													<!-- progress -->
-													<div class="d-flex align-items-center mb-2">
-														<div class="text-nowrap me-3 text-muted">
-															<span class="d-inline-block align-middle text-muted">3</span>
-															<i class="bi bi-star-fill ms-1 small text-warning"></i>
-														</div>
-														<div class="w-100">
-															<div class="progress" style="height: 6px">
-																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: 35%" aria-valuenow="35" aria-valuemin="0"
-																	aria-valuemax="35"></div>
-															</div>
-														</div>
-														<span class="text-muted ms-3">14%</span>
-													</div>
-													<!-- progress -->
-													<div class="d-flex align-items-center mb-2">
-														<div class="text-nowrap me-3 text-muted">
-															<span class="d-inline-block align-middle text-muted">2</span>
-															<i class="bi bi-star-fill ms-1 small text-warning"></i>
-														</div>
-														<div class="w-100">
-															<div class="progress" style="height: 6px">
-																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: 22%" aria-valuenow="22" aria-valuemin="0"
-																	aria-valuemax="22"></div>
-															</div>
-														</div>
-														<span class="text-muted ms-3">5%</span>
-													</div>
-													<!-- progress -->
-													<div class="d-flex align-items-center mb-2">
-														<div class="text-nowrap me-3 text-muted">
-															<span class="d-inline-block align-middle text-muted">1</span>
-															<i class="bi bi-star-fill ms-1 small text-warning"></i>
-														</div>
-														<div class="w-100">
-															<div class="progress" style="height: 6px">
-																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: 14%" aria-valuenow="14" aria-valuemin="0"
-																	aria-valuemax="14"></div>
-															</div>
-														</div>
-														<span class="text-muted ms-3">7%</span>
-													</div>
-												</div>
+ 												
 												<div class="d-grid">
 													<!-- <h4>Review this product</h4> -->
 													<!-- <p class="mb-0">Share your thoughts with other customers.</p> -->
 													<a href="./betterBlog.html"
-														class="btn btn-outline-gray-400 mt-4 text-muted"> 별점 &
-														리뷰 쓰기 </a>
+														class="btn btn-outline-gray-400 mt-4 text-muted"> 
+														블로그 댓글 쓰기 </a>
 												</div>
 											</div>
 										</div>
@@ -1177,218 +1093,86 @@
 													class="d-flex justify-content-between align-items-center mb-8">
 													<div>
 														<!-- heading -->
-														<h4>코디 구매자 리뷰</h4>
+														<h4>코디 리뷰</h4>
 													</div>
 													<div>
-														<select class="form-select">
-															<option selected>Top Reviews</option>
-															<option value="Most Recent">Most Recent</option>
-														</select>
+<!-- 														<select class="form-select"> -->
+<!-- 															<option selected>Top Reviews</option> -->
+<!-- 															<option value="Most Recent">Most Recent</option> -->
+<!-- 														</select> -->
 													</div>
 												</div>
 												<div class="d-flex border-bottom pb-6 mb-6">
+												<th:block th:each="list : ${reviewList}">
 													<!-- img -->
 													<!-- img -->
 													<img
-														src="/usr/template/staticfinal/dist/assets/images/avatar/avatar-10.jpg"
+														src="/usr/template/staticfinal/dist/assets/images/avatar/profile.png"
 														alt="" class="rounded-circle avatar-lg" />
 													<div class="ms-5">
-														<h6 class="mb-1">Shankar Subbaraman</h6>
+														<h6 class="mb-1" th:text="${list.nickName}"></h6>
 														<!-- select option -->
 														<!-- content -->
 														<p class="small">
-															<span class="text-muted">30 December 2022</span> <span
-																class="text-primary ms-3 fw-bold">Verified
-																Purchase</span>
+															<span class="text-muted" th:text="${list.rReg}"></span> 
 														</p>
 														<!-- rating -->
-														<div class="mb-2">
-															<i class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <span
-																class="ms-3 text-dark fw-bold">Need to recheck
-																the weight at delivery point</span>
-														</div>
+														
 														<!-- text-->
-														<p>Product quality is good. But, weight seemed less
-															than 1kg. Since it is being sent in open package, there
-															is a possibility of pilferage in between. FreshCart sends
-															the veggies and fruits through sealed plastic covers and
-															Barcode on the weight etc. .</p>
-														<div>
-															<div class="border icon-shape icon-lg border-2">
-																<!-- img -->
-																<img
-																	src="/usr/template/staticfinal/dist/assets/images/products/product-img-1.jpg"
-																	alt="" class="img-fluid" />
-															</div>
-															<div class="border icon-shape icon-lg border-2 ms-1">
-																<!-- img -->
-																<img
-																	src="/usr/template/staticfinal/dist/assets/images/products/product-img-2.jpg"
-																	alt="" class="img-fluid" />
-															</div>
-															<div class="border icon-shape icon-lg border-2 ms-1">
-																<!-- img -->
-																<img
-																	src="/usr/template/staticfinal/dist/assets/images/products/product-img-3.jpg"
-																	alt="" class="img-fluid" />
-															</div>
-														</div>
+														<p th:text="${list.coment}"></p>
+														
 														<!-- icon -->
 														<div class="d-flex justify-content-end mt-4">
-															<a href="#" class="text-muted"> <i
-																class="feather-icon icon-thumbs-up me-1"></i> Helpful
-															</a> <a href="#" class="text-muted ms-4"> <i
-																class="feather-icon icon-flag me-2"></i> Report abuse
-															</a>
+<!-- 															<a href="#" class="text-muted"> <i -->
+<!-- 																class="feather-icon icon-thumbs-up me-1"></i> Helpful -->
+<!-- 															</a> <a href="#" class="text-muted ms-4"> <i -->
+<!-- 																class="feather-icon icon-flag me-2"></i> Report abuse -->
+<!-- 															</a> -->
 														</div>
 													</div>
+													</th:block>
 												</div>
-												<div class="d-flex border-bottom pb-6 mb-6 pt-4">
-													<!-- img -->
-													<img
-														src="/usr/template/staticfinal/dist/assets/images/avatar/avatar-12.jpg"
-														alt="" class="rounded-circle avatar-lg" />
-													<div class="ms-5">
-														<h6 class="mb-1">Robert Thomas</h6>
-														<!-- content -->
-														<p class="small">
-															<span class="text-muted">29 December 2022</span> <span
-																class="text-primary ms-3 fw-bold">Verified
-																Purchase</span>
-														</p>
-														<!-- rating -->
-														<div class="mb-2">
-															<i class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star text-warning"></i> <span
-																class="ms-3 text-dark fw-bold">Need to recheck
-																the weight at delivery point</span>
-														</div>
-
-														<p>Product quality is good. But, weight seemed less
-															than 1kg. Since it is being sent in open package, there
-															is a possibility of pilferage in between. FreshCart sends
-															the veggies and fruits through sealed plastic covers and
-															Barcode on the weight etc..</p>
-														<!-- icon -->
-														<div class="d-flex justify-content-end mt-4">
-															<a href="#" class="text-muted"> <i
-																class="feather-icon icon-thumbs-up me-1"></i> Helpful
-															</a> <a href="#" class="text-muted ms-4"> <i
-																class="feather-icon icon-flag me-2"></i> Report abuse
-															</a>
-														</div>
-													</div>
-												</div>
-												<div class="d-flex border-bottom pb-6 mb-6 pt-4">
-													<!-- img -->
-													<img
-														src="/usr/template/staticfinal/dist/assets/images/avatar/avatar-9.jpg"
-														alt="" class="rounded-circle avatar-lg" />
-													<div class="ms-5">
-														<h6 class="mb-1">Barbara Tay</h6>
-														<!-- content -->
-														<p class="small">
-															<span class="text-muted">28 December 2022</span> <span
-																class="text-danger ms-3 fw-bold">Unverified
-																Purchase</span>
-														</p>
-														<!-- rating -->
-														<div class="mb-2">
-															<i class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star text-warning"></i> <span
-																class="ms-3 text-dark fw-bold">Need to recheck
-																the weight at delivery point</span>
-														</div>
-
-														<p>Everytime i ordered from fresh i got greenish
-															yellow bananas just like i wanted so go for it , its
-															happens very rare that u get over riped ones.</p>
-
-														<!-- icon -->
-														<div class="d-flex justify-content-end mt-4">
-															<a href="#" class="text-muted"> <i
-																class="feather-icon icon-thumbs-up me-1"></i> Helpful
-															</a> <a href="#" class="text-muted ms-4"> <i
-																class="feather-icon icon-flag me-2"></i> Report abuse
-															</a>
-														</div>
-													</div>
-												</div>
-												<div class="d-flex border-bottom pb-6 mb-6 pt-4">
-													<!-- img -->
-													<img
-														src="/usr/template/staticfinal/dist/assets/images/avatar/avatar-8.jpg"
-														alt="" class="rounded-circle avatar-lg" />
-													<div class="ms-5 flex-grow-1">
-														<h6 class="mb-1">Sandra Langevin</h6>
-														<!-- content -->
-														<p class="small">
-															<span class="text-muted">8 December 2022</span> <span
-																class="text-danger ms-3 fw-bold">Unverified
-																Purchase</span>
-														</p>
-														<!-- rating -->
-														<div class="mb-2">
-															<i class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star-fill text-warning"></i> <i
-																class="bi bi-star text-warning"></i> <span
-																class="ms-3 text-dark fw-bold">Great product</span>
-														</div>
-
-														<p>Great product & package. Delivery can be expedited.</p>
-
-														<!-- icon -->
-														<div class="d-flex justify-content-end mt-4">
-															<a href="#" class="text-muted"> <i
-																class="feather-icon icon-thumbs-up me-1"></i> Helpful
-															</a> <a href="#" class="text-muted ms-4"> <i
-																class="feather-icon icon-flag me-2"></i> Report abuse
-															</a>
-														</div>
-													</div>
-												</div>
-												<div>
-													<a href="#" class="btn btn-outline-gray-400 text-muted">리뷰
-														더보기</a>
+												
+												<div style="display:flex; justify-content:center;">
+													<ul class="pagination">
+								<li th:if="${vo.startPage gt vo.pageNumToShow}"
+									class="page-item" style="cursor: pointer;"><a
+									class="page-link" href="javascript:goList(${vo.startPage - 1})"
+									th:attr="onclick=|goList('${vo.startPage - 1}')|"> <i
+										class="fa-solid fa-angle-left"></i>
+								</a></li>
+								<li
+									th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+									th:classappend="${num eq vo.thisPage} ? active : ''"
+									class="page-item" style="cursor: pointer;"><a
+									class="page-link" th:attr="onclick=|goList('${num}')|"
+									th:text="${num}"> <!-- ${i.index} -->
+								</a></li>
+								<li th:if="${vo.endPage ne vo.totalPages}" class="page-item"
+									style="cursor: pointer;"><a class="page-link"
+									th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
+										class="fa-solid fa-angle-right"></i>
+								</a></li>
+							</ul>
 												</div>
 											</div>
 											<div>
 												<!-- rating -->
 												<h3 class="mb-5">리뷰 작성</h3>
-												<div class="border-bottom py-4 mb-4">
-													<h4 class="mb-3">별점</h4>
-													<div class="rater"></div>
-												</div>
+												
 
 											</div>
 											<!-- form control -->
-											<div class="border-bottom py-4 mb-4">
-												<h5>댓글 제목</h5>
-												<input type="text" class="form-control" autocomplete="off"
-													placeholder="작성자에게 상처가 되는말은 삼가해주시길 부탁드립니다" />
-											</div>
-
+											
 											<div class="py-4 mb-4">
 												<!-- heading -->
 												<h5>댓글 본문</h5>
-												<textarea class="form-control" rows="3"
-													placeholder="작성자에게 상처가 되는말은 삼가해주시길 부탁드립니다"></textarea>
+												<textarea class="form-control" id="coment" name="coment" rows="3"
+													placeholder="작성자에게 상처가 되는말은 삼가해주시길 부탁드립니다" required></textarea>
 											</div>
 											<!-- button -->
 											<div class="d-flex justify-content-end">
-												<a href="#" class="btn btn-primary">리뷰 저장</a>
+												<a href="javascript:void(0);" id="reviewSave" class="btn btn-primary">리뷰 저장</a>
 											</div>
 										</div>
 									</div>
@@ -1427,7 +1211,6 @@
 
 									<div class="text-center position-relative">
 										<div class="position-absolute top-0 start-0">
-											<span class="badge bg-danger">Hot</span>
 										</div>
 										<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
 											th:src="${list.path}"
@@ -1450,11 +1233,7 @@
 									</h2>
 									<div>
 										<!-- rating -->
-										<small class="text-warning"> <i
-											class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-											<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-											<i class="bi bi-star-half"></i>
-										</small> <span class="text-muted small">4.5(149)</span>
+										
 									</div>
 									<!-- price -->
 									<div
@@ -1987,6 +1766,53 @@ document.querySelector("#btnModalUelete1").onclick = function(){
 			}
 		}
 	}
+	document.getElementById("reviewSave").onclick = function(){
+		let flag = true;
+		let coment = document.getElementById("coment");
+		if(coment.value.trim() == "" || coment.value.trim() == null ){
+			document.getElementById("coment").classList.remove("is-valid");
+			document.getElementById("coment").classList.add("is-invalid");
+			document.getElementById("coment").focus();
+			flag = false;
+		}else{
+			document.getElementById("coment").classList.remove("is-invalid");
+		}
+		
+		if(flag){
+	$.ajax({
+		async: true 
+		,cache: false
+		,type: "post"
+		/* ,dataType:"json" */
+		,url: "/reviewUsrInst"
+		/* ,data : $("#formLogin").serialize() */
+		,data : {
+			"user_seq" : $("#urSeq").val(), "betterBlog_seq" : $("#betterBlog_seq").val(),
+			"coment" : $("#coment").val()
+			}
+		,success: function(response) {
+			if(response.rt == "success") {
+				
+					form.action = "/blogUsrView";
+					form.submit();
+				
+			} else {
+		 		return false;
+			}
+		}
+		,error : function(jqXHR, textStatus, errorThrown){
+			alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+		}
+	});
+		}else{
+			return false;
+		}
+	}
+	 function goList(Num) {
+			document.querySelector("input[name=thisPage]").value = Num;
+			form.action = "/blogUsrView"
+			form.submit();
+		}
 	</script>
 </body>
 

@@ -55,13 +55,13 @@
 </style>
 </head>
 
-<body>
+<body style="background-color:#fdf3e5;">
 	<!-- navbar -->
 		<form method="post" id="formList" class="needs-validation" enctype="multipart/form-data" novalidate>
 	<div class="border-bottom">
 			<input name="blogCategory_seq" type="hidden"> <input
 				name="user_seq" type="hidden" th:value="${session.sessSeqUsr}">
-			<div class="bg-light py-1">
+			<div class="bg-light py-1" style="background-color:#fdf6ec !important;">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 col-12 text-center text-md-start">
@@ -78,35 +78,32 @@
 					<div class="row w-100 align-items-center gx-lg-2 gx-0">
 						<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
 							<a class="navbar-brand d-none d-lg-block" href="/indexUsrView">
-								<img
-								src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg"
-								alt="eCommerce HTML Template" style="width: 7cap;"
-								id="title-logo"> <label for="title-logo"
-								style="padding-top: 3%; font-size: x-large">내일은 맑음</label>
+							<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template" style="width: 7cap; padding-bottom:5%;" id="title-logo">
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
+						</a>
+						<div class="d-flex justify-content-between w-100 d-lg-none">
+							<a class="navbar-brand" href="/indexUsrView">
+								<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template"style="width: 7cap; padding-bottom:5%;" id="title-logo" />
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
 							</a>
-							<div class="d-flex justify-content-between w-100 d-lg-none">
-								<a class="navbar-brand" href="/indexUsrView"> <img
-									src="/usr/template/staticfinal/dist/assets/images/logo/태양.jpg"
-									alt="eCommerce HTML Template" />
-								</a>
 							</div>
 						</div>
 						<div class="col-xxl-5 col-lg-5 d-none d-lg-block">
 							<div class="input-group">
-								<input class="form-control rounded" type="search"
-									placeholder="Search for Location" /> <span
-									class="input-group-append">
-									<button
-										class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
-										type="button">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-											viewBox="0 0 24 24" fill="none" stroke="currentColor"
-											stroke-width="2" stroke-linecap="round"
-											stroke-linejoin="round" class="feather feather-search">
-											<circle cx="11" cy="11" r="8"></circle>
-											<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-										</svg>
-									</button>
+<!-- 								<input class="form-control rounded" type="search" -->
+<!-- 									placeholder="Search for Location" /> <span -->
+<!-- 									class="input-group-append"> -->
+<!-- 									<button -->
+<!-- 										class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" -->
+<!-- 										type="button"> -->
+<!-- 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" -->
+<!-- 											viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
+<!-- 											stroke-width="2" stroke-linecap="round" -->
+<!-- 											stroke-linejoin="round" class="feather feather-search"> -->
+<!-- 											<circle cx="11" cy="11" r="8"></circle> -->
+<!-- 											<line x1="21" y1="21" x2="16.65" y2="16.65"></line> -->
+<!-- 										</svg> -->
+<!-- 									</button> -->
 								</span>
 							</div>
 						</div>
@@ -114,9 +111,9 @@
 						<div class="col-md-2 col-xxl-3 d-none d-lg-block">
 
 							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-outline-gray-400 text-muted">
-								<i class="feather-icon icon-map-pin me-2"></i> 검색
-							</button>
+<!-- 							<button type="button" class="btn btn-outline-gray-400 text-muted"> -->
+<!-- 								<i class="feather-icon icon-map-pin me-2"></i> 검색 -->
+<!-- 							</button> -->
 						</div>
 						<div class="col-lg-2 col-xxl-2 text-end col-md-6 col-7">
 
@@ -155,20 +152,20 @@
 									</a>
 								</div>
 								<div class="list-inline-item me-5 me-lg-0">
-									<a class="text-muted position-relative" type="button"
-										href="/usr/template/staticfinal/dist/pages/shop-cart.html">
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-											viewBox="0 0 24 24" fill="none" stroke="currentColor"
-											stroke-width="2" stroke-linecap="round"
-											stroke-linejoin="round" class="feather feather-shopping-bag">
-										<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-										<line x1="3" y1="6" x2="21" y2="6"></line>
-										<path d="M16 10a4 4 0 0 1-8 0"></path>
-									</svg> <span id="cart"
-										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-											0 <span class="visually-hidden">unread messages</span>
-									</span>
-									</a>
+<!-- 									<a class="text-muted position-relative" type="button" -->
+<!-- 										href="/usr/template/staticfinal/dist/pages/shop-cart.html"> -->
+<!-- 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" -->
+<!-- 											viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
+<!-- 											stroke-width="2" stroke-linecap="round" -->
+<!-- 											stroke-linejoin="round" class="feather feather-shopping-bag"> -->
+<!-- 										<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path> -->
+<!-- 										<line x1="3" y1="6" x2="21" y2="6"></line> -->
+<!-- 										<path d="M16 10a4 4 0 0 1-8 0"></path> -->
+<!-- 									</svg> <span id="cart" -->
+<!-- 										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"> -->
+<!-- 											0 <span class="visually-hidden">unread messages</span> -->
+<!-- 									</span> -->
+<!-- 									</a> -->
 								</div>
 								<div class="list-inline-item d-inline-block d-lg-none">
 									<!-- Button -->
@@ -260,7 +257,7 @@
 							<div class="dropdown me-3 d-none d-lg-block">
 								<button class="btn btn-light px-6" type="button"
 									id="dropdownMenuButton1" data-bs-toggle="dropdown"
-									aria-expanded="false">
+									aria-expanded="false" style="background-color:#fdf6ec !important;">
 									<span class="me-1"> <svg
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											viewBox="0 0 24 24" fill="none" stroke="currentColor"

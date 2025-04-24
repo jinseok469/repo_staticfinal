@@ -45,6 +45,7 @@ public class WeatherService {
         InputStream input = conn.getInputStream(); // 응답 데이터를 바이트로 받음
         InputStreamReader isr = new InputStreamReader(input, "UTF-8"); // 문자로 바꿔줌
         BufferedReader reader = new BufferedReader(isr); // 한 줄씩 읽기 쉽게 만듦
+        
         InputStream inputs = conns.getInputStream(); // 응답 데이터를 바이트로 받음
         InputStreamReader isrs = new InputStreamReader(inputs, "UTF-8"); // 문자로 바꿔줌
         BufferedReader readers = new BufferedReader(isrs); // 한 줄씩 읽기 쉽게 만듦
@@ -57,14 +58,15 @@ public class WeatherService {
             response += line; // 줄을 이어 붙이기
             line = reader.readLine(); // 다음 줄 읽기
         }
-
         reader.close(); // 끝나면 닫아주기
+        
         String lines = readers.readLine();
         while(lines != null) {
         	responseDaily += lines;
         	lines = readers.readLine();
         }
         readers.close();
+        
         // JSON 파싱
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response.toString());

@@ -120,6 +120,27 @@
 		and seq = #{blogCategory_seq}
 
 	</select>
+	<select id="reviewList" resultMap="resultMapObj">
+		select
+		a.coment,
+		a.rReg,
+		b.nickName
+		from
+		review as a
+		left join user as b on b.seq = a.user_seq
+		where 1=1
+		and
+		a.betterBlog_seq = #{betterBlog_seq}
+	</select>
+	<select id="reviewCount" resultType="integer">
+		select count(*)
+		from
+		review as a
+		left join user as b on b.seq = a.user_seq
+		where 1=1
+		and
+		a.betterBlog_seq = #{betterBlog_seq}
+	</select>
 	<select id="blogOne" resultMap="resultMapObj">
 		select
 		a.seq,
@@ -209,6 +230,21 @@
 		now()
 		)
 
+	</insert>
+	<insert id="reviewInsert">
+		insert into review
+		(
+		user_seq,
+		coment,
+		betterBlog_seq,
+		rReg
+		)values
+		(
+		#{user_seq},
+		#{coment},
+		#{betterBlog_seq},
+		now()
+		)
 	</insert>
 	<insert id="imageInsert">
 		insert into image
