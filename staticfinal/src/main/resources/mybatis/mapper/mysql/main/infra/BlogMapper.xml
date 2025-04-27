@@ -12,8 +12,6 @@
 		a.user_seq
 		left join
 		blogCategory as c on c.seq = a.blogCategory_seq
-		left join 
-		image as d  on d.pSeq = a.seq
 		where 1=1 and
 		a.blogCategory_seq = #{blogCategory_seq}
 		
@@ -90,11 +88,40 @@
 		a.title,
 		a.bgReg,
 		a.bgMof,
-		d.path
+			(select path
+		from image as d where 1=1 and  d.pSeq =
+		a.seq order by d.uploadedDate asc limit 1) as mainImage
 		<include refid="selectCommon"></include>
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
 	</select>
+	<select id="imageList" resultMap="resultMapObj">
+		select
+		a.path
+		from
+		image as a
+		where 1=1 
+		and a.pSeq = #{betterBlog_seq}
+	</select>
+	<select id="blogViewList" resultMap="resultMapObj">
+		select
+		a.seq,
+		b.name,
+		b.nickName,
+		a.user_seq,
+		a.blogCategory_seq,
+		c.categoryName,
+		a.buied,
+		a.title,
+		a.bgReg,
+		a.bgMof,
+		(select path
+		from image as d where 1=1 and  d.pSeq =
+		a.seq order by d.uploadedDate asc limit 1) as mainImage
+		<include refid="selectCommon"></include>
+		order by a.seq desc
+	</select>
+	
 	<select id="blogXdmList" resultMap="resultMapObj">
 		select
 		a.seq,
@@ -131,6 +158,8 @@
 		where 1=1
 		and
 		a.betterBlog_seq = #{betterBlog_seq}
+		order by a.seq desc
+		limit #{startRnumForMysql},#{rowNumToShow}
 	</select>
 	<select id="reviewCount" resultType="integer">
 		select count(*)
@@ -352,6 +381,32 @@
 			#{seq}
 		</foreach>
 	</delete>
+	<delete id="imageDelete">
+		delete from image
+		where 1=1
+		and pSeq = #{seq}
+	</delete>
+	<insert id="imageUpdate">
+	insert into image
+		(
+		path,
+		originalName,
+		uuidName,
+		ext,
+		size,
+		pSeq,
+		uploadedDate
+		)values
+		(
+		#{path},
+		#{originalName},
+		#{uuidName},
+		#{ext},
+		#{size},
+		#{seq},
+		now()
+		)
+	</insert>
 	<delete id="wishDelete">
 		delete from wishlist
 		where 1=1

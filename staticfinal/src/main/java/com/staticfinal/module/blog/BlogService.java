@@ -24,6 +24,10 @@ public class BlogService {
 
 		return blogDao.blogList(vo);
 	}
+	public List<BlogDto> blogViewList(BannerVo vo) {
+		
+		return blogDao.blogViewList(vo);
+	}
 
 	public List<BlogDto> betterInfo(BlogDto blogDto) {
 
@@ -111,7 +115,27 @@ public class BlogService {
 	public List<BlogDto> reviewList(BannerVo vo){
 		return blogDao.reviewList(vo);
 	}
-	public int reviewCounnt(BannerVo vo) {
+	public int reviewCount(BannerVo vo) {
 		return blogDao.reviewCount(vo);
 	}
+	public int imageUpdate(BlogDto blogDto) throws Exception {
+		
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					blogDao.imageDelete(blogDto);
+				}catch(Exception e){
+					e.printStackTrace();
+				};
+			}
+		});
+		thread.start();
+		uploadService.uploadFilesToS3(blogDto.getUploadImg1(), blogDto, "image", blogDto.getBlogKey(), amazonS3Client);
+		return 1;
+	}
+	public List<BlogDto> imageList(BannerVo vo){
+		return blogDao.imageList(vo);
+	}
+	
 }

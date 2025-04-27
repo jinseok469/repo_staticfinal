@@ -11,6 +11,7 @@ import com.staticfinal.module.util.BannerVo;
 public interface BlogDao {
 	
 	public List<BlogDto> blogList(BannerVo vo);
+	public List<BlogDto> blogViewList(BannerVo vo);
 	public List<BlogDto> betterInfo(BlogDto blogDto);
 	public BlogDto blogOne(BlogDto blogDto);
 	public int selectCount(BannerVo vo);
@@ -34,4 +35,6 @@ public interface BlogDao {
 	public int reviewInsert(BlogDto blogDto);
 	public List<BlogDto> reviewList(BannerVo vo);
 	public int reviewCount(BannerVo vo);
+	public int imageDelete(BlogDto blogDto);
+	public List<BlogDto> imageList(BannerVo vo);
 }

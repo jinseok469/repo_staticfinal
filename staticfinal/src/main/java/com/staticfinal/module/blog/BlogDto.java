@@ -35,12 +35,18 @@ public class BlogDto extends UploadDto{
 	private String url;
 	private String coment;
 	private String rReg;
+	private String mainImage;
 	
 	
 	
 	
 	
-	
+	public String getMainImage() {
+		return mainImage;
+	}
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
 	public String getrReg() {
 		return rReg;
 	}

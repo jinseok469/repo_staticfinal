@@ -93,6 +93,7 @@ public class BlogController {
 		vo.setParamsPaging(blogService.selectCount(vo));
 		model.addAttribute("count", blogService.selectCount(vo));
 		model.addAttribute("blogList", blogService.blogList(vo));
+		
 		model.addAttribute("blogCategory", blogService.blogCategory(blogDto));
 		httpSession.setAttribute("sessBlogCategory_seq", vo.getBlogCategory_seq());
 		return "usr/blog/blogUsrList";
@@ -107,13 +108,20 @@ public class BlogController {
 			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
 			blogDto.setSeq(String.valueOf(httpSession.getAttribute("sessBetterBlog_seq")));
 		}
-		vo.setParamsPaging(blogService.reviewCounnt(vo));
+		if (blogDto.getSeq() == null || blogDto.getSeq().equals("")) {
+			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+			blogDto.setSeq(String.valueOf(httpSession.getAttribute("sessBetterBlog_seq")));
+		}
+		vo.setBetterBlog_seq(String.valueOf(httpSession.getAttribute("sessBetterBlog_seq")));
+		vo.setParamsPaging(blogService.reviewCount(vo));
 		model.addAttribute("item", blogService.blogOne(blogDto));
-		model.addAttribute("blogList", blogService.blogList(vo));
+		model.addAttribute("blogList", blogService.blogViewList(vo));
+		model.addAttribute("imageList", blogService.imageList(vo));
 		model.addAttribute("clotheList", blogService.betterInfo(blogDto));
 		model.addAttribute("buyInfoList",userService.buyInfoSelect(userDto));
 		model.addAttribute("reviewList",blogService.reviewList(vo));
-		model.addAttribute("reviewCount",blogService.reviewCounnt(vo));
+		model.addAttribute("reviewCount",blogService.reviewCount(vo));
 		httpSession.setAttribute("sessBlogCategory_seq", blogDto.getBlogCategory_seq());
 		httpSession.setAttribute("sessBetterBlog_seq", blogDto.getSeq());
 		return "usr/blog/blogUsrView";
@@ -190,6 +198,18 @@ public class BlogController {
 	public Map<String,Object> reviewUsrInst(BlogDto blogDto) {
 		Map<String,Object> result = new HashMap<String,Object>();
 		int rt = blogService.reviewInsert(blogDto);
+		if(rt > 0 ) {
+			result.put("rt", "success");
+		}else {
+			result.put("rt", "fail");
+		}
+		return result;
+	}
+	@RequestMapping(value = "/imageUsrUpdt")
+	@ResponseBody
+	public Map<String,Object> imageUsrUpdt(BlogDto blogDto) throws Exception {
+		Map<String,Object> result = new HashMap<String,Object>();
+		int rt = blogService.imageUpdate(blogDto);
 		if(rt > 0 ) {
 			result.put("rt", "success");
 		}else {

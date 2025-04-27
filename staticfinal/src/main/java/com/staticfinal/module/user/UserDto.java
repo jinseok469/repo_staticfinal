@@ -19,12 +19,18 @@ public class UserDto extends UploadDto{
 	private String notes;
 	private double latitude;
 	private double longitude;
-	
+	private String mainImage;
 	private String tpTitle = "회원가입을 진심으로 축하드립니다";
 	
 	
 	
 	
+	public String getMainImage() {
+		return mainImage;
+	}
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
 	public String getTpTitle() {
 		return tpTitle;
 	}

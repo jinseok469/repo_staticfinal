@@ -117,7 +117,10 @@
 		b.blogCategory_seq,
 		(select c.nickName from user
 		as c where 1=1 and
-		c.seq = b.user_seq) as nickName
+		c.seq = b.user_seq) as nickName,
+		(select path
+		from image as d where 1=1 and  d.pSeq =
+		b.seq order by d.uploadedDate asc limit 1) as mainImage
 		from
 		wishlist as a
 		left join betterBlog as b
@@ -144,7 +147,10 @@
 		b.title,
 		c.item,
 		c.infoPrice,
-		c.seq as infoseq
+		c.seq as infoseq,
+		(select path
+		from image as d where 1=1 and  d.pSeq =
+		b.seq order by d.uploadedDate asc limit 1) as mainImage
 		from
 		user as a
 		left join

@@ -42,13 +42,15 @@
 	href="/usr/template/staticfinal/dist/assets/css/theme.min.css">
 </head>
 
-<body style="background-color:#fdf3e5;">
+<body style="background-color: #fdf3e5;">
 	<!-- navbar -->
-		<form method="post" id="formList" class="needs-validation" novalidate>
+	<form method="post" id="formList" class="needs-validation" enctype="multipart/form-data" novalidate>
 		<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
-				type="hidden" id="rowNumToShow" name="rowNumToShow"
-				th:value="${vo.rowNumToShow}" />
-	<div class="border-bottom">
+			type="hidden" id="rowNumToShow" name="rowNumToShow"
+			th:value="${vo.rowNumToShow}" /> <input type="hidden" name="tab"
+			id="tab" value="intro" />
+
+		<div class="border-bottom">
 			<input id="blogCategory_seq" name="blogCategory_seq" type="hidden"
 				th:value="${item.blogCategory_seq}"> <input
 				id="betterBlog_seq" name="betterBlog_seq" type="hidden"
@@ -56,9 +58,11 @@
 				type="hidden" th:value="${item.user_seq}"> <input
 				type="hidden" id="url" name="url"> <input type="hidden"
 				id="urSeq" name="urSeq" th:value="${session.sessSeqUsr}"> <input
-				type="hidden" name="seq" th:value="${item.seq}">
-				<input type="hidden" name="infoseq">
-			<div class="bg-light py-1"  style="background-color:#fdf6ec !important;">
+				type="hidden" name="seq" th:value="${item.seq}"> <input
+				type="hidden" name="infoseq">
+				<input type="hidden" name="blogKey" th:value="${item.seq}">
+			<div class="bg-light py-1"
+				style="background-color: #fdf6ec !important;">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 col-12 text-center text-md-start">
@@ -79,52 +83,59 @@
 					<div class="row w-100 align-items-center gx-lg-2 gx-0">
 						<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
 							<a class="navbar-brand d-none d-lg-block" href="/indexUsrView">
-							<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template" style="width: 7cap; padding-bottom:5%;" id="title-logo">
-							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
-						</a>
-						<div class="d-flex justify-content-between w-100 d-lg-none">
-							<a class="navbar-brand" href="/indexUsrView">
-								<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template"style="width: 7cap; padding-bottom:5%;" id="title-logo" />
-							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
+								<img
+								src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png"
+								alt="eCommerce HTML Template"
+								style="width: 7cap; padding-bottom: 5%;" id="title-logo">
+								<label for="title-logo"
+								style="padding-top: 10%; font-size: x-large; color: #6a4a2f">내일은
+									맑음</label>
 							</a>
+							<div class="d-flex justify-content-between w-100 d-lg-none">
+								<a class="navbar-brand" href="/indexUsrView"> <img
+									src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png"
+									alt="eCommerce HTML Template"
+									style="width: 7cap; padding-bottom: 5%;" id="title-logo" /> <label
+									for="title-logo"
+									style="padding-top: 10%; font-size: x-large; color: #6a4a2f">내일은
+										맑음</label>
+								</a>
 							</div>
 						</div>
 						<div class="col-xxl-5 col-lg-5 d-none d-lg-block">
 							<div class="input-group">
-<!-- 								<input class="form-control rounded" type="search" -->
-<!-- 									placeholder="Search for Location" /> <span -->
-<!-- 									class="input-group-append"> -->
-<!-- 									<button -->
-<!-- 										class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" -->
-<!-- 										type="button"> -->
-<!-- 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" -->
-<!-- 											viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
-<!-- 											stroke-width="2" stroke-linecap="round" -->
-<!-- 											stroke-linejoin="round" class="feather feather-search"> -->
-<!-- 											<circle cx="11" cy="11" r="8"></circle> -->
-<!-- 											<line x1="21" y1="21" x2="16.65" y2="16.65"></line> -->
-<!-- 										</svg> -->
-<!-- 									</button> -->
-<!-- 								</span> -->
+								<!-- 								<input class="form-control rounded" type="search" -->
+								<!-- 									placeholder="Search for Location" /> <span -->
+								<!-- 									class="input-group-append"> -->
+								<!-- 									<button -->
+								<!-- 										class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" -->
+								<!-- 										type="button"> -->
+								<!-- 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" -->
+								<!-- 											viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
+								<!-- 											stroke-width="2" stroke-linecap="round" -->
+								<!-- 											stroke-linejoin="round" class="feather feather-search"> -->
+								<!-- 											<circle cx="11" cy="11" r="8"></circle> -->
+								<!-- 											<line x1="21" y1="21" x2="16.65" y2="16.65"></line> -->
+								<!-- 										</svg> -->
+								<!-- 									</button> -->
+								<!-- 								</span> -->
 							</div>
 						</div>
 
 						<div class="col-md-2 col-xxl-3 d-none d-lg-block">
 
 							<!-- Button trigger modal -->
-<!-- 							<button type="button" class="btn btn-outline-gray-400 text-muted"> -->
-<!-- 								<i class="feather-icon icon-map-pin me-2"></i> 검색 -->
-<!-- 							</button> -->
+							<!-- 							<button type="button" class="btn btn-outline-gray-400 text-muted"> -->
+							<!-- 								<i class="feather-icon icon-map-pin me-2"></i> 검색 -->
+							<!-- 							</button> -->
 						</div>
 						<div class="col-lg-2 col-xxl-2 text-end col-md-6 col-7">
 
 
 							<div class="list-inline">
 								<div class="list-inline-item me-5">
-									<a
-										href="/userUsrWish"
-										class="text-muted position-relative"> <svg
-											xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+									<a href="/userUsrWish" class="text-muted position-relative">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 											viewBox="0 0 24 24" fill="none" stroke="currentColor"
 											stroke-width="2" stroke-linecap="round"
 											stroke-linejoin="round" class="feather feather-heart">
@@ -151,20 +162,20 @@
 									</a>
 								</div>
 								<div class="list-inline-item me-5 me-lg-0">
-<!-- 									<a class="text-muted position-relative" type="button" -->
-<!-- 										href="/usr/template/staticfinal/dist/pages/shop-cart.html"> -->
-<!-- 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" -->
-<!-- 											viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
-<!-- 											stroke-width="2" stroke-linecap="round" -->
-<!-- 											stroke-linejoin="round" class="feather feather-shopping-bag"> -->
-<!-- 										<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path> -->
-<!-- 										<line x1="3" y1="6" x2="21" y2="6"></line> -->
-<!-- 										<path d="M16 10a4 4 0 0 1-8 0"></path> -->
-<!-- 									</svg> <span id="cart" -->
-<!-- 										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"> -->
-<!-- 											0 <span class="visually-hidden">unread messages</span> -->
-<!-- 									</span> -->
-<!-- 									</a> -->
+									<!-- 									<a class="text-muted position-relative" type="button" -->
+									<!-- 										href="/usr/template/staticfinal/dist/pages/shop-cart.html"> -->
+									<!-- 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" -->
+									<!-- 											viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
+									<!-- 											stroke-width="2" stroke-linecap="round" -->
+									<!-- 											stroke-linejoin="round" class="feather feather-shopping-bag"> -->
+									<!-- 										<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path> -->
+									<!-- 										<line x1="3" y1="6" x2="21" y2="6"></line> -->
+									<!-- 										<path d="M16 10a4 4 0 0 1-8 0"></path> -->
+									<!-- 									</svg> <span id="cart" -->
+									<!-- 										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"> -->
+									<!-- 											0 <span class="visually-hidden">unread messages</span> -->
+									<!-- 									</span> -->
+									<!-- 									</a> -->
 								</div>
 								<div class="list-inline-item d-inline-block d-lg-none">
 									<!-- Button -->
@@ -256,7 +267,8 @@
 							<div class="dropdown me-3 d-none d-lg-block">
 								<button class="btn btn-light px-6" type="button"
 									id="dropdownMenuButton1" data-bs-toggle="dropdown"
-									aria-expanded="false" style="background-color:#fdf6ec !important;">
+									aria-expanded="false"
+									style="background-color: #fdf6ec !important;">
 									<span class="me-1"> <svg
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -284,584 +296,594 @@
 
 					</div>
 				</div>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="userModal" tabindex="-1"
-		aria-labelledby="userModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content p-4">
-				<div class="modal-header border-0">
-					<h5 class="modal-title fs-3 fw-bold" id="userModalLabel">회원 가입</h5>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="userModal" tabindex="-1"
+			aria-labelledby="userModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content p-4">
+					<div class="modal-header border-0">
+						<h5 class="modal-title fs-3 fw-bold" id="userModalLabel">회원
+							가입</h5>
 
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="row g-3">
-						<div class="col-8">
-							<label for="fullName" class="form-label visually-hidden">Name</label>
-							<input type="text" class="form-control" id="fullName"
-								placeholder="이름" required />
-							<div class="invalid-feedback">필수항목 이름을 입력해주세요</div>
-						</div>
-						<div class="col-2">
-							<input type="radio" class="btn-check" name="options-base"
-								id="option8" autocomplete="off" checked> <label
-								class="btn" for="option8">남자</label>
-						</div>
-						<div class="col-2">
-							<input type="radio" class="btn-check" name="options-base"
-								id="option7" autocomplete="off"> <label class="btn"
-								for="option7">여자</label>
-						</div>
-						<div class="col-12">
-							<label for="email" class="form-label visually-hidden">Email
-								address</label> <input type="email" class="form-control" id="email"
-								placeholder="생년월일 8자리" required />
-							<div class="invalid-feedback">필수항목 생년월일 8자리를 입력해주세요</div>
-						</div>
-						<div class="col-12">
-							<label for="password" class="form-label visually-hidden">Password</label>
-							<input type="email" class="form-control" id="password"
-								placeholder="email" required />
-							<div class="invalid-feedback">필수항목 이메일을 입력해주세요</div>
-							<!-- <small class="form-text">
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row g-3">
+							<div class="col-8">
+								<label for="fullName" class="form-label visually-hidden">Name</label>
+								<input type="text" class="form-control" id="fullName"
+									placeholder="이름" required />
+								<div class="invalid-feedback">필수항목 이름을 입력해주세요</div>
+							</div>
+							<div class="col-2">
+								<input type="radio" class="btn-check" name="options-base"
+									id="option8" autocomplete="off" checked> <label
+									class="btn" for="option8">남자</label>
+							</div>
+							<div class="col-2">
+								<input type="radio" class="btn-check" name="options-base"
+									id="option7" autocomplete="off"> <label class="btn"
+									for="option7">여자</label>
+							</div>
+							<div class="col-12">
+								<label for="email" class="form-label visually-hidden">Email
+									address</label> <input type="email" class="form-control" id="email"
+									placeholder="생년월일 8자리" required />
+								<div class="invalid-feedback">필수항목 생년월일 8자리를 입력해주세요</div>
+							</div>
+							<div class="col-12">
+								<label for="password" class="form-label visually-hidden">Password</label>
+								<input type="email" class="form-control" id="password"
+									placeholder="email" required />
+								<div class="invalid-feedback">필수항목 이메일을 입력해주세요</div>
+								<!-- <small class="form-text">
 								By Signup, you agree to our
 								<a href="#!">Terms of Service</a>
 								&
 								<a href="#!">Privacy Policy</a>
 							</small> -->
-						</div>
-						<div class="col-12">
-							<label for="id-email" class="form-label visually-hidden">Email
-								address</label> <input type="email" class="form-control" id="id-email"
-								placeholder="아이디" required />
-							<div class="invalid-feedback">사용하실 아이디를 입력해주세요</div>
-						</div>
-						<div class="col-12">
-							<div class="password-field position-relative">
-								<label for="formSignupPassword-md"
-									class="form-label visually-hidden">Password</label>
+							</div>
+							<div class="col-12">
+								<label for="id-email" class="form-label visually-hidden">Email
+									address</label> <input type="email" class="form-control" id="id-email"
+									placeholder="아이디" required />
+								<div class="invalid-feedback">사용하실 아이디를 입력해주세요</div>
+							</div>
+							<div class="col-12">
 								<div class="password-field position-relative">
-									<input type="password" class="form-control fakePassword"
-										id="formSignupPassword-md"
-										placeholder="비밀번호 (영문과 특수문자조합 10자리이상)" required /> <span><i
-										class="bi bi-eye-slash passwordToggler"></i></span>
-									<div class="invalid-feedback">사용하실 비밀번호를 입력해주세요</div>
+									<label for="formSignupPassword-md"
+										class="form-label visually-hidden">Password</label>
+									<div class="password-field position-relative">
+										<input type="password" class="form-control fakePassword"
+											id="formSignupPassword-md"
+											placeholder="비밀번호 (영문과 특수문자조합 10자리이상)" required /> <span><i
+											class="bi bi-eye-slash passwordToggler"></i></span>
+										<div class="invalid-feedback">사용하실 비밀번호를 입력해주세요</div>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<button type="button" class="btn btn-primary">회원가입 하기</button>
+							<button type="button" class="btn btn-primary">회원가입 하기</button>
+						</div>
+					</div>
+					<div class="modal-footer border-0 justify-content-center">
+						이미 회원이신가요? <a href="/signinUsrForm">로그인 하기</a>
 					</div>
 				</div>
-				<div class="modal-footer border-0 justify-content-center">
-					이미 회원이신가요? <a href="/signinUsrForm">로그인 하기</a>
+			</div>
+		</div>
+
+		<!-- Shop Cart -->
+
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+			aria-labelledby="offcanvasRightLabel">
+			<div class="offcanvas-header border-bottom">
+				<div class="text-start">
+					<h5 id="offcanvasRightLabel" class="mb-0 fs-4">Shop Cart</h5>
+					<small>Location in 382480</small>
+				</div>
+				<button type="button" class="btn-close text-reset"
+					data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+				<div>
+					<!-- alert -->
+					<div class="alert alert-danger p-2" role="alert">
+						You’ve got FREE delivery. Start <a href="#!" class="alert-link">checkout
+							now!</a>
+					</div>
+					<ul class="list-group list-group-flush">
+						<!-- list group -->
+						<li class="list-group-item py-3 ps-0 border-top">
+							<!-- row -->
+							<div class="row align-items-center">
+								<div class="col-6 col-md-6 col-lg-7">
+									<div class="d-flex">
+										<img
+											src="/usr/template/staticfinal/dist/assets/images/products/product-img-1.jpg"
+											alt="Ecommerce" class="icon-shape icon-xxl" />
+										<div class="ms-3">
+											<!-- title -->
+											<a href="./pages/shop-single.html" class="text-inherit">
+												<h6 class="mb-0">Haldiram's Sev Bhujia</h6>
+											</a> <span><small class="text-muted">.98 / lb</small></span>
+											<!-- text -->
+											<div class="mt-2 small lh-1">
+												<a href="#!" class="text-decoration-none text-inherit">
+													<span class="me-1 align-text-bottom"> <svg
+															xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+															viewBox="0 0 24 24" fill="none" stroke="currentColor"
+															stroke-width="2" stroke-linecap="round"
+															stroke-linejoin="round"
+															class="feather feather-trash-2 text-success">
+														<polyline points="3 6 5 6 21 6"></polyline>
+														<path
+																d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+														</path>
+														<line x1="10" y1="11" x2="10" y2="17"></line>
+														<line x1="14" y1="11" x2="14" y2="17"></line>
+													</svg>
+												</span> <span class="text-muted">Remove</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- input group -->
+								<div class="col-4 col-md-3 col-lg-3">
+									<!-- input -->
+									<!-- input -->
+									<div class="input-group input-spinner">
+										<input type="button" value="-" class="button-minus btn btn-sm"
+											data-field="quantity" /> <input type="number" step="1"
+											max="10" value="1" name="quantity"
+											class="quantity-field form-control-sm form-input" /> <input
+											type="button" value="+" class="button-plus btn btn-sm"
+											data-field="quantity" />
+									</div>
+								</div>
+								<!-- price -->
+								<div class="col-2 text-lg-end text-start text-md-end col-md-2">
+									<span class="fw-bold">$5.00</span>
+								</div>
+							</div>
+						</li>
+						<!-- list group -->
+						<li class="list-group-item py-3 ps-0">
+							<!-- row -->
+							<div class="row align-items-center">
+								<div class="col-6 col-md-6 col-lg-7">
+									<div class="d-flex">
+										<img
+											src="/usr/template/staticfinal/dist/assets/images/products/product-img-2.jpg"
+											alt="Ecommerce" class="icon-shape icon-xxl" />
+										<div class="ms-3">
+											<a href="./pages/shop-single.html" class="text-inherit">
+												<h6 class="mb-0">NutriChoice Digestive</h6>
+											</a> <span><small class="text-muted">250g</small></span>
+											<!-- text -->
+											<div class="mt-2 small lh-1">
+												<a href="#!" class="text-decoration-none text-inherit">
+													<span class="me-1 align-text-bottom"> <svg
+															xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+															viewBox="0 0 24 24" fill="none" stroke="currentColor"
+															stroke-width="2" stroke-linecap="round"
+															stroke-linejoin="round"
+															class="feather feather-trash-2 text-success">
+														<polyline points="3 6 5 6 21 6"></polyline>
+														<path
+																d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+														</path>
+														<line x1="10" y1="11" x2="10" y2="17"></line>
+														<line x1="14" y1="11" x2="14" y2="17"></line>
+													</svg>
+												</span> <span class="text-muted">Remove</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- input group -->
+								<div class="col-4 col-md-3 col-lg-3">
+									<!-- input -->
+									<!-- input -->
+									<div class="input-group input-spinner">
+										<input type="button" value="-" class="button-minus btn btn-sm"
+											data-field="quantity" /> <input type="number" step="1"
+											max="10" value="1" name="quantity"
+											class="quantity-field form-control-sm form-input" /> <input
+											type="button" value="+" class="button-plus btn btn-sm"
+											data-field="quantity" />
+									</div>
+								</div>
+								<!-- price -->
+								<div class="col-2 text-lg-end text-start text-md-end col-md-2">
+									<span class="fw-bold text-danger">$20.00</span>
+									<div class="text-decoration-line-through text-muted small">$26.00</div>
+								</div>
+							</div>
+						</li>
+						<!-- list group -->
+						<li class="list-group-item py-3 ps-0">
+							<!-- row -->
+							<div class="row align-items-center">
+								<div class="col-6 col-md-6 col-lg-7">
+									<div class="d-flex">
+										<img
+											src="/usr/template/staticfinal/dist/assets/images/products/product-img-3.jpg"
+											alt="Ecommerce" class="icon-shape icon-xxl" />
+										<div class="ms-3">
+											<!-- title -->
+											<a href="./pages/shop-single.html" class="text-inherit">
+												<h6 class="mb-0">Cadbury 5 Star Chocolate</h6>
+											</a> <span><small class="text-muted">1 kg</small></span>
+											<!-- text -->
+											<div class="mt-2 small lh-1">
+												<a href="#!" class="text-decoration-none text-inherit">
+													<span class="me-1 align-text-bottom"> <svg
+															xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+															viewBox="0 0 24 24" fill="none" stroke="currentColor"
+															stroke-width="2" stroke-linecap="round"
+															stroke-linejoin="round"
+															class="feather feather-trash-2 text-success">
+														<polyline points="3 6 5 6 21 6"></polyline>
+														<path
+																d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+														</path>
+														<line x1="10" y1="11" x2="10" y2="17"></line>
+														<line x1="14" y1="11" x2="14" y2="17"></line>
+													</svg>
+												</span> <span class="text-muted">Remove</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- input group -->
+								<div class="col-4 col-md-3 col-lg-3">
+									<!-- input -->
+									<!-- input -->
+									<div class="input-group input-spinner">
+										<input type="button" value="-" class="button-minus btn btn-sm"
+											data-field="quantity" /> <input type="number" step="1"
+											max="10" value="1" name="quantity"
+											class="quantity-field form-control-sm form-input" /> <input
+											type="button" value="+" class="button-plus btn btn-sm"
+											data-field="quantity" />
+									</div>
+								</div>
+								<!-- price -->
+								<div class="col-2 text-lg-end text-start text-md-end col-md-2">
+									<span class="fw-bold">$15.00</span>
+									<div class="text-decoration-line-through text-muted small">$20.00</div>
+								</div>
+							</div>
+						</li>
+						<!-- list group -->
+						<li class="list-group-item py-3 ps-0">
+							<!-- row -->
+							<div class="row align-items-center">
+								<div class="col-6 col-md-6 col-lg-7">
+									<div class="d-flex">
+										<img
+											src="/usr/template/staticfinal/dist/assets/images/products/product-img-4.jpg"
+											alt="Ecommerce" class="icon-shape icon-xxl" />
+										<div class="ms-3">
+											<!-- title -->
+											<!-- title -->
+											<a href="./pages/shop-single.html" class="text-inherit">
+												<h6 class="mb-0">Onion Flavour Potato</h6>
+											</a> <span><small class="text-muted">250g</small></span>
+											<!-- text -->
+											<div class="mt-2 small lh-1">
+												<a href="#!" class="text-decoration-none text-inherit">
+													<span class="me-1 align-text-bottom"> <svg
+															xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+															viewBox="0 0 24 24" fill="none" stroke="currentColor"
+															stroke-width="2" stroke-linecap="round"
+															stroke-linejoin="round"
+															class="feather feather-trash-2 text-success">
+														<polyline points="3 6 5 6 21 6"></polyline>
+														<path
+																d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+														</path>
+														<line x1="10" y1="11" x2="10" y2="17"></line>
+														<line x1="14" y1="11" x2="14" y2="17"></line>
+													</svg>
+												</span> <span class="text-muted">Remove</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- input group -->
+								<div class="col-4 col-md-3 col-lg-3">
+									<!-- input -->
+									<!-- input -->
+									<div class="input-group input-spinner">
+										<input type="button" value="-" class="button-minus btn btn-sm"
+											data-field="quantity" /> <input type="number" step="1"
+											max="10" value="1" name="quantity"
+											class="quantity-field form-control-sm form-input" /> <input
+											type="button" value="+" class="button-plus btn btn-sm"
+											data-field="quantity" />
+									</div>
+								</div>
+								<!-- price -->
+								<div class="col-2 text-lg-end text-start text-md-end col-md-2">
+									<span class="fw-bold">$15.00</span>
+									<div class="text-decoration-line-through text-muted small">$20.00</div>
+								</div>
+							</div>
+						</li>
+						<!-- list group -->
+						<li class="list-group-item py-3 ps-0 border-bottom">
+							<!-- row -->
+							<div class="row align-items-center">
+								<div class="col-6 col-md-6 col-lg-7">
+									<div class="d-flex">
+										<img
+											src="/usr/template/staticfinal/dist/assets/images/products/product-img-5.jpg"
+											alt="Ecommerce" class="icon-shape icon-xxl" />
+										<div class="ms-3">
+											<!-- title -->
+											<a href="./pages/shop-single.html" class="text-inherit">
+												<h6 class="mb-0">Salted Instant Popcorn</h6>
+											</a> <span><small class="text-muted">100g</small></span>
+											<!-- text -->
+											<div class="mt-2 small lh-1">
+												<a href="#!" class="text-decoration-none text-inherit">
+													<span class="me-1 align-text-bottom"> <svg
+															xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+															viewBox="0 0 24 24" fill="none" stroke="currentColor"
+															stroke-width="2" stroke-linecap="round"
+															stroke-linejoin="round"
+															class="feather feather-trash-2 text-success">
+														<polyline points="3 6 5 6 21 6"></polyline>
+														<path
+																d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+														</path>
+														<line x1="10" y1="11" x2="10" y2="17"></line>
+														<line x1="14" y1="11" x2="14" y2="17"></line>
+													</svg>
+												</span> <span class="text-muted">Remove</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- input group -->
+								<div class="col-4 col-md-3 col-lg-3">
+									<!-- input -->
+									<!-- input -->
+									<div class="input-group input-spinner">
+										<input type="button" value="-" class="button-minus btn btn-sm"
+											data-field="quantity" /> <input type="number" step="1"
+											max="10" value="1" name="quantity"
+											class="quantity-field form-control-sm form-input" /> <input
+											type="button" value="+" class="button-plus btn btn-sm"
+											data-field="quantity" />
+									</div>
+								</div>
+								<!-- price -->
+								<div class="col-2 text-lg-end text-start text-md-end col-md-2">
+									<span class="fw-bold">$15.00</span>
+									<div class="text-decoration-line-through text-muted small">$25.00</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<!-- btn -->
+					<div class="d-flex justify-content-between mt-4">
+						<a href="#!" class="btn btn-primary">Continue Shopping</a> <a
+							href="#!" class="btn btn-dark">Update Cart</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Shop Cart -->
-
-	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
-		aria-labelledby="offcanvasRightLabel">
-		<div class="offcanvas-header border-bottom">
-			<div class="text-start">
-				<h5 id="offcanvasRightLabel" class="mb-0 fs-4">Shop Cart</h5>
-				<small>Location in 382480</small>
-			</div>
-			<button type="button" class="btn-close text-reset"
-				data-bs-dismiss="offcanvas" aria-label="Close"></button>
-		</div>
-		<div class="offcanvas-body">
-			<div>
-				<!-- alert -->
-				<div class="alert alert-danger p-2" role="alert">
-					You’ve got FREE delivery. Start <a href="#!" class="alert-link">checkout
-						now!</a>
-				</div>
-				<ul class="list-group list-group-flush">
-					<!-- list group -->
-					<li class="list-group-item py-3 ps-0 border-top">
-						<!-- row -->
-						<div class="row align-items-center">
-							<div class="col-6 col-md-6 col-lg-7">
-								<div class="d-flex">
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/products/product-img-1.jpg"
-										alt="Ecommerce" class="icon-shape icon-xxl" />
-									<div class="ms-3">
-										<!-- title -->
-										<a href="./pages/shop-single.html" class="text-inherit">
-											<h6 class="mb-0">Haldiram's Sev Bhujia</h6>
-										</a> <span><small class="text-muted">.98 / lb</small></span>
-										<!-- text -->
-										<div class="mt-2 small lh-1">
-											<a href="#!" class="text-decoration-none text-inherit"> <span
-												class="me-1 align-text-bottom"> <svg
-														xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-														viewBox="0 0 24 24" fill="none" stroke="currentColor"
-														stroke-width="2" stroke-linecap="round"
-														stroke-linejoin="round"
-														class="feather feather-trash-2 text-success">
-														<polyline points="3 6 5 6 21 6"></polyline>
-														<path
-															d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-														</path>
-														<line x1="10" y1="11" x2="10" y2="17"></line>
-														<line x1="14" y1="11" x2="14" y2="17"></line>
-													</svg>
-											</span> <span class="text-muted">Remove</span>
-											</a>
-										</div>
-									</div>
-								</div>
+		<!-- Modal -->
+		<div class="modal fade" id="locationModal" tabindex="-1"
+			aria-labelledby="locationModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body p-6">
+						<div class="d-flex justify-content-between align-items-start">
+							<div>
+								<h5 class="mb-1" id="locationModalLabel">Choose your
+									Delivery Location</h5>
+								<p class="mb-0 small">Enter your address and we will specify
+									the offer you area.</p>
 							</div>
-							<!-- input group -->
-							<div class="col-4 col-md-3 col-lg-3">
-								<!-- input -->
-								<!-- input -->
-								<div class="input-group input-spinner">
-									<input type="button" value="-" class="button-minus btn btn-sm"
-										data-field="quantity" /> <input type="number" step="1"
-										max="10" value="1" name="quantity"
-										class="quantity-field form-control-sm form-input" /> <input
-										type="button" value="+" class="button-plus btn btn-sm"
-										data-field="quantity" />
-								</div>
-							</div>
-							<!-- price -->
-							<div class="col-2 text-lg-end text-start text-md-end col-md-2">
-								<span class="fw-bold">$5.00</span>
-							</div>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
 						</div>
-					</li>
-					<!-- list group -->
-					<li class="list-group-item py-3 ps-0">
-						<!-- row -->
-						<div class="row align-items-center">
-							<div class="col-6 col-md-6 col-lg-7">
-								<div class="d-flex">
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/products/product-img-2.jpg"
-										alt="Ecommerce" class="icon-shape icon-xxl" />
-									<div class="ms-3">
-										<a href="./pages/shop-single.html" class="text-inherit">
-											<h6 class="mb-0">NutriChoice Digestive</h6>
-										</a> <span><small class="text-muted">250g</small></span>
-										<!-- text -->
-										<div class="mt-2 small lh-1">
-											<a href="#!" class="text-decoration-none text-inherit"> <span
-												class="me-1 align-text-bottom"> <svg
-														xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-														viewBox="0 0 24 24" fill="none" stroke="currentColor"
-														stroke-width="2" stroke-linecap="round"
-														stroke-linejoin="round"
-														class="feather feather-trash-2 text-success">
-														<polyline points="3 6 5 6 21 6"></polyline>
-														<path
-															d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-														</path>
-														<line x1="10" y1="11" x2="10" y2="17"></line>
-														<line x1="14" y1="11" x2="14" y2="17"></line>
-													</svg>
-											</span> <span class="text-muted">Remove</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- input group -->
-							<div class="col-4 col-md-3 col-lg-3">
-								<!-- input -->
-								<!-- input -->
-								<div class="input-group input-spinner">
-									<input type="button" value="-" class="button-minus btn btn-sm"
-										data-field="quantity" /> <input type="number" step="1"
-										max="10" value="1" name="quantity"
-										class="quantity-field form-control-sm form-input" /> <input
-										type="button" value="+" class="button-plus btn btn-sm"
-										data-field="quantity" />
-								</div>
-							</div>
-							<!-- price -->
-							<div class="col-2 text-lg-end text-start text-md-end col-md-2">
-								<span class="fw-bold text-danger">$20.00</span>
-								<div class="text-decoration-line-through text-muted small">$26.00</div>
-							</div>
+						<div class="my-5">
+							<input type="search" class="form-control"
+								placeholder="Search your area" />
 						</div>
-					</li>
-					<!-- list group -->
-					<li class="list-group-item py-3 ps-0">
-						<!-- row -->
-						<div class="row align-items-center">
-							<div class="col-6 col-md-6 col-lg-7">
-								<div class="d-flex">
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/products/product-img-3.jpg"
-										alt="Ecommerce" class="icon-shape icon-xxl" />
-									<div class="ms-3">
-										<!-- title -->
-										<a href="./pages/shop-single.html" class="text-inherit">
-											<h6 class="mb-0">Cadbury 5 Star Chocolate</h6>
-										</a> <span><small class="text-muted">1 kg</small></span>
-										<!-- text -->
-										<div class="mt-2 small lh-1">
-											<a href="#!" class="text-decoration-none text-inherit"> <span
-												class="me-1 align-text-bottom"> <svg
-														xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-														viewBox="0 0 24 24" fill="none" stroke="currentColor"
-														stroke-width="2" stroke-linecap="round"
-														stroke-linejoin="round"
-														class="feather feather-trash-2 text-success">
-														<polyline points="3 6 5 6 21 6"></polyline>
-														<path
-															d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-														</path>
-														<line x1="10" y1="11" x2="10" y2="17"></line>
-														<line x1="14" y1="11" x2="14" y2="17"></line>
-													</svg>
-											</span> <span class="text-muted">Remove</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- input group -->
-							<div class="col-4 col-md-3 col-lg-3">
-								<!-- input -->
-								<!-- input -->
-								<div class="input-group input-spinner">
-									<input type="button" value="-" class="button-minus btn btn-sm"
-										data-field="quantity" /> <input type="number" step="1"
-										max="10" value="1" name="quantity"
-										class="quantity-field form-control-sm form-input" /> <input
-										type="button" value="+" class="button-plus btn btn-sm"
-										data-field="quantity" />
-								</div>
-							</div>
-							<!-- price -->
-							<div class="col-2 text-lg-end text-start text-md-end col-md-2">
-								<span class="fw-bold">$15.00</span>
-								<div class="text-decoration-line-through text-muted small">$20.00</div>
-							</div>
+						<div
+							class="d-flex justify-content-between align-items-center mb-2">
+							<h6 class="mb-0">Select Location</h6>
+							<a href="#" class="btn btn-outline-gray-400 text-muted btn-sm">Clear
+								All</a>
 						</div>
-					</li>
-					<!-- list group -->
-					<li class="list-group-item py-3 ps-0">
-						<!-- row -->
-						<div class="row align-items-center">
-							<div class="col-6 col-md-6 col-lg-7">
-								<div class="d-flex">
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/products/product-img-4.jpg"
-										alt="Ecommerce" class="icon-shape icon-xxl" />
-									<div class="ms-3">
-										<!-- title -->
-										<!-- title -->
-										<a href="./pages/shop-single.html" class="text-inherit">
-											<h6 class="mb-0">Onion Flavour Potato</h6>
-										</a> <span><small class="text-muted">250g</small></span>
-										<!-- text -->
-										<div class="mt-2 small lh-1">
-											<a href="#!" class="text-decoration-none text-inherit"> <span
-												class="me-1 align-text-bottom"> <svg
-														xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-														viewBox="0 0 24 24" fill="none" stroke="currentColor"
-														stroke-width="2" stroke-linecap="round"
-														stroke-linejoin="round"
-														class="feather feather-trash-2 text-success">
-														<polyline points="3 6 5 6 21 6"></polyline>
-														<path
-															d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-														</path>
-														<line x1="10" y1="11" x2="10" y2="17"></line>
-														<line x1="14" y1="11" x2="14" y2="17"></line>
-													</svg>
-											</span> <span class="text-muted">Remove</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- input group -->
-							<div class="col-4 col-md-3 col-lg-3">
-								<!-- input -->
-								<!-- input -->
-								<div class="input-group input-spinner">
-									<input type="button" value="-" class="button-minus btn btn-sm"
-										data-field="quantity" /> <input type="number" step="1"
-										max="10" value="1" name="quantity"
-										class="quantity-field form-control-sm form-input" /> <input
-										type="button" value="+" class="button-plus btn btn-sm"
-										data-field="quantity" />
-								</div>
-							</div>
-							<!-- price -->
-							<div class="col-2 text-lg-end text-start text-md-end col-md-2">
-								<span class="fw-bold">$15.00</span>
-								<div class="text-decoration-line-through text-muted small">$20.00</div>
-							</div>
-						</div>
-					</li>
-					<!-- list group -->
-					<li class="list-group-item py-3 ps-0 border-bottom">
-						<!-- row -->
-						<div class="row align-items-center">
-							<div class="col-6 col-md-6 col-lg-7">
-								<div class="d-flex">
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/products/product-img-5.jpg"
-										alt="Ecommerce" class="icon-shape icon-xxl" />
-									<div class="ms-3">
-										<!-- title -->
-										<a href="./pages/shop-single.html" class="text-inherit">
-											<h6 class="mb-0">Salted Instant Popcorn</h6>
-										</a> <span><small class="text-muted">100g</small></span>
-										<!-- text -->
-										<div class="mt-2 small lh-1">
-											<a href="#!" class="text-decoration-none text-inherit"> <span
-												class="me-1 align-text-bottom"> <svg
-														xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-														viewBox="0 0 24 24" fill="none" stroke="currentColor"
-														stroke-width="2" stroke-linecap="round"
-														stroke-linejoin="round"
-														class="feather feather-trash-2 text-success">
-														<polyline points="3 6 5 6 21 6"></polyline>
-														<path
-															d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-														</path>
-														<line x1="10" y1="11" x2="10" y2="17"></line>
-														<line x1="14" y1="11" x2="14" y2="17"></line>
-													</svg>
-											</span> <span class="text-muted">Remove</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- input group -->
-							<div class="col-4 col-md-3 col-lg-3">
-								<!-- input -->
-								<!-- input -->
-								<div class="input-group input-spinner">
-									<input type="button" value="-" class="button-minus btn btn-sm"
-										data-field="quantity" /> <input type="number" step="1"
-										max="10" value="1" name="quantity"
-										class="quantity-field form-control-sm form-input" /> <input
-										type="button" value="+" class="button-plus btn btn-sm"
-										data-field="quantity" />
-								</div>
-							</div>
-							<!-- price -->
-							<div class="col-2 text-lg-end text-start text-md-end col-md-2">
-								<span class="fw-bold">$15.00</span>
-								<div class="text-decoration-line-through text-muted small">$25.00</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-				<!-- btn -->
-				<div class="d-flex justify-content-between mt-4">
-					<a href="#!" class="btn btn-primary">Continue Shopping</a> <a
-						href="#!" class="btn btn-dark">Update Cart</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal -->
-	<div class="modal fade" id="locationModal" tabindex="-1"
-		aria-labelledby="locationModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-sm modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-body p-6">
-					<div class="d-flex justify-content-between align-items-start">
 						<div>
-							<h5 class="mb-1" id="locationModalLabel">Choose your
-								Delivery Location</h5>
-							<p class="mb-0 small">Enter your address and we will specify
-								the offer you area.</p>
-						</div>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="my-5">
-						<input type="search" class="form-control"
-							placeholder="Search your area" />
-					</div>
-					<div class="d-flex justify-content-between align-items-center mb-2">
-						<h6 class="mb-0">Select Location</h6>
-						<a href="#" class="btn btn-outline-gray-400 text-muted btn-sm">Clear
-							All</a>
-					</div>
-					<div>
-						<div data-simplebar style="height: 300px">
-							<div class="list-group list-group-flush">
-								<a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active">
-									<span>Alabama</span> <span>Min:$20</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>Alaska</span> <span>Min:$30</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>Arizona</span> <span>Min:$50</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>California</span> <span>Min:$29</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>Colorado</span> <span>Min:$80</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>Florida</span> <span>Min:$90</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>Arizona</span> <span>Min:$50</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>California</span> <span>Min:$29</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>Colorado</span> <span>Min:$80</span>
-								</a> <a href="#"
-									class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-									<span>Florida</span> <span>Min:$90</span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script
-		src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
-
-	<main>
-		<div class="mt-4">
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- col -->
-					<div class="col-12"></div>
-				</div>
-			</div>
-		</div>
-		<section class="mt-8">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-5 col-xl-6">
-						<div class="slider slider-for">
-							<div th:each="list:${blogList}">
-								<div class="zoom" onmousemove="zoom(event)"
-									th:style="'background-image: url(' + ${list.path} + ')'">
-									<!-- img -->
-									<!-- img -->
-									<img
-										th:src="${list.path}"
-										alt="" style="height: 700px;" />
+							<div data-simplebar style="height: 300px">
+								<div class="list-group list-group-flush">
+									<a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active">
+										<span>Alabama</span> <span>Min:$20</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>Alaska</span> <span>Min:$30</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>Arizona</span> <span>Min:$50</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>California</span> <span>Min:$29</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>Colorado</span> <span>Min:$80</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>Florida</span> <span>Min:$90</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>Arizona</span> <span>Min:$50</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>California</span> <span>Min:$29</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>Colorado</span> <span>Min:$80</span>
+									</a> <a href="#"
+										class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+										<span>Florida</span> <span>Min:$90</span>
+									</a>
 								</div>
 							</div>
-							
-						</div>
-						<div class="slider slider-nav mt-4" >
-							<div th:each="list:${blogList}">
-								<img
-									th:src="${list.path}"
-									alt="" class="w-100 rounded" />
-							</div>
-							
 						</div>
 					</div>
-					<div class="col-md-7 col-xl-6">
-						<div class="ps-lg-10 mt-6 mt-md-0">
-							<!-- content -->
-							<h5 th:text="${item.nickName}"></h5>
-							<!-- <a href="#!" class="mb-4 d-block">Bakery Biscuits</a> -->
-							<!-- heading -->
-							<div id="title" style="display: none;">
-								<input class="form-control" type="text" th:value="${item.title}"
-									name="title" style="display: inline; width: 500px;">
-								<button id="blogUpdateBtn" type="button"
-									class="btn btn-outline-secondary">완료</button>
+				</div>
+			</div>
+		</div>
+
+		<script
+			src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
+
+		<main>
+			<div class="mt-4">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- col -->
+						<div class="col-12"></div>
+					</div>
+				</div>
+			</div>
+			<section class="mt-8">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-5 col-xl-6">
+							<div class="slider slider-for">
+								<div th:each="lists:${imageList}">
+									<div class="zoom" onmousemove="zoom(event)"
+										th:style="'background-image: url(' + ${lists.path} + ')'">
+										<!-- img -->
+										<!-- img -->
+										<img th:src="${lists.path}" alt="" style="height: 700px;" />
+									</div>
+								</div>
+
 							</div>
-							<div id="blogTitle">
-								<h1 class="mb-1" th:text="${item.title}"
-									style="display: inline;"></h1>
-								<span class="blogUpdatePencil"
-									style="display: flex; align-items: center;"><a
-									id="TitleUptBtn" type="button"
-									class="btn-sm btn-outline-secondary"> <i
-										class="bi bi-pencil"></i>
-								</a></span>
+							<div  style="display: flex; justify-content: end;">
+								<input type="file" id="fileInput" name="uploadImg1" multiple
+									style="display: none;">
+									<button type="button" id="fileSave" style="display:none;">확인</button>
+								<button type="button" id="fileBtn"
+									onclick="imageModify()">
+									이미지 수정</button>
 							</div>
-							<div class="mb-4">
-								<!-- rating -->
-								<!-- rating -->
-<!-- 								<small class="text-warning"> <i class="bi bi-star-fill"></i> -->
-<!-- 									<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> -->
-<!-- 									<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> -->
-<!-- 								</small> -->
-								 <h6  class="ms-2" style="color:orange;">([[${reviewCount}]] reviews)</h6>
+							<div class="slider slider-nav mt-4">
+								<div th:each="lists:${imageList}">
+									<img th:src="${lists.path}" alt="" class="w-100 rounded" />
+								</div>
+
 							</div>
-							<hr class="my-6" />
-							<div class="mb-5"></div>
-							<div>
-								<a class="btn btn-light"
-									th:onclick="wishList([[${item.seq}]],[[${session.sessSeqUsr}]])"
-									data-bs-toggle="tooltip" data-bs-html="true"
-									aria-label="Wishlist" style="background-color:pink;"><i class="feather-icon icon-heart"></i></a>
-							</div>
-							<div>
+						</div>
+						<div class="col-md-7 col-xl-6">
+							<div class="ps-lg-10 mt-6 mt-md-0">
+								<!-- content -->
+								<h5 th:text="${item.nickName}"></h5>
+								<!-- <a href="#!" class="mb-4 d-block">Bakery Biscuits</a> -->
+								<!-- heading -->
+								<div id="title" style="display: none;">
+									<input class="form-control" type="text"
+										th:value="${item.title}" name="title"
+										style="display: inline; width: 500px;">
+									<button id="blogUpdateBtn" type="button"
+										class="btn btn-outline-secondary">완료</button>
+								</div>
+								<div id="blogTitle">
+									<h1 class="mb-1" th:text="${item.title}"
+										style="display: inline;"></h1>
+									<span class="blogUpdatePencil"
+										style="display: flex; align-items: center;"><a
+										id="TitleUptBtn" type="button"
+										class="btn-sm btn-outline-secondary"> <i
+											class="bi bi-pencil"></i>
+									</a></span>
+								</div>
+								<div class="mb-4">
+									<!-- rating -->
+									<!-- rating -->
+									<!-- 								<small class="text-warning"> <i class="bi bi-star-fill"></i> -->
+									<!-- 									<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> -->
+									<!-- 									<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i> -->
+									<!-- 								</small> -->
+									<h6 class="ms-2" style="color: orange;">([[${reviewCount}]]
+										reviews)</h6>
+								</div>
 								<hr class="my-6" />
-							</div>
+								<div class="mb-5"></div>
+								<div>
+									<a class="btn btn-light"
+										th:onclick="wishList([[${item.seq}]],[[${session.sessSeqUsr}]])"
+										data-bs-toggle="tooltip" data-bs-html="true"
+										aria-label="Wishlist" style="background-color: pink;"><i
+										class="feather-icon icon-heart"></i></a>
+								</div>
+								<div>
+									<hr class="my-6" />
+								</div>
 
-							<!-- hr -->
-							<div>
-								<!-- table -->
-								<table class="table table-borderless "
-									style="font-size: large; text-align: center; width: 110%">
-									<tbody>
-										<tr>
-											<td style="color: black;">품목</td>
-											<td style="color: black;">구매 링크</td>
-											<td style="color: black;">가격</td>
-											<td></td>
-											<td></td>
-											<td></td>
+								<!-- hr -->
+								<div>
+									<!-- table -->
+									<table class="table table-borderless "
+										style="font-size: large; text-align: center; width: 110%">
+										<tbody>
+											<tr>
+												<td style="color: black;">품목</td>
+												<td style="color: black;">구매 링크</td>
+												<td style="color: black;">가격</td>
+												<td></td>
+												<td></td>
+												<td></td>
 
 
-										</tr>
+											</tr>
 											<tr th:each="infoList:${clotheList}">
-												<td style="display: none;"><input class="infoseq" type="hidden"
-													name="infoseq" th:value="${infoList.infoseq}"></td>
+												<td style="display: none;"><input class="infoseq"
+													type="hidden" name="infoseq" th:value="${infoList.infoseq}"></td>
 												<td th:text="${infoList.item}" class="view-mode"></td>
 												<td class="ssInfo view-mode"><a
 													th:href="${#strings.startsWith(infoList.buyLink, 'http')? infoList.buyLink : 'https://' +infoList.buyLink}"
-													th:text="${infoList.buyLink}" target="_blank"></a>
-													</td>
-												<td style="display:none;" class="buyInfo"><a href="javascript:void(0)" th:onclick="buy([[${infoList.infoseq}]])">정보 구매하기</a></td>
+													th:text="${infoList.buyLink}" target="_blank"></a></td>
+												<td style="display: none;" class="buyInfo"><a
+													href="javascript:void(0)"
+													th:onclick="buy([[${infoList.infoseq}]])">정보 구매하기</a></td>
 												<td class="view-mode" th:text="${infoList.infoPrice}"></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.item}"
-													name="item" autocomplete="off"/></td>
+													name="item" autocomplete="off" /></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.buyLink}"
-													name="buyLink" autocomplete="off"/></td>
+													name="buyLink" autocomplete="off" /></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.infoPrice}"
-													name="infoPrice" autocomplete="off"/></td>
-<!-- 												<td class="shopCart" id="shopCart" style="display: none;"><a -->
-<!-- 													type="button"> <i class="bi bi-cart"></i> -->
-<!-- 												</a></td> -->
+													name="infoPrice" autocomplete="off" /></td>
+												<!-- 												<td class="shopCart" id="shopCart" style="display: none;"><a -->
+												<!-- 													type="button"> <i class="bi bi-cart"></i> -->
+												<!-- 												</a></td> -->
 												<td><a onclick="edit(this)" type="button"
 													class=" blogUpdatePencil"> <i class="bi bi-pencil"></i>
 												</a></td>
@@ -873,424 +895,411 @@
 														class="bi bi-check-square"></i>
 												</a></td>
 											</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="mt-8 row">
-								<!-- dropdown -->
-
-								<div class="dropdown col-9">
-<!-- 									<a class="btn btn-outline-secondary dropdown-toggle" href="#" -->
-<!-- 										role="button" data-bs-toggle="dropdown" aria-expanded="false">Share</a> -->
-
-<!-- 									<ul class="dropdown-menu"> -->
-<!-- 										<li><a class="dropdown-item" href="#"> <i -->
-<!-- 												class="bi bi-facebook me-2"></i> Facebook -->
-<!-- 										</a></li> -->
-<!-- 										<li><a class="dropdown-item" href="#"> <i -->
-<!-- 												class="bi bi-twitter me-2"></i> Twitter -->
-<!-- 										</a></li> -->
-<!-- 										<li><a class="dropdown-item" href="#"> <i -->
-<!-- 												class="bi bi-instagram me-2"></i> Instagram -->
-<!-- 										</a></li> -->
-<!-- 									</ul> -->
-
+										</tbody>
+									</table>
 								</div>
+								<div class="mt-8 row">
+									<!-- dropdown -->
 
-								<div class="col-3" style="display: flex; justify-content: end;"
-									id="blogDelete">
-									<button type="button" onclick="blogDelete()"
-										class="btn btn-outline-secondary">블로그 삭제</button>
+									<div class="dropdown col-9">
+										<!-- 									<a class="btn btn-outline-secondary dropdown-toggle" href="#" -->
+										<!-- 										role="button" data-bs-toggle="dropdown" aria-expanded="false">Share</a> -->
+
+										<!-- 									<ul class="dropdown-menu"> -->
+										<!-- 										<li><a class="dropdown-item" href="#"> <i -->
+										<!-- 												class="bi bi-facebook me-2"></i> Facebook -->
+										<!-- 										</a></li> -->
+										<!-- 										<li><a class="dropdown-item" href="#"> <i -->
+										<!-- 												class="bi bi-twitter me-2"></i> Twitter -->
+										<!-- 										</a></li> -->
+										<!-- 										<li><a class="dropdown-item" href="#"> <i -->
+										<!-- 												class="bi bi-instagram me-2"></i> Instagram -->
+										<!-- 										</a></li> -->
+										<!-- 									</ul> -->
+
+									</div>
+
+									<div class="col-3" style="display: flex; justify-content: end;"
+										id="blogDelete">
+										<button type="button" onclick="blogDelete()"
+											class="btn btn-outline-secondary">블로그 삭제</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-		<section class="mt-lg-14 mt-8">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<ul class="nav nav-pills nav-lb-tab" id="myTab" role="tablist">
-							<!-- nav item -->
-							<li class="nav-item" role="presentation">
-								<!-- btn -->
-								<button class="nav-link active" id="product-tab"
-									data-bs-toggle="tab" data-bs-target="#product-tab-pane"
-									type="button" role="tab" aria-controls="product-tab-pane"
-									aria-selected="true">코디 소개</button>
-							</li>
-							<!-- nav item -->
-							<li class="nav-item" role="presentation">
-								<!-- btn -->
-								<button class="nav-link" id="details-tab" data-bs-toggle="tab"
-									data-bs-target="#details-tab-pane" type="button" role="tab"
-									aria-controls="details-tab-pane" aria-selected="false">
-									코디 상세정보</button>
-							</li>
-							<!-- nav item -->
-							<li class="nav-item" role="presentation">
-								<!-- btn -->
-								<button class="nav-link" id="reviews-tab" data-bs-toggle="tab"
-									data-bs-target="#reviews-tab-pane" type="button" role="tab"
-									aria-controls="reviews-tab-pane" aria-selected="false">
-									리뷰</button>
-							</li>
-						</ul>
-						<!-- tab content -->
-						<div class="tab-content" id="myTabContent">
-							<!-- tab pane -->
-							<div class="tab-pane fade show active" id="product-tab-pane"
-								role="tabpanel" aria-labelledby="product-tab" tabindex="0">
-								<div class="my-8">
-									<div class="mb-5">
-										<!-- text -->
-										<div id="introduction" style="display: none;">
-											<input class="form-control" type="text"
-												th:value="${item.blogIntroduction}" name="blogIntroduction"
-												style="display: inline; width: 1000px;">
-											<button id="blogUpdateBtn1" type="button"
-												class="btn btn-outline-secondary">완료</button>
-										</div>
-										<div id="blogIntroduction">
-											<p class="mb-0" style="font-size: 20px; display: inline;"
-												th:text="${item.blogIntroduction}"></p>
-											<span class="blogUpdatePencil"
-												style="display: flex; align-items: center;"><a
-												id="IntroductionUptBtn" type="button"
-												class="btn-sm btn-outline-secondary"> <i
-													class="bi bi-pencil"></i>
-											</a></span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- tab pane -->
-							<div class="tab-pane fade" id="details-tab-pane" role="tabpanel"
-								aria-labelledby="details-tab" tabindex="0">
-								<div class="my-8">
-									<div class="row">
-										<div class="col-12">
-											<h4 class="mb-4">Details</h4>
-										</div>
-										<div class="col-12 col-lg-6">
-											<table class="table table-striped">
-												<!-- table -->
-												<tbody>
-													<tr>
-														<th>키</th>
-														<td id="modelHeight" style="display: none;"><input
-															class="form-control" type="text"
-															th:value="${item.modelHeight}" name="modelHeight"
-															style="display: inline; width: 100px;">
-															<button id="blogUpdateBtn2" type="button"
-																class="btn btn-outline-secondary">완료</button></td>
-														<td id="blogModelHeight"><span
-															th:text="${item.modelHeight}"
-															style="display: inline; align-items: center;"></span> <a
-															id="ModelHeightUptBtn" type="button"
-															class="btn-sm btn-outline-secondary blogUpdatePencil">
-																<i class="bi bi-pencil"></i>
-														</a></td>
-													</tr>
-													<tr>
-														<th>몸무게</th>
-														<td id="modelWeight" style="display: none;"><input
-															class="form-control" type="text" autocomplete="off"
-															th:value="${item.modelWeight}" name="modelWeight"
-															style="display: inline; width: 100px;">
-															<button id="blogUpdateBtn3" type="button"
-																class="btn btn-outline-secondary">완료</button></td>
-														<td id="blogModelWeight"><span
-															th:text="${item.modelWeight}"
-															style="display: inline; align-items: center;"></span> <a
-															id="ModelWeightUptBtn" type="button"
-															class="btn-sm btn-outline-secondary blogUpdatePencil">
-																<i class="bi bi-pencil"></i>
-														</a></td>
-													</tr>
-													<tr>
-														<th>착용 사이즈</th>
-														<td id="modelSize" style="display: none;"><input
-															class="form-control" type="text"
-															th:value="${item.modelSize}" name="modelSize"
-															autocomplete="off" style="display: inline; width: 100px;">
-															<button id="blogUpdateBtn" type="button"
-																class="btn btn-outline-secondary">완료</button></td>
-														<td id="blogModelSize"><span
-															th:text="${item.modelSize}"
-															style="display: inline; align-items: center;"></span> <a
-															id="ModelSizeUptBtn" type="button"
-															class="btn-sm btn-outline-secondary blogUpdatePencil">
-																<i class="bi bi-pencil"></i>
-														</a></td>
-													</tr>
-													<tr>
-														<th>신발 사이즈</th>
-														<td id="modelShoesSize" style="display: none;"><input
-															class="form-control" type="text"
-															th:value="${item.modelShoesSize}" name="modelShoesSize"
-															style="display: inline; width: 100px;" autocomplete="off">
-															<button id="blogUpdateBtn4" type="button"
-																class="btn btn-outline-secondary">완료</button></td>
-														<td id="blogModelShoesSize"><span
-															th:text="${item.modelShoesSize}"
-															style="display: inline; align-items: center;"></span> <a
-															id="ModelShoesSizeUptBtn" type="button"
-															class="btn-sm btn-outline-secondary blogUpdatePencil">
-																<i class="bi bi-pencil"></i>
-														</a></td>
-													</tr>
-													<tr>
-														<!-- <th>Form</th>
-														<td>Larry the Bird</td> -->
-													</tr>
-													<tr>
-														<!-- <th>Manufacturer</th>
-														<td>Dmart</td> -->
-													</tr>
-													<tr>
-														<!-- <th>Net Quantity</th>
-														<td>340.0 Gram</td> -->
-													</tr>
-													<tr>
-														<!-- <th>Product Dimensions</th>
-														<td>9.6 x 7.49 x 18.49 cm</td> -->
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div class="col-12 col-lg-6">
-											<table class="table table-striped">
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- tab pane -->
-							<div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel"
-								aria-labelledby="reviews-tab" tabindex="0">
-								<div class="my-8">
-									<!-- row -->
-									<div class="row">
-										<div class="col-md-4">
-											<div class="me-lg-12 mb-6 mb-md-0">
- 												
-												<div class="d-grid">
-													<!-- <h4>Review this product</h4> -->
-													<!-- <p class="mb-0">Share your thoughts with other customers.</p> -->
-													<a href="./betterBlog.html"
-														class="btn btn-outline-gray-400 mt-4 text-muted"> 
-														블로그 댓글 쓰기 </a>
-												</div>
+			</section>
+			<section class="mt-lg-14 mt-8">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<ul class="nav nav-pills nav-lb-tab" id="myTab" role="tablist">
+								<!-- nav item -->
+								<li class="nav-item" role="presentation">
+									<!-- btn -->
+									<button class="nav-link active" id="product-tab"
+										data-bs-toggle="tab" data-bs-target="#product-tab-pane"
+										type="button" role="tab" aria-controls="product-tab-pane"
+										aria-selected="false">코디 소개</button>
+								</li>
+								<!-- nav item -->
+								<li class="nav-item" role="presentation">
+									<!-- btn -->
+									<button class="nav-link" id="details-tab" data-bs-toggle="tab"
+										data-bs-target="#details-tab-pane" type="button" role="tab"
+										aria-controls="details-tab-pane" aria-selected="false">
+										코디 상세정보</button>
+								</li>
+								<!-- nav item -->
+								<li class="nav-item" role="presentation">
+									<!-- btn -->
+									<button class="nav-link " id="reviews-tab" data-bs-toggle="tab"
+										data-bs-target="#reviews-tab-pane " type="button" role="tab"
+										aria-controls="reviews-tab-pane" aria-selected="true">
+										리뷰</button>
+								</li>
+							</ul>
+							<!-- tab content -->
+							<div class="tab-content" id="myTabContent">
+								<!-- tab pane -->
+								<div class="tab-pane fade show active" id="product-tab-pane"
+									role="tabpanel" aria-labelledby="product-tab" tabindex="0">
+									<div class="my-8">
+										<div class="mb-5">
+											<!-- text -->
+											<div id="introduction" style="display: none;">
+												<input class="form-control" type="text"
+													th:value="${item.blogIntroduction}" name="blogIntroduction"
+													style="display: inline; width: 1000px;">
+												<button id="blogUpdateBtn1" type="button"
+													class="btn btn-outline-secondary">완료</button>
+											</div>
+											<div id="blogIntroduction">
+												<p class="mb-0" style="font-size: 20px; display: inline;"
+													th:text="${item.blogIntroduction}"></p>
+												<span class="blogUpdatePencil"
+													style="display: flex; align-items: center;"><a
+													id="IntroductionUptBtn" type="button"
+													class="btn-sm btn-outline-secondary"> <i
+														class="bi bi-pencil"></i>
+												</a></span>
 											</div>
 										</div>
-										<!-- col -->
-										<div class="col-md-8">
-											<div class="mb-10">
-												<div
-													class="d-flex justify-content-between align-items-center mb-8">
-													<div>
-														<!-- heading -->
-														<h4>코디 리뷰</h4>
-													</div>
-													<div>
-<!-- 														<select class="form-select"> -->
-<!-- 															<option selected>Top Reviews</option> -->
-<!-- 															<option value="Most Recent">Most Recent</option> -->
-<!-- 														</select> -->
+									</div>
+								</div>
+								<!-- tab pane -->
+								<div class="tab-pane fade" id="details-tab-pane" role="tabpanel"
+									aria-labelledby="details-tab" tabindex="0">
+									<div class="my-8">
+										<div class="row">
+											<div class="col-12">
+												<h4 class="mb-4">Details</h4>
+											</div>
+											<div class="col-12 col-lg-6">
+												<table class="table table-striped">
+													<!-- table -->
+													<tbody>
+														<tr>
+															<th>키</th>
+															<td id="modelHeight" style="display: none;"><input
+																class="form-control" type="text"
+																th:value="${item.modelHeight}" name="modelHeight"
+																style="display: inline; width: 100px;">
+																<button id="blogUpdateBtn2" type="button"
+																	class="btn btn-outline-secondary">완료</button></td>
+															<td id="blogModelHeight"><span
+																th:text="${item.modelHeight}"
+																style="display: inline; align-items: center;"></span> <a
+																id="ModelHeightUptBtn" type="button"
+																class="btn-sm btn-outline-secondary blogUpdatePencil">
+																	<i class="bi bi-pencil"></i>
+															</a></td>
+														</tr>
+														<tr>
+															<th>몸무게</th>
+															<td id="modelWeight" style="display: none;"><input
+																class="form-control" type="text" autocomplete="off"
+																th:value="${item.modelWeight}" name="modelWeight"
+																style="display: inline; width: 100px;">
+																<button id="blogUpdateBtn3" type="button"
+																	class="btn btn-outline-secondary">완료</button></td>
+															<td id="blogModelWeight"><span
+																th:text="${item.modelWeight}"
+																style="display: inline; align-items: center;"></span> <a
+																id="ModelWeightUptBtn" type="button"
+																class="btn-sm btn-outline-secondary blogUpdatePencil">
+																	<i class="bi bi-pencil"></i>
+															</a></td>
+														</tr>
+														<tr>
+															<th>착용 사이즈</th>
+															<td id="modelSize" style="display: none;"><input
+																class="form-control" type="text"
+																th:value="${item.modelSize}" name="modelSize"
+																autocomplete="off"
+																style="display: inline; width: 100px;">
+																<button id="blogUpdateBtn" type="button"
+																	class="btn btn-outline-secondary">완료</button></td>
+															<td id="blogModelSize"><span
+																th:text="${item.modelSize}"
+																style="display: inline; align-items: center;"></span> <a
+																id="ModelSizeUptBtn" type="button"
+																class="btn-sm btn-outline-secondary blogUpdatePencil">
+																	<i class="bi bi-pencil"></i>
+															</a></td>
+														</tr>
+														<tr>
+															<th>신발 사이즈</th>
+															<td id="modelShoesSize" style="display: none;"><input
+																class="form-control" type="text"
+																th:value="${item.modelShoesSize}" name="modelShoesSize"
+																style="display: inline; width: 100px;"
+																autocomplete="off">
+																<button id="blogUpdateBtn4" type="button"
+																	class="btn btn-outline-secondary">완료</button></td>
+															<td id="blogModelShoesSize"><span
+																th:text="${item.modelShoesSize}"
+																style="display: inline; align-items: center;"></span> <a
+																id="ModelShoesSizeUptBtn" type="button"
+																class="btn-sm btn-outline-secondary blogUpdatePencil">
+																	<i class="bi bi-pencil"></i>
+															</a></td>
+														</tr>
+														<tr>
+															<!-- <th>Form</th>
+														<td>Larry the Bird</td> -->
+														</tr>
+														<tr>
+															<!-- <th>Manufacturer</th>
+														<td>Dmart</td> -->
+														</tr>
+														<tr>
+															<!-- <th>Net Quantity</th>
+														<td>340.0 Gram</td> -->
+														</tr>
+														<tr>
+															<!-- <th>Product Dimensions</th>
+														<td>9.6 x 7.49 x 18.49 cm</td> -->
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="col-12 col-lg-6">
+												<table class="table table-striped">
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- tab pane -->
+								<div class="tab-pane fade " id="reviews-tab-pane"
+									role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+									<div class="my-8">
+										<!-- row -->
+										<div class="row">
+											<div class="col-md-4">
+												<div class="me-lg-12 mb-6 mb-md-0">
+
+													<div class="d-grid">
+														<!-- <h4>Review this product</h4> -->
+														<!-- <p class="mb-0">Share your thoughts with other customers.</p> -->
+														<a href="javascript:void(0);" onclick="gotext()"
+															class="btn btn-outline-gray-400 mt-4 text-muted"> 블로그
+															댓글 쓰기 </a>
 													</div>
 												</div>
-												<div class="d-flex border-bottom pb-6 mb-6">
-												<th:block th:each="list : ${reviewList}">
-													<!-- img -->
-													<!-- img -->
-													<img
-														src="/usr/template/staticfinal/dist/assets/images/avatar/profile.png"
-														alt="" class="rounded-circle avatar-lg" />
-													<div class="ms-5">
-														<h6 class="mb-1" th:text="${list.nickName}"></h6>
-														<!-- select option -->
-														<!-- content -->
-														<p class="small">
-															<span class="text-muted" th:text="${list.rReg}"></span> 
-														</p>
-														<!-- rating -->
-														
-														<!-- text-->
-														<p th:text="${list.coment}"></p>
-														
-														<!-- icon -->
-														<div class="d-flex justify-content-end mt-4">
-<!-- 															<a href="#" class="text-muted"> <i -->
-<!-- 																class="feather-icon icon-thumbs-up me-1"></i> Helpful -->
-<!-- 															</a> <a href="#" class="text-muted ms-4"> <i -->
-<!-- 																class="feather-icon icon-flag me-2"></i> Report abuse -->
-<!-- 															</a> -->
+											</div>
+											<!-- col -->
+											<div class="col-md-8">
+												<div class="mb-10">
+													<div
+														class="d-flex justify-content-between align-items-center mb-8">
+														<div>
+															<!-- heading -->
+															<h4>코디 리뷰</h4>
+														</div>
+														<div>
+															<!-- 														<select class="form-select"> -->
+															<!-- 															<option selected>Top Reviews</option> -->
+															<!-- 															<option value="Most Recent">Most Recent</option> -->
+															<!-- 														</select> -->
 														</div>
 													</div>
+													<th:block th:each="list : ${reviewList}">
+														<div class="d-flex border-bottom pb-6 mb-6">
+															<!-- img -->
+															<!-- img -->
+															<img
+																src="/usr/template/staticfinal/dist/assets/images/avatar/profile.png"
+																alt="" class="rounded-circle avatar-lg" />
+															<div class="ms-5">
+																<h6 class="mb-1" th:text="${list.nickName}"></h6>
+																<!-- select option -->
+																<!-- content -->
+																<p class="small">
+																	<span class="text-muted" th:text="${list.rReg}"></span>
+																</p>
+																<!-- rating -->
+
+																<!-- text-->
+																<p th:text="${list.coment}"></p>
+
+																<!-- icon -->
+																<div class="d-flex justify-content-end mt-4">
+																	<!-- 															<a href="#" class="text-muted"> <i -->
+																	<!-- 																class="feather-icon icon-thumbs-up me-1"></i> Helpful -->
+																	<!-- 															</a> <a href="#" class="text-muted ms-4"> <i -->
+																	<!-- 																class="feather-icon icon-flag me-2"></i> Report abuse -->
+																	<!-- 															</a> -->
+																</div>
+															</div>
+														</div>
 													</th:block>
-												</div>
-												
-												<div style="display:flex; justify-content:center;">
-													<ul class="pagination">
-								<li th:if="${vo.startPage gt vo.pageNumToShow}"
-									class="page-item" style="cursor: pointer;"><a
-									class="page-link" href="javascript:goList(${vo.startPage - 1})"
-									th:attr="onclick=|goList('${vo.startPage - 1}')|"> <i
-										class="fa-solid fa-angle-left"></i>
-								</a></li>
-								<li
-									th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
-									th:classappend="${num eq vo.thisPage} ? active : ''"
-									class="page-item" style="cursor: pointer;"><a
-									class="page-link" th:attr="onclick=|goList('${num}')|"
-									th:text="${num}"> <!-- ${i.index} -->
-								</a></li>
-								<li th:if="${vo.endPage ne vo.totalPages}" class="page-item"
-									style="cursor: pointer;"><a class="page-link"
-									th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
-										class="fa-solid fa-angle-right"></i>
-								</a></li>
-							</ul>
-												</div>
-											</div>
-											<div>
-												<!-- rating -->
-												<h3 class="mb-5">리뷰 작성</h3>
-												
 
-											</div>
-											<!-- form control -->
-											
-											<div class="py-4 mb-4">
-												<!-- heading -->
-												<h5>댓글 본문</h5>
-												<textarea class="form-control" id="coment" name="coment" rows="3"
-													placeholder="작성자에게 상처가 되는말은 삼가해주시길 부탁드립니다" required></textarea>
-											</div>
-											<!-- button -->
-											<div class="d-flex justify-content-end">
-												<a href="javascript:void(0);" id="reviewSave" class="btn btn-primary">리뷰 저장</a>
+													<div style="display: flex; justify-content: center;">
+														<ul class="pagination">
+															<li th:if="${vo.startPage gt vo.pageNumToShow}"
+																class="page-item" style="cursor: pointer;"><a
+																class="page-link"
+																href="javascript:goList(${vo.startPage - 1})"
+																th:attr="onclick=|goList('${vo.startPage - 1}')|"> <i
+																	class="fa-solid fa-angle-left"></i>
+															</a></li>
+															<li
+																th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+																th:classappend="${num eq vo.thisPage} ? active : ''"
+																class="page-item" style="cursor: pointer;"><a
+																class="page-link" th:attr="onclick=|goList('${num}')|"
+																th:text="${num}"> <!-- ${i.index} -->
+															</a></li>
+															<li th:if="${vo.endPage ne vo.totalPages}"
+																class="page-item" style="cursor: pointer;"><a
+																class="page-link"
+																th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
+																	class="fa-solid fa-angle-right"></i>
+															</a></li>
+														</ul>
+													</div>
+												</div>
+												<div id="writeReview">
+													<!-- rating -->
+													<h3 class="mb-5">리뷰 작성</h3>
+
+
+												</div>
+												<!-- form control -->
+
+												<div class="py-4 mb-4">
+													<!-- heading -->
+													<h5>댓글 본문</h5>
+													<textarea class="form-control" id="coment" name="coment"
+														rows="3" placeholder="작성자에게 상처가 되는말은 삼가해주시길 부탁드립니다"
+														required></textarea>
+												</div>
+												<!-- button -->
+												<div class="d-flex justify-content-end">
+													<a href="javascript:void(0);" id="reviewSave"
+														class="btn btn-primary">리뷰 저장</a>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+							<!-- tab pane -->
+							<div class="tab-pane fade" id="sellerInfo-tab-pane"
+								role="tabpanel" aria-labelledby="sellerInfo-tab" tabindex="0">...</div>
 						</div>
-						<!-- tab pane -->
-						<div class="tab-pane fade" id="sellerInfo-tab-pane"
-							role="tabpanel" aria-labelledby="sellerInfo-tab" tabindex="0">...</div>
 					</div>
 				</div>
-			</div>
-			</div>
-		</section>
-
-		<!-- section -->
-		<section class="my-lg-14 my-14">
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-12">
-						<!-- heading -->
-						<h3>다른 코디 블로그</h3>
-					</div>
 				</div>
-				<!-- row -->
-				<th:block th:if="${#lists.isEmpty(blogList)}">게시물이 없습니다</th:block>
-				<div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-2 mt-2">
-					<th:block th:unless="${#lists.isEmpty(blogList)}"
-						th:each="list : ${blogList}">
-						<!-- col -->
-						<div class="col">
-							<div class="card card-product">
-								<div class="card-body">
-									<!-- badge -->
+			</section>
 
-									<div class="text-center position-relative">
-										<div class="position-absolute top-0 start-0">
-										</div>
-										<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
-											th:src="${list.path}"
-											alt="Grocery Ecommerce Template" class="mb-3 img-fluid"
-											style="height: 210px; width: 210px;" />
-										</a>
-										<!-- action btn -->
-										<div class="card-product-action"></div>
-									</div>
-									<!-- heading -->
-									<div class="text-small mb-1">
-										<a th:onclick="blogView([[${list.seq}]])"
-											class="text-decoration-none text-muted"><small
-											th:text="${list.nickName}"></small></a>
-									</div>
-									<h2 class="fs-6">
-										<a th:onclick="blogView([[${list.seq}]])"
-											class="text-inherit text-decoration-none"
-											th:text="${list.title}"> </a>
-									</h2>
-									<div>
-										<!-- rating -->
-										
-									</div>
-									<!-- price -->
-									<div
-										class="d-flex justify-content-between align-items-center mt-3">
-
-										<!-- btn -->
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</th:block>
-				</div>
-				<!-- col -->
-
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>
-		</section>
-	</main>
-	<!-- Footer -->
-	<!-- footer -->
-
-	<!-- modal -->
-	<!-- Modal -->
-	<div class="modal fade" id="quickViewModal" tabindex="-1"
-		aria-hidden="true">
-		<div class="modal-dialog modal-xl modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-body p-8">
-					<div class="position-absolute top-0 end-0 me-3 mt-3">
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
+			<!-- section -->
+			<section class="my-lg-14 my-14">
+				<div class="container">
+					<!-- row -->
 					<div class="row">
-						<div class="col-lg-6">
-							<!-- img slide -->
-							<div class="product productModal" id="productModal">
-								<div class="zoom" onmousemove="zoom(event)"
-									style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg);">
-									<!-- img -->
-									<img
-										src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
-										alt="">
-								</div>
-								<div>
-									<div class="zoom" onmousemove="zoom(event)"
-										style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg);">
-										<!-- img -->
-										<img
-											src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
-											alt="">
+						<div class="col-12">
+							<!-- heading -->
+							<h3>다른 코디 블로그</h3>
+						</div>
+					</div>
+					<!-- row -->
+					<th:block th:if="${#lists.isEmpty(blogList)}">게시물이 없습니다</th:block>
+					<div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-2 mt-2">
+						<th:block th:unless="${#lists.isEmpty(blogList)}"
+							th:each="list : ${blogList}">
+							<!-- col -->
+							<div class="col">
+								<div class="card card-product">
+									<div class="card-body">
+										<!-- badge -->
+
+										<div class="text-center position-relative">
+											<div class="position-absolute top-0 start-0"></div>
+											<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
+												th:src="${list.mainImage}" alt="Grocery Ecommerce Template"
+												class="mb-3 img-fluid" style="height: 210px; width: 210px;" />
+											</a>
+											<!-- action btn -->
+											<div class="card-product-action"></div>
+										</div>
+										<!-- heading -->
+										<div class="text-small mb-1">
+											<a th:onclick="blogView([[${list.seq}]])"
+												class="text-decoration-none text-muted"><small
+												th:text="${list.nickName}"></small></a>
+										</div>
+										<h2 class="fs-6">
+											<a th:onclick="blogView([[${list.seq}]])"
+												class="text-inherit text-decoration-none"
+												th:text="${list.title}"> </a>
+										</h2>
+										<div>
+											<!-- rating -->
+
+										</div>
+										<!-- price -->
+										<div
+											class="d-flex justify-content-between align-items-center mt-3">
+
+											<!-- btn -->
+
+										</div>
 									</div>
 								</div>
-								<div>
+							</div>
+						</th:block>
+					</div>
+					<!-- col -->
+
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+			</section>
+		</main>
+		<!-- Footer -->
+		<!-- footer -->
+
+		<!-- modal -->
+		<!-- Modal -->
+		<div class="modal fade" id="quickViewModal" tabindex="-1"
+			aria-hidden="true">
+			<div class="modal-dialog modal-xl modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body p-8">
+						<div class="position-absolute top-0 end-0 me-3 mt-3">
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<!-- img slide -->
+								<div class="product productModal" id="productModal">
 									<div class="zoom" onmousemove="zoom(event)"
 										style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg);">
 										<!-- img -->
@@ -1298,46 +1307,27 @@
 											src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
 											alt="">
 									</div>
-								</div>
-								<div>
-									<div class="zoom" onmousemove="zoom(event)"
-										style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg);">
-										<!-- img -->
-										<img
-											src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
-											alt="">
-									</div>
-								</div>
-							</div>
-							<!-- product tools -->
-							<div class="product-tools">
-								<div class="thumbnails row g-3" id="productModalThumbnails">
-									<div class="col-3 tns-nav-active">
-										<div class="thumbnails-img">
-											<!-- img -->
-											<img
-												src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
-												alt="">
-										</div>
-									</div>
-									<div class="col-3">
-										<div class="thumbnails-img">
+									<div>
+										<div class="zoom" onmousemove="zoom(event)"
+											style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg);">
 											<!-- img -->
 											<img
 												src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
 												alt="">
 										</div>
 									</div>
-									<div class="col-3">
-										<div class="thumbnails-img">
+									<div>
+										<div class="zoom" onmousemove="zoom(event)"
+											style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg);">
 											<!-- img -->
 											<img
 												src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
 												alt="">
 										</div>
 									</div>
-									<div class="col-3">
-										<div class="thumbnails-img">
+									<div>
+										<div class="zoom" onmousemove="zoom(event)"
+											style="background-image: url(/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg);">
 											<!-- img -->
 											<img
 												src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
@@ -1345,88 +1335,126 @@
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="ps-lg-8 mt-6 mt-lg-0">
-								<a href="#!" class="mb-4 d-block">Bakery Biscuits</a>
-								<h2 class="mb-1 h1">Napolitanke Ljesnjak</h2>
-								<div class="mb-4">
-									<small class="text-warning"> <i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i></small><a
-										href="#" class="ms-2">(30 reviews)</a>
-								</div>
-								<div class="fs-4">
-									<span class="fw-bold text-dark">$32</span> <span
-										class="text-decoration-line-through text-muted">$35</span><span><small
-										class="fs-6 ms-2 text-danger">26% Off</small></span>
-								</div>
-								<hr class="my-6">
-								<div class="mb-4">
-									<button type="button" class="btn btn-outline-secondary">
-										250g</button>
-									<button type="button" class="btn btn-outline-secondary">
-										500g</button>
-									<button type="button" class="btn btn-outline-secondary">
-										1kg</button>
-								</div>
-								<div>
-									<!-- input -->
-									<!-- input -->
-									<div class="input-group input-spinner  ">
-										<input type="button" value="-"
-											class="button-minus  btn  btn-sm " data-field="quantity">
-										<input type="number" step="1" max="10" value="1"
-											name="quantity"
-											class="quantity-field form-control-sm form-input   ">
-										<input type="button" value="+" class="button-plus btn btn-sm "
-											data-field="quantity">
+								<!-- product tools -->
+								<div class="product-tools">
+									<div class="thumbnails row g-3" id="productModalThumbnails">
+										<div class="col-3 tns-nav-active">
+											<div class="thumbnails-img">
+												<!-- img -->
+												<img
+													src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
+													alt="">
+											</div>
+										</div>
+										<div class="col-3">
+											<div class="thumbnails-img">
+												<!-- img -->
+												<img
+													src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
+													alt="">
+											</div>
+										</div>
+										<div class="col-3">
+											<div class="thumbnails-img">
+												<!-- img -->
+												<img
+													src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1.jpg"
+													alt="">
+											</div>
+										</div>
+										<div class="col-3">
+											<div class="thumbnails-img">
+												<!-- img -->
+												<img
+													src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
+													alt="">
+											</div>
+										</div>
 									</div>
 								</div>
-								<div
-									class="mt-3 row justify-content-start g-2 align-items-center">
+							</div>
+							<div class="col-lg-6">
+								<div class="ps-lg-8 mt-6 mt-lg-0">
+									<a href="#!" class="mb-4 d-block">Bakery Biscuits</a>
+									<h2 class="mb-1 h1">Napolitanke Ljesnjak</h2>
+									<div class="mb-4">
+										<small class="text-warning"> <i
+											class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+											<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+											<i class="bi bi-star-half"></i></small><a href="#" class="ms-2">(30
+											reviews)</a>
+									</div>
+									<div class="fs-4">
+										<span class="fw-bold text-dark">$32</span> <span
+											class="text-decoration-line-through text-muted">$35</span><span><small
+											class="fs-6 ms-2 text-danger">26% Off</small></span>
+									</div>
+									<hr class="my-6">
+									<div class="mb-4">
+										<button type="button" class="btn btn-outline-secondary">
+											250g</button>
+										<button type="button" class="btn btn-outline-secondary">
+											500g</button>
+										<button type="button" class="btn btn-outline-secondary">
+											1kg</button>
+									</div>
+									<div>
+										<!-- input -->
+										<!-- input -->
+										<div class="input-group input-spinner  ">
+											<input type="button" value="-"
+												class="button-minus  btn  btn-sm " data-field="quantity">
+											<input type="number" step="1" max="10" value="1"
+												name="quantity"
+												class="quantity-field form-control-sm form-input   ">
+											<input type="button" value="+"
+												class="button-plus btn btn-sm " data-field="quantity">
+										</div>
+									</div>
+									<div
+										class="mt-3 row justify-content-start g-2 align-items-center">
 
-									<div class="col-lg-4 col-md-5 col-6 d-grid">
-										<!-- button -->
-										<!-- btn -->
-										<button type="button" class="btn btn-primary">
-											<i class="feather-icon icon-shopping-bag me-2"></i>Add to
-											cart
-										</button>
+										<div class="col-lg-4 col-md-5 col-6 d-grid">
+											<!-- button -->
+											<!-- btn -->
+											<button type="button" class="btn btn-primary">
+												<i class="feather-icon icon-shopping-bag me-2"></i>Add to
+												cart
+											</button>
+										</div>
+										<div class="col-md-4 col-5">
+											<!-- btn -->
+											<a class="btn btn-light" href="#" data-bs-toggle="tooltip"
+												data-bs-html="true" aria-label="Compare"><i
+												class="bi bi-arrow-left-right"></i></a> <a class="btn btn-light"
+												href="#!" data-bs-toggle="tooltip" data-bs-html="true"
+												aria-label="Wishlist"><i class="feather-icon icon-heart"></i></a>
+										</div>
 									</div>
-									<div class="col-md-4 col-5">
-										<!-- btn -->
-										<a class="btn btn-light" href="#" data-bs-toggle="tooltip"
-											data-bs-html="true" aria-label="Compare"><i
-											class="bi bi-arrow-left-right"></i></a> <a class="btn btn-light"
-											href="#!" data-bs-toggle="tooltip" data-bs-html="true"
-											aria-label="Wishlist"><i class="feather-icon icon-heart"></i></a>
+									<hr class="my-6">
+									<div>
+										<table class="table table-borderless">
+											<tbody>
+												<tr>
+													<td>Product Code:</td>
+													<td>FBB00255</td>
+												</tr>
+												<tr>
+													<td>Availability:</td>
+													<td>In Stock</td>
+												</tr>
+												<tr>
+													<td>Type:</td>
+													<td>Fruits</td>
+												</tr>
+												<tr>
+													<td>Shipping:</td>
+													<td><small>01 day shipping.<span
+															class="text-muted">( Free pickup today)</span></small></td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
-								</div>
-								<hr class="my-6">
-								<div>
-									<table class="table table-borderless">
-										<tbody>
-											<tr>
-												<td>Product Code:</td>
-												<td>FBB00255</td>
-											</tr>
-											<tr>
-												<td>Availability:</td>
-												<td>In Stock</td>
-											</tr>
-											<tr>
-												<td>Type:</td>
-												<td>Fruits</td>
-											</tr>
-											<tr>
-												<td>Shipping:</td>
-												<td><small>01 day shipping.<span
-														class="text-muted">( Free pickup today)</span></small></td>
-											</tr>
-										</tbody>
-									</table>
 								</div>
 							</div>
 						</div>
@@ -1434,57 +1462,56 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modalConfirmTitle">title</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body" id="modalConfirmBody">body</div>
-				<div class="modal-footer">
-					<button type="button" id="btnReturn"
-						class="btn btn-outline-secondary btn-sm btn_custom"
-						data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
-						name="" id="btnModalDelete">
-						<i class="fa-solid fa-x fa-lg"></i>
-					</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
-						name="" id="btnModalUelete">삭제</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="modalConfirm1" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modalConfirmTitle1">title</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body" id="modalConfirmBody1">body</div>
-				<div class="modal-footer">
-					<button type="button" id="btnReturn1"
-						class="btn btn-outline-secondary btn-sm btn_custom"
-						data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
-						name="" id="btnModalDelete1">
-						<i class="fa-solid fa-x fa-lg"></i>
-					</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
-						name="" id="btnModalUelete1">삭제</button>
+		<div class="modal fade" id="modalConfirm" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalConfirmTitle">title</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="modalConfirmBody">body</div>
+					<div class="modal-footer">
+						<button type="button" id="btnReturn"
+							class="btn btn-outline-secondary btn-sm btn_custom"
+							data-bs-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-danger btn-sm btn_custom"
+							name="" id="btnModalDelete">
+							<i class="fa-solid fa-x fa-lg"></i>
+						</button>
+						<button type="button" class="btn btn-danger btn-sm btn_custom"
+							name="" id="btnModalUelete">삭제</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		<div class="modal fade" id="modalConfirm1" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalConfirmTitle1">title</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="modalConfirmBody1">body</div>
+					<div class="modal-footer">
+						<button type="button" id="btnReturn1"
+							class="btn btn-outline-secondary btn-sm btn_custom"
+							data-bs-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-danger btn-sm btn_custom"
+							name="" id="btnModalDelete1">
+							<i class="fa-solid fa-x fa-lg"></i>
+						</button>
+						<button type="button" class="btn btn-danger btn-sm btn_custom"
+							name="" id="btnModalUelete1">삭제</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</form>
 	<div th:replace="~{usr/include/footer::footer}"></div>
 	<!-- Javascript-->
@@ -1609,6 +1636,7 @@
 		  ssInfo[i].style.display = "none";
 	  }
 	  document.getElementById("blogDelete").style.display = "none";
+	  document.getElementById("fileBtn").style.display = "none";
 	}
 	
 	function wishList(num1,num2){
@@ -1808,11 +1836,65 @@ document.querySelector("#btnModalUelete1").onclick = function(){
 			return false;
 		}
 	}
-	 function goList(Num) {
-			document.querySelector("input[name=thisPage]").value = Num;
-			form.action = "/blogUsrView"
-			form.submit();
+	function goList(Num) {
+		document.querySelector("input[name=thisPage]").value = Num;
+		document.querySelector("#tab").value = "review";
+		form.action = "/blogUsrView";
+		form.submit();
+	}
+	 function gotext() {
+		    const commentBox = document.getElementById("writeReview");
+		    if (commentBox) {
+		      commentBox.scrollIntoView({ behavior: "smooth" });
+		      commentBox.focus();
+		    }
+		  }
+	 function imageModify(){
+		 document.getElementById("fileInput").style.display = "";
+		 document.getElementById("fileSave").style.display = "";
+		 document.getElementById("fileBtn").style.display = "none";
+	 }
+	 
+	 document.getElementById("fileSave").onclick = function(){
+		if( document.getElementById("fileInput").value == null || 
+				 document.getElementById("fileInput").value ==""){
+			return false;
+		}else{
+		    var formData = new FormData();
+		    var fileInput = document.getElementById("fileInput");
+		    var files = fileInput.files;
+
+		    // 파일 여러 개 가능 (multiple 처리했으니까)
+		    for (var i = 0; i < files.length; i++) {
+		        formData.append("uploadImg1", files[i]);
+		    }
+		    
+		    formData.append("seq", $("#betterBlog_seq").val());
+		    formData.append("blogKey", $("#betterBlog_seq").val());
+
+		    $.ajax({
+		        async: true,
+		        cache: false,
+		        type: "post",
+		        enctype: "multipart/form-data",  // ★ 이거 중요
+		        url: "/imageUsrUpdt",
+		        processData: false, // ★ 파일 보낼 땐 꼭 false
+		        contentType: false, // ★ 파일 보낼 땐 꼭 false
+		        data: formData,
+		        success: function(response) {
+		            if (response.rt == "success") {
+		                form.action = "/blogUsrView";
+		                form.submit();
+		            } else {
+		                return false;
+		            }
+		        },
+		        error: function(jqXHR, textStatus, errorThrown){
+		            alert("ajaxUpdate " + textStatus + " : " + errorThrown);
+		        }
+		    });
 		}
+	 }
 	</script>
 </body>
 

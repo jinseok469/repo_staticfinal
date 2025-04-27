@@ -216,10 +216,6 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		userService.userUpdate(userDto);
 		}
 		httpSession.setAttribute("sessSeqUsr", userDto.getUrSeq());
-		System.out.println(userDto.getUrl());
-		System.out.println(userDto.getUrl());
-		System.out.println(userDto.getUrl());
-		System.out.println(userDto.getUrl());
 		return "redirect:"+userDto.getUrl();
 	}
 	@RequestMapping(value = "/userUsrAddr")
