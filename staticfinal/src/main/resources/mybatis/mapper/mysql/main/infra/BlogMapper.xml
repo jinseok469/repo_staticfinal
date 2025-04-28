@@ -84,7 +84,6 @@
 		a.user_seq,
 		a.blogCategory_seq,
 		c.categoryName,
-		a.buied,
 		a.title,
 		a.bgReg,
 		a.bgMof,
@@ -101,7 +100,7 @@
 		from
 		image as a
 		where 1=1 
-		and a.pSeq = #{betterBlog_seq}
+		and a.pSeq = #{seq}
 	</select>
 	<select id="blogViewList" resultMap="resultMapObj">
 		select
@@ -111,7 +110,6 @@
 		a.user_seq,
 		a.blogCategory_seq,
 		c.categoryName,
-		a.buied,
 		a.title,
 		a.bgReg,
 		a.bgMof,
@@ -130,7 +128,6 @@
 		a.user_seq,
 		a.blogCategory_seq,
 		c.categoryName,
-		a.buied,
 		a.title,
 		a.bgReg,
 		a.bgMof
@@ -180,7 +177,6 @@
 		a.modelShoesSize,
 		a.blogCategory_seq,
 		a.user_seq,
-		a.buied,
 		a.title,
 		b.name,
 		b.nickName,
@@ -351,7 +347,6 @@
 		modelShoesSize ,
 		blogCategory_seq,
 		user_seq ,
-		buied ,
 		title ,
 		bgDelNy,
 		bgReg
@@ -364,7 +359,6 @@
 		#{modelShoesSize},
 		#{blogCategory_seq},
 		#{user_seq},
-		#{buied},
 		#{title},
 		#{bgDelNy},
 		now()

@@ -110,11 +110,14 @@
 									<button type="button" onclick="loginLogic()"
 										class="btn btn-primary">로그인 하기</button>
 								</div>
+								
+								<div id="naverIdLogin" style="text-align:center;"></div>
 								<!-- link -->
 								<div>
 									아직 회원이 아니신가요? <a href="/signupUsrForm">회원 가입</a>
 								</div>
 							</div>
+							
 							<div class="modal fade" id="loginModal" tabindex="-1"
 								aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog ">
@@ -175,6 +178,8 @@
 		src="/usr/template/staticfinal/dist/assets/js/vendors/password.js"></script>
 	<script
 		src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
+		<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
+		
 	<script type="text/javascript">
 		let input = document.getElementsByClassName("ss");
 		function loginLogic() {
@@ -251,6 +256,14 @@
 		 	loginLogic();
 			}
 		}
+		
+		let naverLogin = new naver.LoginWithNaverId({
+		    clientId: "gVil5SCPgA8y9YABGyNA",  // 반드시 네이버에서 발급받은 걸로
+		    callbackUrl: "http://localhost:8080/indexUsrView", // 인증 완료 후 돌아올 주소
+		    isPopup: false,  // 팝업이 아니라 새로 이동
+		    loginButton: {color: "green", type: 3, height: 40} // 버튼 디자인 옵션
+		  });
+		  naverLogin.init();
 	</script>
 </body>
 

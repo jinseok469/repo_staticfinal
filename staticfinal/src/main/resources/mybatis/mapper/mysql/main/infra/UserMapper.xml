@@ -192,7 +192,6 @@
 		from
 		user as a
 		left join betterBlog as b on a.seq = b.user_seq
-		left join image as c on c.pSeq = b.seq
 		where 1=1
 		and b.bgDelNy = 0
 		and a.seq = #{urSeq}
@@ -207,7 +206,7 @@
 		b.title,
 		b.seq,
 		b.blogCategory_seq,
-		c.path
+		(select d.path from image as d where 1=1 and d.pSeq = b.seq order by d.uploadedDate asc limit 1) as mainImage
 		<include refid="myBlogCommon"></include>
 		limit #{startRnumForMysql},#{rowNumToShow}
 	</select>

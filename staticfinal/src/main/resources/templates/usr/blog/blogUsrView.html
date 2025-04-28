@@ -853,7 +853,7 @@
 										<tbody>
 											<tr>
 												<td style="color: black;">품목</td>
-												<td style="color: black;">구매 링크</td>
+												<td style="color: black; ">구매 링크</td>
 												<td style="color: black;">가격</td>
 												<td></td>
 												<td></td>
@@ -865,20 +865,20 @@
 												<td style="display: none;"><input class="infoseq"
 													type="hidden" name="infoseq" th:value="${infoList.infoseq}"></td>
 												<td th:text="${infoList.item}" class="view-mode"></td>
-												<td class="ssInfo view-mode"><a
+												<td class="ssInfo view-mode" style="width:42%; word-break: break-all;"><a
 													th:href="${#strings.startsWith(infoList.buyLink, 'http')? infoList.buyLink : 'https://' +infoList.buyLink}"
 													th:text="${infoList.buyLink}" target="_blank"></a></td>
 												<td style="display: none;" class="buyInfo"><a
 													href="javascript:void(0)"
 													th:onclick="buy([[${infoList.infoseq}]])">정보 구매하기</a></td>
 												<td class="view-mode" th:text="${infoList.infoPrice}"></td>
-												<td class="edit-mode" style="display: none;"><input
+												<td class="edit-mode" style="display: none; width:18%;"><input
 													class="form-control" th:value="${infoList.item}"
 													name="item" autocomplete="off" /></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.buyLink}"
 													name="buyLink" autocomplete="off" /></td>
-												<td class="edit-mode" style="display: none;"><input
+												<td class="edit-mode" style="display: none; width:18%;"><input
 													class="form-control" th:value="${infoList.infoPrice}"
 													name="infoPrice" autocomplete="off" /></td>
 												<!-- 												<td class="shopCart" id="shopCart" style="display: none;"><a -->
@@ -1126,7 +1126,11 @@
 															<!-- 														</select> -->
 														</div>
 													</div>
-													<th:block th:each="list : ${reviewList}">
+													<th:block th:if="${#lists.isEmpty(reviewList)}">
+													<div>등록된 리뷰가 없습니다</div>
+													</th:block>
+													
+													<th:block th:if="${!#lists.isEmpty(reviewList)}" th:each="list : ${reviewList}">
 														<div class="d-flex border-bottom pb-6 mb-6">
 															<!-- img -->
 															<!-- img -->

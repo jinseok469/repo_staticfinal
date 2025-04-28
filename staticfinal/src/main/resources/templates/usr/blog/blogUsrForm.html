@@ -90,30 +90,11 @@
 						</div>
 						<div class="col-xxl-5 col-lg-5 d-none d-lg-block">
 							<div class="input-group">
-<!-- 								<input class="form-control rounded" type="search" -->
-<!-- 									placeholder="Search for Location" /> <span -->
-<!-- 									class="input-group-append"> -->
-<!-- 									<button -->
-<!-- 										class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" -->
-<!-- 										type="button"> -->
-<!-- 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" -->
-<!-- 											viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
-<!-- 											stroke-width="2" stroke-linecap="round" -->
-<!-- 											stroke-linejoin="round" class="feather feather-search"> -->
-<!-- 											<circle cx="11" cy="11" r="8"></circle> -->
-<!-- 											<line x1="21" y1="21" x2="16.65" y2="16.65"></line> -->
-<!-- 										</svg> -->
-<!-- 									</button> -->
-								</span>
 							</div>
 						</div>
 
 						<div class="col-md-2 col-xxl-3 d-none d-lg-block">
 
-							<!-- Button trigger modal -->
-<!-- 							<button type="button" class="btn btn-outline-gray-400 text-muted"> -->
-<!-- 								<i class="feather-icon icon-map-pin me-2"></i> 검색 -->
-<!-- 							</button> -->
 						</div>
 						<div class="col-lg-2 col-xxl-2 text-end col-md-6 col-7">
 
@@ -152,20 +133,6 @@
 									</a>
 								</div>
 								<div class="list-inline-item me-5 me-lg-0">
-<!-- 									<a class="text-muted position-relative" type="button" -->
-<!-- 										href="/usr/template/staticfinal/dist/pages/shop-cart.html"> -->
-<!-- 										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" -->
-<!-- 											viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
-<!-- 											stroke-width="2" stroke-linecap="round" -->
-<!-- 											stroke-linejoin="round" class="feather feather-shopping-bag"> -->
-<!-- 										<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path> -->
-<!-- 										<line x1="3" y1="6" x2="21" y2="6"></line> -->
-<!-- 										<path d="M16 10a4 4 0 0 1-8 0"></path> -->
-<!-- 									</svg> <span id="cart" -->
-<!-- 										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"> -->
-<!-- 											0 <span class="visually-hidden">unread messages</span> -->
-<!-- 									</span> -->
-<!-- 									</a> -->
 								</div>
 								<div class="list-inline-item d-inline-block d-lg-none">
 									<!-- Button -->
@@ -316,20 +283,20 @@
 											<div class="col-12">
 												<!-- input -->
 												<label for="blognewTitle" class="form-label">제목</label> <input
-													type="text" class="form-control" id="title" name="title"
+													type="text" class="form-control ss" id="title" name="title"
 													placeholder="제목을 입력해주세요" required autocomplete="off" />
-												<div class="invalid-feedback">제목을 입력해주세요</div>
+												<div class="invalid-feedback"></div>
 											</div>
 											<div class="col-12">
 												<!-- heading -->
 												<label class="form-label">사진등록</label>
 
 												<!-- input -->
-												<div><input type="file" name="uploadImg1" multiple></div>
+												<div><input class="form-control ss" type="file" name="uploadImg1" multiple></div>
 											</div>
 											<div class="col-12">
 												<label class="form-label" for="sell-product">소개</label>
-												<textarea class="form-control" id="blogIntroduction"
+												<textarea class="form-control ss" id="blogIntroduction"
 													name="blogIntroduction" row="5" placeholder="인사말을 적어주세요"
 													required autocomplete="off"></textarea>
 												<!-- <div class="py-8" id="editor"></div> -->
@@ -340,21 +307,24 @@
 											</div>
 											<div class="row g-3">
 												<div class="col-sm-6 col-md-3">
-													<input type="text" class="form-control" name="modelHeight"
+													<input type="text" class="form-control dd" name="modelHeight"
 														placeholder="모델 신장" autocomplete="off">
+														<div class="invalid-feedback" id="invalid">숫자만 입력해주세요</div>
 												</div>
 												<div class="col-sm-6 col-md-3">
-													<input type="text" class="form-control" name="modelWeight"
+													<input type="text" class="form-control dd" name="modelWeight"
 														placeholder="모델 몸무게" autocomplete="off">
+														<div class="invalid-feedback" id="invalid">숫자만 입력해주세요</div>
 												</div>
 												<div class="col-sm-6 col-md-3">
-													<input type="text" class="form-control" name="modelSize"
+													<input type="text" class="form-control ss" name="modelSize"
 														placeholder="모델 옷 사이즈" autocomplete="off">
 												</div>
 												<div class="col-sm-6 col-md-3">
-													<input type="text" class="form-control"
+													<input type="text" class="form-control dd"
 														name="modelShoesSize" placeholder="모델 신발 사이즈"
 														autocomplete="off">
+														<div class="invalid-feedback" id="invalid">숫자만 입력해주세요</div>
 												</div>
 											</div>
 											<div class="col-12">
@@ -373,30 +343,30 @@
 												<div class="item-input row">
 													<div class="col-md-6">
 														<label for="blogdescriptionTextarea" class="form-label"></label>
-														<input class="form-control item " name="items[0].item"
+														<input class="form-control item ss" name="items[0].item"
 															placeholder="착용아이템" required autocomplete="off" />
 														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
 													</div>
 													<div class="col-md-6">
 														<label for="blogdescriptionTextarea" class="form-label"></label>
-														<input class="form-control itemBrand "
+														<input class="form-control itemBrand ss"
 															name="items[0].itemBrand" placeholder="착용아이템 (브랜드 이름)"
 															required autocomplete="off" />
 														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
 													</div>
 													<div class="col-md-9">
 														<label for="blogdescriptionTextarea" class="form-label"></label>
-														<input class="form-control buyLink "
+														<input class="form-control buyLink ss"
 															name="items[0].buyLink" placeholder="착용 아이템 (구매 링크)"
 															required autocomplete="off" />
 														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
 													</div>
 													<div class="col-md-3">
 														<label for="blogdescriptionTextarea" class="form-label"></label>
-														<input class="form-control infoPrice "
+														<input class="form-control infoPrice dd"
 															name="items[0].infoPrice" placeholder="정보 공개 가격" required
 															autocomplete="off" />
-														<div class="invalid-feedback">블로그를 만들때 사용될 필수 항목입니다</div>
+														<div class="invalid-feedback" id="invalid">숫자만 입력해주세요</div>
 													</div>
 													<div class="col-md-12">
 														<hr>
@@ -413,7 +383,7 @@
 												<div class="d-flex flex-column gap-3">
 													<div>
 														<label for="validationCustom04" class="form-label">코디
-															카테고리</label> <select class="form-select" id="blogCategory_seq"
+															카테고리</label> <select class="form-select ss" id="blogCategory_seq"
 															required>
 															<option value="">카테고리를 선택해주세요</option>
 
@@ -542,7 +512,27 @@
 		
 		blogInsert.onclick = function() {
 			let itemInputs = document.querySelectorAll(".item-input");
-
+			let ss = document.querySelectorAll(".ss");
+			let dd = document.querySelectorAll(".dd");
+			let flag = true;
+			for(let i = 0; i < ss.length; i++){
+				if(ss[i].value.trim()==null ||ss[i].value.trim() ==""){
+					ss[i].classList.remove("is-valid");
+					ss[i].classList.add("is-invalid");
+					document.getElementsByClassName("is-invalid")[0].focus();
+					flag = false;
+				}
+			}
+			for(let i = 0; i < dd.length; i++){
+				if(dd[i].value.trim()==null ||dd[i].value.trim() ==""
+						|| /[^0-9]/.test(dd[i].value)){
+					dd[i].classList.remove("is-valid");
+					dd[i].classList.add("is-invalid");
+					document.getElementsByClassName("is-invalid")[0].focus();
+					flag = false;
+				}
+			}
+		if(flag){
 			for (let j = 0; j < itemInputs.length; j++) {
 				let ncheck = itemInputs[j].querySelectorAll("input");
 				for (let i = 0; i < ncheck.length; i++) {
@@ -554,6 +544,9 @@
 			}
 			form.action = "/blogUsrInst";
 			form.submit();
+		}else{
+			return false;
+		}
 		}
 	
 				 

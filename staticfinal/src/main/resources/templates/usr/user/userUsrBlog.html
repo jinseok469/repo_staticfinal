@@ -41,12 +41,11 @@
 							<!-- badge -->
 							<div class="text-center position-relative">
 								<div class="position-absolute top-0 start-0">
-									<span class="badge bg-danger">Hot</span>
 								</div>
 								<a href="javascript:void(0)"
 									th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])">
 									<!-- img --> <img
-									th:src="${list.path}"
+									th:src="${list.mainImage}"
 									alt="Grocery Ecommerce Template" class="mb-3 img-fluid"
 									style="height: 222px; width: 100%;" />
 								</a>
@@ -77,10 +76,7 @@
 							</h2>
 							<div>
 								<!-- rating -->
-								<small class="text-warning"> <i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
-								</small> <span class="text-muted small">4.5(149)</span>
+								
 							</div>
 							<!-- price -->
 							<div
