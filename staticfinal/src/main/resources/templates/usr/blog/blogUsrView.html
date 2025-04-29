@@ -865,9 +865,10 @@
 												<td style="display: none;"><input class="infoseq"
 													type="hidden" name="infoseq" th:value="${infoList.infoseq}"></td>
 												<td th:text="${infoList.item}" class="view-mode"></td>
-												<td class="ssInfo view-mode" style="width:42%; word-break: break-all;"><a
+												<td   style="display:none;"><a class="info"
 													th:href="${#strings.startsWith(infoList.buyLink, 'http')? infoList.buyLink : 'https://' +infoList.buyLink}"
 													th:text="${infoList.buyLink}" target="_blank"></a></td>
+													<td class="ssInfo view-mode"  style="width:70%;"><a href="javascript:void(0);" onclick="buyLink(this)">구매 사이트</a></td>
 												<td style="display: none;" class="buyInfo"><a
 													href="javascript:void(0)"
 													th:onclick="buy([[${infoList.infoseq}]])">정보 구매하기</a></td>
@@ -1237,7 +1238,7 @@
 							th:each="list : ${blogList}">
 							<!-- col -->
 							<div class="col">
-								<div class="card card-product">
+								<div class="card card-product" style="width:222px; background-color:#fdf6ec !important;">
 									<div class="card-body">
 										<!-- badge -->
 
@@ -1245,7 +1246,7 @@
 											<div class="position-absolute top-0 start-0"></div>
 											<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
 												th:src="${list.mainImage}" alt="Grocery Ecommerce Template"
-												class="mb-3 img-fluid" style="height: 210px; width: 210px;" />
+												class="mb-3 img-fluid" style="height: 222px; width: 100%;  border-radius:10px;" />
 											</a>
 											<!-- action btn -->
 											<div class="card-product-action"></div>
@@ -1573,6 +1574,7 @@
 	}
 	function blogView(num){
 		document.querySelector("input[name=seq]").value = num;
+		console.log(num);
 		form.action="/blogUsrView";
 		form.submit();
 	}
@@ -1898,6 +1900,10 @@ document.querySelector("#btnModalUelete1").onclick = function(){
 		        }
 		    });
 		}
+	 }
+	 function buyLink(line){
+		 let tr = line.closest("tr");
+		 tr.querySelector(".info").click();
 	 }
 	</script>
 </body>

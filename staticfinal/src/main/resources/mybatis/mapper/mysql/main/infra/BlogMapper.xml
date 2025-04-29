@@ -154,7 +154,7 @@
 		left join user as b on b.seq = a.user_seq
 		where 1=1
 		and
-		a.betterBlog_seq = #{betterBlog_seq}
+		a.betterBlog_seq = #{seq}
 		order by a.seq desc
 		limit #{startRnumForMysql},#{rowNumToShow}
 	</select>
@@ -165,7 +165,7 @@
 		left join user as b on b.seq = a.user_seq
 		where 1=1
 		and
-		a.betterBlog_seq = #{betterBlog_seq}
+		a.betterBlog_seq = #{seq}
 	</select>
 	<select id="blogOne" resultMap="resultMapObj">
 		select

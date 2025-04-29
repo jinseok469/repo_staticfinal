@@ -36,6 +36,7 @@ public class WeatherService {
         	    lat, lon, API_KEY
         	);
         URL url = new URL(urlStr);
+        
         URL urls = new URL(urlArr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");

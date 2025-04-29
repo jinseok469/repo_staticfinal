@@ -3,202 +3,218 @@
 
 <div th:replace="~{usr/include/blogHead :: head}"></div>
 
-               <section class="col-lg-9 col-md-12">
-               <input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
-				type="hidden" id="rowNumToShow" name="rowNumToShow"
-				th:value="${vo.rowNumToShow}" />
-				<input type="hidden" name="betterBlog_seq">
-				<input type="hidden" name="blogCategory_seq">
-				<input type="hidden" name="user_seq">
-				<input type="hidden" name="url">
-                  <!-- card -->
-                  <div class="card mb-4 bg-light border-0">
-                     <!-- card body -->
-                     <div class="card-body p-9" style="background-color:#fdf6ec !important;">
-                        <h2 class="mb-0 fs-1" style="color: gray;" th:text="${blogCategory.categoryName}"></h2>
-                     </div>
-                  </div>
-                  <!-- list icon -->
-                  <div class="d-lg-flex justify-content-between align-items-center">
-                     <div class="mb-3 mb-lg-0">
-                        <p class="mb-0">
-                           <span class="text-dark">[[${count}]]</span>
-                           Products found
-                        </p>
-                     </div>
+<section class="col-lg-9 col-md-12">
+	<input type="hidden" name="thisPage" th:value="${vo.thisPage}" /> <input
+		type="hidden" id="rowNumToShow" name="rowNumToShow"
+		th:value="${vo.rowNumToShow}" /> <input type="hidden"
+		name="betterBlog_seq"> <input type="hidden"
+		name="blogCategory_seq"> <input type="hidden" name="user_seq">
+	<input type="hidden" name="url">
+	<!-- card -->
+	<div class="card mb-4 bg-light border-0">
+		<!-- card body -->
+		<div class="card-body p-9"
+			style="background-color: #fdf6ec !important;">
+			<h2 class="mb-0 fs-1" style="color: gray;"
+				th:text="${blogCategory.categoryName}"></h2>
+		</div>
+	</div>
+	<!-- list icon -->
+	<div class="d-lg-flex justify-content-between align-items-center">
+		<div class="mb-3 mb-lg-0">
+			<p class="mb-0">
+				<span class="text-dark">[[${count}]]</span> Products found
+			</p>
+		</div>
 
-                     <!-- icon -->
-                     <div class="d-md-flex justify-content-between align-items-center">
-                      
-
-                        <div class="d-flex mt-2 mt-lg-0">
-                           <div class="me-2 flex-grow-1">
-                              <!-- select option -->
-                              <select class="form-select" onchange="getNum()" id="perPage">
-                                 <option value="5" th:selected="${vo.rowNumToShow == 5}">5</option>
-                                 <option value="10" th:selected="${vo.rowNumToShow == 10}">10</option>
-                                 <option value="15" th:selected="${vo.rowNumToShow == 15}">15</option>
-                              </select>
-                           </div>
-                           
-                        </div>
-                     </div>
-                  </div>
-                  <!-- row -->
-                  <div class="row g-4 row-cols-xl-3 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2">
-                     <!-- col -->
-                     <th:block th:if="${#lists.isEmpty(blogList)}">
-                     
-                      <div class="col-lg-4" style="text-align:center;"></div>
-                      <div class="col-lg-4" style="text-align:center;">블로그 게시물이 없습니다.</div>
-                      <div class="col-lg-4" style="text-align:center;"></div>
-                      </th:block>
-                    
-                       <th:block th:if="${!#lists.isEmpty(blogList)}" th:each="list:${blogList}">
-                     <div class="col">
-                        <!-- card -->
-                        <div class="card card-product">
-                           <div class="card-body">
-                              <!-- badge -->
-                              <div class="text-center position-relative">
-                                 <div class="position-absolute top-0 start-0">
-                                 </div>
-                                 <a th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])">
-                                    <!-- img -->
-                                    <img th:src="${list.mainImage}"
-                                       alt="Grocery Ecommerce Template" class="mb-3 img-fluid" style="height: 222px; width: 100%;" />
-                                 </a>
-                                 <!-- action btn -->
-                                 <div class="card-product-action">
-                                    <a type="button" class="btn-action" data-bs-toggle="tooltip" 
-                                       data-bs-html="true" title="Wishlist" th:onclick="wishList([[${list.seq}]],[[${session.sessSeqUsr}]])"><i class="bi bi-heart"></i></a>
-                                 </div>
-                              </div>
-                              <!-- heading -->
-                            
-                              <div class="text-small mb-1">
-                                 <a href="#!" class="text-decoration-none text-muted"><small th:text="${list.nickName}"></small></a>
-                              </div>
-                              <h2 class="fs-6"><a th:onclick="blogView([[${list.seq}]])"
-                                    class="text-inherit text-decoration-none" th:text="${list.title}"></a></h2>
-                              <div>
-                                 <!-- rating -->
-                                
-                              </div>
-                              <!-- price -->
-                              <div class="d-flex justify-content-between align-items-center mt-3">
-                                 <div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                                    </div> 
-                      </th:block>
-                  <!-- row -->
-                  <div class="row mt-8">
-                        <!-- nav -->
-                         <div class="col-lg-12"  style="display:flex; justify-content:center;">
-                        <nav>
-                          <ul class="pagination">
-								<li th:if="${vo.startPage gt vo.pageNumToShow}"
-									class="page-item" style="cursor: pointer;"><a
-									class="page-link" href="javascript:goList(${vo.startPage - 1})"
-									th:attr="onclick=|goList('${vo.startPage - 1}')|"> <i
-										class="fa-solid fa-angle-left"></i>
-								</a></li>
-								<li
-									th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
-									th:classappend="${num eq vo.thisPage} ? active : ''"
-									class="page-item" style="cursor: pointer;"><a
-									class="page-link" th:attr="onclick=|goList('${num}')|"
-									th:text="${num}"> <!-- ${i.index} -->
-								</a></li>
-								<li th:if="${vo.endPage ne vo.totalPages}" class="page-item"
-									style="cursor: pointer;"><a class="page-link"
-									th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
-										class="fa-solid fa-angle-right"></i>
-								</a></li>
-							</ul>
-                        </nav>
-                     </div>
-                     <div  style="display:flex; justify-content:end;">
-                        <a href="/blogUsrForm" type="button" class="btn btn-secondary" style="width: 120px;">블로그 쓰기</a>
-                     </div>
-                  </div>
-                  </form>
-               </section>
-            </div>
-         </div>
-      </div>
-   </main>
-
-   
+		<!-- icon -->
+		<div class="d-md-flex justify-content-between align-items-center">
 
 
-  <div th:replace="~{usr/include/footer :: footer}"></div>
-   <!-- Javascript-->
-   <script src="/usr/template/staticfinal/dist/assets/libs/nouislider/dist/nouislider.min.js"></script>
-   <script src="/usr/template/staticfinal/dist/assets/libs/wnumb/wNumb.min.js"></script>
-   <!-- Libs JS -->
-   <!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
-   <script src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+			<div class="d-flex mt-2 mt-lg-0">
+				<div class="me-2 flex-grow-1">
+					<!-- select option -->
+					<select class="form-select" onchange="getNum()" id="perPage">
+						<option value="5" th:selected="${vo.rowNumToShow == 5}">5</option>
+						<option value="10" th:selected="${vo.rowNumToShow == 10}">10</option>
+						<option value="15" th:selected="${vo.rowNumToShow == 15}">15</option>
+					</select>
+				</div>
 
-   <!-- Theme JS -->
-   <script src="/usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+			</div>
+		</div>
+	</div>
+	<!-- row -->
+	<div
+		class="row g-4 row-cols-xl-3 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2">
+		<!-- col -->
+		
+		<th:block th:if="${#lists.isEmpty(blogList)}">
 
-   <script src="/usr/template/staticfinal/dist/assets/libs/tiny-slider/dist/min/tiny-slider.js"></script>
-   <script src="/usr/template/staticfinal/dist/assets/js/vendors/tns-slider.js"></script>
-   <script src="/usr/template/staticfinal/dist/assets/js/vendors/zoom.js"></script>
-   <script type="text/javascript">
-   let form = document.getElementById("formList");
-   let url = window.location.pathname;
-	
+			<div class="col-lg-4" style="text-align: center;"></div>
+			<div class="col-lg-4" style="text-align: center;">블로그 게시물이
+				없습니다.</div>
+			<div class="col-lg-4" style="text-align: center;"></div>
+		</th:block>
+
+		<th:block th:if="${!#lists.isEmpty(blogList)}"
+			th:each="list:${blogList}">
+			<div class="col">
+				<!-- card -->
+				<div class="card card-product" style="background-color:#fdf6ec !important; width:222px;">
+					<div class="card-body">
+						<!-- badge -->
+						<div class="text-center position-relative">
+							<div class="position-absolute top-0 start-0"></div>
+							<a
+								th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])">
+								<!-- img --> <img th:src="${list.mainImage}"
+								alt="Grocery Ecommerce Template" class="mb-3 img-fluid"
+								style="height: 222px; width: 100%;  border-radius: 10px;" />
+							</a>
+							<!-- action btn -->
+							<div class="card-product-action">
+								<a type="button" class="btn-action" data-bs-toggle="tooltip"
+									data-bs-html="true" title="Wishlist"
+									th:onclick="wishList([[${list.seq}]],[[${session.sessSeqUsr}]])"><i
+									class="bi bi-heart"></i></a>
+							</div>
+						</div>
+						<!-- heading -->
+
+						<div class="text-small mb-1">
+							<a href="#!" class="text-decoration-none text-muted"><small
+								th:text="${list.nickName}"></small></a>
+						</div>
+						<h2 class="fs-6">
+							<a th:onclick="blogView([[${list.seq}]])"
+								class="text-inherit text-decoration-none"
+								th:text="${list.title}"></a>
+						</h2>
+						<div>
+							<!-- rating -->
+
+						</div>
+						<!-- price -->
+						<div
+							class="d-flex justify-content-between align-items-center mt-3">
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	</th:block>
+	<!-- row -->
+	<div class="row mt-8">
+		<!-- nav -->
+		<div class="col-lg-12" style="display: flex; justify-content: center;">
+			<nav>
+				<ul class="pagination">
+					<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item"
+						style="cursor: pointer;"><a class="page-link"
+						href="javascript:goList(${vo.startPage - 1})"
+						th:attr="onclick=|goList('${vo.startPage - 1}')|"> <i
+							class="fa-solid fa-angle-left"></i>
+					</a></li>
+					<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+						th:classappend="${num eq vo.thisPage} ? active : ''"
+						class="page-item" style="cursor: pointer;"><a
+						class="page-link" th:attr="onclick=|goList('${num}')|"
+						th:text="${num}"> <!-- ${i.index} -->
+					</a></li>
+					<li th:if="${vo.endPage ne vo.totalPages}" class="page-item"
+						style="cursor: pointer;"><a class="page-link"
+						th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
+							class="fa-solid fa-angle-right"></i>
+					</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div style="display: flex; justify-content: end;">
+			<a href="/blogUsrForm" type="button" class="btn btn-secondary"
+				style="width: 120px;">블로그 쓰기</a>
+		</div>
+	</div>
+	</form>
+</section>
+</div>
+</div>
+</div>
+</main>
+
+
+
+
+<div th:replace="~{usr/include/footer :: footer}"></div>
+<!-- Javascript-->
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/nouislider/dist/nouislider.min.js"></script>
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/wnumb/wNumb.min.js"></script>
+<!-- Libs JS -->
+<!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+<!-- Theme JS -->
+<script src="/usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+
+<script
+	src="/usr/template/staticfinal/dist/assets/libs/tiny-slider/dist/min/tiny-slider.js"></script>
+<script
+	src="/usr/template/staticfinal/dist/assets/js/vendors/tns-slider.js"></script>
+<script src="/usr/template/staticfinal/dist/assets/js/vendors/zoom.js"></script>
+<script type="text/javascript">
+	let form = document.getElementById("formList");
+	let url = window.location.pathname;
+
 	document.querySelector("input[name=url]").value = url;
-   console.log(document.querySelector("input[name=blogCategory_seq]").value)
-   if(document.querySelector("input[name=blogCategory_seq]").value == 1){
-	   document.getElementById("spring").classList.remove("collapse");
-	   document.getElementById("springMinner").classList.add("active");
-	   document.getElementById("springMinner").classList.remove("nav-link");
-   }
-   if(document.querySelector("input[name=blogCategory_seq]").value == 2){
-	   document.getElementById("spring").classList.remove("collapse");
-	   document.getElementById("springFinner").classList.add("active");
-	   document.getElementById("springFinner").classList.remove("nav-link");
-   }
-   if(document.querySelector("input[name=blogCategory_seq]").value == 3){
-	   document.getElementById("summer").classList.remove("collapse");
-	   document.getElementById("summerMinner").classList.add("active");
-	   document.getElementById("summerMinner").classList.remove("nav-link");
-   }
-   if(document.querySelector("input[name=blogCategory_seq]").value == 4){
-	   document.getElementById("summer").classList.remove("collapse");
-	   document.getElementById("summerFinner").classList.add("active");
-	   document.getElementById("summerFinner").classList.remove("nav-link");
-   }
-   if(document.querySelector("input[name=blogCategory_seq]").value == 5){
-	   document.getElementById("fall").classList.remove("collapse");
-	   document.getElementById("fallMinner").classList.add("active");
-	   document.getElementById("fallMinner").classList.remove("nav-link");
-   }
-   if(document.querySelector("input[name=blogCategory_seq]").value == 6){
-	   document.getElementById("fall").classList.remove("collapse");
-	   document.getElementById("fallFinner").classList.add("active");
-	   document.getElementById("fallFinner").classList.remove("nav-link");
-   }
-   if(document.querySelector("input[name=blogCategory_seq]").value == 7){
-	   document.getElementById("winter").classList.remove("collapse");
-	   document.getElementById("winterMinner").classList.add("active");
-	   document.getElementById("winterMinner").classList.remove("nav-link");
-   }
-   if(document.querySelector("input[name=blogCategory_seq]").value == 8){
-	   document.getElementById("winter").classList.remove("collapse");
-	   document.getElementById("winterFinner").classList.add("active");
-	   document.getElementById("winterFinner").classList.remove("nav-link");
-   }
-   
-   function goList(Num) {
+	console.log(document.querySelector("input[name=blogCategory_seq]").value)
+	if (document.querySelector("input[name=blogCategory_seq]").value == 1) {
+		document.getElementById("spring").classList.remove("collapse");
+		document.getElementById("springMinner").classList.add("active");
+		document.getElementById("springMinner").classList.remove("nav-link");
+	}
+	if (document.querySelector("input[name=blogCategory_seq]").value == 2) {
+		document.getElementById("spring").classList.remove("collapse");
+		document.getElementById("springFinner").classList.add("active");
+		document.getElementById("springFinner").classList.remove("nav-link");
+	}
+	if (document.querySelector("input[name=blogCategory_seq]").value == 3) {
+		document.getElementById("summer").classList.remove("collapse");
+		document.getElementById("summerMinner").classList.add("active");
+		document.getElementById("summerMinner").classList.remove("nav-link");
+	}
+	if (document.querySelector("input[name=blogCategory_seq]").value == 4) {
+		document.getElementById("summer").classList.remove("collapse");
+		document.getElementById("summerFinner").classList.add("active");
+		document.getElementById("summerFinner").classList.remove("nav-link");
+	}
+	if (document.querySelector("input[name=blogCategory_seq]").value == 5) {
+		document.getElementById("fall").classList.remove("collapse");
+		document.getElementById("fallMinner").classList.add("active");
+		document.getElementById("fallMinner").classList.remove("nav-link");
+	}
+	if (document.querySelector("input[name=blogCategory_seq]").value == 6) {
+		document.getElementById("fall").classList.remove("collapse");
+		document.getElementById("fallFinner").classList.add("active");
+		document.getElementById("fallFinner").classList.remove("nav-link");
+	}
+	if (document.querySelector("input[name=blogCategory_seq]").value == 7) {
+		document.getElementById("winter").classList.remove("collapse");
+		document.getElementById("winterMinner").classList.add("active");
+		document.getElementById("winterMinner").classList.remove("nav-link");
+	}
+	if (document.querySelector("input[name=blogCategory_seq]").value == 8) {
+		document.getElementById("winter").classList.remove("collapse");
+		document.getElementById("winterFinner").classList.add("active");
+		document.getElementById("winterFinner").classList.remove("nav-link");
+	}
+
+	function goList(Num) {
 		document.querySelector("input[name=thisPage]").value = Num;
 		form.action = "/blogUsrList"
 		form.submit();
@@ -212,38 +228,38 @@
 		form.submit();
 	}
 	function infoLink() {
-		form.action ="/userUsrInfo";
+		form.action = "/userUsrInfo";
 		form.submit();
 	}
-	function blogSearch(){
-		if(event.key =="Enter"){
+	function blogSearch() {
+		if (event.key == "Enter") {
 			document.querySelector("input[name=shOption]").value = 2;
-			form.action ="/blogUsrList";
+			form.action = "/blogUsrList";
 			form.submit();
 		}
 	}
-	function blogLink(){
+	function blogLink() {
 		document.querySelector("input[name=blogCategory_seq]").value = 1;
-		form.action ="/blogUsrList";
+		form.action = "/blogUsrList";
 		form.submit();
 	}
-	
-	function wishList(num1,num2){
+
+	function wishList(num1, num2) {
 		document.querySelector("input[name=betterBlog_seq]").value = num1;
 		document.querySelector("input[name=user_seq]").value = num2;
 		console.log(document.querySelector("input[name=betterBlog_seq]").value);
 		console.log(document.querySelector("input[name=user_seq]").value);
-		form.action="/wishUsrInst";
+		form.action = "/wishUsrInst";
 		form.submit();
 	}
-	function blogView(num,num1){
+	function blogView(num, num1) {
 		document.querySelector("input[name=seq]").value = num;
 		document.querySelector("input[name=betterBlog_seq]").value = num;
 		document.querySelector("input[name=blogCategory_seq]").value = num1;
-		form.action="/blogUsrView";
+		form.action = "/blogUsrView";
 		form.submit();
 	}
-   </script>
+</script>
 </body>
 
 </html>

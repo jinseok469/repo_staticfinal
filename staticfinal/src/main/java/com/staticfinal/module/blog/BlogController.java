@@ -112,8 +112,10 @@ public class BlogController {
 			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
 			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
 			blogDto.setSeq(String.valueOf(httpSession.getAttribute("sessBetterBlog_seq")));
+			vo.setSeq(blogDto.getSeq());
 		}
 		vo.setBetterBlog_seq(String.valueOf(httpSession.getAttribute("sessBetterBlog_seq")));
+		vo.setSeq(blogDto.getSeq());
 		vo.setParamsPaging(blogService.reviewCount(vo));
 		model.addAttribute("item", blogService.blogOne(blogDto));
 		model.addAttribute("blogList", blogService.blogViewList(vo));
