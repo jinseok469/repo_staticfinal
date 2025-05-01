@@ -13,24 +13,35 @@
 
 						<div
 							class="card-body d-flex align-items-center justify-content-center"
-							style="background-color:#ffffff; border-radius:16px; padding:24px; box-shadow:0 8px 24px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; text-align:center;">
-
+							style="background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; align-items: center; text-align: center;">
+							<div id="weatherSpinner"
+								style="display: none; text-align: center;">
+								<img src="/usr/template/staticfinal/dist/assets/images/about/spinner.png" alt="로딩 중..."
+									style="width: 80px;" />
+								<p style="margin-top: 10px;">날씨 정보 불러오는 중...</p>
+							</div>
 							<div class="row w-100">
 								<div
 									class="col-md-6 col-12 text-center mb-4 mb-md-0 d-flex flex-column justify-content-center"
 									style="min-height: 100%;">
-									<h3 id="weather-Info" style="font-size:1.2rem; color:#6a4a2f; font-weight:500;"></h3>
-									<h1 id="temp" style="font-size:2.5rem; font-weight:bold; color:#6a4a2f; margin:12px 0;"></h1>
-									<h1 id="minMax" style="font-size:1.5rem; font-weight:bold; color:#6a4a2f; margin:12px 0;"></h1>
+									<h3 id="weather-Info"
+										style="font-size: 1.2rem; color: #6a4a2f; font-weight: 500;"></h3>
+									<h1 id="temp"
+										style="font-size: 2.5rem; font-weight: bold; color: #6a4a2f; margin: 12px 0;"></h1>
+									<h1 id="minMax"
+										style="font-size: 1.5rem; font-weight: bold; color: #6a4a2f; margin: 12px 0;"></h1>
 								</div>
 								<div class="col-md-6 col-12 text-center">
-									<div class="pt-md-3 pt-1">
-										<h2  id="locationName"
-											style="font-size:1.2rem; color:#9c897b;" ></h2>
+									<div class="pt-md-3 pt-1" >
+										<h2 id="locationName"
+											style="font-size: 1.2rem; color: #9c897b;"></h2>
 										<img id="weatherIcon" src="" alt="날씨 이미지"
-											style="width: 100%; max-width: 300px; height: auto;">
+											style="width: 100%; max-width: 300px; height: auto; display:none;">
+											
 									</div>
+								
 								</div>
+								<div style="display:flex; justify-content:end;"><h6 style="font-size: 0.5rem; color: #6a4a2f; margin: 12px 0;">openWeatherApi 제공</h6></div>
 							</div>
 
 						</div>
@@ -38,12 +49,13 @@
 				</div>
 
 				<div class="col-lg-4 col-12">
-					<div class="card" style="background-color:#ffffff; border-radius:16px; padding:24px; box-shadow:0 8px 24px rgba(0,0,0,0.05); text-align:center;">
+					<div class="card"
+						style="background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); text-align: center;">
 						<div class="card-body" id="clothe"
-							style="width:100%; border-radius:12px; margin-bottom:12px; min-height:370px; background-color:#fdf6ec;">
+							style="width: 100%; border-radius: 12px; margin-bottom: 12px; min-height: 370px; background-color: #fdf6ec;">
 						</div>
 						<div class="text-center py-4">
-							<h3 style="color:#6a4a2f;">오늘의 추천 옷차림</h3>
+							<h3 style="color: #6a4a2f;">오늘의 추천 옷차림</h3>
 							<!-- 							<h1 style="font-size: 2rem; color: darkslategray;">얇은 셔츠, -->
 							<!-- 								청바지</h1> -->
 							<!-- 							<h2>입니다</h2> -->
@@ -55,11 +67,12 @@
 	</section>
 
 	<!-- Category Section Start-->
-	<section class="mb-lg-10 mt-lg-14 my-8" style="margin:10px 0px 48px !important;">
+	<section class="mb-lg-10 mt-lg-14 my-8"
+		style="margin: 10px 0px 48px !important;">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 mb-6">
-					<h3 class="mb-0">이번주 날씨</h3>
+					<h3 class="mb-0">이번주 날씨 <span style="font-size: 0.8rem; color: #6a4a2f; margin: 12px 0;">(openWeatherApi 제공)</span></h3>
 				</div>
 			</div>
 			<div class="category-slider ">
@@ -69,11 +82,12 @@
 					</div>
 					<div class="card" style="height: 160px;">
 						<div class="card-body " id="dailyImage0"
-							style="background-size:cover;
-				  background-position:center;
-				  border-radius:0.5rem;">
+							style="background-size: cover; background-position: center; border-radius: 0.5rem;">
 						</div>
-						<div> <h5 class="dayMinMax"id="dayMinMax0" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
+						<div>
+							<h5 class="dayMinMax" id="dayMinMax0"
+								style="font-size: 1.2rem; color: #6a4a2f;"></h5>
+						</div>
 					</div>
 				</div>
 				<div class="item" style="text-align: center;">
@@ -82,11 +96,12 @@
 					</div>
 					<div class="card" style="height: 160px;">
 						<div class="card-body " id="dailyImage1"
-							style="background-size:cover;
-				  background-position:center;
-				  border-radius:0.5rem;">
+							style="background-size: cover; background-position: center; border-radius: 0.5rem;">
 						</div>
-						<div> <h5 class="dayMinMax" id="dayMinMax1" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
+						<div>
+							<h5 class="dayMinMax" id="dayMinMax1"
+								style="font-size: 1.2rem; color: #6a4a2f;"></h5>
+						</div>
 					</div>
 				</div>
 				<div class="item" style="text-align: center;">
@@ -95,11 +110,12 @@
 					</div>
 					<div class="card" style="height: 160px;">
 						<div class="card-body " id="dailyImage2"
-							style="background-size:cover;
-				  background-position:center;
-				  border-radius:0.5rem;">
+							style="background-size: cover; background-position: center; border-radius: 0.5rem;">
 						</div>
-						<div> <h5 class="dayMinMax" id="dayMinMax2" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
+						<div>
+							<h5 class="dayMinMax" id="dayMinMax2"
+								style="font-size: 1.2rem; color: #6a4a2f;"></h5>
+						</div>
 					</div>
 				</div>
 				<div class="item" style="text-align: center;">
@@ -108,11 +124,12 @@
 					</div>
 					<div class="card" style="height: 160px;">
 						<div class="card-body " id="dailyImage3"
-							style="background-size:cover;
-				  background-position:center;
-				  border-radius:0.5rem;">
+							style="background-size: cover; background-position: center; border-radius: 0.5rem;">
 						</div>
-						<div> <h5 class="dayMinMax" id="dayMinMax3" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
+						<div>
+							<h5 class="dayMinMax" id="dayMinMax3"
+								style="font-size: 1.2rem; color: #6a4a2f;"></h5>
+						</div>
 					</div>
 				</div>
 				<div class="item" style="text-align: center;">
@@ -121,11 +138,12 @@
 					</div>
 					<div class="card" style="height: 160px;">
 						<div class="card-body " id="dailyImage4"
-							style="background-size:cover;
-				  background-position:center;
-				  border-radius:0.5rem;">
+							style="background-size: cover; background-position: center; border-radius: 0.5rem;">
 						</div>
-						<div> <h5 class="dayMinMax" id="dayMinMax4" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
+						<div>
+							<h5 class="dayMinMax" id="dayMinMax4"
+								style="font-size: 1.2rem; color: #6a4a2f;"></h5>
+						</div>
 					</div>
 				</div>
 				<div class="item" style="text-align: center;">
@@ -134,11 +152,12 @@
 					</div>
 					<div class="card" style="height: 160px;">
 						<div class="card-body " id="dailyImage5"
-							style="background-size:cover;
-				  background-position:center;
-				  border-radius:0.5rem;">
+							style="background-size: cover; background-position: center; border-radius: 0.5rem;">
 						</div>
-						<div> <h5 class="dayMinMax" id="dayMinMax5" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
+						<div>
+							<h5 class="dayMinMax" id="dayMinMax5"
+								style="font-size: 1.2rem; color: #6a4a2f;"></h5>
+						</div>
 					</div>
 				</div>
 				<div class="item" style="text-align: center;">
@@ -146,12 +165,13 @@
 						<h5 id="dailyTitle6"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body "  id="dailyImage6"
-							style="background-size:cover;
-				  background-position:center;
-				  border-radius:0.5rem;">
+						<div class="card-body " id="dailyImage6"
+							style="background-size: cover; background-position: center; border-radius: 0.5rem;">
 						</div>
-						<div> <h5 class="dayMinMax" id="dayMinMax6" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
+						<div>
+							<h5 class="dayMinMax" id="dayMinMax6"
+								style="font-size: 1.2rem; color: #6a4a2f;"></h5>
+						</div>
 					</div>
 				</div>
 				<div class="item" style="text-align: center;">
@@ -159,12 +179,13 @@
 						<h5 id="dailyTitle7"></h5>
 					</div>
 					<div class="card" style="height: 160px;">
-						<div class="card-body "  id="dailyImage7"
-							style="background-size:cover;
-				  background-position:center;
-				  border-radius:0.5rem;">
+						<div class="card-body " id="dailyImage7"
+							style="background-size: cover; background-position: center; border-radius: 0.5rem;">
 						</div>
-						<div> <h5 class="dayMinMax" id="dayMinMax7" style="font-size:1.2rem; color:#6a4a2f;"></h5></div>
+						<div>
+							<h5 class="dayMinMax" id="dayMinMax7"
+								style="font-size: 1.2rem; color: #6a4a2f;"></h5>
+						</div>
 					</div>
 				</div>
 
@@ -197,7 +218,7 @@
 				<!-- 오른쪽 날씨 뉴스 카드 -->
 				<div class="col-12 col-md-6 mb-3">
 					<div class="h-100 py-5 px-4 rounded"
-						style="height: 300px; background-color:#fdf6ec;">
+						style="height: 300px; background-color: #fdf6ec;">
 						<div>
 							<h3 class="fw-bold mb-4 text-center">오늘의 날씨 뉴스</h3>
 							<ul id="newsList" class="fs-4">
@@ -506,6 +527,8 @@
 		});
 	  
 	  function callWeatherApi(lat, lon, locationName) {
+		  document.getElementById("weatherSpinner").style.display = "block";
+		 
 		  fetch("/api/weather", {
 			  method: "POST",
 			  headers: {
@@ -552,7 +575,12 @@
 			})
 		  	.catch(function(error) {
 			  console.error("날씨 정보 가져오기 실패:", error);
-			});
+			})
+		  .finally(function() {
+		      // 2. 스피너 숨기기
+		      document.getElementById("weatherSpinner").style.display = "none";
+		      document.getElementById("weatherIcon").style.display = "";
+		    });
 		}
 	  
 	  function searchWeather() {

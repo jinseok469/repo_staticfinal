@@ -868,19 +868,28 @@
                                  </div>
                            </ul>
                         </div>
-
+						  <input type="hidden" name="isSearch">
+						   <input type="hidden" name="shOption">
                         <div class="mb-8">
                            <h5 class="mb-3">제목 검색</h5>
                            <div class="my-4">
                               <!-- input -->
-                              <input type="hidden" name="shOption">
-                              <input type="search" class="form-control" name="shValue" th:value="${vo.shValue}" placeholder="블로그 제목 검색" autocomplete="off" onkeyup="blogSearch(event)"/>
+                             
+                              <input type="search" class="form-control" name="shValue"  placeholder="블로그 제목 검색" autocomplete="off" onkeyup="blogSearch(event)"/>
+                            
                            </div>
      
-                        <div class="mb-8">
-                          
-                        </div>
+                      
                        
+                        </div>
+                          <div class="mb-8">
+                           <h5 class="mb-3">작성자 검색</h5>
+                           <div class="my-4">
+                              <!-- input -->
+                             
+                              <input type="search" class="form-control" name="shValues"  placeholder="작성자 검색" autocomplete="off" onkeyup="userSearch(event)"/>
+                            
+                           </div>
                         </div>
                      </div>
                   </div>

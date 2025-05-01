@@ -8,7 +8,7 @@
 		type="hidden" id="rowNumToShow" name="rowNumToShow"
 		th:value="${vo.rowNumToShow}" /> <input type="hidden"
 		name="betterBlog_seq"> <input type="hidden"
-		name="blogCategory_seq"> <input type="hidden" name="user_seq">
+		name="blogCategory_seq" th:value="${vo.blogCategory_seq}"> <input type="hidden" name="user_seq">
 	<input type="hidden" name="url">
 	<!-- card -->
 	<div class="card mb-4 bg-light border-0">
@@ -16,7 +16,7 @@
 		<div class="card-body p-9"
 			style="background-color: #fdf6ec !important;">
 			<h2 class="mb-0 fs-1" style="color: gray;"
-				th:text="${blogCategory.categoryName}"></h2>
+				>코디 블로그</h2>
 		</div>
 	</div>
 	<!-- list icon -->
@@ -173,42 +173,42 @@
 
 	document.querySelector("input[name=url]").value = url;
 	console.log(document.querySelector("input[name=blogCategory_seq]").value)
-	if (document.querySelector("input[name=blogCategory_seq]").value == 1) {
+	if (document.querySelector("input[name=blogCategory_seq]").value === "1") {
 		document.getElementById("spring").classList.remove("collapse");
 		document.getElementById("springMinner").classList.add("active");
 		document.getElementById("springMinner").classList.remove("nav-link");
 	}
-	if (document.querySelector("input[name=blogCategory_seq]").value == 2) {
+	if (document.querySelector("input[name=blogCategory_seq]").value === "2") {
 		document.getElementById("spring").classList.remove("collapse");
 		document.getElementById("springFinner").classList.add("active");
 		document.getElementById("springFinner").classList.remove("nav-link");
 	}
-	if (document.querySelector("input[name=blogCategory_seq]").value == 3) {
+	if (document.querySelector("input[name=blogCategory_seq]").value === "3") {
 		document.getElementById("summer").classList.remove("collapse");
 		document.getElementById("summerMinner").classList.add("active");
 		document.getElementById("summerMinner").classList.remove("nav-link");
 	}
-	if (document.querySelector("input[name=blogCategory_seq]").value == 4) {
+	if (document.querySelector("input[name=blogCategory_seq]").value === "4") {
 		document.getElementById("summer").classList.remove("collapse");
 		document.getElementById("summerFinner").classList.add("active");
 		document.getElementById("summerFinner").classList.remove("nav-link");
 	}
-	if (document.querySelector("input[name=blogCategory_seq]").value == 5) {
+	if (document.querySelector("input[name=blogCategory_seq]").value === "5") {
 		document.getElementById("fall").classList.remove("collapse");
 		document.getElementById("fallMinner").classList.add("active");
 		document.getElementById("fallMinner").classList.remove("nav-link");
 	}
-	if (document.querySelector("input[name=blogCategory_seq]").value == 6) {
+	if (document.querySelector("input[name=blogCategory_seq]").value === "6") {
 		document.getElementById("fall").classList.remove("collapse");
 		document.getElementById("fallFinner").classList.add("active");
 		document.getElementById("fallFinner").classList.remove("nav-link");
 	}
-	if (document.querySelector("input[name=blogCategory_seq]").value == 7) {
+	if (document.querySelector("input[name=blogCategory_seq]").value === "7") {
 		document.getElementById("winter").classList.remove("collapse");
 		document.getElementById("winterMinner").classList.add("active");
 		document.getElementById("winterMinner").classList.remove("nav-link");
 	}
-	if (document.querySelector("input[name=blogCategory_seq]").value == 8) {
+	if (document.querySelector("input[name=blogCategory_seq]").value === "8") {
 		document.getElementById("winter").classList.remove("collapse");
 		document.getElementById("winterFinner").classList.add("active");
 		document.getElementById("winterFinner").classList.remove("nav-link");
@@ -234,6 +234,19 @@
 	function blogSearch() {
 		if (event.key == "Enter") {
 			document.querySelector("input[name=shOption]").value = 2;
+			document.querySelector("input[name=isSearch]").value = "true";
+			document.querySelector("input[name=blogCategory_seq]").value = "null";
+			console.log(document.querySelector("input[name=isSearch]").value);
+			form.action = "/blogUsrList";
+			form.submit();
+		}
+	}
+	function userSearch() {
+		if (event.key == "Enter") {
+			document.querySelector("input[name=shOption]").value = 3;
+			document.querySelector("input[name=isSearch]").value = "true";
+			document.querySelector("input[name=blogCategory_seq]").value = "null";
+			console.log(document.querySelector("input[name=isSearch]").value);
 			form.action = "/blogUsrList";
 			form.submit();
 		}

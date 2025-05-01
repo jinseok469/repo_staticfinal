@@ -19,6 +19,7 @@ import com.staticfinal.module.user.UserDto;
 import com.staticfinal.module.user.UserService;
 import com.staticfinal.module.util.BannerVo;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -85,23 +86,23 @@ public class BlogController {
 	public String springUsrMale(@ModelAttribute("vo") BannerVo vo, Model model, BlogDto blogDto,
 			HttpSession httpSession, UserDto userDto) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
-		if (vo.getBlogCategory_seq() == null || vo.getBlogCategory_seq().equals("")) {
-			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
-			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
-			vo.setParamsPaging(blogService.selectCount(vo));
-		}
+//		if (vo.getBlogCategory_seq() == null || vo.getBlogCategory_seq().equals("")) {
+//			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+//			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
+//			vo.setParamsPaging(blogService.selectCount(vo));
+//		}
 		vo.setParamsPaging(blogService.selectCount(vo));
 		model.addAttribute("count", blogService.selectCount(vo));
 		model.addAttribute("blogList", blogService.blogList(vo));
 		
 		model.addAttribute("blogCategory", blogService.blogCategory(blogDto));
-		httpSession.setAttribute("sessBlogCategory_seq", vo.getBlogCategory_seq());
+//		httpSession.setAttribute("sessBlogCategory_seq", vo.getBlogCategory_seq());
 		return "usr/blog/blogUsrList";
 	}
 
 	@RequestMapping(value = "blogUsrView")
 	public String blogUsrView(@ModelAttribute("vo") BannerVo vo, Model model, UserDto userDto, BlogDto blogDto,
-			HttpSession httpSession) {
+			HttpSession httpSession,HttpServletRequest request) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		if (blogDto.getBlogCategory_seq() == null || blogDto.getBlogCategory_seq().equals("")) {
 			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
@@ -126,7 +127,11 @@ public class BlogController {
 		model.addAttribute("reviewCount",blogService.reviewCount(vo));
 		httpSession.setAttribute("sessBlogCategory_seq", blogDto.getBlogCategory_seq());
 		httpSession.setAttribute("sessBetterBlog_seq", blogDto.getSeq());
+		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+	        return "usr/blog/blogUsrView :: reviewFragment";
+	    }else {
 		return "usr/blog/blogUsrView";
+	    }
 	}
 
 	@RequestMapping(value = "/blogUsrUpdt")
@@ -196,16 +201,10 @@ public class BlogController {
 		return "redirect:/blogUsrList";
 	}
 	@RequestMapping(value = "/reviewUsrInst")
-	@ResponseBody
-	public Map<String,Object> reviewUsrInst(BlogDto blogDto) {
-		Map<String,Object> result = new HashMap<String,Object>();
-		int rt = blogService.reviewInsert(blogDto);
-		if(rt > 0 ) {
-			result.put("rt", "success");
-		}else {
-			result.put("rt", "fail");
-		}
-		return result;
+	public String reviewUsrInst(BlogDto blogDto) {
+		blogService.reviewInsert(blogDto);
+		
+		return "redirect:/blogUsrView";
 	}
 	@RequestMapping(value = "/imageUsrUpdt")
 	@ResponseBody

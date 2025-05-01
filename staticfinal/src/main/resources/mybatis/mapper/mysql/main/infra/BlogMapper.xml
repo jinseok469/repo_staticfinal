@@ -12,8 +12,8 @@
 		a.user_seq
 		left join
 		blogCategory as c on c.seq = a.blogCategory_seq
-		where 1=1 and
-		a.blogCategory_seq = #{blogCategory_seq}
+		where 1=1 
+		<if test="isSearch != true or isSearch == null or shValue == null and shValues ==null or shValue.equals('') and shValues.equals('')">and a.blogCategory_seq = #{blogCategory_seq}</if>
 		
 		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy 
 			= #{shUseNy}</if> -->
@@ -31,7 +31,7 @@
 		<choose>
 			<when test="shOption == 1">AND a.seq = #{shValue}</when>
 			<when test="shOption == 2">AND a.title LIKE CONCAT('%',#{shValue},'%')</when>
-			<when test="shOption == 3">AND b.name LIKE CONCAT('%',#{shValue},'%')</when>
+			<when test="shOption == 3">AND b.nickName LIKE CONCAT('%',#{shValues},'%')</when>
 		</choose>
 	</sql>
 	<sql id="selectXdmCommon">

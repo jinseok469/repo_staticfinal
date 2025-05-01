@@ -36,11 +36,17 @@ public class BlogDto extends UploadDto{
 	private String coment;
 	private String rReg;
 	private String mainImage;
+	private boolean isSearch;
 	
 	
 	
 	
-	
+	public boolean isSearch() {
+		return isSearch;
+	}
+	public void setSearch(boolean isSearch) {
+		this.isSearch = isSearch;
+	}
 	public String getMainImage() {
 		return mainImage;
 	}

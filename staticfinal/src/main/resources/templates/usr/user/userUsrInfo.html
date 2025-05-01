@@ -54,11 +54,11 @@
 							<div>
 								<label for="boy" class="form-label">성별</label>
 							</div>
-							<input type="radio" class="btn-check" name="team" id="boy"
+							<input  type="radio" class="btn-check" name="team" id="boy"
 								autocomplete="off" th:checked="${item.gender == 1}"> <label
-								class="btn" for="boy">남자</label> <input type="radio"
+							style="background-color:white;"	class="btn" for="boy">남자</label> <input type="radio"
 								class="btn-check" name="team" id="girl" autocomplete="off"
-								th:checked="${item.gender == 2}"> <label class="btn"
+								th:checked="${item.gender == 2}"> <label style="background-color:white;" class="btn"
 								for="girl">여자</label>
 						</div>
 						<div class="mb-3">
@@ -271,15 +271,14 @@
 
 	boy.onclick = function() {
 		gender.value = 1;
-		console.log(gender.value);
-		girl.removeAttribute("checked");
-		boy.setAttribute("checked");
+		boy.checked = true;
+		girl.checked = false;
 	}
 
 	girl.onclick = function() {
 		gender.value = 2;
-		boy.removeAttribute("checked");
-		girl.setAttribute("checked");
+		girl.checked = true;
+		boy.checked = false;
 	}
 
 	document.querySelector("button[id=btnSubmit]").onclick = function() {

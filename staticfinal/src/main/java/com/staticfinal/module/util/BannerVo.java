@@ -135,12 +135,22 @@ public class BannerVo {
 		private String shDateEnd;
 		private Integer shOption; /* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
 		private String shValue;
+		private String shValues;
 		private String bnSeq;
 		private String shDateStartDB;
 		private String shDateEndDB;
 		
 		
 		
+		
+		public String getShValues() {
+			return shValues;
+		}
+
+		public void setShValues(String shValues) {
+			this.shValues = shValues;
+		}
+
 		public String getShDateStartDB() {
 			return shDateStart +" 00:00:00";
 		}
@@ -282,12 +292,22 @@ public class BannerVo {
 		private String infoPrice;
 		private String coment;
 		private String rReg;
+		private Boolean isSearch;
 		
 		
 		
 		
 		
 		
+
+		public Boolean getIsSearch() {
+			return isSearch;
+		}
+
+		public void setIsSearch(Boolean isSearch) {
+			this.isSearch = isSearch;
+		}
+
 		public String getrReg() {
 			return rReg;
 		}
