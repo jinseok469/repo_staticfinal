@@ -44,11 +44,12 @@
 
 <body style="background-color: #fdf3e5;">
 	<!-- navbar -->
-	<form method="post" id="formList" class="needs-validation" enctype="multipart/form-data" novalidate>
-		<input type="hidden" id="thisPage" name="thisPage" th:value="${vo.thisPage}" /> <input
-			type="hidden" id="rowNumToShow" name="rowNumToShow"
-			th:value="${vo.rowNumToShow}" /> <input type="hidden" name="tab"
-			id="tab" value="intro" />
+	<form method="post" id="formList" class="needs-validation"
+		enctype="multipart/form-data" novalidate>
+		<input type="hidden" id="thisPage" name="thisPage"
+			th:value="${vo.thisPage}" /> <input type="hidden" id="rowNumToShow"
+			name="rowNumToShow" th:value="${vo.rowNumToShow}" /> <input
+			type="hidden" name="tab" id="tab" value="intro" />
 
 		<div class="border-bottom">
 			<input id="blogCategory_seq" name="blogCategory_seq" type="hidden"
@@ -57,10 +58,10 @@
 				th:value="${item.seq}"> <input id="user_seq" name="user_seq"
 				type="hidden" th:value="${item.user_seq}"> <input
 				type="hidden" id="url" name="url"> <input type="hidden"
-				id="urSeq" name="urSeq" th:value="${session.sessSeqUsr}"> <input id="seq"
-				type="hidden" name="seq" th:value="${item.seq}"> <input
-				type="hidden" name="infoseq">
-				<input type="hidden" name="blogKey" th:value="${item.seq}">
+				id="urSeq" name="urSeq" th:value="${session.sessSeqUsr}"> <input
+				id="seq" type="hidden" name="seq" th:value="${item.seq}"> <input
+				type="hidden" name="infoseq"> <input type="hidden"
+				name="blogKey" th:value="${item.seq}">
 			<div class="bg-light py-1"
 				style="background-color: #fdf6ec !important;">
 				<div class="container">
@@ -784,12 +785,11 @@
 								</div>
 
 							</div>
-							<div  style="display: flex; justify-content: end;">
+							<div style="display: flex; justify-content: end;">
 								<input type="file" id="fileInput" name="uploadImg1" multiple
 									style="display: none;">
-									<button type="button" id="fileSave" style="display:none;">확인</button>
-								<button type="button" id="fileBtn"
-									onclick="imageModify()">
+								<button type="button" id="fileSave" style="display: none;">확인</button>
+								<button type="button" id="fileBtn" onclick="imageModify()">
 									이미지 수정</button>
 							</div>
 							<div class="slider slider-nav mt-4">
@@ -809,7 +809,7 @@
 									<input class="form-control" type="text" id="title"
 										th:value="${item.title}" name="title"
 										style="display: inline; width: 500px;">
-									<button  type="button"
+									<button type="button"
 										class="btn btn-outline-secondary blogUpdateBtn">완료</button>
 								</div>
 								<div id="blogTitle">
@@ -853,7 +853,7 @@
 										<tbody>
 											<tr>
 												<td style="color: black;">품목</td>
-												<td style="color: black; ">구매 링크</td>
+												<td style="color: black;">구매 링크</td>
 												<td style="color: black;">가격</td>
 												<td></td>
 												<td></td>
@@ -865,21 +865,23 @@
 												<td style="display: none;"><input class="infoseq"
 													type="hidden" name="infoseq" th:value="${infoList.infoseq}"></td>
 												<td th:text="${infoList.item}" class="view-mode"></td>
-												<td   style="display:none;"><a class="info"
+												<td style="display: none;"><a class="info"
 													th:href="${#strings.startsWith(infoList.buyLink, 'http')? infoList.buyLink : 'https://' +infoList.buyLink}"
 													th:text="${infoList.buyLink}" target="_blank"></a></td>
-													<td class="ssInfo view-mode"  style="width:40%;"><a href="javascript:void(0);" onclick="buyLink(this)">구매 사이트</a></td>
+												<td class="ssInfo view-mode" style="width: 40%;"><a
+													href="javascript:void(0);" onclick="buyLink(this)">구매
+														사이트</a></td>
 												<td style="display: none;" class="buyInfo"><a
 													href="javascript:void(0)"
 													th:onclick="buy([[${infoList.infoseq}]])">정보 구매하기</a></td>
 												<td class="view-mode" th:text="${infoList.infoPrice}"></td>
-												<td class="edit-mode" style="display: none; width:18%;"><input
+												<td class="edit-mode" style="display: none; width: 18%;"><input
 													class="form-control" th:value="${infoList.item}"
 													name="item" autocomplete="off" /></td>
 												<td class="edit-mode" style="display: none;"><input
 													class="form-control" th:value="${infoList.buyLink}"
 													name="buyLink" autocomplete="off" /></td>
-												<td class="edit-mode" style="display: none; width:18%;"><input
+												<td class="edit-mode" style="display: none; width: 18%;"><input
 													class="form-control" th:value="${infoList.infoPrice}"
 													name="infoPrice" autocomplete="off" /></td>
 												<!-- 												<td class="shopCart" id="shopCart" style="display: none;"><a -->
@@ -966,28 +968,27 @@
 								<!-- tab pane -->
 								<div class="tab-pane fade show active" id="product-tab-pane"
 									role="tabpanel" aria-labelledby="product-tab" tabindex="0">
-									<div class="my-8" style="display:flex;">
+									<div class="my-8" style="display: flex;">
 										<div class="mb-5 mbInfo" th:fragment="infoFragment">
 											<!-- text -->
 											<div class="introduction" style="display: none;">
-												<input class="form-control" type="text" 
+												<input class="form-control" type="text"
 													th:value="${item.blogIntroduction}" name="blogIntroduction"
 													style="display: inline; width: 1000px;" autocomplete="off">
-												
+
 											</div>
 											<div class="blogIntroduction">
 												<p class="mb-0" style="font-size: 20px; display: inline;"
 													th:text="${item.blogIntroduction}"></p>
 											</div>
 										</div>
-										<button  type="button" style="display:none; height:40px;"
-													class="btn btn-outline-secondary blogUpdateBtn1 introduction">완료</button>
-										<span class="blogUpdatePencil blogIntroduction"  id="introductionUpt"
-													style="display: flex; align-items: center;"><a
-													id="IntroductionUptBtn" type="button"
-													class="btn-sm btn-outline-secondary"> <i
-														class="bi bi-pencil"></i>
-												</a></span>
+										<button type="button" style="display: none; height: 40px;"
+											class="btn btn-outline-secondary blogUpdateBtn1 introduction">완료</button>
+										<span class="blogUpdatePencil blogIntroduction" style="padding-left:20px; padding-top:5px;"
+											id="introductionUpt"><a id="IntroductionUptBtn"
+											type="button" class="btn-sm btn-outline-secondary"> <i
+												class="bi bi-pencil"></i>
+										</a></span>
 									</div>
 								</div>
 								<!-- tab pane -->
@@ -1004,69 +1005,77 @@
 													<tbody>
 														<tr>
 															<th>키</th>
-															<td id="modelHeight" style="display: none;"><input
-																class="form-control" type="text" id="modelHei"
-																th:value="${item.modelHeight}" name="modelHeight"
-																style="display: inline; width: 100px;">
-																<button id="blogUpdateBtn2" type="button"
-																	class="btn btn-outline-secondary">완료</button></td>
-															<td id="blogModelHeight"><span
-																th:text="${item.modelHeight}"
-																style="display: inline; align-items: center;"></span> <a
-																id="ModelHeightUptBtn" type="button"
-																class="btn-sm btn-outline-secondary blogUpdatePencil">
+
+															<td class="mbHeight" th:fragment="heightFragment"><input
+																style="display: none; width: 100px; height: 30px;"
+																class="form-control modelHeight" type="text"
+																autocomplete="off" th:value="${item.modelHeight}"
+																name="modelHeight"> <span
+																class="blogModelHeight" th:text="${item.modelHeight}"
+																style="display: inline; align-items: center;"></span></td>
+															<td><button id="blogUpdateBtn2" type="button"
+																	style="display: none;"
+																	class="btn-sm btn-outline-secondary modelHeight">완료</button>
+																<a id="ModelHeightUptBtn" type="button"
+																class="btn-sm btn-outline-secondary blogUpdatePencil blogModelHeight">
 																	<i class="bi bi-pencil"></i>
 															</a></td>
 														</tr>
 														<tr>
 															<th>몸무게</th>
-															<td id="modelWeight" style="display: none;"><input
-																class="form-control" type="text" autocomplete="off" id="modelWei"
-																th:value="${item.modelWeight}" name="modelWeight"
-																style="display: inline; width: 100px;">
-																<button id="blogUpdateBtn3" type="button"
-																	class="btn btn-outline-secondary">완료</button></td>
-															<td id="blogModelWeight"><span
-																th:text="${item.modelWeight}"
-																style="display: inline; align-items: center;"></span> <a
+															<td class="mbWeight" th:fragment="weightFragment"><input
+																style="display: none; width: 100px; height: 30px;"
+																class="form-control modelWeight" type="text"
+																autocomplete="off" th:value="${item.modelWeight}"
+																name="modelWeight"> <span
+																class="blogModelWeight" th:text="${item.modelWeight}"
+																style="display: inline; align-items: center;"></span></td>
+
+															<td><button id="blogUpdateBtn3" type="button"
+																	class="btn-sm btn-outline-secondary modelWeight"
+																	style="display: none;">완료</button> <a
 																id="ModelWeightUptBtn" type="button"
-																class="btn-sm btn-outline-secondary blogUpdatePencil">
+																class="btn-sm btn-outline-secondary blogUpdatePencil blogModelWeight">
 																	<i class="bi bi-pencil"></i>
 															</a></td>
 														</tr>
 														<tr>
 															<th>착용 사이즈</th>
-															<td id="modelSize" style="display: none;"><input
-																class="form-control" type="text" id="modelSiz"
+															<td class="mbSize" th:fragment="sizeFragment"><input
+																style="display: none; width: 100px; height: 30px;"
+																class="form-control modelSize" type="text"
 																th:value="${item.modelSize}" name="modelSize"
-																autocomplete="off"
-																style="display: inline; width: 100px;">
-																<button id="blogUpdateBtn" type="button"
-																	class="btn btn-outline-secondary">완료</button></td>
-															<td id="blogModelSize"><span
+																autocomplete="off"> <span class="blogModelSize"
 																th:text="${item.modelSize}"
-																style="display: inline; align-items: center;"></span> <a
-																id="ModelSizeUptBtn" type="button"
-																class="btn-sm btn-outline-secondary blogUpdatePencil">
+																style="display: inline; align-items: center;"></span></td>
+															<td><button id="blogUpdateBtn5" type="button"
+																	style="display: none;"
+																	class="btn-sm btn-outline-secondary modelSize">완료</button>
+																<a id="ModelSizeUptBtn" type="button"
+																class="btn-sm btn-outline-secondary blogUpdatePencil blogModelSize">
 																	<i class="bi bi-pencil"></i>
 															</a></td>
 														</tr>
 														<tr>
 															<th>신발 사이즈</th>
-															<td id="modelShoesSize" style="display: none;"><input
-																class="form-control" type="text" id="modelSho"
+															<td class="mbShoesSize" th:fragment="shoesSizeFragment"><input
+																style="display: none; width: 100px; height: 30px;"
+																class="form-control modelShoesSize" type="text"
 																th:value="${item.modelShoesSize}" name="modelShoesSize"
-																style="display: inline; width: 100px;"
-																autocomplete="off">
-																<button id="blogUpdateBtn4" type="button"
-																	class="btn btn-outline-secondary">완료</button></td>
-															<td id="blogModelShoesSize"><span
+																autocomplete="off"> <span
+																class="blogModelShoesSize"
 																th:text="${item.modelShoesSize}"
-																style="display: inline; align-items: center;"></span> <a
-																id="ModelShoesSizeUptBtn" type="button"
-																class="btn-sm btn-outline-secondary blogUpdatePencil">
+																style="display: inline; align-items: center;"></span></td>
+
+															<td>
+																<button id="blogUpdateBtn4" type="button"
+																	style="display: none;"
+																	class="btn-sm btn-outline-secondary modelShoesSize">완료</button>
+																<a id="ModelShoesSizeUptBtn" type="button"
+																class="btn-sm btn-outline-secondary blogUpdatePencil blogModelShoesSize">
 																	<i class="bi bi-pencil"></i>
-															</a></td>
+															</a>
+															</td>
 														</tr>
 														<tr>
 															<!-- <th>Form</th>
@@ -1114,94 +1123,94 @@
 											</div>
 											<!-- col -->
 											<div class="col-md-8">
-												<div  class="mb-10">
-												<div th:fragment="reviewFragment" class="mb">
-													<div
-														class="d-flex justify-content-between align-items-center mb-8">
-														<div>
-															<!-- heading -->
-															<h4>코디 리뷰</h4>
+												<div class="mb-10">
+													<div th:fragment="reviewFragment" class="mb">
+														<div
+															class="d-flex justify-content-between align-items-center mb-8">
+															<div>
+																<!-- heading -->
+																<h4>코디 리뷰</h4>
+															</div>
+															<div></div>
 														</div>
-														<div>
-															
-														</div>
-													</div>
-													<th:block th:if="${#lists.isEmpty(reviewList)}">
-													<div>등록된 리뷰가 없습니다</div>
-													</th:block>
-													
-													<th:block th:if="${!#lists.isEmpty(reviewList)}" th:each="list : ${reviewList}">
-														<div class="d-flex border-bottom pb-6 mb-6">
-															<!-- img -->
-															<!-- img -->
-															<img
-																src="/usr/template/staticfinal/dist/assets/images/avatar/profile.png"
-																alt="" class="rounded-circle avatar-lg" />
-															<div class="ms-5">
-																<h6 class="mb-1" th:text="${list.nickName}"></h6>
-																<!-- select option -->
-																<!-- content -->
-																<p class="small">
-																	<span class="text-muted" th:text="${list.rReg}"></span>
-																</p>
-																<!-- rating -->
+														<th:block th:if="${#lists.isEmpty(reviewList)}">
+															<div>등록된 리뷰가 없습니다</div>
+														</th:block>
 
-																<!-- text-->
-																<p th:text="${list.coment}"></p>
+														<th:block th:if="${!#lists.isEmpty(reviewList)}"
+															th:each="list : ${reviewList}">
+															<div class="d-flex border-bottom pb-6 mb-6">
+																<!-- img -->
+																<!-- img -->
+																<img
+																	src="/usr/template/staticfinal/dist/assets/images/avatar/profile.png"
+																	alt="" class="rounded-circle avatar-lg" />
+																<div class="ms-5">
+																	<h6 class="mb-1" th:text="${list.nickName}"></h6>
+																	<!-- select option -->
+																	<!-- content -->
+																	<p class="small">
+																		<span class="text-muted" th:text="${list.rReg}"></span>
+																	</p>
+																	<!-- rating -->
 
-																<!-- icon -->
-																<div class="d-flex justify-content-end mt-4">
-																	<!-- 															<a href="#" class="text-muted"> <i -->
-																	<!-- 																class="feather-icon icon-thumbs-up me-1"></i> Helpful -->
-																	<!-- 															</a> <a href="#" class="text-muted ms-4"> <i -->
-																	<!-- 																class="feather-icon icon-flag me-2"></i> Report abuse -->
-																	<!-- 															</a> -->
+																	<!-- text-->
+																	<p th:text="${list.coment}"></p>
+
+																	<!-- icon -->
+																	<div class="d-flex justify-content-end mt-4">
+																		<!-- 															<a href="#" class="text-muted"> <i -->
+																		<!-- 																class="feather-icon icon-thumbs-up me-1"></i> Helpful -->
+																		<!-- 															</a> <a href="#" class="text-muted ms-4"> <i -->
+																		<!-- 																class="feather-icon icon-flag me-2"></i> Report abuse -->
+																		<!-- 															</a> -->
+																	</div>
 																</div>
 															</div>
-														</div>
-													</th:block>
-												
-													<div id="writeReview" style="display: flex; justify-content: center;">
-														<ul class="pagination">
-															<li th:if="${vo.startPage gt vo.pageNumToShow}"
-																class="page-item" style="cursor: pointer;"><a
-																class="page-link"
-																href="javascript:goList(${vo.startPage - 1})"
-																th:attr="onclick=|goList('${vo.startPage - 1}')|"> <i
-																	class="fa-solid fa-angle-left"></i>
-															</a></li>
-															<li
-																th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
-																th:classappend="${num eq vo.thisPage} ? active : ''"
-																class="page-item" style="cursor: pointer;"><a
-																class="page-link" th:attr="onclick=|goList('${num}')|"
-																th:text="${num}"> <!-- ${i.index} -->
-															</a></li>
-															<li th:if="${vo.endPage ne vo.totalPages}"
-																class="page-item" style="cursor: pointer;"><a
-																class="page-link"
-																th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
-																	class="fa-solid fa-angle-right"></i>
-															</a></li>
-														</ul>
-													</div>
-												
-												
-												<!-- form control -->
+														</th:block>
 
-												<div class="py-4 mb-4">
-													<!-- heading -->
-													<h5>리뷰 작성</h5>
-													<textarea class="form-control" id="coment" name="coment"
-														rows="3" placeholder="작성자에게 상처가 되는말은 삼가해주시길 부탁드립니다"
-														required></textarea>
-												</div>
-												<!-- button -->
-												<div class="d-flex justify-content-end">
-													<a href="javascript:void(0);" id="reviewSave" onclick="reviewSave()"
-														class="btn btn-primary">리뷰 저장</a>
-												</div>
-												</div>
+														<div id="writeReview"
+															style="display: flex; justify-content: center;">
+															<ul class="pagination">
+																<li th:if="${vo.startPage gt vo.pageNumToShow}"
+																	class="page-item" style="cursor: pointer;"><a
+																	class="page-link"
+																	href="javascript:goList(${vo.startPage - 1})"
+																	th:attr="onclick=|goList('${vo.startPage - 1}')|">
+																		<i class="fa-solid fa-angle-left"></i>
+																</a></li>
+																<li
+																	th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+																	th:classappend="${num eq vo.thisPage} ? active : ''"
+																	class="page-item" style="cursor: pointer;"><a
+																	class="page-link" th:attr="onclick=|goList('${num}')|"
+																	th:text="${num}"> <!-- ${i.index} -->
+																</a></li>
+																<li th:if="${vo.endPage ne vo.totalPages}"
+																	class="page-item" style="cursor: pointer;"><a
+																	class="page-link"
+																	th:attr="onclick=|goList('${vo.endPage + 1}')|"> <i
+																		class="fa-solid fa-angle-right"></i>
+																</a></li>
+															</ul>
+														</div>
+
+
+														<!-- form control -->
+
+														<div class="py-4 mb-4">
+															<!-- heading -->
+															<h5>리뷰 작성</h5>
+															<textarea class="form-control" id="coment" name="coment"
+																rows="3" placeholder="작성자에게 상처가 되는말은 삼가해주시길 부탁드립니다"
+																required></textarea>
+														</div>
+														<!-- button -->
+														<div class="d-flex justify-content-end">
+															<a href="javascript:void(0);" id="reviewSave"
+																onclick="reviewSave()" class="btn btn-primary">리뷰 저장</a>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -1234,7 +1243,8 @@
 							th:each="list : ${blogList}">
 							<!-- col -->
 							<div class="col">
-								<div class="card card-product" style="width:222px; background-color:#fdf6ec !important;">
+								<div class="card card-product"
+									style="width: 222px; background-color: #fdf6ec !important;">
 									<div class="card-body">
 										<!-- badge -->
 
@@ -1242,7 +1252,8 @@
 											<div class="position-absolute top-0 start-0"></div>
 											<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
 												th:src="${list.mainImage}" alt="Grocery Ecommerce Template"
-												class="mb-3 img-fluid" style="height: 222px; width: 100%;  border-radius:10px;" />
+												class="mb-3 img-fluid"
+												style="height: 222px; width: 100%; border-radius: 10px;" />
 											</a>
 											<!-- action btn -->
 											<div class="card-product-action"></div>
@@ -1661,22 +1672,38 @@
 		for(let i = 0 ; i < document.querySelectorAll(".introduction").length;i++){
 		document.querySelectorAll(".introduction")[i].style.display="block";
 		}
-	}
+	} 
 	document.getElementById("ModelHeightUptBtn").onclick = function(){
-		document.getElementById("blogModelHeight").style.display="none";
-		document.getElementById("modelHeight").style.display="block";
-	}
+		for(let i = 0 ; i < document.querySelectorAll(".blogModelHeight").length;i++){
+			document.querySelectorAll(".blogModelHeight")[i].style.display="none";
+			}
+			for(let i = 0 ; i < document.querySelectorAll(".modelHeight").length;i++){
+			document.querySelectorAll(".modelHeight")[i].style.display="block";
+			}
+	} 
 	document.getElementById("ModelWeightUptBtn").onclick = function(){
-		document.getElementById("blogModelWeight").style.display="none";
-		document.getElementById("modelWeight").style.display="block";
-	}
+		for(let i = 0 ; i < document.querySelectorAll(".blogModelWeight").length;i++){
+			document.querySelectorAll(".blogModelWeight")[i].style.display="none";
+			}
+			for(let i = 0 ; i < document.querySelectorAll(".modelWeight").length;i++){
+			document.querySelectorAll(".modelWeight")[i].style.display="block";
+			}
+	} 
 	document.getElementById("ModelSizeUptBtn").onclick = function(){
-		document.getElementById("blogModelSize").style.display="none";
-		document.getElementById("modelSize").style.display="block";
-	}
+		for(let i = 0 ; i < document.querySelectorAll(".blogModelSize").length;i++){
+			document.querySelectorAll(".blogModelSize")[i].style.display="none";
+			}
+			for(let i = 0 ; i < document.querySelectorAll(".modelSize").length;i++){
+			document.querySelectorAll(".modelSize")[i].style.display="block";
+			}
+	} 
 	document.getElementById("ModelShoesSizeUptBtn").onclick = function(){
-		document.getElementById("blogModelShoesSize").style.display="none";
-		document.getElementById("modelShoesSize").style.display="block";
+		for(let i = 0 ; i < document.querySelectorAll(".blogModelShoesSize").length;i++){
+			document.querySelectorAll(".blogModelShoesSize")[i].style.display="none";
+			}
+			for(let i = 0 ; i < document.querySelectorAll(".modelShoesSize").length;i++){
+			document.querySelectorAll(".modelShoesSize")[i].style.display="block";
+			}
 	}
 	document.querySelector(".blogUpdateBtn").onclick = function(){
 		form.action = "/blogUsrUpdt";
@@ -1691,10 +1718,10 @@
 			    seq: $("#seq").val(),
 			    title: $("#title").val(),
 			    blogIntroduction: $("input[name=blogIntroduction]").val(),
-			    modelHeight: $("#modelHei").val(),
-			    modelWeight: $("#modelWei").val(),
-			    modelSize: $("#modelSiz").val(),
-			    modelShoesSize: $("#modelSho").val()
+			    modelHeight: $("input[name=modelHeight]").val(),
+			    modelWeight: $("input[name=modelWeight]").val(),
+			    modelSize: $("input[name=modelSize]").val(),
+			    modelShoesSize: $("input[name=modelShoesSize]").val()
 			  },
 			  success: function() {
 			    $.ajax({
@@ -1716,16 +1743,136 @@
 			});
 	}
 	document.getElementById("blogUpdateBtn2").onclick = function(){
-		form.action = "/blogUsrUpdt";
-		form.submit();
+		$.ajax({
+			  type: "post",
+			  url: "/blogUsrUpdt",
+			  data: {
+			    user_seq: $("#user_seq").val(),
+			    seq: $("#seq").val(),
+			    title: $("#title").val(),
+			    blogIntroduction: $("input[name=blogIntroduction]").val(),
+			    modelHeight: $("input[name=modelHeight]").val(),
+			    modelWeight: $("input[name=modelWeight]").val(),
+			    modelSize: $("input[name=modelSize]").val(),
+			    modelShoesSize: $("input[name=modelShoesSize]").val()
+			  },
+			  success: function() {
+			    $.ajax({
+			      type: "post",
+			      url: "/blogUsrView",
+			      headers: { "X-Requested-With": "XMLHttpRequest" },
+			      data:{
+			    	  fragmentType:"height"
+			      },
+			      success: function(fragmentHtml) {
+			        $(".mbHeight").html(fragmentHtml); 
+			        document.querySelector("#blogUpdateBtn2").style.display="none";
+			        document.querySelector("#ModelHeightUptBtn").style.display="block";
+
+			      }
+			    });
+			   
+			  }
+			});
 	}
 	document.getElementById("blogUpdateBtn3").onclick = function(){
-		form.action = "/blogUsrUpdt";
-		form.submit();
+		$.ajax({
+			  type: "post",
+			  url: "/blogUsrUpdt",
+			  data: {
+			    user_seq: $("#user_seq").val(),
+			    seq: $("#seq").val(),
+			    title: $("#title").val(),
+			    blogIntroduction: $("input[name=blogIntroduction]").val(),
+			    modelHeight: $("input[name=modelHeight]").val(),
+			    modelWeight: $("input[name=modelWeight]").val(),
+			    modelSize: $("input[name=modelSize]").val(),
+			    modelShoesSize: $("input[name=modelShoesSize]").val()
+			  },
+			  success: function() {
+			    $.ajax({
+			      type: "post",
+			      url: "/blogUsrView",
+			      headers: { "X-Requested-With": "XMLHttpRequest" },
+			      data:{
+			    	  fragmentType:"weight"
+			      },
+			      success: function(fragmentHtml) {
+			        $(".mbWeight").html(fragmentHtml); 
+			        document.querySelector("#blogUpdateBtn3").style.display="none";
+			        document.querySelector("#ModelWeightUptBtn").style.display="block";
+
+			      }
+			    });
+			   
+			  }
+			});
+	}
+	document.getElementById("blogUpdateBtn5").onclick = function(){
+		$.ajax({
+			  type: "post",
+			  url: "/blogUsrUpdt",
+			  data: {
+			    user_seq: $("#user_seq").val(),
+			    seq: $("#seq").val(),
+			    title: $("#title").val(),
+			    blogIntroduction: $("input[name=blogIntroduction]").val(),
+			    modelHeight: $("input[name=modelHeight]").val(),
+			    modelWeight: $("input[name=modelWeight]").val(),
+			    modelSize: $("input[name=modelSize]").val(),
+			    modelShoesSize: $("input[name=modelShoesSize]").val()
+			  },
+			  success: function() {
+			    $.ajax({
+			      type: "post",
+			      url: "/blogUsrView",
+			      headers: { "X-Requested-With": "XMLHttpRequest" },
+			      data:{
+			    	  fragmentType:"size"
+			      },
+			      success: function(fragmentHtml) {
+			        $(".mbSize").html(fragmentHtml); 
+			        document.querySelector("#blogUpdateBtn5").style.display="none";
+			        document.querySelector("#ModelSizeUptBtn").style.display="block";
+
+			      }
+			    });
+			   
+			  }
+			});
 	}
 	document.getElementById("blogUpdateBtn4").onclick = function(){
-		form.action = "/blogUsrUpdt";
-		form.submit();
+		$.ajax({
+			  type: "post",
+			  url: "/blogUsrUpdt",
+			  data: {
+			    user_seq: $("#user_seq").val(),
+			    seq: $("#seq").val(),
+			    title: $("#title").val(),
+			    blogIntroduction: $("input[name=blogIntroduction]").val(),
+			    modelHeight: $("input[name=modelHeight]").val(),
+			    modelWeight: $("input[name=modelWeight]").val(),
+			    modelSize: $("input[name=modelSize]").val(),
+			    modelShoesSize: $("input[name=modelShoesSize]").val()
+			  },
+			  success: function() {
+			    $.ajax({
+			      type: "post",
+			      url: "/blogUsrView",
+			      headers: { "X-Requested-With": "XMLHttpRequest" },
+			      data:{
+			    	  fragmentType:"shoesSize"
+			      },
+			      success: function(fragmentHtml) {
+			        $(".mbShoesSize").html(fragmentHtml); 
+			        document.querySelector("#blogUpdateBtn4").style.display="none";
+			        document.querySelector("#ModelShoesSizeUptBtn").style.display="block";
+
+			      }
+			    });
+			   
+			  }
+			});
 	}
 	function edit(button) {
 	    let row = button.closest('tr');
@@ -1874,7 +2021,10 @@ document.querySelector("#btnModalUelete1").onclick = function(){
 		      type: "post",
 		      url: "/blogUsrView",
 		      headers: { "X-Requested-With": "XMLHttpRequest" },
-		      data:{ "thisPage"  : $("#thisPage").val() },// 중요!
+		      data:{ "thisPage"  : $("#thisPage").val() ,
+		    	  fragmentType:"review"
+		      },// 중요!
+		     
 		      success: function(fragmentHtml) {
 		        $(".mb").html(fragmentHtml); // 리뷰 부분만 갱신
 		      }

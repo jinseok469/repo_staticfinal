@@ -134,6 +134,14 @@ public class BlogController {
 			}else if("info".equals(fragmentType)) {
 				System.out.println("infofragment:"+fragmentType);
 				return "usr/blog/blogUsrView :: infoFragment";
+			}else if("height".equals(fragmentType)) {
+				return "usr/blog/blogUsrView :: heightFragment";
+			}else if("weight".equals(fragmentType)) {
+				return "usr/blog/blogUsrView :: weightFragment";
+			}else if("size".equals(fragmentType)) {
+				return "usr/blog/blogUsrView :: sizeFragment";
+			}else if("shoesSize".equals(fragmentType)) {
+				return "usr/blog/blogUsrView :: shoesSizeFragment";
 			}
 	    }
 		return "usr/blog/blogUsrView";
