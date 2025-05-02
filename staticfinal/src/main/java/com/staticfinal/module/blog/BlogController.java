@@ -101,7 +101,7 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "blogUsrView")
-	public String blogUsrView(@ModelAttribute("vo") BannerVo vo, Model model, UserDto userDto, BlogDto blogDto,
+	public String blogUsrView(@RequestParam(value="fragmentType",required=false) String fragmentType,@ModelAttribute("vo") BannerVo vo, Model model, UserDto userDto, BlogDto blogDto,
 			HttpSession httpSession,HttpServletRequest request) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		if (blogDto.getBlogCategory_seq() == null || blogDto.getBlogCategory_seq().equals("")) {
@@ -128,17 +128,21 @@ public class BlogController {
 		httpSession.setAttribute("sessBlogCategory_seq", blogDto.getBlogCategory_seq());
 		httpSession.setAttribute("sessBetterBlog_seq", blogDto.getSeq());
 		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-	        return "usr/blog/blogUsrView :: reviewFragment";
-	    }else {
-		return "usr/blog/blogUsrView";
+			if("review".equals(fragmentType)) {
+				System.out.println("fragment:"+fragmentType);
+				return "usr/blog/blogUsrView :: reviewFragment";
+			}else if("info".equals(fragmentType)) {
+				System.out.println("infofragment:"+fragmentType);
+				return "usr/blog/blogUsrView :: infoFragment";
+			}
 	    }
+		return "usr/blog/blogUsrView";
 	}
 
 	@RequestMapping(value = "/blogUsrUpdt")
 	public String blogUsrUpdt(HttpSession httpSession, UserDto userDto, BlogDto blogDto) {
-		String url = blogDto.getUrl();
 		blogService.blogUpdate(blogDto);
-		return "redirect:" + url;
+		return "redirect:/blogUsrView";
 	}
 
 	@RequestMapping(value = "/clotheInfoUsrUpdt")

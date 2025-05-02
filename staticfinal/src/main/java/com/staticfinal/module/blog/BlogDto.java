@@ -37,10 +37,16 @@ public class BlogDto extends UploadDto{
 	private String rReg;
 	private String mainImage;
 	private boolean isSearch;
+	private String fragmentType;
 	
 	
 	
-	
+	public String getFragmentType() {
+		return fragmentType;
+	}
+	public void setFragmentType(String fragmentType) {
+		this.fragmentType = fragmentType;
+	}
 	public boolean isSearch() {
 		return isSearch;
 	}

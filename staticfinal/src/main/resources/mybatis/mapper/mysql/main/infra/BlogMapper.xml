@@ -327,7 +327,6 @@
 		modelSize = #{modelSize},
 		modelShoesSize =
 		#{modelShoesSize},
-		blogCategory_seq = #{blogCategory_seq},
 		user_seq =
 		#{user_seq},
 		title = #{title},
