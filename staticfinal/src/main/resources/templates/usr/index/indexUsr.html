@@ -459,23 +459,24 @@
 		form.submit();
 	}
 	function blogLink(){
-		document.querySelector("input[name=blogCategory_seq]").value = 1;
+		document.querySelector("input[name=blogCategory_seq]").value = "9";
+		document.querySelector("input[name=isSearch]").value = "true";
 		form.action ="/blogUsrList";
 		form.submit();
 	}
 	
-	  let rssUrl = "https://news-ex.jtbc.co.kr/v1/get/rss/section/80";
-	  let apiUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rssUrl);
+	let rssUrl = "https://news-ex.jtbc.co.kr/v1/get/rss/section/80";
+	let apiUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rssUrl);
 
-	  fetch(apiUrl)
-	    .then(function(response) {
-	      return response.json();
-	    })
-	    .then(function(data) {
-	      let container = document.getElementById("newsList");
-	      let item = data.items.slice(0,3);  // 가장 최신 기사 하나만 선택!
-		
-	      for(let i = 0 ;  i < item.length ; i++){
+	$.ajax({
+	  url: apiUrl,
+	  method: "GET",
+	  dataType: "json",
+	  success: function(data) {
+	    let container = document.getElementById("newsList");
+	    let item = data.items.slice(0, 3); // 가장 최신 3개 기사
+
+	    for (let i = 0; i < item.length; i++) {
 	      let li = document.createElement("li");
 	      let link = document.createElement("a");
 	      link.href = item[i].link;
@@ -484,11 +485,13 @@
 
 	      li.appendChild(link);
 	      container.appendChild(li);
-	      }
-	    })
-	    .catch(function(error) {
-	      console.error("RSS 불러오기 실패:", error);
-	    });
+	    }
+	  },
+	  error: function(xhr, status, error) {
+	    console.error("RSS 불러오기 실패:", error);
+	  }
+	});
+
 	  
 	  
 	  // 위치 가져오기
@@ -529,58 +532,56 @@
 	  function callWeatherApi(lat, lon, locationName) {
 		  document.getElementById("weatherSpinner").style.display = "block";
 		 
-		  fetch("/api/weather", {
-			  method: "POST",
-			  headers: {
-			    "Content-Type": "application/json"
+		  $.ajax({
+			  url: "/api/weather",
+			  type: "POST",
+			  contentType: "application/json",
+			  data: JSON.stringify({ lat: lat, lon: lon }),
+			  success: function(data) {
+			    let tempInt = parseInt(data.temp);
+			    let iconUrl = "https://openweathermap.org/img/wn/" + data.icon + "@2x.png";
+			    let tempMin = parseInt(data.tempMin);
+			    let tempMax = parseInt(data.tempMax);
+			    let dailyList = data.daily;
+			    console.log(dailyList.length);
+
+			    document.getElementById("locationName").innerHTML = locationName;
+			    document.getElementById("weather-Info").innerHTML = "<b>" + data.description + "</b>";
+			    document.getElementById("minMax").innerHTML = tempMin + "°C / " + tempMax + "°C";
+			    document.getElementById("temp").innerHTML = tempInt + "°C";
+			    document.getElementById("weatherIcon").src = iconUrl;
+
+			    var backgroundUrl = "";
+			    if (tempInt > -20 && tempInt <= -5) backgroundUrl = "-10.jpg";
+			    else if (tempInt > -5 && tempInt <= 5) backgroundUrl = "-5.jpg";
+			    else if (tempInt > 5 && tempInt <= 13) backgroundUrl = "5.jpg";
+			    else if (tempInt > 13 && tempInt <= 18) backgroundUrl = "13.jpg";
+			    else if (tempInt > 18 && tempInt <= 27) backgroundUrl = "18.jpg";
+			    else if (tempInt > 27 && tempInt <= 31) backgroundUrl = "27.jpg";
+			    else if (tempInt > 31) backgroundUrl = "31.jpg";
+
+			    document.getElementById("clothe").style.background =
+			      "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/" + backgroundUrl + "') no-repeat center center/contain";
+
+			    for (let i = 0; i < dailyList.length; i++) {
+			      let dailyMin = parseInt(dailyList[i].min);
+			      let dailyMax = parseInt(dailyList[i].max);
+			      let dailyIcon = "https://openweathermap.org/img/wn/" + dailyList[i].icon + "@2x.png";
+
+			      document.getElementById("dailyImage" + i).style.background = "url('" + dailyIcon + "') no-repeat center/cover";
+			      document.getElementById("dayMinMax" + i).innerHTML = dailyMin + "°C / " + dailyMax + "°C";
+			      document.getElementById("dailyTitle" + i).innerHTML = dailyList[i].date;
+			    }
 			  },
-			  body: JSON.stringify({ lat: lat, lon: lon })
-			})
-			.then(function(response) {
-			  return response.json();
-			})
-			.then(function(data) {
-			  let tempInt = parseInt(data.temp);
-			  let iconUrl = "https://openweathermap.org/img/wn/" + data.icon + "@2x.png";
-			  let tempMin = parseInt(data.tempMin);	
-			  let tempMax = parseInt(data.tempMax);	
-			  let dailyList = data.daily;
-			  console.log(dailyList.length);
-			  document.getElementById("locationName").innerHTML = locationName;
-			  document.getElementById("weather-Info").innerHTML = "<b>" + data.description + "</b>";
-			  document.getElementById("minMax").innerHTML = tempMin+ "°C" + " / "+ tempMax+ "°C";
-			  document.getElementById("temp").innerHTML = tempInt + "°C";
-			  document.getElementById("weatherIcon").src = iconUrl;
-			 
-
-			  var backgroundUrl = "";
-			  if(tempInt > -20 && tempInt <= -5) backgroundUrl = "-10.jpg";
-			  else if(tempInt > -5 && tempInt <= 5) backgroundUrl = "-5.jpg";
-			  else if(tempInt > 5 && tempInt <= 13) backgroundUrl = "5.jpg";
-			  else if(tempInt > 13 && tempInt <= 18) backgroundUrl = "13.jpg";
-			  else if(tempInt > 18 && tempInt <= 27) backgroundUrl = "18.jpg";
-			  else if(tempInt > 27 && tempInt <= 31) backgroundUrl = "27.jpg";
-			  else if(tempInt > 31) backgroundUrl = "31.jpg";
-
-			  document.getElementById("clothe").style.background =
-			    "url('/usr/template/staticfinal/dist/assets/images/bannerClothe/" + backgroundUrl + "') no-repeat center center/contain";
-			  for(let i = 0 ; i < dailyList.length; i++){
-				  let dailyMin = parseInt(dailyList[i].min);
-				  let dailyMax = parseInt(dailyList[i].max);
-				  let dailyIcon = "https://openweathermap.org/img/wn/" + dailyList[i].icon + "@2x.png";
-				  document.getElementById("dailyImage"+i).style.background = "url('"+dailyIcon+"')no-repeat center/cover";
-				  document.getElementById("dayMinMax"+i).innerHTML = dailyMin+ "°C"+ " / "+ dailyMax+ "°C";
-				  document.getElementById("dailyTitle"+i).innerHTML = dailyList[i].date;
+			  error: function(xhr, status, error) {
+			    console.error("날씨 정보 가져오기 실패:", error);
+			  },
+			  complete: function() {
+			    document.getElementById("weatherSpinner").style.display = "none";
+			    document.getElementById("weatherIcon").style.display = "";
 			  }
-			})
-		  	.catch(function(error) {
-			  console.error("날씨 정보 가져오기 실패:", error);
-			})
-		  .finally(function() {
-		      // 2. 스피너 숨기기
-		      document.getElementById("weatherSpinner").style.display = "none";
-		      document.getElementById("weatherIcon").style.display = "";
-		    });
+			});
+
 		}
 	  
 	  function searchWeather() {

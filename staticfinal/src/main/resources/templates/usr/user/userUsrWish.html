@@ -32,6 +32,7 @@
 	<form method="post" id="formList" class="needs-validation" novalidate>
 	<div class="border-bottom">
 	<input name="blogCategory_seq" type="hidden" >
+	<input name="isSearch" type="hidden">
 		<div class="bg-light py-1" style="background-color:#fdf6ec !important;">
 			<div class="container">
 				<div class="row">
@@ -717,7 +718,6 @@
 
       <main>
       <input type="hidden" name="seq">
-      <input type="hidden" name="blogCategory_seq">
          <!-- section-->
          <div class="mt-4">
             <div class="container">
@@ -860,7 +860,8 @@ function infoLink() {
 	form.submit();
 }
 function blogLink(){
-	document.querySelector("input[name=blogCategory_seq]").value = 1;
+	document.querySelector("input[name=blogCategory_seq]").value = "9";
+	document.querySelector("input[name=isSearch]").value = "true";
 	form.action ="/blogUsrList";
 	form.submit();
 }

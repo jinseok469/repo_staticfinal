@@ -62,6 +62,7 @@
 				id="seq" type="hidden" name="seq" th:value="${item.seq}"> <input
 				type="hidden" name="infoseq"> <input type="hidden"
 				name="blogKey" th:value="${item.seq}">
+				<input type="hidden" name="isSearch">
 			<div class="bg-light py-1"
 				style="background-color: #fdf6ec !important;">
 				<div class="container">
@@ -868,7 +869,7 @@
 												<td style="display: none;"><a class="info"
 													th:href="${#strings.startsWith(infoList.buyLink, 'http')? infoList.buyLink : 'https://' +infoList.buyLink}"
 													th:text="${infoList.buyLink}" target="_blank"></a></td>
-												<td class="ssInfo view-mode" style="width: 40%;"><a
+												<td class="ssInfo view-mode" style="width: 250px;"><a
 													href="javascript:void(0);" onclick="buyLink(this)">구매
 														사이트</a></td>
 												<td style="display: none;" class="buyInfo"><a
@@ -1575,7 +1576,8 @@
 	}
 
 	function blogLink(){
-		document.querySelector("input[name=blogCategory_seq]").value = 1;
+		document.querySelector("input[name=blogCategory_seq]").value = "9";
+		document.querySelector("input[name=isSearch]").value = "true";
 		form.action ="/blogUsrList";
 		form.submit();
 	}

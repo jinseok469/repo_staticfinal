@@ -36,23 +36,23 @@ public class BlogDto extends UploadDto{
 	private String coment;
 	private String rReg;
 	private String mainImage;
-	private boolean isSearch;
 	private String fragmentType;
+	private Integer bestCount;
 	
 	
-	
+	public Integer getBestCount() {
+		return bestCount;
+	}
+	public void setBestCount(Integer bestCount) {
+		this.bestCount = bestCount;
+	}
 	public String getFragmentType() {
 		return fragmentType;
 	}
 	public void setFragmentType(String fragmentType) {
 		this.fragmentType = fragmentType;
 	}
-	public boolean isSearch() {
-		return isSearch;
-	}
-	public void setSearch(boolean isSearch) {
-		this.isSearch = isSearch;
-	}
+	
 	public String getMainImage() {
 		return mainImage;
 	}

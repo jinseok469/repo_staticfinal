@@ -325,7 +325,8 @@
 		}
 	}
 	function blogLink(){
-		document.querySelector("input[name=blogCategory_seq]").value = 1;
+		document.querySelector("input[name=blogCategory_seq]").value = "9";
+		document.querySelector("input[name=isSearch]").value = "true";
 		form.action ="/blogUsrList";
 		form.submit();
 	}

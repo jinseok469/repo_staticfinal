@@ -35,9 +35,9 @@
 				<div class="me-2 flex-grow-1">
 					<!-- select option -->
 					<select class="form-select" onchange="getNum()" id="perPage">
-						<option value="5" th:selected="${vo.rowNumToShow == 5}">5</option>
-						<option value="10" th:selected="${vo.rowNumToShow == 10}">10</option>
-						<option value="15" th:selected="${vo.rowNumToShow == 15}">15</option>
+						<option value="6" th:selected="${vo.rowNumToShow == 6}">6</option>
+						<option value="12" th:selected="${vo.rowNumToShow == 12}">12</option>
+						<option value="18" th:selected="${vo.rowNumToShow == 18}">18</option>
 					</select>
 				</div>
 
@@ -173,49 +173,63 @@
 
 	document.querySelector("input[name=url]").value = url;
 	console.log(document.querySelector("input[name=blogCategory_seq]").value)
+	if (document.querySelector("input[name=blogCategory_seq]").value === "9") {
+		document.getElementById("bestCody").style.backgroundColor="#f0f0f0";
+	}
 	if (document.querySelector("input[name=blogCategory_seq]").value === "1") {
 		document.getElementById("spring").classList.remove("collapse");
+		document.getElementById("springs").style.backgroundColor="#f0f0f0";
 		document.getElementById("springMinner").classList.add("active");
 		document.getElementById("springMinner").classList.remove("nav-link");
 	}
 	if (document.querySelector("input[name=blogCategory_seq]").value === "2") {
 		document.getElementById("spring").classList.remove("collapse");
+		document.getElementById("springs").style.backgroundColor="#f0f0f0";
 		document.getElementById("springFinner").classList.add("active");
 		document.getElementById("springFinner").classList.remove("nav-link");
 	}
 	if (document.querySelector("input[name=blogCategory_seq]").value === "3") {
 		document.getElementById("summer").classList.remove("collapse");
+		document.getElementById("summers").style.backgroundColor="#f0f0f0";
 		document.getElementById("summerMinner").classList.add("active");
 		document.getElementById("summerMinner").classList.remove("nav-link");
 	}
 	if (document.querySelector("input[name=blogCategory_seq]").value === "4") {
 		document.getElementById("summer").classList.remove("collapse");
+		document.getElementById("summers").style.backgroundColor="#f0f0f0";
 		document.getElementById("summerFinner").classList.add("active");
 		document.getElementById("summerFinner").classList.remove("nav-link");
 	}
 	if (document.querySelector("input[name=blogCategory_seq]").value === "5") {
 		document.getElementById("fall").classList.remove("collapse");
+		document.getElementById("falls").style.backgroundColor="#f0f0f0";
 		document.getElementById("fallMinner").classList.add("active");
 		document.getElementById("fallMinner").classList.remove("nav-link");
 	}
 	if (document.querySelector("input[name=blogCategory_seq]").value === "6") {
 		document.getElementById("fall").classList.remove("collapse");
+		document.getElementById("falls").style.backgroundColor="#f0f0f0";
 		document.getElementById("fallFinner").classList.add("active");
 		document.getElementById("fallFinner").classList.remove("nav-link");
 	}
 	if (document.querySelector("input[name=blogCategory_seq]").value === "7") {
 		document.getElementById("winter").classList.remove("collapse");
+		document.getElementById("winters").style.backgroundColor="#f0f0f0";
 		document.getElementById("winterMinner").classList.add("active");
 		document.getElementById("winterMinner").classList.remove("nav-link");
 	}
 	if (document.querySelector("input[name=blogCategory_seq]").value === "8") {
 		document.getElementById("winter").classList.remove("collapse");
+		document.getElementById("winters").style.backgroundColor="#f0f0f0";
 		document.getElementById("winterFinner").classList.add("active");
 		document.getElementById("winterFinner").classList.remove("nav-link");
 	}
 
 	function goList(Num) {
 		document.querySelector("input[name=thisPage]").value = Num;
+		if(document.querySelector("input[name=blogCategory_seq]").value === "9"){
+		document.querySelector("input[name=isSearch]").value = "true";
+		}
 		form.action = "/blogUsrList"
 		form.submit();
 	}
@@ -223,7 +237,9 @@
 	function getNum() {
 		document.querySelector("input[name=rowNumToShow]").value = document
 				.getElementById("perPage").value;
-
+		if(document.querySelector("input[name=blogCategory_seq]").value === "9"){
+			document.querySelector("input[name=isSearch]").value = "true";
+			}
 		form.action = "/blogUsrList"
 		form.submit();
 	}
@@ -251,9 +267,10 @@
 			form.submit();
 		}
 	}
-	function blogLink() {
-		document.querySelector("input[name=blogCategory_seq]").value = 1;
-		form.action = "/blogUsrList";
+	function blogLink(){
+		document.querySelector("input[name=blogCategory_seq]").value = "9";
+		document.querySelector("input[name=isSearch]").value = "true";
+		form.action ="/blogUsrList";
 		form.submit();
 	}
 

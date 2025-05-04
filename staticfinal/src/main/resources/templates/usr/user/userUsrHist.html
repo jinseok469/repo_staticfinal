@@ -40,7 +40,7 @@
                                                 <!-- Table body -->
                                                 <tr th:if="${!#lists.isEmpty(list)}" th:each="list :${list}">
                                                     <td class="align-middle border-top-0 w-0">
-                                                        <a th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])"><img src="/usr/template/staticfinal/dist/assets/images/manClothe/남성1-1.jpg"
+                                                        <a th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])"><img th:src="${list.mainImage}"
                                                                 alt="Ecommerce" class="icon-shape icon-xl" /></a>
                                                     </td>
                                                     <td class="align-middle border-top-0">
@@ -205,7 +205,8 @@ function infoLink() {
 	form.submit();
 }
 function blogLink(){
-	document.querySelector("input[name=blogCategory_seq]").value = 1;
+	document.querySelector("input[name=blogCategory_seq]").value = "9";
+	document.querySelector("input[name=isSearch]").value = "true";
 	form.action ="/blogUsrList";
 	form.submit();
 }

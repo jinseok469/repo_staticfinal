@@ -12,21 +12,15 @@
 		a.user_seq
 		left join
 		blogCategory as c on c.seq = a.blogCategory_seq
-		where 1=1 
-		<if test="isSearch != true or isSearch == null or shValue == null and shValues ==null or shValue.equals('') and shValues.equals('')">and a.blogCategory_seq = #{blogCategory_seq}</if>
+		left join 
+		(select f.betterBlog_seq, count(*) as buyCount from clotheInfo f
+		join buyInfo e on e.clotheInfo_seq = f.seq
+		group by f.betterBlog_seq
+		) as buyCounts on buyCounts.betterBlog_seq = a.seq
+		where 1=1 and
+		a.bgDelNy = 0
+		<if test="isSearch != true or isSearch == null ">and a.blogCategory_seq = #{blogCategory_seq}</if>
 		
-		<!-- <if test="shUseNy != null and !shUseNy.equals('')">AND a.ifcgUseNy 
-			= #{shUseNy}</if> -->
-		<if test="shDelNy != null and !shDelNy.equals('')">AND a.bgDelNy = #{shDelNy}</if>
-
-		<choose>
-			<when test="shOptionDate == 1">AND a.bgReg BETWEEN #{shDateStartDB} AND
-				#{shDateEndDB}
-			</when>
-			<when test="shOptionDate == 2">AND a.bgMof BETWEEN #{shDateStartDB} AND
-				#{shDateEndDB}
-			</when>
-		</choose>
 
 		<choose>
 			<when test="shOption == 1">AND a.seq = #{shValue}</when>
@@ -89,9 +83,11 @@
 		a.bgMof,
 			(select path
 		from image as d where 1=1 and  d.pSeq =
-		a.seq order by d.uploadedDate asc limit 1) as mainImage
+		a.seq order by d.uploadedDate asc limit 1) as mainImage,
+		ifnull(buyCounts.buyCount,0) as bestCount
+		
 		<include refid="selectCommon"></include>
-		order by a.seq desc
+		order by bestCount desc
 		limit #{startRnumForMysql},#{rowNumToShow}
 	</select>
 	<select id="imageList" resultMap="resultMapObj">

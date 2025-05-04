@@ -292,7 +292,8 @@
 		b.seq,
 		b.blogCategory_seq,
 		c.item,
-		c.infoPrice
+		c.infoPrice,
+		(select path from image as d where 1=1 and d.pSeq = b.seq order by d.uploadedDate asc limit 1) as mainImage
 		from
 		buyInfo as a
 		left join clotheInfo as c on c.seq =

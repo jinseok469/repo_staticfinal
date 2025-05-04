@@ -86,11 +86,11 @@ public class BlogController {
 	public String springUsrMale(@ModelAttribute("vo") BannerVo vo, Model model, BlogDto blogDto,
 			HttpSession httpSession, UserDto userDto) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
-//		if (vo.getBlogCategory_seq() == null || vo.getBlogCategory_seq().equals("")) {
-//			vo.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
-//			blogDto.setBlogCategory_seq(String.valueOf(httpSession.getAttribute("sessBlogCategory_seq")));
-//			vo.setParamsPaging(blogService.selectCount(vo));
-//		}
+		if (vo.getBlogCategory_seq() == null || vo.getBlogCategory_seq().equals("")) {
+			vo.setIsSearch(true);
+			vo.setBlogCategory_seq("9");
+			vo.setParamsPaging(blogService.selectCount(vo));
+		}
 		vo.setParamsPaging(blogService.selectCount(vo));
 		model.addAttribute("count", blogService.selectCount(vo));
 		model.addAttribute("blogList", blogService.blogList(vo));

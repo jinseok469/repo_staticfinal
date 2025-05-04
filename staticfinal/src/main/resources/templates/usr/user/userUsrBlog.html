@@ -3,8 +3,7 @@
 
 <div th:replace="~{usr/include/infoHead :: head}"></div>
 <div class="col-lg-9 col-md-8 col-12">
-	<input type="hidden" name="seq"> <input type="hidden"
-		name="blogCategory_seq"> <input type="hidden" name="thisPage"
+	<input type="hidden" name="seq">  <input type="hidden" name="thisPage"
 		th:value="${vo.thisPage}" /> <input type="hidden" id="rowNumToShow"
 		name="rowNumToShow" th:value="${vo.rowNumToShow}" />
 	<div class="py-6 p-md-6 p-lg-10">
@@ -219,9 +218,10 @@
 		main.classList.add("active");
 
 	}
-	function blogLink() {
-		document.querySelector("input[name=blogCategory_seq]").value = 1;
-		form.action = "/blogUsrList";
+	function blogLink(){
+		document.querySelector("input[name=blogCategory_seq]").value = "9";
+		document.querySelector("input[name=isSearch]").value = "true";
+		form.action ="/blogUsrList";
 		form.submit();
 	}
 	$("#btnSignout").on(
