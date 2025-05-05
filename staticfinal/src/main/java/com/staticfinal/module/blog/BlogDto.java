@@ -38,8 +38,17 @@ public class BlogDto extends UploadDto{
 	private String mainImage;
 	private String fragmentType;
 	private Integer bestCount;
+	private Integer rank;
 	
 	
+	
+	
+	public Integer getRank() {
+		return rank;
+	}
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
 	public Integer getBestCount() {
 		return bestCount;
 	}

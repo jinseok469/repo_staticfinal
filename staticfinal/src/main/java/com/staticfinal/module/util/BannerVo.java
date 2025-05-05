@@ -293,12 +293,20 @@ public class BannerVo {
 		private String coment;
 		private String rReg;
 		private Boolean isSearch;
+		private Integer rank;
 		
 		
 		
 		
 		
 		
+		public Integer getRank() {
+			return rank;
+		}
+
+		public void setRank(Integer rank) {
+			this.rank = rank;
+		}
 
 		public Boolean getIsSearch() {
 			return isSearch;

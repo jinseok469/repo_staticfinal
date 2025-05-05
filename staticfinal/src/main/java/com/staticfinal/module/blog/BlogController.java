@@ -83,8 +83,8 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "/blogUsrList")
-	public String springUsrMale(@ModelAttribute("vo") BannerVo vo, Model model, BlogDto blogDto,
-			HttpSession httpSession, UserDto userDto) {
+	public String springUsrMale(@RequestParam(value="fragmentType",required=false) String fragmentType,@ModelAttribute("vo") BannerVo vo, Model model, BlogDto blogDto,
+			HttpSession httpSession, UserDto userDto,HttpServletRequest request) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		if (vo.getBlogCategory_seq() == null || vo.getBlogCategory_seq().equals("")) {
 			vo.setIsSearch(true);
@@ -93,11 +93,25 @@ public class BlogController {
 		}
 		vo.setParamsPaging(blogService.selectCount(vo));
 		model.addAttribute("count", blogService.selectCount(vo));
-		model.addAttribute("blogList", blogService.blogList(vo));
+		List<BlogDto> list = blogService.blogList(vo);
+		if(!list.isEmpty() && vo.getBlogCategory_seq().equals("9")) {
+			list.get(0).setRank(1);
+			list.get(1).setRank(2);
+			list.get(2).setRank(3);
+		}
+		model.addAttribute("blogList", list);
 		
 		model.addAttribute("blogCategory", blogService.blogCategory(blogDto));
+		
 //		httpSession.setAttribute("sessBlogCategory_seq", vo.getBlogCategory_seq());
+		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+			if("wish".equals(fragmentType)) {
+				
+				return "usr/include/blogHead :: wishFragment";
+			}
+		}
 		return "usr/blog/blogUsrList";
+		
 	}
 
 	@RequestMapping(value = "blogUsrView")
@@ -174,6 +188,7 @@ public class BlogController {
 	@RequestMapping(value = "/wishUsrInst")
 	public String wishUsrInst(BlogDto blogDto, HttpSession httpSession, UserDto userDto) throws Exception {
 		String url = blogDto.getUrl();
+		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
 		int wishCount = userService.wishListCount(userDto);
 		if (wishCount < 5) {
 			try {

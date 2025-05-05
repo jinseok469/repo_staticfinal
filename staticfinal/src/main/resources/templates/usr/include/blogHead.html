@@ -51,12 +51,12 @@
 					<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
 						<a class="navbar-brand d-none d-lg-block" href="/indexUsrView">
 							<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template" style="width: 7cap; padding-bottom:5%;" id="title-logo">
-							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f; cursor:pointer; ">내일은 맑음</label>
 						</a>
 						<div class="d-flex justify-content-between w-100 d-lg-none">
 							<a class="navbar-brand" href="/indexUsrView">
 								<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template"style="width: 7cap; padding-bottom:5%;" id="title-logo" />
-							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f; cursor:pointer; ">내일은 맑음</label>
 							</a>
 						</div>
 					</div>
@@ -91,7 +91,8 @@
 					<input type="hidden" id="urSeq" name="urSeq" th:value="${session.sessSeqUsr}">
 					<input type="hidden" name="seq">
 						<div class="list-inline">
-							<div class="list-inline-item me-5">
+							<div class="list-inline-item me-5 mbWish" >
+							<div class="mbWish" th:fragment="wishFragment">
 								<a href="/userUsrWish" class="text-muted position-relative">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
 										fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -106,6 +107,7 @@
 										<span class="visually-hidden">unread messages</span>
 									</span>
 								</a>
+								</div>
 							</div>
 							
 							<div class="list-inline-item me-5">

@@ -186,7 +186,6 @@
 		where 1=1
 		and b.bgDelNy = 0
 		and a.user_seq = #{urSeq}
-
 	</select>
 	<sql id="myBlogCommon">
 		from

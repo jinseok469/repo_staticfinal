@@ -90,7 +90,7 @@
 								alt="eCommerce HTML Template"
 								style="width: 7cap; padding-bottom: 5%;" id="title-logo">
 								<label for="title-logo"
-								style="padding-top: 10%; font-size: x-large; color: #6a4a2f">내일은
+								style="padding-top: 10%; font-size: x-large; color: #6a4a2f; cursor:pointer;">내일은
 									맑음</label>
 							</a>
 							<div class="d-flex justify-content-between w-100 d-lg-none">
@@ -99,7 +99,7 @@
 									alt="eCommerce HTML Template"
 									style="width: 7cap; padding-bottom: 5%;" id="title-logo" /> <label
 									for="title-logo"
-									style="padding-top: 10%; font-size: x-large; color: #6a4a2f">내일은
+									style="padding-top: 10%; font-size: x-large; color: #6a4a2f; cursor:pointer;">내일은
 										맑음</label>
 								</a>
 							</div>
@@ -1254,7 +1254,7 @@
 											<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
 												th:src="${list.mainImage}" alt="Grocery Ecommerce Template"
 												class="mb-3 img-fluid"
-												style="height: 222px; width: 100%; border-radius: 10px;" />
+												style="height: 222px; width: 100%; border-radius: 10px; cursor:pointer;" />
 											</a>
 											<!-- action btn -->
 											<div class="card-product-action"></div>
@@ -1263,12 +1263,12 @@
 										<div class="text-small mb-1">
 											<a th:onclick="blogView([[${list.seq}]])"
 												class="text-decoration-none text-muted"><small
-												th:text="${list.nickName}"></small></a>
+												th:text="${list.nickName}" style="cursor:pointer;"></small></a>
 										</div>
 										<h2 class="fs-6">
 											<a th:onclick="blogView([[${list.seq}]])"
 												class="text-inherit text-decoration-none"
-												th:text="${list.title}"> </a>
+												th:text="${list.title}" style="cursor:pointer;"> </a>
 										</h2>
 										<div>
 											<!-- rating -->

@@ -53,12 +53,12 @@
 					<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
 						<a class="navbar-brand d-none d-lg-block" href="/indexUsrView">
 							<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template" style="width: 7cap; padding-bottom:5%;" id="title-logo">
-							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f; cursor:pointer; ">내일은 맑음</label>
 						</a>
 						<div class="d-flex justify-content-between w-100 d-lg-none">
 							<a class="navbar-brand" href="/indexUsrView">
 								<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template"style="width: 7cap; padding-bottom:5%;" id="title-logo" />
-							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f; cursor:pointer; ">내일은 맑음</label>
 							</a>
 						</div>
 					</div>
@@ -774,21 +774,21 @@
 <!--                                        </div> -->
                                     </td>
                                     <td class="align-middle">
-                                       <a  th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])"><img th:src="${list.mainImage}" class="icon-shape icon-xxl" alt="" /></a>
+                                       <a  th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])" style="cursor:pointer;"><img th:src="${list.mainImage}" class="icon-shape icon-xxl" alt="" /></a>
                                     </td>
                                     <td class="align-middle">
                                        <div>
-                                          <h5 class="fs-6 mb-0"><a th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])"  class="text-inherit" th:text="${list.title}"></a></h5>
+                                          <h5 class="fs-6 mb-0"><a th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])"  class="text-inherit" th:text="${list.title}" style="cursor:pointer;"></a></h5>
                                           <!-- <small>$.98 / lb</small> -->
                                        </div>
                                     </td>
                                     <td class="align-middle" th:text="${list.nickName}"></td>
                                     <!-- <td class="align-middle"><span class="badge bg-success">In Stock</span></td> -->
                                     <td class="align-middle">
-                                       <div class="btn btn-primary btn-sm" th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])">이동하기</div>
+                                       <div class="btn btn-primary btn-sm" th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])" style="cursor:pointer;">이동하기</div>
                                     </td>
                                     <td class="align-middle">
-                                       <a onclick="btnDelete()" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                       <a onclick="btnDelete()" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" style="cursor:pointer;">
                                           <i class="feather-icon icon-trash-2"></i>
                                        </a>
                                     </td>

@@ -17,8 +17,8 @@ public class UserDto extends UploadDto{
 	private String urSeq;
 	private String streetAddress;
 	private String notes;
-	private double latitude;
-	private double longitude;
+	private Double latitude;
+	private Double longitude;
 	private String mainImage;
 	private String tpTitle = "회원가입을 진심으로 축하드립니다";
 	
@@ -49,16 +49,16 @@ public class UserDto extends UploadDto{
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	public double getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(double latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public double getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(double longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 	private String cdName;
