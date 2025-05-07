@@ -61,8 +61,8 @@
 				id="urSeq" name="urSeq" th:value="${session.sessSeqUsr}"> <input
 				id="seq" type="hidden" name="seq" th:value="${item.seq}"> <input
 				type="hidden" name="infoseq"> <input type="hidden"
-				name="blogKey" th:value="${item.seq}">
-				<input type="hidden" name="isSearch">
+				name="blogKey" th:value="${item.seq}"> <input type="hidden"
+				name="isSearch">
 			<div class="bg-light py-1"
 				style="background-color: #fdf6ec !important;">
 				<div class="container">
@@ -90,7 +90,7 @@
 								alt="eCommerce HTML Template"
 								style="width: 7cap; padding-bottom: 5%;" id="title-logo">
 								<label for="title-logo"
-								style="padding-top: 10%; font-size: x-large; color: #6a4a2f; cursor:pointer;">내일은
+								style="padding-top: 10%; font-size: x-large; color: #6a4a2f; cursor: pointer;">내일은
 									맑음</label>
 							</a>
 							<div class="d-flex justify-content-between w-100 d-lg-none">
@@ -99,7 +99,7 @@
 									alt="eCommerce HTML Template"
 									style="width: 7cap; padding-bottom: 5%;" id="title-logo" /> <label
 									for="title-logo"
-									style="padding-top: 10%; font-size: x-large; color: #6a4a2f; cursor:pointer;">내일은
+									style="padding-top: 10%; font-size: x-large; color: #6a4a2f; cursor: pointer;">내일은
 										맑음</label>
 								</a>
 							</div>
@@ -136,20 +136,23 @@
 
 							<div class="list-inline">
 								<div class="list-inline-item me-5">
-									<a href="/userUsrWish" class="text-muted position-relative">
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-											viewBox="0 0 24 24" fill="none" stroke="currentColor"
-											stroke-width="2" stroke-linecap="round"
-											stroke-linejoin="round" class="feather feather-heart">
+									<div class="mbWish" th:fragment="wishFragment">
+										<a href="/userUsrWish" class="text-muted position-relative">
+											<svg xmlns="http://www.w3.org/2000/svg" width="20"
+												height="20" viewBox="0 0 24 24" fill="none"
+												stroke="currentColor" stroke-width="2"
+												stroke-linecap="round" stroke-linejoin="round"
+												class="feather feather-heart">
 										<path
-												d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+													d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
 										</path>
 									</svg> <span id="wish"
-										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-											[[${session.sessWishUsr}]] <span class="visually-hidden">unread
-												messages</span>
-									</span>
-									</a>
+											class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+												[[${session.sessWishUsr}]] <span class="visually-hidden">unread
+													messages</span>
+										</span>
+										</a>
+									</div>
 								</div>
 
 								<div class="list-inline-item me-5">
@@ -985,7 +988,8 @@
 										</div>
 										<button type="button" style="display: none; height: 40px;"
 											class="btn btn-outline-secondary blogUpdateBtn1 introduction">완료</button>
-										<span class="blogUpdatePencil blogIntroduction" style="padding-left:20px; padding-top:5px;"
+										<span class="blogUpdatePencil blogIntroduction"
+											style="padding-left: 20px; padding-top: 5px;"
 											id="introductionUpt"><a id="IntroductionUptBtn"
 											type="button" class="btn-sm btn-outline-secondary"> <i
 												class="bi bi-pencil"></i>
@@ -1224,76 +1228,76 @@
 						</div>
 					</div>
 				</div>
-				</div>
-			</section>
+		</div>
+		</section>
 
-			<!-- section -->
-			<section class="my-lg-14 my-14">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-12">
-							<!-- heading -->
-							<h3>다른 코디 블로그</h3>
-						</div>
+		<!-- section -->
+		<section class="my-lg-14 my-14">
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-12">
+						<!-- heading -->
+						<h3>다른 코디 블로그</h3>
 					</div>
-					<!-- row -->
-					<th:block th:if="${#lists.isEmpty(blogList)}">게시물이 없습니다</th:block>
-					<div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-2 mt-2">
-						<th:block th:unless="${#lists.isEmpty(blogList)}"
-							th:each="list : ${blogList}">
-							<!-- col -->
-							<div class="col">
-								<div class="card card-product"
-									style="width: 222px; background-color: #fdf6ec !important;">
-									<div class="card-body">
-										<!-- badge -->
+				</div>
+				<!-- row -->
+				<th:block th:if="${#lists.isEmpty(blogList)}">게시물이 없습니다</th:block>
+				<div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-2 mt-2">
+					<th:block th:unless="${#lists.isEmpty(blogList)}"
+						th:each="list : ${blogList}">
+						<!-- col -->
+						<div class="col">
+							<div class="card card-product"
+								style="width: 222px; background-color: #fdf6ec !important;">
+								<div class="card-body">
+									<!-- badge -->
 
-										<div class="text-center position-relative">
-											<div class="position-absolute top-0 start-0"></div>
-											<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
-												th:src="${list.mainImage}" alt="Grocery Ecommerce Template"
-												class="mb-3 img-fluid"
-												style="height: 222px; width: 100%; border-radius: 10px; cursor:pointer;" />
-											</a>
-											<!-- action btn -->
-											<div class="card-product-action"></div>
-										</div>
-										<!-- heading -->
-										<div class="text-small mb-1">
-											<a th:onclick="blogView([[${list.seq}]])"
-												class="text-decoration-none text-muted"><small
-												th:text="${list.nickName}" style="cursor:pointer;"></small></a>
-										</div>
-										<h2 class="fs-6">
-											<a th:onclick="blogView([[${list.seq}]])"
-												class="text-inherit text-decoration-none"
-												th:text="${list.title}" style="cursor:pointer;"> </a>
-										</h2>
-										<div>
-											<!-- rating -->
+									<div class="text-center position-relative">
+										<div class="position-absolute top-0 start-0"></div>
+										<a th:onclick="blogView([[${list.seq}]])"> <!-- img --> <img
+											th:src="${list.mainImage}" alt="Grocery Ecommerce Template"
+											class="mb-3 img-fluid"
+											style="height: 222px; width: 100%; border-radius: 10px; cursor: pointer;" />
+										</a>
+										<!-- action btn -->
+										<div class="card-product-action"></div>
+									</div>
+									<!-- heading -->
+									<div class="text-small mb-1">
+										<a th:onclick="blogView([[${list.seq}]])"
+											class="text-decoration-none text-muted"><small
+											th:text="${list.nickName}" style="cursor: pointer;"></small></a>
+									</div>
+									<h2 class="fs-6">
+										<a th:onclick="blogView([[${list.seq}]])"
+											class="text-inherit text-decoration-none"
+											th:text="${list.title}" style="cursor: pointer;"> </a>
+									</h2>
+									<div>
+										<!-- rating -->
 
-										</div>
-										<!-- price -->
-										<div
-											class="d-flex justify-content-between align-items-center mt-3">
+									</div>
+									<!-- price -->
+									<div
+										class="d-flex justify-content-between align-items-center mt-3">
 
-											<!-- btn -->
+										<!-- btn -->
 
-										</div>
 									</div>
 								</div>
 							</div>
-						</th:block>
-					</div>
-					<!-- col -->
+						</div>
+					</th:block>
+				</div>
+				<!-- col -->
 
-				</div>
-				</div>
-				</div>
-				</div>
-				</div>
-			</section>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+		</section>
 		</main>
 		<!-- Footer -->
 		<!-- footer -->
@@ -1525,6 +1529,24 @@
 				</div>
 			</div>
 		</div>
+		 <div class="modal fade" id="wishModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
 	</form>
 	<div th:replace="~{usr/include/footer::footer}"></div>
 	<!-- Javascript-->
@@ -1655,13 +1677,51 @@
 	}
 	
 	
-	function wishList(num1,num2){
+	function wishList(num1, num2) {
 		document.querySelector("input[name=betterBlog_seq]").value = num1;
 		document.querySelector("input[name=user_seq]").value = num2;
-		console.log(document.querySelector("input[name=betterBlog_seq]").value);
-		console.log(document.querySelector("input[name=user_seq]").value);
-		form.action="/wishUsrInst";
-		form.submit();
+		$.ajax({
+			  type: "post",
+			  url: "/wishUsrDist",
+			  data: {
+			    user_seq: $("input[name=user_seq]").val(),
+			    betterBlog_seq: $("input[name=betterBlog_seq]").val(),
+			   url: $("input[name=url]").val()
+			  },
+			  success: function(response) {
+				  if(response.rt == "success"){
+				  $.ajax({
+					  type: "post",
+					  url: "/wishUsrInst",
+					  data: {
+					    user_seq: $("input[name=user_seq]").val(),
+					    betterBlog_seq: $("input[name=betterBlog_seq]").val(),
+					   url: $("input[name=url]").val()
+					  },
+					  success: function() {
+					    $.ajax({
+					      type: "post",
+					      url: "/blogUsrView",
+					      headers: { "X-Requested-With": "XMLHttpRequest" },
+					     data:{ fragmentType:"wish"},// 중요!/
+					      success: function(fragmentHtml) {
+					        $(".mbWish").html(fragmentHtml); // 리뷰 부분만 갱신
+					      }
+					    });
+					  }
+					});
+				  }else{
+					  document.querySelector("#modalHead").textContent ="확인";
+					  document.querySelector("#modalText").textContent ="이미 추가된 블로그 입니다";
+					  $("#wishModal").modal("show");
+				  }
+			  }
+			 
+			});
+		
+	}
+	function btnClick(){
+		return false;
 	}
 	document.getElementById("TitleUptBtn").onclick = function(){
 		document.getElementById("blogTitle").style.display="none";

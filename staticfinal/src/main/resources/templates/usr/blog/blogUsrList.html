@@ -144,6 +144,24 @@
 				style="width: 120px;">블로그 쓰기</a>
 		</div>
 	</div>
+	<div class="modal fade" id="wishModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
 	</form>
 </section>
 </div>
@@ -296,24 +314,46 @@
 		document.querySelector("input[name=user_seq]").value = num2;
 		$.ajax({
 			  type: "post",
-			  url: "/wishUsrInst",
+			  url: "/wishUsrDist",
 			  data: {
 			    user_seq: $("input[name=user_seq]").val(),
 			    betterBlog_seq: $("input[name=betterBlog_seq]").val(),
 			   url: $("input[name=url]").val()
 			  },
-			  success: function() {
-			    $.ajax({
-			      type: "post",
-			      url: "/blogUsrList",
-			      headers: { "X-Requested-With": "XMLHttpRequest" },
-			     data:{ fragmentType:"wish"},// 중요!/
-			      success: function(fragmentHtml) {
-			        $(".mbWish").html(fragmentHtml); // 리뷰 부분만 갱신
-			      }
-			    });
+			  success: function(response) {
+				  if(response.rt == "success"){
+				  $.ajax({
+					  type: "post",
+					  url: "/wishUsrInst",
+					  data: {
+					    user_seq: $("input[name=user_seq]").val(),
+					    betterBlog_seq: $("input[name=betterBlog_seq]").val(),
+					   url: $("input[name=url]").val()
+					  },
+					  success: function() {
+					    $.ajax({
+					      type: "post",
+					      url: "/blogUsrList",
+					      headers: { "X-Requested-With": "XMLHttpRequest" },
+					     data:{ fragmentType:"wish"},// 중요!/
+					      success: function(fragmentHtml) {
+					        $(".mbWish").html(fragmentHtml); // 리뷰 부분만 갱신
+					      }
+					    });
+					  }
+					});
+				  }else{
+					  document.querySelector("#modalHead").textContent ="확인";
+					  document.querySelector("#modalText").textContent ="이미 추가된 블로그 입니다";
+					  $("#wishModal").modal("show");
+				  }
 			  }
+			 
 			});
+		
+	}
+	function btnClick(){
+		return false;
 	}
 	function blogView(num, num1) {
 		document.querySelector("input[name=seq]").value = num;

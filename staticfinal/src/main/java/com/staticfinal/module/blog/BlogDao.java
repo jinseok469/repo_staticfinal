@@ -37,4 +37,5 @@ public interface BlogDao {
 	public int reviewCount(BannerVo vo);
 	public int imageDelete(BlogDto blogDto);
 	public List<BlogDto> imageList(BannerVo vo);
+	public int wishDistinct(BlogDto blogDto);
 }

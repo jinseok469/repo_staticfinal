@@ -137,5 +137,8 @@ public class BlogService {
 	public List<BlogDto> imageList(BannerVo vo){
 		return blogDao.imageList(vo);
 	}
+	public int wishDistinct(BlogDto blogDto) {
+		return blogDao.wishDistinct(blogDto);
+	}
 	
 }

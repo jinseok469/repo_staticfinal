@@ -156,6 +156,8 @@ public class BlogController {
 				return "usr/blog/blogUsrView :: sizeFragment";
 			}else if("shoesSize".equals(fragmentType)) {
 				return "usr/blog/blogUsrView :: shoesSizeFragment";
+			}else if("wish".equals(fragmentType)) {
+				return "usr/blog/blogUsrView :: wishFragment";
 			}
 	    }
 		return "usr/blog/blogUsrView";
@@ -204,6 +206,19 @@ public class BlogController {
 		} else {
 			return "redirect:" + url;
 		}
+	}
+	@RequestMapping(value = "wishUsrDist")
+	@ResponseBody
+	public Map<String,Object> wishUsrDist(BlogDto blogDto){
+		Map<String,Object> result = new HashMap<String,Object>();
+		
+		int dist = blogService.wishDistinct(blogDto);
+		if(dist == 0 ) {
+			result.put("rt", "success");
+		}else {
+			result.put("rt", "fail");
+		}
+		return result;
 	}
 
 	@RequestMapping(value = "/wishUsrDele")
