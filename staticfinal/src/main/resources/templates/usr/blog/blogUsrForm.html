@@ -61,6 +61,7 @@
 	<div class="border-bottom">
 			<input name="blogCategory_seq" type="hidden"> <input
 				name="user_seq" type="hidden" th:value="${session.sessSeqUsr}">
+				<input type="hidden" name="isSearch">
 			<div class="bg-light py-1" style="background-color:#fdf6ec !important;">
 				<div class="container">
 					<div class="row">
@@ -292,6 +293,11 @@
 												<label class="form-label">사진등록 <span style="font-size:x-small;">(1024 X 1536)</span></label>
 
 												<!-- input -->
+												<div class="form-labe" style="font-size:small;">대표 이미지</div>
+												<div><input class="form-control ss" type="file" name="uploadImg" ></div>
+											</div>
+											<div class="col-12">
+												<div class="form-labe" style="font-size:small;">추가 이미지</div>
 												<div><input class="form-control ss" type="file" name="uploadImg1" multiple></div>
 											</div>
 											<div class="col-12">
@@ -500,7 +506,8 @@
 			form.submit();
 		}
 		function blogLink() {
-			document.querySelector("input[name=blogCategory_seq]").value = 1;
+			document.querySelector("input[name=blogCategory_seq]").value = 9;
+			document.querySelector("input[name=isSearch]").value = "true";
 			form.action = "/blogUsrList";
 			form.submit();
 		}
@@ -542,6 +549,7 @@
 					}
 				}
 			}
+			blogInsert.disabled = true;
 			form.action = "/blogUsrInst";
 			form.submit();
 		}else{

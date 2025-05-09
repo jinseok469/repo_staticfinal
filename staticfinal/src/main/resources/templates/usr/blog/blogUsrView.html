@@ -868,7 +868,7 @@
 											<tr th:each="infoList:${clotheList}">
 												<td style="display: none;"><input class="infoseq"
 													type="hidden" name="infoseq" th:value="${infoList.infoseq}"></td>
-												<td th:text="${infoList.item}" class="view-mode"></td>
+												<td th:text="${infoList.item}" class="view-mode" style="width:150px;"></td>
 												<td style="display: none;"><a class="info"
 													th:href="${#strings.startsWith(infoList.buyLink, 'http')? infoList.buyLink : 'https://' +infoList.buyLink}"
 													th:text="${infoList.buyLink}" target="_blank"></a></td>

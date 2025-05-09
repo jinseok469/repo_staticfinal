@@ -18,8 +18,36 @@ public class UploadService {
 	@Value("${cloud_aws_bucket}")
 	private String bucket;
 	
-	public void uploadFilesToS3(MultipartFile[] multipartFiles, UploadDto dto, String tableName, String pSeq,
+	public void uploadFilesToS3(MultipartFile file,MultipartFile[] multipartFiles, UploadDto dto, String tableName, String pSeq,
 			AmazonS3Client amazonS3Client) throws Exception {
+		
+		if(!file.isEmpty()) {
+			String fileName = file.getOriginalFilename();
+			String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+			String uuid = UUID.randomUUID().toString();
+			String uuidFileName = uuid + "." + ext;
+			String pathModule = tableName;
+			String path = pathModule + "/";
+
+			ObjectMetadata metadata = new ObjectMetadata();
+			metadata.setContentLength(file.getSize());
+			metadata.setContentType(file.getContentType());
+
+			amazonS3Client.putObject(bucket, path + uuidFileName, file.getInputStream(), metadata);
+
+			String objectUrl = amazonS3Client.getUrl(bucket, path + uuidFileName).toString();
+
+			dto.setPath(objectUrl);
+			dto.setOriginalName(fileName);
+			dto.setUuidName(uuidFileName);
+			dto.setExt(ext);
+			dto.setSize(file.getSize());
+
+			dto.setTableName(tableName);
+			dto.setpSeq(pSeq);
+
+			dao.insertUploaded(dto);
+		}
 
 		for (int i = 0; i < multipartFiles.length; i++) {
 

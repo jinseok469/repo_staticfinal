@@ -14,9 +14,18 @@ public class UploadDto {
 	private long size;
 	private String pSeq;
 	private String uploadedDate;
+	private MultipartFile uploadImg;
 	private MultipartFile[] uploadImg1;
 	
 	
+	
+	
+	public MultipartFile getUploadImg() {
+		return uploadImg;
+	}
+	public void setUploadImg(MultipartFile uploadImg) {
+		this.uploadImg = uploadImg;
+	}
 	public String getTableName() {
 		return tableName;
 	}

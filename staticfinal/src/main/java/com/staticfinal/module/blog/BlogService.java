@@ -85,7 +85,7 @@ public class BlogService {
 
 	public int insertBlog(BlogDto dto) throws Exception {
 		blogDao.insertBlog(dto);
-		uploadService.uploadFilesToS3(dto.getUploadImg1(), dto, "image", dto.getBlogKey(), amazonS3Client);
+		uploadService.uploadFilesToS3(dto.getUploadImg(),dto.getUploadImg1(), dto, "image", dto.getBlogKey(), amazonS3Client);
 
 		return 1;
 	}
@@ -131,7 +131,7 @@ public class BlogService {
 			}
 		});
 		thread.start();
-		uploadService.uploadFilesToS3(blogDto.getUploadImg1(), blogDto, "image", blogDto.getBlogKey(), amazonS3Client);
+		uploadService.uploadFilesToS3(blogDto.getUploadImg(),blogDto.getUploadImg1(), blogDto, "image", blogDto.getBlogKey(), amazonS3Client);
 		return 1;
 	}
 	public List<BlogDto> imageList(BannerVo vo){

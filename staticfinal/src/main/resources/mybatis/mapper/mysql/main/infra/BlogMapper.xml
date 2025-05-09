@@ -97,6 +97,7 @@
 		image as a
 		where 1=1 
 		and a.pSeq = #{seq}
+		order by a.uploadedDate asc
 	</select>
 	<select id="blogViewList" resultMap="resultMapObj">
 		select

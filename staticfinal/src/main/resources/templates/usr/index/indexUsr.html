@@ -16,8 +16,9 @@
 							style="background-color: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; align-items: center; text-align: center;">
 							<div id="weatherSpinner"
 								style="display: none; text-align: center;">
-								<img src="/usr/template/staticfinal/dist/assets/images/about/spinner.png" alt="로딩 중..."
-									style="width: 80px;" />
+								<img
+									src="/usr/template/staticfinal/dist/assets/images/about/spinner.png"
+									alt="로딩 중..." style="width: 80px;" />
 								<p style="margin-top: 10px;">날씨 정보 불러오는 중...</p>
 							</div>
 							<div class="row w-100">
@@ -32,16 +33,19 @@
 										style="font-size: 1.5rem; font-weight: bold; color: #6a4a2f; margin: 12px 0;"></h1>
 								</div>
 								<div class="col-md-6 col-12 text-center">
-									<div class="pt-md-3 pt-1" >
+									<div class="pt-md-3 pt-1">
 										<h2 id="locationName"
 											style="font-size: 1.2rem; color: #9c897b;"></h2>
 										<img id="weatherIcon" src="" alt="날씨 이미지"
-											style="width: 100%; max-width: 300px; height: auto; display:none;">
-											
+											style="width: 100%; max-width: 300px; height: auto; display: none;">
+
 									</div>
-								
+
 								</div>
-								<div style="display:flex; justify-content:end;"><h6 style="font-size: 0.5rem; color: #6a4a2f; margin: 12px 0;">openWeatherApi 제공</h6></div>
+								<div style="display: flex; justify-content: end;">
+									<h6 style="font-size: 0.5rem; color: #6a4a2f; margin: 12px 0;">openWeatherApi
+										제공</h6>
+								</div>
 							</div>
 
 						</div>
@@ -72,7 +76,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 mb-6">
-					<h3 class="mb-0">이번주 날씨 <span style="font-size: 0.8rem; color: #6a4a2f; margin: 12px 0;">(openWeatherApi 제공)</span></h3>
+					<h3 class="mb-0">
+						이번주 날씨 <span
+							style="font-size: 0.8rem; color: #6a4a2f; margin: 12px 0;">(openWeatherApi
+							제공)</span>
+					</h3>
 				</div>
 			</div>
 			<div class="category-slider ">
@@ -408,6 +416,24 @@
 		</div>
 
 	</div>
+	<div class="modal fade" id="searchModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
 </main>
 </form>
 <div th:replace="~{usr/include/footer :: footer}"></div>
@@ -585,12 +611,16 @@
 		}
 	  
 	  function searchWeather() {
-		  var address = document.getElementById("searchLocation").value;
+		  let address = document.getElementById("searchLocation").value;
+		  let flag = true;
 		  if (!address.trim()) {
-		    alert("지역명을 입력해주세요!");
-		    return;
+		   document.querySelector("#modalHead").textContent = "확인";
+		   document.querySelector("#modalText").textContent = "지역명을 확인해주세요";
+		   flag = false;
+		   $("#searchModal").modal("show");
 		  }
-
+		
+		  if(flag){
 		  var geocoder = new kakao.maps.services.Geocoder();
 		  geocoder.addressSearch(address, function(result, status) {
 		    if (status === kakao.maps.services.Status.OK) {
@@ -601,15 +631,22 @@
 
 		      callWeatherApi(lat, lon, locationName);
 		    } else {
-		      alert("해당 지역을 찾을 수 없습니다.");
+		    	 document.querySelector("#modalHead").textContent = "확인";
+				   document.querySelector("#modalText").textContent = "지역명을 확인해주세요";
+				   $("#searchModal").modal("show");
 		    }
 		  });
+		  }
 	  }
 	  
 	  function enterKey(event){
 		  if(event.key =="Enter"){
 			  searchWeather();
 		  }
+	  }
+	  
+	  function btnClick(){
+		  return false;
 	  }
 	  
 </script>
