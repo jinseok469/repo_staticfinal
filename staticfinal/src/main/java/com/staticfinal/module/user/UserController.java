@@ -8,11 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.staticfinal.module.blog.BlogService;
 import com.staticfinal.module.code.CodeService;
 import com.staticfinal.module.mail.MailService;
+import com.staticfinal.module.toss.TossPaymentDto;
+import com.staticfinal.module.toss.TossPaymentService;
 import com.staticfinal.module.util.BannerVo;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +31,8 @@ public class UserController {
 	BlogService blogService;
 	@Autowired
 	MailService mailService;
+	@Autowired
+	TossPaymentService tossService;
 
 	@RequestMapping(value = "/userXdmList")
 	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo,UserDto userDto,HttpSession httpSession) {
@@ -277,9 +282,12 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 	@RequestMapping(value = "/userUsrBuys")
 	public String userUsrBuys(HttpSession httpSession,Model model, UserDto userDto) {
 		userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+		if(userDto.getInfoseq() == null || userDto.getInfoseq().equals("")) {
+			userDto.setInfoseq(String.valueOf(httpSession.getAttribute("sessInfoUsr")));
+		}
 		model.addAttribute("buyPeople",userService.buyPeople(userDto));
 		model.addAttribute("sellPeople",userService.sellPeople(userDto));
-		
+		httpSession.setAttribute("sessInfoUsr", userDto.getInfoseq());
 		return "usr/user/userUsrBuys";
 	}
 	@RequestMapping(value = "/userUsrBlog")
@@ -290,18 +298,28 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 		
 		return "usr/user/userUsrBlog";
 	}
-	@ResponseBody
 	@RequestMapping(value = "/buysUsrInst")
-	public Map<String,Object> buysUsrInst(UserDto userDto) {
-		Map<String,Object> resultMap = new HashMap<String,Object>();
-		int buyCount = userService.buyCount(userDto);
-		if(buyCount > 0 ) {
-			resultMap.put("rt", "fail");
-		}else {
+	public String buysUsrInst(@RequestParam("orderId") String orderId,UserDto userDto,HttpSession httpSession) throws InterruptedException {
+		TossPaymentDto info = tossService.verifyPayment(orderId);
+		
+		if (info != null && info.getStatus().equals("IN_PROGRESS")) {
+			userDto.setUser_seq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+			String order = info.getOrderId();
+			String[] orders = order.split("_");
+			userDto.setClotheInfo_seq(orders[1]);
+		    // 진짜 결제 성공 → insert
 			userService.buyInsert(userDto);
-			resultMap.put("rt", "success");
+			
+			info.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqUsr")));
+			
+			userService.tossInsert(info);
+		} else {
+		    // 검증 실패 by pass
+			System.out.println("승인 거절");
+			return"redirect:/userUsrBuys";
 		}
-		return resultMap;
+			
+		return "redirect:/userUsrHist";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/userUsrPassCheck")

@@ -6,6 +6,7 @@ import java.util.List;
 //import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.staticfinal.module.toss.TossPaymentDto;
 import com.staticfinal.module.util.BannerVo;
 
 @Repository
@@ -36,4 +37,5 @@ public interface UserDao {
 	public List<Integer> buyInfoSelect(UserDto userDto);
 	public int buySelectCount(BannerVo vo);
 	public int userAddressUpdate(UserDto userDto);
+	public int tossInsert(TossPaymentDto tossDto);
 }

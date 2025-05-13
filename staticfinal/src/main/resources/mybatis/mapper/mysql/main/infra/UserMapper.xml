@@ -262,6 +262,31 @@
 		1
 		)
 	</insert>
+	<insert id="tossInsert">
+		insert into toss
+		(
+		orderId,
+		paymentKey,
+		status,
+		method,
+		orderName,
+		approvedAt,
+		cardCompany,
+		cardNumber,
+		urSeq
+		)values
+		(
+		#{orderId},
+		#{paymentKey},
+		#{status},
+		#{method},
+		#{orderName},
+		now(),
+		#{card.company},
+		#{card.number},
+		#{urSeq}
+		)
+	</insert>
 	<select id="buyInfoSelect" resultType="java.lang.Integer">
 		select
 		a.clotheInfo_seq

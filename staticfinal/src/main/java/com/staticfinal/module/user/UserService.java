@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.staticfinal.module.toss.TossPaymentDto;
 import com.staticfinal.module.util.BannerVo;
 
 @Service
@@ -90,5 +91,8 @@ public class UserService {
 	}
 	public int userAddressUpdate(UserDto userDto) {
 		return userDao.userAddressUpdate(userDto);
+	}
+	public int tossInsert(TossPaymentDto tossDto) {
+		return userDao.tossInsert(tossDto);
 	}
 }

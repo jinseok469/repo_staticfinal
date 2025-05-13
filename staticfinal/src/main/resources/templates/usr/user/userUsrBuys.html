@@ -32,6 +32,9 @@
 <body>
 	<!-- navbar -->
 	<form method="post" id="formList" class="needs-validation" novalidate style="background-color:#fdf3e5;">
+	<input name="isSearch" type="hidden">
+	<input name="infoPrice" type="hidden" th:value="${sellPeople.infoPrice}">
+	<input name="item" type="hidden" th:value="${sellPeople.item}">
 	<div class="border-bottom">
 	<input name="blogCategory_seq" type="hidden" >
 		<div class="bg-light py-1" style="background-color:#fdf6ec !important;">
@@ -809,7 +812,7 @@
 														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
 														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
 													</td>
-													<td class="align-middle" th:text="${sellPeople.infoPrice}">
+													<td class="align-middle"><span  th:text="${sellPeople.infoPrice}" ></span>
 
 														<!-- <a href="#" class="btn btn-secondary" type="button">
 															   결제하기
@@ -1002,9 +1005,13 @@ function blogLink(){
 	form.submit();
 }
 
-
+let infoPrice = document.querySelector("input[name=infoPrice]")?.value;
+let item = document.querySelector("input[name=item]")?.value;
+let clotheInfo = document.querySelector("input[name=clotheInfo_seq]")?.value;
+console.log(infoPrice);
+let orderIds = 'order_' +clotheInfo+'_'+ crypto.randomUUID(); 
 const clientKey = "test_ck_DpexMgkW36Z6JlePLM4B3GbR5ozO";
-const customerKey = "pnnLyEodNkNWNDToaI_vm";
+const customerKey = "urSeq_"+sessionSeq;
 // 회원 결제
 // @docs https://docs.tosspayments.com/sdk/v2/js#tosspaymentspayment
 const tossPayments = TossPayments(clientKey);
@@ -1021,15 +1028,12 @@ async function requestPayment() {
     method: "CARD", // 카드 및 간편결제
     amount: {
       currency: "KRW",
-      value: 50000,
+      value: Number(infoPrice),
     },
-    orderId: "A3JxGRPLsw-WoOMVj7kv-", // 고유 주문번호
-    orderName: "토스 티셔츠 외 2건",
-    successUrl: window.location.origin + "/success", // 결제 요청이 성공하면 리다이렉트되는 URL
-    failUrl: window.location.origin + "/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
-    customerEmail: "customer123@gmail.com",
-    customerName: "김토스",
-    customerMobilePhone: "01012341234",
+    orderId: orderIds, // 고유 주문번호
+    orderName: item,
+    successUrl: "http://localhost:8080/buysUsrInst", // 결제 요청이 성공하면 리다이렉트되는 URL
+    failUrl: "http://localhost:8080/userUsrBuys", // 결제 요청이 실패하면 리다이렉트되는 URL
     // 카드 결제에 필요한 정보
     card: {
       useEscrow: false,
@@ -1042,33 +1046,7 @@ async function requestPayment() {
   });
 }
 	 
-// $.ajax({
-// 	async: true 
-// 	,cache: false
-// 	,type: "post"
-// 	/* ,dataType:"json" */
-// 	,url: "/buysUsrInst"
-// 	/* ,data : $("#formLogin").serialize() */
-// 	,data : {
-// 		"user_seq" : $("#user_seq").val(), "clotheInfo_seq" : $("#clotheInfo_seq").val()
-// 		}
-// 	,success: function(response) {
-// 		if(response.rt == "success") {
-// 			document.getElementById("modalHead").textContent = "확인";
-// 			document.getElementById("modalText").textContent = "결제가 완료되었습니다";
-// 				$("#buyModal").modal("show");
-			
-// 		} else {
-// 			document.getElementById("modalHead1").textContent = "실패";
-// 			document.getElementById("modalText1").textContent = "이미 구매한 상품이거나 잘못된 접근 방식입니다";
-// 				$("#buyModal1").modal("show");
-	 		
-// 		}
-// 	}
-// 	,error : function(jqXHR, textStatus, errorThrown){
-// 		alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
-// 	}
-// });
+
 function btnClick(){
 	form.action = "/userUsrHist";
 	form.submit();

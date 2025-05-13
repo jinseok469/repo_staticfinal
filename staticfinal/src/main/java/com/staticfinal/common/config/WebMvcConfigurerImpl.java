@@ -18,6 +18,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer{
 							"wishUsrInst",
 							"/signpwUsrProc",
 							"/signidUsrProc",
+							"/buysUsrInst",
 							"/userUsrUpdt",
 							"/userUsrInst",
 							"/indexUsrView",
