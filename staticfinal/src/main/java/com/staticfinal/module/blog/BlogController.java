@@ -94,7 +94,7 @@ public class BlogController {
 		vo.setParamsPaging(blogService.selectCount(vo));
 		model.addAttribute("count", blogService.selectCount(vo));
 		List<BlogDto> list = blogService.blogList(vo);
-		if(!list.isEmpty() && vo.getBlogCategory_seq().equals("9") && list.size() == 3 ) {
+		if(!list.isEmpty() && vo.getBlogCategory_seq().equals("9") && list.size() >= 3 ) {
 			list.get(0).setRank(1);
 			list.get(1).setRank(2);
 			list.get(2).setRank(3);

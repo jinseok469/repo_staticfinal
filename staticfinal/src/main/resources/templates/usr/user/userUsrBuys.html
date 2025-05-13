@@ -3,6 +3,7 @@
 
 <head >
 <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://js.tosspayments.com/v2/standard"></script>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -836,8 +837,7 @@
 														class="form-check-input" id="tossPay" name="team" checked>
 												</div>
 												<div class="col-3">
-													<button type="button" id="btnBuys"
-														class="btn btn-secondary">결제 하기</button>
+													<button class="btn btn-secondary" type="button" onclick="requestPayment()" >결제하기</button>
 												</div>
 											</div>
 										</div>
@@ -851,7 +851,9 @@
 
 						</div>
 					</div>
-
+ <div id="payment-method"></div>
+    <!-- 이용약관 UI -->
+    <div id="agreement"></div>
 				</div>
 			</div>
 		</div>
@@ -972,6 +974,8 @@
 
 <!-- Theme JS -->
 <script src="usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
+
+
 <script type="text/javascript">
 let loginf = document.getElementById("loginf");
 let logins = document.getElementById("logins");
@@ -997,35 +1001,74 @@ function blogLink(){
 	form.action ="/blogUsrList";
 	form.submit();
 }
-document.getElementById("btnBuys").onclick = function(){
-$.ajax({
-	async: true 
-	,cache: false
-	,type: "post"
-	/* ,dataType:"json" */
-	,url: "/buysUsrInst"
-	/* ,data : $("#formLogin").serialize() */
-	,data : {
-		"user_seq" : $("#user_seq").val(), "clotheInfo_seq" : $("#clotheInfo_seq").val()
-		}
-	,success: function(response) {
-		if(response.rt == "success") {
-			document.getElementById("modalHead").textContent = "확인";
-			document.getElementById("modalText").textContent = "결제가 완료되었습니다";
-				$("#buyModal").modal("show");
-			
-		} else {
-			document.getElementById("modalHead1").textContent = "실패";
-			document.getElementById("modalText1").textContent = "이미 구매한 상품이거나 잘못된 접근 방식입니다";
-				$("#buyModal1").modal("show");
-	 		
-		}
-	}
-	,error : function(jqXHR, textStatus, errorThrown){
-		alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
-	}
-});
+
+
+const clientKey = "test_ck_DpexMgkW36Z6JlePLM4B3GbR5ozO";
+const customerKey = "pnnLyEodNkNWNDToaI_vm";
+// 회원 결제
+// @docs https://docs.tosspayments.com/sdk/v2/js#tosspaymentspayment
+const tossPayments = TossPayments(clientKey);
+const payment = tossPayments.payment({ customerKey });
+// 비회원 결제
+// const payment = tossPayments.payment({customerKey: TossPayments.ANONYMOUS})
+
+// ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
+// @docs https://docs.tosspayments.com/sdk/v2/js#paymentrequestpayment
+async function requestPayment() {
+  // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
+  // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
+  await payment.requestPayment({
+    method: "CARD", // 카드 및 간편결제
+    amount: {
+      currency: "KRW",
+      value: 50000,
+    },
+    orderId: "A3JxGRPLsw-WoOMVj7kv-", // 고유 주문번호
+    orderName: "토스 티셔츠 외 2건",
+    successUrl: window.location.origin + "/success", // 결제 요청이 성공하면 리다이렉트되는 URL
+    failUrl: window.location.origin + "/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
+    customerEmail: "customer123@gmail.com",
+    customerName: "김토스",
+    customerMobilePhone: "01012341234",
+    // 카드 결제에 필요한 정보
+    card: {
+      useEscrow: false,
+      flowMode: "DIRECT", // 자체창 여는 옵션
+      // cardCompany: "삼성", // 카드사 자체창
+      easyPay: "토스페이", // 간편결제 자체창
+      useCardPoint: false,
+      useAppCardOnly: false,
+    },
+  });
 }
+	 
+// $.ajax({
+// 	async: true 
+// 	,cache: false
+// 	,type: "post"
+// 	/* ,dataType:"json" */
+// 	,url: "/buysUsrInst"
+// 	/* ,data : $("#formLogin").serialize() */
+// 	,data : {
+// 		"user_seq" : $("#user_seq").val(), "clotheInfo_seq" : $("#clotheInfo_seq").val()
+// 		}
+// 	,success: function(response) {
+// 		if(response.rt == "success") {
+// 			document.getElementById("modalHead").textContent = "확인";
+// 			document.getElementById("modalText").textContent = "결제가 완료되었습니다";
+// 				$("#buyModal").modal("show");
+			
+// 		} else {
+// 			document.getElementById("modalHead1").textContent = "실패";
+// 			document.getElementById("modalText1").textContent = "이미 구매한 상품이거나 잘못된 접근 방식입니다";
+// 				$("#buyModal1").modal("show");
+	 		
+// 		}
+// 	}
+// 	,error : function(jqXHR, textStatus, errorThrown){
+// 		alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+// 	}
+// });
 function btnClick(){
 	form.action = "/userUsrHist";
 	form.submit();
