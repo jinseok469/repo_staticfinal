@@ -13,7 +13,7 @@ public class WeatherController {
 
 	
 	 @Autowired
-	    private WeatherService weatherService;
+	 WeatherService weatherService;
 
 	    @PostMapping("/api/weather")
 	    public Map<String, Object> getWeather(@RequestBody Map<String, Double> location) throws IOException {

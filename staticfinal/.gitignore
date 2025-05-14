@@ -40,3 +40,4 @@ out/
 logs/
 application-external.properties
 TossPaymentService.java
+NaverService.java

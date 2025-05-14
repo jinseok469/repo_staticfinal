@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.staticfinal.module.blog.BlogService;
 import com.staticfinal.module.code.CodeService;
 import com.staticfinal.module.mail.MailService;
+import com.staticfinal.module.naver.NaverDto;
+import com.staticfinal.module.naver.NaverService;
 import com.staticfinal.module.toss.TossPaymentDto;
 import com.staticfinal.module.toss.TossPaymentService;
 import com.staticfinal.module.util.BannerVo;
@@ -33,6 +35,8 @@ public class UserController {
 	MailService mailService;
 	@Autowired
 	TossPaymentService tossService;
+	@Autowired
+	NaverService naverService;
 
 	@RequestMapping(value = "/userXdmList")
 	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo,UserDto userDto,HttpSession httpSession) {
@@ -104,6 +108,37 @@ userDto.setUrSeq(String.valueOf(httpSession.getAttribute("sessSeqXdm")));
 			returnMap.put("rt", "fail");
 		}
 		return returnMap;
+	}
+	
+	
+	@RequestMapping(value = "/naverUsrProc")
+	public String naverUsrProc(@RequestParam("code") String code,
+			@RequestParam("status")String status,
+			UserDto userDto,HttpSession httpSession)throws Exception {
+		NaverDto userInfo = naverService.getUserInfo(code, status);
+		System.out.println(userInfo.getMessage());
+		System.out.println(userInfo.getMessage());
+		System.out.println(userInfo.getMessage());
+		System.out.println(userInfo.getMessage());
+		System.out.println(userInfo);
+		System.out.println(userInfo);
+		System.out.println(userInfo);
+		System.out.println(userInfo);
+		System.out.println(userInfo);
+		if(userInfo != null &&userInfo.getMessage().equals("Y")) {
+//			userDto.setId(userInfo.getId());
+//			userDto.setName(userInfo.getName());
+//			userDto.setNickName(userInfo.getNickName());
+//			userDto.setDob(userInfo.getBirthyear());
+//			userDto.setEmail(userInfo.getEmail());
+//			userDto.setGender(Integer.parseInt(userInfo.getGender()));
+			System.out.println(userInfo.getId());
+			System.out.println(userInfo.getId());
+			System.out.println(userInfo.getId());
+			System.out.println(userInfo.getId());
+			System.out.println(userInfo.getId());
+		}
+		return "redirect:/indexUsrView";
 	}
 	
 	@ResponseBody
