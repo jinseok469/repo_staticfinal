@@ -41,7 +41,8 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer{
 							"/userXdmUele",
 							"/codyXdmInst",
 							"/codyXdmUpdt",
-							"/codyXdmUele"
+							"/codyXdmUele",
+							"/naverUsrProc"
 			);
 		}
 }

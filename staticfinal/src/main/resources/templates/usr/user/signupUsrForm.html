@@ -58,7 +58,7 @@
 			<div
 				class="container justify-content-center justify-content-lg-between">
 				<a class="navbar-brand" href="/indexUsrView"> <img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template" style="width: 7cap; height:50px; " id="title-logo">
-							<label for="title-logo" style=" font-size:mideum; color:#6a4a2f ">내일은 맑음</label>
+							<label for="title-logo" style=" font-size:mideum; color:#6a4a2f; cursor:pointer;">내일은 맑음</label>
 				</a> <span class="navbar-text"> 이미 회원이신가요? <a style="color:green;"
 					href="/signinUsrForm">로그인 하기</a>
 				</span>
@@ -95,22 +95,22 @@
 							<input type="hidden" name="gender" >
 							<div class="row g-3">
 								<!-- col -->
-								<div class="col-8">
+								<div class="col-6">
 									<!-- input -->
 									<label for="formSignupfname" class="form-label visually-hidden">First
-										Name</label> <input type="text" class="form-control "
+										Name</label> <input type="text" class="form-control " 
 										id="name" name="name" placeholder="이름" required autocomplete="off"/>
 									<div class="invalid-feedback" id="nameInvalid">이름을 입력해주세요</div>
 									<div class="valid-feedback" id="nameValid">이름을 입력해주세요</div>
 								</div>
-								<div class="col-2">
-									<input type="radio" class="btn-check" id="boy" name="team"
-										autocomplete="off" checked> <label class="btn"
+								<div class="col-3">
+									<input type="radio" class="btn-check" id="boy" name="team" 
+										autocomplete="off" checked> <label class="btn" style="width:100%;"
 										for="boy">남자</label>
 								</div>
-								<div class="col-2">
-									<input type="radio" class="btn-check" id="girl" name="team"
-										autocomplete="off"> <label class="btn" for="girl">여자</label>
+								<div class="col-3">
+									<input type="radio" class="btn-check" id="girl" name="team" 
+										autocomplete="off"> <label class="btn" for="girl" style="width:100%;">여자</label>
 								</div>
 								<div class="col-12">
 									<label for="dob" class="form-label visually-hidden">First

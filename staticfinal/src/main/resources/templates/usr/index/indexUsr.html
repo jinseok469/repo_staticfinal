@@ -472,6 +472,7 @@
 	let cart = document.getElementById("cart");
 	let form = document.getElementById("formList");
 	let sessionSeq = [[${session.sessSeqUsr}]];
+	 document.getElementById("weatherSpinner").style.display = "block";
 	console.log(sessionSeq);
 	if(!sessionSeq){
 		wish.style.display="none";
@@ -556,7 +557,7 @@
 		});
 	  
 	  function callWeatherApi(lat, lon, locationName) {
-		  document.getElementById("weatherSpinner").style.display = "block";
+		 
 		 
 		  $.ajax({
 			  url: "/api/weather",
