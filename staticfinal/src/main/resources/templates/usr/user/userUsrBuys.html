@@ -51,6 +51,12 @@
 				</div>
 			</div>
 		</div>
+		<div class="container">
+		<div class="row">
+		<div class="col-md-6 col-12 text-center text-md-start"></div>
+		<div class="col-6 text-end d-none d-md-block"><a type="button" id="btnSignouts" onclick="logout()" style="color:green;">log out</a></div>
+		</div>
+		</div>
 		<div class="py-5">
 			<div class="container">
 				<div class="row w-100 align-items-center gx-lg-2 gx-0">
@@ -201,8 +207,8 @@
 							</div>
 						</div>
 						<div class="dropdown me-3 d-none d-lg-block">
-							<button class="btn btn-light px-6" type="button" id="dropdownMenuButton1"
-								data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#fdf6ec;">
+							<button class="btn btn-outline-dark" type="button" id="dropdownMenuButton1"
+								data-bs-toggle="dropdown" aria-expanded="false" >
 								<span class="me-1">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
 										fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
@@ -1055,6 +1061,32 @@ function btnClicks(){
 	return false;
 }
 </script>
+ 	<script type="text/javascript">
+	 function logout(){
+		  $.ajax({
+				async : true,
+				cache : false,
+				type : "post",
+				url : "/signoutUsrProc",
+				data : {},
+				success : function(response) {
+					if (response.rt == "success") {
+
+						location.href = "/indexUsrView";
+					} else {
+						// by pass
+					}
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("ajaxUpdate " + jqXHR.textStatus + " : "
+							+ jqXHR.errorThrown);
+				}
+	  });
+	  }
+	
+	
+	
+	</script>
 </body>
 
 </html>

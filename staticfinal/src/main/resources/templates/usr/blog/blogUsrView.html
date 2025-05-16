@@ -80,6 +80,12 @@
 					</div>
 				</div>
 			</div>
+			<div class="container">
+		<div class="row">
+		<div class="col-md-6 col-12 text-center text-md-start"></div>
+		<div class="col-6 text-end d-none d-md-block"><a type="button" id="btnSignouts" onclick="logout()" style="color:green;">log out</a></div>
+		</div>
+		</div>
 			<div class="py-5">
 				<div class="container">
 					<div class="row w-100 align-items-center gx-lg-2 gx-0">
@@ -2188,6 +2194,32 @@ document.querySelector("#btnModalUelete1").onclick = function(){
 		 let tr = line.closest("tr");
 		 tr.querySelector(".info").click();
 	 }
+	</script>
+		<script type="text/javascript">
+	 function logout(){
+		  $.ajax({
+				async : true,
+				cache : false,
+				type : "post",
+				url : "/signoutUsrProc",
+				data : {},
+				success : function(response) {
+					if (response.rt == "success") {
+
+						location.href = "/indexUsrView";
+					} else {
+						// by pass
+					}
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("ajaxUpdate " + jqXHR.textStatus + " : "
+							+ jqXHR.errorThrown);
+				}
+	  });
+	  }
+	
+	
+	
 	</script>
 </body>
 

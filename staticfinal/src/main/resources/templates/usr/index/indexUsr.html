@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="https://www.thymeleaf.org">
 
@@ -472,11 +471,13 @@
 	let wish = document.getElementById("wish");
 	let cart = document.getElementById("cart");
 	let form = document.getElementById("formList");
+	let logouts = document.getElementById("btnSignouts");
 	let sessionSeq = [[${session.sessSeqUsr}]];
 	 document.getElementById("weatherSpinner").style.display = "block";
 	console.log(sessionSeq);
 	if(!sessionSeq){
 		wish.style.display="none";
+		logouts.style.display = "none";
 // 		cart.style.display="none";
 		logins.style.display = "none";
 	}else{
@@ -650,6 +651,8 @@
 	  function btnClick(){
 		  return false;
 	  }
+	 
+	  
 	  
 </script>
 
