@@ -13,16 +13,16 @@
 						<ul class="nav flex-column">
 							<li class="nav-item"><a style="cursor:pointer;"  id="springMinner" onclick="springM()" class="nav-link" >봄 남성 코디</a></li>
                                           <!-- nav item -->
-                                          <li class="nav-item"><a style="cursor:pointer;"  id="springFinner" class="nav-link">봄 여성 코디</a></li>
+                                          <li class="nav-item"><a style="cursor:pointer;"  id="springFinner" onclick="springF()" class="nav-link">봄 여성 코디</a></li>
                                           <!-- nav item -->
 						</ul>
 					</div>
 					<div class="col-3">
 						<!-- list -->
 						<ul class="nav flex-column">
-							<li class="nav-item"><a style="cursor:pointer;"  id="summerMinner" class="nav-link">여름 남성 옷 코디</a></li>
+							<li class="nav-item"><a style="cursor:pointer;"  id="summerMinner" onclick="summerM()" class="nav-link">여름 남성 옷 코디</a></li>
                                           <!-- nav item -->
-                                          <li class="nav-item"><a style="cursor:pointer;"  id="summerFinner" class="nav-link">여름 여성 옷 코디</a></li>
+                                          <li class="nav-item"><a style="cursor:pointer;"  id="summerFinner" onclick="summerF()" class="nav-link">여름 여성 옷 코디</a></li>
                                           <!-- nav item -->
 						</ul>
 					</div>
@@ -30,21 +30,21 @@
 						<!-- list -->
 						<ul class="nav flex-column">
 							 <li class="nav-item">
-                                             <a  style="cursor:pointer;" class="nav-link"  id="fallMinner" >가을 남성 옷 코디
+                                             <a  style="cursor:pointer;" class="nav-link"  id="fallMinner" onclick="fallM()" >가을 남성 옷 코디
                                                 </a>
                                           </li>
                                           <!-- nav item -->
                                           <li class="nav-item">
-                                             <a style="cursor:pointer;" class="nav-link" id="fallFinner" >가을 여성 옷 코디</a>
+                                             <a style="cursor:pointer;" class="nav-link" id="fallFinner" onclick="fallF()" >가을 여성 옷 코디</a>
                                           </li>
 						</ul>
 					</div>
 					<div class="col-3">
 						<!-- list -->
 						<ul class="nav flex-column">
-							 <li class="nav-item"><a style="cursor:pointer;"  id="winterMinner" class="nav-link">겨울 남성 옷 코디</a></li>
+							 <li class="nav-item"><a style="cursor:pointer;"  id="winterMinner" onclick="winterM()" class="nav-link">겨울 남성 옷 코디</a></li>
                                           <!-- nav item -->
-                                          <li class="nav-item"><a style="cursor:pointer;"  id="winterFinner" class="nav-link">겨울 여성 옷 코디</a></li>
+                                          <li class="nav-item"><a style="cursor:pointer;"  id="winterFinner" onclick="winterF()" class="nav-link">겨울 여성 옷 코디</a></li>
                                          
 						</ul>
 					</div>
@@ -57,38 +57,39 @@
 		form.action ="/blogUsrList";
 		form.submit();
 	}
-	document.getElementById("springFinner").onclick = function(){
+	function springF(){
 		document.querySelector("input[name=blogCategory_seq]").value = 2;
 		form.action ="/blogUsrList";
 		form.submit();
 	}
-	document.getElementById("summerMinner").onclick = function(){
+	function summerM(){
 		console.log("gd");
 		document.querySelector("input[name=blogCategory_seq]").value = 3;
 		form.action ="/blogUsrList";
 		form.submit();
 	}
-	document.getElementById("summerFinner").onclick = function(){
+	function summerF(){
 		document.querySelector("input[name=blogCategory_seq]").value = 4;
 		form.action ="/blogUsrList";
 		form.submit();
 	}
-	document.getElementById("fallMinner").onclick = function(){
+	function fallM(){
 		document.querySelector("input[name=blogCategory_seq]").value = 5;
 		form.action ="/blogUsrList";
 		form.submit();
 	}
-	document.getElementById("fallFinner").onclick = function(){
+	function fallF(){
 		document.querySelector("input[name=blogCategory_seq]").value = 6;
 		form.action ="/blogUsrList";
 		form.submit();
 	}
-	document.getElementById("winterMinner").onclick = function(){
+	function winterM(){
+		console.log("gggg");
 		document.querySelector("input[name=blogCategory_seq]").value = 7;
 		form.action ="/blogUsrList";
 		form.submit();
 	}
-	document.getElementById("winterFinner").onclick = function(){
+	function winterF(){
 		document.querySelector("input[name=blogCategory_seq]").value = 8;
 		form.action ="/blogUsrList";
 		form.submit();

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.staticfinal.module.blog.BlogService;
 import com.staticfinal.module.code.CodeService;
+import com.staticfinal.module.kakao.KakaoDto;
+import com.staticfinal.module.kakao.KakaoService;
 import com.staticfinal.module.mail.MailService;
 import com.staticfinal.module.naver.NaverDto;
 import com.staticfinal.module.naver.NaverService;
@@ -37,6 +39,32 @@ public class UserController {
 	TossPaymentService tossService;
 	@Autowired
 	NaverService naverService;
+	@Autowired
+	KakaoService kakaoService;
+	
+	@RequestMapping(value = "kakaoUsrProc")
+	public String kakaoUsrProc(@RequestParam(value = "code")String code,UserDto userDto,HttpSession httpSession) throws Exception {
+		KakaoDto kakao = kakaoService.getUserInfo(code);
+		if (kakao != null ) {
+			userDto.setId(kakao.getKakaoId());
+			userDto.setNickName(kakao.profile_nickname);
+			userDto.setName(kakao.profile_nickname);
+			userDto.setDob("0000-00-00");
+			
+			UserDto value = userService.loginOne(userDto);
+			if (value != null && value.getUrDelNy() == 0) {
+				httpSession.setAttribute("sessSeqUsr", value.getUrSeq());
+				httpSession.setAttribute("sessIdUsr", value.getId());
+				httpSession.setAttribute("sessNameUsr", value.getName());
+				userDto.setUrSeq(value.getUrSeq());
+				httpSession.setAttribute("sessWishUsr", userService.wishCount(userDto));
+			} else if (value == null) {
+				userService.userInsert(userDto);
+			}
+		}
+		
+		return "redirect:/indexUsrView";
+	}
 
 	@RequestMapping(value = "/userXdmList")
 	public String userXdmList(Model model, @ModelAttribute("vo") BannerVo vo, UserDto userDto,
