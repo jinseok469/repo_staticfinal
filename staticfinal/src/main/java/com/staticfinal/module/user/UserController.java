@@ -395,5 +395,13 @@ public class UserController {
 		model.addAttribute("list", userService.buySelect(vo));
 		return "usr/user/userUsrHist";
 	}
+	@RequestMapping(value = "/errorUsr400")
+	public String errorUsr400() {
+		return "error/400";
+	}
+	@RequestMapping(value = "/errorUsr500")
+	public String errorUsr500() {
+		return "error/500";
+	}
 
 }

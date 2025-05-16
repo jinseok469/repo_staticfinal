@@ -36,6 +36,7 @@
 		$(".datepicker").datetimepicker({
 			timepicker : false,
 			format : "Y-m-d",
+			maxDate : new Date(),
 			onChangeDateTime:function(ss,$input){
 				let input = $input.val();
 				if(!input){
@@ -94,12 +95,55 @@
 						<form class="needs-validation" novalidate id="suForm">
 							<input type="hidden" name="gender" >
 							<div class="row g-3">
+								<div class="col-12">
+									<!-- input -->
+									<label for="userId" class="form-label visually-hidden">ID</label>
+									<input type="email" class="form-control "
+										id="userId" name="id" placeholder="아이디" required autocomplete="off" maxlength="43"/>
+									<div class="invalid-feedback" id=invalid></div>
+									<div class="valid-feedback" id=valid></div>
+									
+								</div>
+								<div class="col-12">
+									<!-- input -->
+									<label for="nickname" class="form-label visually-hidden">Email</label>
+									<input type="text" class="form-control " id="nickName"
+										name="nickName" placeholder="닉네임" required autocomplete="off" maxlength="43"/>
+									<div class="invalid-feedback" id="nickNameInvalid"></div>
+									<div class="valid-feedback" id="nickNameValid"></div>
+								</div>
+								<div class="col-12">
+									<div class="password-field position-relative">
+										<label for="password" class="form-label visually-hidden">Password</label>
+										<div class="password-field position-relative">
+											<input type="password" class="form-control fakePassword "
+												id="password" name="password"
+												placeholder="비밀번호 (영문과 특수문자조합 10자리이상)" required /> <span><i
+												class="bi bi-eye-slash passwordToggler"></i></span>
+											<div class="invalid-feedback" id="passwordInvalid"></div>
+											<div class="valid-feedback" id="passwordValid"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="password-field position-relative">
+										<label for="passwordck" class="form-label visually-hidden">Password</label>
+										<div class="password-field position-relative">
+											<input type="password" class="form-control fakePassword "
+												id="passwordck" name="passwordck"
+												placeholder="비밀번호 확인 (영문과 특수문자조합 10자리이상)" onkeyup="enterkey()" required /> <span><i
+												class="bi bi-eye-slash passwordToggler"></i></span>
+											<div class="invalid-feedback" id="passwordckInvalid"></div>
+											<div class="valid-feedback" id="passwordckValid"></div>
+										</div>
+									</div>
+								</div>
 								<!-- col -->
 								<div class="col-6">
 									<!-- input -->
 									<label for="formSignupfname" class="form-label visually-hidden">First
-										Name</label> <input type="text" class="form-control " 
-										id="name" name="name" placeholder="이름" required autocomplete="off"/>
+										Name</label> <input type="text" class="form-control " maxlength="12"
+										id="name" name="name" placeholder="이름 (최대 12자)" required autocomplete="off"/>
 									<div class="invalid-feedback" id="nameInvalid">이름을 입력해주세요</div>
 									<div class="valid-feedback" id="nameValid">이름을 입력해주세요</div>
 								</div>
@@ -128,7 +172,7 @@
 								</div>
 
 								<div class="col-4">
-									<button type="button" class="btn btn-primary" onclick="sample4_execDaumPostcode()"
+									<button type="button" class="btn btn-dark" onclick="sample4_execDaumPostcode()"
 										style="width: 100%;">+ 주소검색</button>
 								</div>
 								<div class="col-12">
@@ -141,7 +185,7 @@
 								<span id="guide" style="color:#999;display:none"></span>
 								<div class="col-12">
 									<input type="text" class="form-control ss" id="betterAddress" name="betterAddress"
-										placeholder="상세주소" autocomplete="off" >
+										placeholder="상세주소" autocomplete="off" maxlength="43">
 										<div class="invalid-feedback">주소를 입력해주세요</div>
 								</div>
 								<div class="col-12">
@@ -156,58 +200,17 @@
 								<div class="col-12">
 									<!-- input -->
 									<label for="email" class="form-label visually-hidden">Email</label>
-									<input type="text" class="form-control" id="email"
-										name="email" placeholder="email" required autocomplete="off"/>
+									<input type="text" class="form-control" id="email" 
+										name="email" placeholder="email" required autocomplete="off" maxlength="43"/>
 									<div class="invalid-feedback" id="emailInvalid"></div>
 									<div class="valid-feedback" id="emailValid"></div>
 								</div>
-								<div class="col-12">
-									<!-- input -->
-									<label for="nickname" class="form-label visually-hidden">Email</label>
-									<input type="text" class="form-control " id="nickName"
-										name="nickName" placeholder="닉네임" required autocomplete="off"/>
-									<div class="invalid-feedback" id="nickNameInvalid"></div>
-									<div class="valid-feedback" id="nickNameValid"></div>
-								</div>
-								<div class="col-12">
-									<!-- input -->
-									<label for="userId" class="form-label visually-hidden">ID</label>
-									<input type="email" class="form-control "
-										id="userId" name="id" placeholder="아이디" required autocomplete="off"/>
-									<div class="invalid-feedback" id=invalid></div>
-									<div class="valid-feedback" id=valid></div>
-									
-								</div>
-								<div class="col-12">
-									<div class="password-field position-relative">
-										<label for="password" class="form-label visually-hidden">Password</label>
-										<div class="password-field position-relative">
-											<input type="password" class="form-control fakePassword "
-												id="password" name="password"
-												placeholder="비밀번호 (영문과 특수문자조합 10자리이상)" required /> <span><i
-												class="bi bi-eye-slash passwordToggler"></i></span>
-											<div class="invalid-feedback" id="passwordInvalid"></div>
-											<div class="valid-feedback" id="passwordValid"></div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="password-field position-relative">
-										<label for="passwordck" class="form-label visually-hidden">Password</label>
-										<div class="password-field position-relative">
-											<input type="password" class="form-control fakePassword "
-												id="passwordck" name="passwordck"
-												placeholder="비밀번호 확인 (영문과 특수문자조합 10자리이상)" onkeyup="enterkey()" required /> <span><i
-												class="bi bi-eye-slash passwordToggler"></i></span>
-											<div class="invalid-feedback" id="passwordckInvalid"></div>
-											<div class="valid-feedback" id="passwordckValid"></div>
-										</div>
-									</div>
-								</div>
+								
+								
 								<!-- btn -->
 								<div class="col-12 d-grid">
 									<button type="button" id="subtn" onclick="subtnClick()" 
-										class="btn btn-primary">회원가입</button>
+										class="btn btn-dark">회원가입</button>
 								</div>
 
 								<!-- text -->

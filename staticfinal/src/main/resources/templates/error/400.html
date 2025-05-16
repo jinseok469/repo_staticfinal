@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" style="height:100%;">
+
+<head>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="Codescandy" name="author">
+<title>내일은 맑음</title>
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/dropzone/dist/min/dropzone.min.css"
+	rel="stylesheet" />
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/slick-carousel/slick/slick.css"
+	rel="stylesheet" />
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/slick-carousel/slick/slick-theme.css"
+	rel="stylesheet" />
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/tiny-slider/dist/tiny-slider.css"
+	rel="stylesheet" />
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon"
+	href="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png">
+
+
+<!-- Libs CSS -->
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/bootstrap-icons/font/bootstrap-icons.min.css"
+	rel="stylesheet">
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/feather-webfont/dist/feather-icons.css"
+	rel="stylesheet">
+<link
+	href="/usr/template/staticfinal/dist/assets/libs/simplebar/dist/simplebar.min.css"
+	rel="stylesheet">
+
+
+<!-- Theme CSS -->
+<link rel="stylesheet"
+	href="/usr/template/staticfinal/dist/assets/css/theme.min.css">
+	<style>
+  .main-content-wrapper {
+    padding-left: 300px;
+  }
+
+  @media (max-width: 991.98px) {
+    .main-content-wrapper {
+      padding-left: 0 !important;
+    }
+  }
+</style>
+</head>
+
+<body style="background-color:#fdf3e5;">
+	<!-- navbar -->
+	<div class="border-bottom">
+			<input name="blogCategory_seq" type="hidden"> <input
+				name="user_seq" type="hidden" th:value="${session?.sessSeqUsr}">
+				<input type="hidden" name="isSearch">
+			<div class="bg-light py-1" style="background-color:#fdf6ec !important;">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-12 text-center text-md-start">
+							<span>현재 화면은 예기치못한 오류로 인해 나오는 화면입니다 </span>
+						</div>
+						<div class="col-6 text-end d-none d-md-block">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="py-5">
+				<div class="container">
+					<div class="row w-100 align-items-center gx-lg-2 gx-0">
+						<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
+							<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template" style="width: 7cap; padding-bottom:5%;" id="title-logo">
+							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label>
+						<div class="d-flex justify-content-between w-100 d-lg-none">
+<!-- 								<img src="/usr/template/staticfinal/dist/assets/images/banner/weatherLogo.png" alt="eCommerce HTML Template"style="width: 7cap; padding-bottom:5%;" id="title-logo" /> -->
+<!-- 							<label for="title-logo" style="padding-top: 10%; font-size:x-large; color:#6a4a2f ">내일은 맑음</label> -->
+							</div>
+						</div>
+						<div class="col-xxl-5 col-lg-5 d-none d-lg-block">
+							<div class="input-group">
+							</div>
+						</div>
+
+						<div class="col-md-2 col-xxl-3 d-none d-lg-block">
+
+						</div>
+						<div class="col-lg-2 col-xxl-2 text-end col-md-6 col-7">
+
+							<input type="hidden" name="urSeq"
+								th:value="${session?.sessSeqUsr}"> <input type="hidden"
+								name="seq">
+							<div class="list-inline">
+								<div class="list-inline-item me-5">
+								</div>
+
+								<div class="list-inline-item me-5">
+								</div>
+								<div class="list-inline-item me-5 me-lg-0">
+								</div>
+								<div class="list-inline-item d-inline-block d-lg-none">
+									<!-- Button -->
+									<button class="navbar-toggler collapsed" type="button"
+										data-bs-toggle="offcanvas" data-bs-target="#navbar-default"
+										aria-controls="navbar-default" aria-label="Toggle navigation">
+										<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+											fill="currentColor"
+											class="bi bi-text-indent-left text-primary"
+											viewBox="0 0 16 16">
+										<path
+												d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+									</svg>
+									</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<nav
+				class="navbar navbar-expand-lg navbar-light navbar-default py-0 pb-lg-4"
+				aria-label="Offcanvas navbar large">
+				<div class="container">
+					<div class="offcanvas offcanvas-start" tabindex="-1"
+						id="navbar-default" aria-labelledby="navbar-defaultLabel">
+						<div class="offcanvas-header pb-1">
+							<a href="/usr/template/staticfinal/dist/index.html"><img
+								src="/usr/template/staticfinal/dist/assets/images/logo/freshcart-logo.svg"
+								alt="eCommerce HTML Template" /></a>
+							<button type="button" class="btn-close"
+								data-bs-dismiss="offcanvas" aria-label="Close"></button>
+						</div>
+						<div class="offcanvas-body">
+							<div class="d-block d-lg-none mb-4">
+								<div class="input-group">
+									<input class="form-control rounded" type="search"
+										placeholder="Search for products" /> <span
+										class="input-group-append">
+										<button
+											class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+											type="button">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16"
+												height="16" viewBox="0 0 24 24" fill="none"
+												stroke="currentColor" stroke-width="2"
+												stroke-linecap="round" stroke-linejoin="round"
+												class="feather feather-search">
+												<circle cx="11" cy="11" r="8"></circle>
+												<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+											</svg>
+										</button>
+									</span>
+								</div>
+								<div class="mt-2">
+									<button type="button"
+										class="btn btn-outline-gray-400 text-muted w-100"
+										data-bs-toggle="modal" data-bs-target="#locationModal">
+										<i class="feather-icon icon-map-pin me-2"></i> Pick Location
+									</button>
+								</div>
+							</div>
+							<div class="d-block d-lg-none mb-4">
+								<a
+									class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+									data-bs-toggle="collapse" href="#collapseExample" role="button"
+									aria-expanded="false" aria-controls="collapseExample"> <span
+									class="me-2"> <svg xmlns="http://www.w3.org/2000/svg"
+											width="16" height="16" viewBox="0 0 24 24" fill="none"
+											stroke="currentColor" stroke-width="1.5"
+											stroke-linecap="round" stroke-linejoin="round"
+											class="feather feather-grid">
+										<rect x="3" y="3" width="7" height="7"></rect>
+										<rect x="14" y="3" width="7" height="7"></rect>
+										<rect x="14" y="14" width="7" height="7"></rect>
+										<rect x="3" y="14" width="7" height="7"></rect>
+									</svg>
+								</span> 메뉴
+								</a>
+								<div class="collapse mt-2" id="collapseExample">
+									<div class="card card-body">
+										<ul class="mb-0 list-unstyled">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="dropdown me-3 d-none d-lg-block">
+
+							</div>
+
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+	<!-- Modal -->
+
+
+
+
+	<script
+		src="/usr/template/staticfinal/dist/assets/js/vendors/validation.js"></script>
+
+	<section class="mt-8">
+	<form>
+				<div class="container align-items-center text-center">
+					<div class="row">
+						<div class="col-md-5 col-xl-6" style="padding-top:100px;">
+			<h1 style="color:#6a4a2f; font-size:100px;">400</h1>
+			<h3 style="color:#6a4a2f;">오류로 인해 페이지가 구동하지 않습니다</h3>
+			<div style="padding-top:50px;">
+			<button class="btn btn-outline-dark" type="button" onclick="javascript:history.back();" >이전 화면으로 돌아가기</button>
+			</div>
+			</div>
+			<div class="col-md-5 col-xl-6">
+			<img alt="" src="/usr/template/staticfinal/dist/assets/images/about/error.png" style="height:100%; width:100%;">
+			</div>
+				</div>
+			</div>
+	</form>
+	</section>
+	<!-- Footer -->
+	<!-- footer -->
+	<!-- modal -->
+
+
+
+	<!-- Theme JS -->
+
+</body>
+
+</html>

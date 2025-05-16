@@ -270,10 +270,10 @@
 								</div>
 							</div>
 							<div class="dropdown me-3 d-none d-lg-block">
-								<button class="btn btn-light px-6" type="button"
+								<button class="btn btn-outline-dark" type="button"
 									id="dropdownMenuButton1" data-bs-toggle="dropdown"
 									aria-expanded="false"
-									style="background-color: #fdf6ec !important;">
+									>
 									<span class="me-1"> <svg
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1547,6 +1547,42 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="wishModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="wishModal2" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead2"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText2"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
 	</form>
 	<div th:replace="~{usr/include/footer::footer}"></div>
 	<!-- Javascript-->
@@ -1690,6 +1726,9 @@
 			  },
 			  success: function(response) {
 				  if(response.rt == "success"){
+					  document.querySelector("#modalHead2").textContent = "확인";
+				        document.querySelector("#modalText2").textContent = "위시리스트에 해당 블로그를 추가하였습니다";
+				        $("#wishModal2").modal("show");
 				  $.ajax({
 					  type: "post",
 					  url: "/wishUsrInst",

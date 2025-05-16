@@ -216,8 +216,8 @@
 							</div>
 						</div>
 						<div class="dropdown me-3 d-none d-lg-block">
-							<button class="btn btn-light px-6" type="button" id="dropdownMenuButton1"
-								data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#fdf6ec !important;">
+							<button class="btn btn-outline-dark" type="button" id="dropdownMenuButton1"
+								data-bs-toggle="dropdown" aria-expanded="false" >
 								<span class="me-1">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
 										fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
@@ -785,7 +785,7 @@
                                     <td class="align-middle" th:text="${list.nickName}"></td>
                                     <!-- <td class="align-middle"><span class="badge bg-success">In Stock</span></td> -->
                                     <td class="align-middle">
-                                       <div class="btn btn-primary btn-sm" th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])" style="cursor:pointer;">이동하기</div>
+                                       <div class="btn btn-dark btn-sm" th:onclick="blogView([[${list.betterBlog_seq}]],[[${list.blogCategory_seq}]])" style="cursor:pointer;">이동하기</div>
                                     </td>
                                     <td class="align-middle">
                                        <a onclick="btnDelete()" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" style="cursor:pointer;">
@@ -814,13 +814,13 @@
 				<div class="modal-body" id="modalConfirmBody">body</div>
 				<div class="modal-footer">
 					<button type="button"
-						class="btn btn-outline-secondary btn-sm btn_custom" id="btnModalReturn"
+						class="btn btn-outline-secondary " id="btnModalReturn"
 						data-bs-dismiss="modal">취소</button>
 					<button type="button" class="btn btn-danger btn-sm btn_custom"
 						name="" id="btnModalDelete">
 						<i class="fa-solid fa-x fa-lg"></i>
 					</button>
-					<button type="button" class="btn btn-danger btn-sm btn_custom"
+					<button type="button" class="btn btn-danger "
 						name="" id="btnModalUelete">삭제</button>
 				</div>
 			</div>

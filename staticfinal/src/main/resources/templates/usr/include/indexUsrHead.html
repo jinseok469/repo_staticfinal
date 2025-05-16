@@ -48,6 +48,12 @@
 				</div>
 			</div>
 		</div>
+		<div class="container">
+		<div class="row">
+		<div class="col-md-6 col-12 text-center text-md-start"></div>
+		<div class="col-6 text-end d-none d-md-block"><a type="button" style="color:green;">log out</a></div>
+		</div>
+		</div>
 		<div class="py-5">
 			<div class="container">
 				<div class="row w-100 align-items-center gx-lg-2 gx-0">
@@ -65,7 +71,7 @@
 					</div>
 					<div class="col-xxl-5 col-lg-5 d-none d-lg-block">
 							<div class="input-group">
-								<input class="form-control rounded" type="search" id="searchLocation" placeholder="지역 검색" onkeyup="enterKey(event)" autocomplete="off"/>
+								<input class="form-control rounded" type="search" id="searchLocation" placeholder="지역 검색(ex 서울시 강남구 역삼동)" onkeyup="enterKey(event)" autocomplete="off"/>
 								<span class="input-group-append">
 									<button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
 										type="button">
@@ -84,7 +90,7 @@
 					<div class="col-md-2 col-xxl-3 d-none d-lg-block">
 					
 						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-outline-gray-400 text-muted" onclick="searchWeather()" >
+						<button type="button" class="btn btn-outline-dark " onclick="searchWeather()" >
 							<i class="feather-icon icon-map-pin me-2"></i>
 							검색
 						</button>
@@ -217,8 +223,8 @@
 							</div>
 						</div>
 						<div class="dropdown me-3 d-none d-lg-block">
-							<button class="btn btn-light px-6" type="button" id="dropdownMenuButton1"
-								data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#fdf6ec;">
+							<button class="btn btn-outline-dark " type="button" id="dropdownMenuButton1"
+								data-bs-toggle="dropdown" aria-expanded="false">
 								<span class="me-1">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
 										fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"

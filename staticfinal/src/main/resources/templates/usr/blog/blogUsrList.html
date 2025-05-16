@@ -58,7 +58,9 @@
 
 		<th:block th:if="${!#lists.isEmpty(blogList)}"
 			th:each="list:${blogList}">
+			
 			<div class="col">
+			
 				<!-- card -->
 				<span th:if="${list.rank == 1}" class="badge bg-warning">1st</span>
 				<span th:if="${list.rank == 2}" class="badge bg-light-secondary">2st</span>
@@ -66,11 +68,12 @@
 				<div class="card card-product"
 					style="background-color: #fdf6ec !important; width: 222px;">
 					
-					<div class="card-body">
+					<div class="card-body" th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])" style="cursor:pointer;">
+					
 						<!-- badge -->
-						<div class="text-center position-relative">
+						<div class="text-center position-relative" >
 
-							<div class="position-absolute top-0 start-0"></div>
+							<div class="position-absolute top-0 start-0" ></div>
 							
 							<a
 								th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])">
@@ -84,7 +87,7 @@
 							<div class="card-product-action">
 								<a type="button" class="btn-action" data-bs-toggle="tooltip"
 									data-bs-html="true" title="Wishlist"
-									th:onclick="wishList([[${list.seq}]],[[${session.sessSeqUsr}]])"><i
+									th:onclick="wishList([[${list.seq}]],[[${session.sessSeqUsr}]],event)"><i
 									class="bi bi-heart" style="cursor:pointer;"></i></a>
 							</div>
 						</div>
@@ -95,7 +98,7 @@
 								th:text="${list.nickName}" style="cursor:pointer;"></small></a>
 						</div>
 						<h2 class="fs-6">
-							<a th:onclick="blogView([[${list.seq}]])"
+							<a th:onclick="blogView([[${list.seq}]],[[${list.blogCategory_seq}]])"
 								class="text-inherit text-decoration-none"
 								th:text="${list.title}" style="cursor:pointer;"></a>
 						</h2>
@@ -109,6 +112,7 @@
 							<div></div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 	</div>
@@ -140,7 +144,7 @@
 			</nav>
 		</div>
 		<div style="display: flex; justify-content: end;">
-			<a href="/blogUsrForm" type="button" class="btn btn-secondary"
+			<a href="/blogUsrForm" type="button" class="btn btn-dark"
 				style="width: 120px;">블로그 쓰기</a>
 		</div>
 	</div>
@@ -154,6 +158,24 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body" id="modalText"></div>
+				<div class="modal-footer">
+					<a class="btn btn-secondary" data-bs-dismiss="modal"
+						onclick="btnClick()">확인</a>
+					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="wishModal2" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modalHead2"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="modalText2"></div>
 				<div class="modal-footer">
 					<a class="btn btn-secondary" data-bs-dismiss="modal"
 						onclick="btnClick()">확인</a>
@@ -309,7 +331,8 @@
 		form.submit();
 	}
 
-	function wishList(num1, num2) {
+	function wishList(num1, num2,event) {
+		event.stopPropagation();
 		document.querySelector("input[name=betterBlog_seq]").value = num1;
 		document.querySelector("input[name=user_seq]").value = num2;
 		$.ajax({
@@ -322,6 +345,9 @@
 			  },
 			  success: function(response) {
 				  if(response.rt == "success"){
+					  document.querySelector("#modalHead2").textContent = "확인";
+				        document.querySelector("#modalText2").textContent = "위시리스트에 해당 블로그를 추가하였습니다";
+				        $("#wishModal2").modal("show");
 				  $.ajax({
 					  type: "post",
 					  url: "/wishUsrInst",
@@ -331,6 +357,7 @@
 					   url: $("input[name=url]").val()
 					  },
 					  success: function() {
+						 
 					    $.ajax({
 					      type: "post",
 					      url: "/blogUsrList",
@@ -338,6 +365,7 @@
 					     data:{ fragmentType:"wish"},// 중요!/
 					      success: function(fragmentHtml) {
 					        $(".mbWish").html(fragmentHtml); // 리뷰 부분만 갱신
+					      
 					      }
 					    });
 					  }
