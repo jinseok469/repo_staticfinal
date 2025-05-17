@@ -734,132 +734,100 @@
 					</div>
 
 					<!-- table -->
-					<div class="row">
-						<div class="col-6">
-							<div class="card">
-								<div class="card-body">
-									<h3>구매자 정보</h3>
-									<hr>
-									<div class="row">
-										<div class="col-8">
-											<label class="form-label" for="rf-name">아이디</label> <input
-												type="text" class="form-control" th:value="${buyPeople.id}"
-												required disabled />
-										</div>
-										<div class="col-2"></div>
+					<!-- table -->
+<div class="row g-4">
+    <!-- 구매자 / 판매자 정보 카드 -->
+    <div class="col-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h3>구매자 정보</h3>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label">아이디</label>
+                        <input type="text" class="form-control" th:value="${buyPeople.id}" required disabled />
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">닉네임</label>
+                        <input type="text" class="form-control" th:value="${buyPeople.nickName}" required disabled />
+                    </div>
+                </div>
+                <hr>
+                <h3>판매자 정보</h3>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label">아이디</label>
+                        <input type="text" class="form-control" th:value="${sellPeople.id}" required disabled />
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">닉네임</label>
+                        <input type="text" class="form-control" th:value="${sellPeople.nickName}" required disabled />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-										<div class="col-8" style="padding-top: 10px;">
-											<label class="form-label" for="rf-name">닉네임</label> <input
-												type="text" class="form-control"
-												th:value="${buyPeople.nickName}" required disabled />
-										</div>
-										<div class="col-2"></div>
+    <!-- 상품 정보 + 결제 카드 -->
+    <div class="col-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h3>상품 정보</h3>
+                <hr>
+                <div class="table-responsive">
+                    <table class="table text-nowrap table-with-checkbox">
+                        <thead class="table-light">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>상품명</th>
+                                <th></th>
+                                <th></th>
+                                <th>금액</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">
+                                    <a href="javascript:history.back()">
+                                        <img th:src="${sellPeople.mainImage}" class="icon-shape icon-xxl" alt="" />
+                                    </a>
+                                </td>
+                                <td class="align-middle"></td>
+                                <td class="align-middle">
+                                    <h5 class="fs-6 mb-0" style="padding-top: 2px;" th:text="${sellPeople.item}"></h5>
+                                </td>
+                                <td class="align-middle"></td>
+                                <td class="align-middle"></td>
+                                <td class="align-middle">
+                                    <span th:text="${sellPeople.infoPrice}"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-									</div>
-									<hr>
-									<h3>판매자 정보</h3>
-									<hr>
-									<div class="row">
-										<div class="col-8">
-											<label class="form-label" for="rf-name">아이디</label> <input
-												type="text" class="form-control" th:value="${sellPeople.id}"
-												required disabled />
-										</div>
-										<div class="col-2"></div>
+                <hr>
+                <h3>결제 수단</h3>
+                <hr>
+                <div class="row text-center align-items-center g-3">
+                    <div class="col-12 col-md-3"></div>
+                    <div class="col-12 col-md-3">
+                        <label for="tossPay">tossPay</label><br />
+                        <input type="radio" class="form-check-input" id="tossPay" name="team" checked>
+                    </div>
+                    <div class="col-12 col-md-3"></div>
+                    <div class="col-12 col-md-3">
+                        <button class="btn btn-dark w-100" type="button" onclick="requestPayment()">결제하기</button>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
 
-										<div class="col-8" style="padding-top: 10px;">
-											<label class="form-label" for="rf-name">닉네임</label> <input
-												type="text" class="form-control"
-												th:value="${sellPeople.nickName}" required disabled />
-										</div>
-										<div class="col-2"></div>
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="card">
-								<div class="card-body">
-									<h3>상품 정보</h3>
-									<hr>
-									<div class="table-responsive">
-										<table class="table text-nowrap table-with-checkbox">
-											<thead class="table-light">
-												<tr>
-													<th></th>
-													<th></th>
-													<th>상품명</th>
-													<th></th>
-													<th></th>
-													<th>금액</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="align-middle"><a
-														href="javascript:history.back()"><img
-															th:src="${sellPeople.mainImage}"
-															class="icon-shape icon-xxl" alt="" /></a></td>
-													<td class="align-middle">
-														<div></div>
-													</td>
-													<td class="align-middle">
-														<h5 class="fs-6 mb-0" style="padding-top: 2px;"
-															th:text="${sellPeople.item}"></h5>
-													</td>
-													<!-- <td class="align-middle"><span class="badge bg-success">In Stock</span></td> -->
-													<td class="align-middle">
-														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
-														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5> <!-- <input type="radio" id="kakaoPay" checked> -->
-													</td>
-													<td class="align-middle">
-														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
-														<h5 class="fs-6 mb-0" style="padding-top: 2px;"></h5>
-													</td>
-													<td class="align-middle"><span  th:text="${sellPeople.infoPrice}" ></span>
-
-														<!-- <a href="#" class="btn btn-secondary" type="button">
-															   결제하기
-															</a> -->
-													</td>
-												</tr>
-
-											</tbody>
-										</table>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-12">
-											<h3>결제 수단</h3>
-										</div>
-
-										<div class="col-12">
-											<hr>
-											<div class="row" style="align-items: center;">
-
-												<div class="col-3"></div>
-												<div class="col-3"></div>
-												<div class="col-3">
-													<label for="samsung">tossPay</label> <input type="radio"
-														class="form-check-input" id="tossPay" name="team" checked>
-												</div>
-												<div class="col-3">
-													<button class="btn btn-secondary" type="button" onclick="requestPayment()" >결제하기</button>
-												</div>
-											</div>
-										</div>
-
-									</div>
-									<hr>
-
-								</div>
-
-							</div>
-
-						</div>
-					</div>
  <div id="payment-method"></div>
     <!-- 이용약관 UI -->
     <div id="agreement"></div>
