@@ -796,9 +796,14 @@
 
 							</div>
 							<div style="display: flex; justify-content: end;">
-								<input type="file" id="fileInput" name="uploadImg1" multiple
-									style="display: none;">
-								<button type="button" id="fileSave" style="display: none;">확인</button>
+								<div><label for="fileInput1" id="filelabel1" class="form-label" style="display:none;">대표 이미지</label>
+								<input   type="file" id="fileInput1" name="uploadImg" 
+									style="display: none;"></div>
+									<div>
+								<label for="fileInput" id="filelabel" class="form-label" style="display:none;">추가 이미지(여러장)</label>
+								<input   type="file" id="fileInput" name="uploadImg1" multiple
+									style="display: none;"></div>
+								<button type="button"  id="fileSave" style="display: none;">확인</button>
 								<button type="button" id="fileBtn" onclick="imageModify()">
 									이미지 수정</button>
 							</div>
@@ -2146,24 +2151,31 @@ document.querySelector("#btnModalUelete1").onclick = function(){
 		  }
 	 function imageModify(){
 		 document.getElementById("fileInput").style.display = "";
+		 document.getElementById("fileInput1").style.display = "";
+		 document.getElementById("filelabel").style.display = "";
+		 document.getElementById("filelabel1").style.display = "";
 		 document.getElementById("fileSave").style.display = "";
 		 document.getElementById("fileBtn").style.display = "none";
 	 }
 	 
 	 document.getElementById("fileSave").onclick = function(){
-		if( document.getElementById("fileInput").value == null || 
-				 document.getElementById("fileInput").value ==""){
+		if( document.getElementById("fileInput1").value == null || 
+				 document.getElementById("fileInput1").value ==""){
 			return false;
 		}else{
 		    var formData = new FormData();
 		    var fileInput = document.getElementById("fileInput");
+		    var fileInput1 = document.getElementById("fileInput1");
 		    var files = fileInput.files;
+		    var files1 = fileInput1.files;
 
 		    // 파일 여러 개 가능 (multiple 처리했으니까)
+		      for (var i = 0; i < files1.length; i++) {
+		        formData.append("uploadImg", files1[i]);
+		      }
 		    for (var i = 0; i < files.length; i++) {
 		        formData.append("uploadImg1", files[i]);
 		    }
-		    
 		    formData.append("seq", $("#betterBlog_seq").val());
 		    formData.append("blogKey", $("#betterBlog_seq").val());
 
