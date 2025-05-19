@@ -2,6 +2,7 @@ package com.staticfinal.module.user;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -99,6 +100,8 @@ public class UserController {
 
 	@RequestMapping(value = "/signinUsrForm")
 	public String signinUsrForm(Model model, UserDto userDto, HttpSession httpSession) {
+		String state = String.valueOf(UUID.randomUUID());
+		model.addAttribute("state",state);
 		return "usr/user/signinUsrForm";
 	}
 

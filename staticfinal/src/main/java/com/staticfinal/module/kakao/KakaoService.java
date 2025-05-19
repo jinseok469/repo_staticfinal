@@ -17,7 +17,7 @@ public class KakaoService {
 	    private  ObjectMapper mapper = new ObjectMapper();
 
 	    private final String clientId = "3b69eb94e9cbee8dd8cb445e30b29a23"; // 카카오 REST API 키
-	    private final String redirectUri = "http://localhost:8080/kakaoUsrProc"; // 등록된 리디렉트 URI
+	    private final String redirectUri = "http://43.201.110.240:8080/kakaoUsrProc"; // 등록된 리디렉트 URI
 
 	    public KakaoDto getUserInfo(String code) throws Exception {
 

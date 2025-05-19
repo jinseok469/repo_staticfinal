@@ -104,12 +104,12 @@ public class BlogController {
 		}
 		if ("11".equals(vo.getBlogCategory_seq())) {
 
-			if (!vo.getShValues().isEmpty() && vo.getShValues() != null) {
-				httpSession.setAttribute("sessBlogUsr", vo.getShValues());
+			if (!vo.getShValue().isEmpty() && vo.getShValue() != null) {
+				httpSession.setAttribute("sessBlogUsr", vo.getShValue());
 
 			} else {
 				vo.setShOption(2);
-				vo.setShValues(String.valueOf(httpSession.getAttribute("sessBlogUsr")));
+				vo.setShValue(String.valueOf(httpSession.getAttribute("sessBlogUsr")));
 			}
 		}
 		vo.setParamsPaging(blogService.selectCount(vo));
