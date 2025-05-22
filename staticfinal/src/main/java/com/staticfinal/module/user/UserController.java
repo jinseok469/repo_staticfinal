@@ -361,6 +361,8 @@ public class UserController {
 		if (userDto.getInfoseq() == null || userDto.getInfoseq().equals("")) {
 			userDto.setInfoseq(String.valueOf(httpSession.getAttribute("sessInfoUsr")));
 		}
+		String orderId = String.valueOf(UUID.randomUUID());
+		model.addAttribute("orderId", orderId);
 		model.addAttribute("buyPeople", userService.buyPeople(userDto));
 		model.addAttribute("sellPeople", userService.sellPeople(userDto));
 		httpSession.setAttribute("sessInfoUsr", userDto.getInfoseq());

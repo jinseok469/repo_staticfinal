@@ -32,21 +32,6 @@
 				th:value="${vo.rowNumToShow}" />
 				<input type="hidden" name="seqList">
 				<input type="hidden" name="seq">
-<!-- 			<div class="col-md-2" style="height: 10px;"> -->
-
-<!-- 				<select class="form-select" id="shDelNy" name="shDelNy"> -->
-<!-- 					<option   value="">사용 여부</option> -->
-<!-- 					<option   value="0" th:selected="${vo.shDelNy == 0}">Y</option> -->
-<!-- 					<option value="1" th:selected="${vo.shDelNy ==1}">N</option> -->
-<!-- 				</select> -->
-<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-2"> -->
-<!-- 				<select class="form-select" id="" disabled> -->
-<!-- 					<option selected disabled value="">Y</option> -->
-<!-- 					<option>아무거나</option> -->
-<!-- 				</select> -->
-<!-- 				<div class="invalid-feedback">항목중 하나를 선택 해주세요.</div> -->
 <!-- 			</div> -->
 			<div class="col-md-2">
 				<select class="form-select" id="shOptionDate" name="shOptionDate" >
@@ -127,7 +112,6 @@
 								<th class="list-sort" style="text-align: center;">유저 이름</th>
 								<th class="list-sort" style="text-align: center;">블로그 카테고리</th>
 								<th class="list-sort" style="text-align: center;">블로그 제목</th>
-								<th  class="list-sort" style="text-align: center;">구매 여부</th>
 								<th  class="list-sort" style="text-align: center;">등록일</th>
 								<th  class="list-sort" style="text-align: center;">수정일</th>
 									
@@ -156,7 +140,6 @@
 								<td th:text="${list.name}"></td>
 								<td th:text="${list.categoryName}"></td>
 								<td ><a th:href="@{/blogXdmForm(seq=${list.seq})}" th:text="${list.title}"></a></td>
-								<td th:text="${list.buied == 1 }?Y:N"></td>
 								<td th:text="${list.bgReg}"></td>
 								<td th:text="${list.bgMof}"></td>
 								
@@ -205,7 +188,7 @@
 						<div class="col-md-6 padding-right"
 							style="display: flex; justify-content: end;">
 
-							<button class="btn btn-success btn-right">
+							<button class="btn btn-success btn-right" type="button" onclick="excel()">
 								<i class="bi bi-journal-x"></i>
 							</button>
 							<a type="button" id="blogBtn" class="btn btn-primary"><i
@@ -421,6 +404,13 @@ function goList(Num){
 		    	
 		 			 serve.classList.remove("collapse");
 		     }
+		     
+		     
+		     
+		  function excel(){
+			  form.action = "/blogXdmExcel";
+			  form.submit();
+		  }
 
 	</script>
 </body>

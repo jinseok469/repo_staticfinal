@@ -1,5 +1,8 @@
 package com.staticfinal.module.blog;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +23,7 @@ import com.staticfinal.module.user.UserService;
 import com.staticfinal.module.util.BannerVo;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -61,6 +65,32 @@ public class BlogController {
 //		model.addAttribute("bcList",blogService.blogCategoryList(blogDto));
 		return "xdm/blog/blogXdmForm";
 	}
+	
+	@RequestMapping(value = "/blogXdmExcel")
+	public void exportBlogsToCsv(HttpServletResponse response,BannerVo vo) throws Exception {
+		vo.setParamsPaging(blogService.selectXdmCount(vo));
+	    List<BlogDto> blogs = blogService.blogXdmList(vo);
+
+	    response.setContentType("text/xls; charset=UTF-8");
+	    response.setHeader("Content-Disposition", "attachment; filename = blogs.xls");
+	   
+	    PrintWriter writer = response.getWriter();
+	    writer.println("번호,작성자,카테고리,제목,등록일,수정일");
+
+	    for (BlogDto blog : blogs) {
+	        writer.printf("%s,%s,%s,%s,%s,%s\n",
+	            blog.getSeq(),
+	            blog.getName(),
+	            blog.getCategoryName(),
+	            blog.getTitle(),
+	            blog.getBgReg(),
+	            blog.getBgMof()
+	        );
+	    }
+	    writer.flush();
+	    writer.close();
+	}
+
 
 	@RequestMapping(value = "/blogXdmInst")
 	public String blogXdmInst(BlogDto blogDto) {

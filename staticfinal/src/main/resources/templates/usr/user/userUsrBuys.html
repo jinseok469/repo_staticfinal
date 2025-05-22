@@ -953,7 +953,7 @@
 <script src="usr/template/staticfinal/dist/assets/js/theme.min.js"></script>
 
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 let loginf = document.getElementById("loginf");
 let logins = document.getElementById("logins");
 let wish = document.getElementById("wish");
@@ -983,7 +983,9 @@ let infoPrice = document.querySelector("input[name=infoPrice]")?.value;
 let item = document.querySelector("input[name=item]")?.value;
 let clotheInfo = document.querySelector("input[name=clotheInfo_seq]")?.value;
 console.log(infoPrice);
-let orderIds = 'order_' +clotheInfo+'_'+ crypto.randomUUID(); 
+let order = /*[[${orderId}]]*/ "";
+let orderIds = 'order_' +clotheInfo+'_'+ order;
+console.log(order);
 const clientKey = "test_ck_DpexMgkW36Z6JlePLM4B3GbR5ozO";
 const customerKey = "urSeq_"+sessionSeq;
 // 회원 결제
