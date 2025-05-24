@@ -246,7 +246,7 @@
 	src="/xdm/template/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
 <script
 	src="/xdm/template/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
-
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <!-- Template Main JS File -->
 
 <script src="/xdm/template/NiceAdmin/assets/js/main.js"></script>
@@ -411,6 +411,20 @@ function goList(Num){
 			  form.action = "/blogXdmExcel";
 			  form.submit();
 		  }
+
+// function excel() {
+//     let today = new Date();
+//     let date = today.getFullYear().toString() + (today.getMonth() + 1).toString().padStart(2, '0') + today.getDate().toString().padStart(2, '0');
+//     $("table").table2excel({
+//         exclude: "",
+//         name: "",
+//         filename: $("table").attr("data-value") + date, //확장자를 여기서 붙여줘야한다.
+//         fileext: ".xls",
+//         exclude_img: true,
+//         exclude_links: true,
+//         exclude_inputs: true
+//     });
+// }
 
 	</script>
 </body>

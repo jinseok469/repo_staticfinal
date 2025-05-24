@@ -43,7 +43,8 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer{
 							"/codyXdmUpdt",
 							"/codyXdmUele",
 							"/naverUsrProc",
-							"/kakaoUsrProc"
+							"/kakaoUsrProc",
+							"/profile"
 			);
 		}
 }

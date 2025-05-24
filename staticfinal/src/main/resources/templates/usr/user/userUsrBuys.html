@@ -1008,8 +1008,8 @@ async function requestPayment() {
     },
     orderId: orderIds, // 고유 주문번호
     orderName: item,
-    successUrl: "http://localhost:8080/buysUsrInst", // 결제 요청이 성공하면 리다이렉트되는 URL
-    failUrl: "http://localhost:8080/userUsrBuys", // 결제 요청이 실패하면 리다이렉트되는 URL
+    successUrl: "https://staticfinal.animalalert.shop/buysUsrInst", // 결제 요청이 성공하면 리다이렉트되는 URL
+    failUrl: "https://staticfinal.animalalert.shop/userUsrBuys", // 결제 요청이 실패하면 리다이렉트되는 URL
     // 카드 결제에 필요한 정보
     card: {
       useEscrow: false,
